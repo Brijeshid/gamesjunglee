@@ -39,16 +39,16 @@
 <div class="header-tow">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/in-play"><img src="/assets/images/soccer.png"> INPLAY</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img src="/assets/images/soccer.png"> INPLAY</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="cricket.html"><img src="/assets/images/cricket.png"> CRICKET</a>
+            <a class="nav-link" [routerLink]="['/sportsbook/cricket']" [routerLinkActive]="'active'"><img src="/assets/images/cricket.png"> CRICKET</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><img src="/assets/images/soccer.png"> SOCCER</a>
+            <a class="nav-link" [routerLink]="['/sportsbook/soccer']" [routerLinkActive]="'active'"><img src="/assets/images/soccer.png"> SOCCER</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><img src="/assets/images/tennis.png"> TENNIS</a>
+            <a class="nav-link" [routerLink]="['/sportsbook/tennis']" [routerLinkActive]="'active'"><img src="/assets/images/tennis.png"> TENNIS</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><img src="/assets/images/casino.png"> CASINO</a>

@@ -15,5 +15,25 @@ export class InPlayService {
   _postInPlayUpcomingApi(inPlayUpcomingBody: object) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getInPlayUpcomingEndPoint(), inPlayUpcomingBody);
-  } 
+  }
+  
+  getMarketDataByEventIdApi(id:string| null) {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getMarketByEventIdEndpoint(id));
+  }
+
+  getWebSocketURLApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getWebSocketURLEndpoint());
+  }
+
+  postSetOrUnsetWebSocketDataApi(isSet:boolean,objParams:object) {
+    if(isSet){
+      return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('set'), objParams);
+    }else{
+      return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('unset'), objParams);
+    }
+  }
 }
