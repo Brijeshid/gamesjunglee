@@ -1,0 +1,10 @@
+@media(min-width:768px) {
+    /*Right sidebar start*/
+    #rightslider {padding-right: 250px;}
+    #rightslider.toggled {padding-right: 0;}
+    #sidebar-wrapper {width: 0px;}
+    #rightslider.toggled #sidebar-wrapper {width: 250;}
+    #page-content-wrapper {padding: 20px;position: relative;}
+    #rightslider.toggled #page-content-wrapper {position: relative;margin-left: 0;}
+    /*Right sidebar end*/
+    } 

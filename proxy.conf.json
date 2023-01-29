@@ -1,0 +1,16 @@
+{
+  "/apiE/*": {
+    "target": "https://devbetting.azurewebsites.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/apiE": "" }
+  },
+
+  "/api/*": {
+    "target": "https://devbetting.azurewebsites.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

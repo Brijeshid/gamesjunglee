@@ -1,0 +1,32 @@
+<!--Registration start-->
+<div class="w-25 m-auto">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmitSignUp()">
+      <div class="text-center"><img src="/assets/images/logo.png"></div>
+      <div class="row login pb-4 pt-5">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Name" formControlName="name">
+          <span class="input-group-text bg-white">
+            <span class="fa fa-user text-dark"></span>
+          </span>
+        </div>
+        <div class="input-group mt-4">
+          <input type="text" class="form-control" placeholder="Phone Number" formControlName="phoneNo">
+          <span class="input-group-text bg-white">
+            <span class="fa fa-phone text-dark"></span>
+          </span>
+        </div>
+        <div class="input-group">
+          <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100 rounded-pill" [disabled]="signUpForm.invalid">
+            <i class="busy" *ngIf="isLoading"></i>
+            <span *ngIf="!isLoading">REGISTER</span>
+          </button>
+        </div>
+        <div class="col mt-4 text-center text-white">
+          <span class="text-white"> Already a member?</span> <a routerLink="/login" class="text-pink v-btn">LOGIN</a><br>
+          <span class="small pt-3"> Powered by </span><br>
+          <img src="/assets/images/betfair_logo.png" width="150px">
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--Registration end-->

@@ -1,0 +1,33 @@
+<!--Login start-->
+<div class="w-25 m-auto">
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
+        <div class="text-center"><img src="/assets/images/logo.png"></div>
+        <div class="row login pb-4 pt-5">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter User Name" formControlName="username">
+                <span class="input-group-text bg-white">
+                    <span class="fa fa-user text-dark"></span>
+                </span>
+            </div>
+            <div class="input-group mt-4">
+                <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Enter Password" formControlName="password">
+                <span class="input-group-text bg-white" (click)="show = !show">
+                    <span class="fa text-dark" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                </span>
+            </div>
+            <div class="input-group">
+                <button type="submit" class="btn btn-light bg-pink border-0  mt-4 w-100 rounded-pill" [disabled]="signInForm.invalid">
+                    <i class="busy" *ngIf="isLoading"></i>
+                    <span *ngIf="!isLoading">LOGIN</span>
+                </button>
+            </div>
+            <div class="col mt-4 text-center text-white">
+                <span class="small"> Not a member?</span> <a routerLink="/registration" class="text-pink v-btn">JOIN
+                    NOW</a><br>
+                <span class="small pt-3"> Powered by </span><br>
+                <img src="/assets/images/betfair_logo.png" width="150px">
+            </div>
+        </div>
+    </form>
+</div>
+<!--Login end-->

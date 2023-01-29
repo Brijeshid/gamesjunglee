@@ -1,0 +1,61 @@
+<div id="sidebar-wrapper">
+    <div class="row p-3 bg-pink">
+        <div class="col-md-6">
+            <h5>{{userDetails['username']}}</h5>
+        </div>
+        <div class="col-md-6 text-end"> <a class="anchorTag" (click)="onClose()">X</a> </div>
+    </div>
+    <div class="row ps-4 pe-3">
+        <div class="col-md-12 text-center p-3"><i class="fa fa-landmark"></i> Balance Information </div>
+        <div class="col-md-6 p-2"><strong>Available Credit</strong></div>
+        <div class="col-md-6 p-2"> {{userBalance?.availableCredit | number}} </div>
+        <div class="col-md-6 p-2"><strong>Credit Limit</strong></div>
+        <div class="col-md-6 p-2"> {{userBalance?.creditLimit | number}} </div>
+        <div class="col-md-6 p-2"><strong>Winnings</strong></div>
+        <div class="col-md-6 p-2 text-success"><strong>{{userBalance?.winnings | number}}</strong> </div>
+        <div class="col-md-6 p-2"><strong>Net Exposure</strong></div>
+        <div class="col-md-6 p-2">{{userBalance?.netExposure | number}}</div>
+    </div>
+    <hr>
+    <div class="row asidenav pt-0">
+        <div class="col">
+            <ul class="nav flex-column border-0 pt-0">
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fa fa-star"></i> <span> Favorites </span>
+                        <span class="leftb-icon">12</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fa fa-list"></i> <span> Open Bets </span>
+                        <span class="leftb-icon">10</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-coins"></i> Betting P&L</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-file-invoice"></i> Transfer Statements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-calendar-days"></i> Time Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-file-lines"></i> News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-lock"></i> Change Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/rules-regulations"><i class="fa fa-memory"></i> Rules & Regulations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-light bg-pink" (click)="onLogout()">LOGOUT</button>
+        </div>
+    </div>
+</div>

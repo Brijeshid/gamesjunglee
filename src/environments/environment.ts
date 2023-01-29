@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl:'/apiE',
+  apiMockUrl:'/api',
+  domainUrl:'http://localhost:8000/',
+  appEnv: 'development',
+  OcpApimSubscriptionKey:'131ad35b6d6e48c597bb466343d18b2d',
+  JungleeToken:'RANDOM_GUID'
 };
 
 /*

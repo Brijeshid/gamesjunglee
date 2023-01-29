@@ -1,0 +1,117 @@
+import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
+import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
+import { ApiHttpService } from 'src/app/core/services/api-http.service';
+import { Isports } from '../models/shared';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SharedService {
+ 
+
+  sportsList:Isports[];
+  isisExpandedNavSideBar = new BehaviorSubject(true);
+  constructor(
+    private _toastr: ToastrService,
+    private _apiHttpService: ApiHttpService,
+    private _apiEndpointsService: ApiEndpointsService
+  ) { }
+
+  _getUserDetailsApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUserDetailEndpoint());
+  }
+
+  _getSportsListApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getSportsEndpoint());
+  }
+
+  _getSportsToursListApi(id:string) {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getSportsToursByIdEndpoint(id));
+  }
+
+  _getToursMatchesListApi(id:string) {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getToursMatchesByIdEndpoint(id));
+  }
+
+
+  getToastPopup(errorMsg: string, errorModule: string, errorType: string) {
+    switch (errorType) {
+      case 'error':
+        this._toastr.error(errorMsg, errorModule, {
+          progressBar: true
+        });
+        break;
+      case 'info':
+        this._toastr.info(errorMsg, errorModule, {
+          progressBar: true
+        });
+        break;
+      case 'success':
+        this._toastr.success(errorMsg, errorModule, {
+          progressBar: true
+        });
+        break;
+    }
+  }
+
+  isLoggedIn(){
+    return localStorage.getItem('jwtToken') ? true: false;
+  }
+
+  getJWTToken() {
+    return localStorage.getItem('jwtToken');
+  }
+
+  setJWTToken(jwtToken:string){
+    localStorage.setItem('jwtToken',jwtToken);
+  }
+
+  removeJWTToken(){
+    localStorage.removeItem('jwtToken');
+  }
+
+  rtnSingleObjFromArrObj(arrObjParams:any, obj:any) {
+    let key = Object.keys(obj)[0];
+    return arrObjParams.filter(arrObjParam => arrObjParam[key] == obj[key])[0];
+  }
+
+  _replaceArrayObject(arr1, arr2,objKey) {
+    return arr1.map(obj => arr2.find(o => o[objKey] === obj[objKey]) || obj);
+  }
+
+  _removeObjectFromArray(arr1,data){
+    return arr1.filter(obj => obj.key != data.key);
+  }
+  removeToken(){
+    localStorage.removeItem('jwtToken');
+  }
+
+  getUserDetails() {
+    return JSON.parse(localStorage.getItem('userDetails') || '{}');
+  }
+
+  setUserDetails(userDetails){
+    localStorage.setItem('userDetails',JSON.stringify(userDetails['user']));
+  }
+
+  removeUserDetails(){
+    localStorage.removeItem('userDetails');
+  }
+
+  _getBalanceInfoApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getBalanceInfoEndpoint());
+  }
+
+  _getAllNavListApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getAllNavEndPoint());
+  }
+}
+

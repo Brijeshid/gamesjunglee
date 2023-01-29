@@ -1,0 +1,150 @@
+<div class="row m-0">
+    <!--Aside start-->
+    
+        <div class="col-md-2 asidenav">
+            <div class="row">
+                <div class="col-md-12">
+                    <app-left-nav></app-left-nav>
+                </div>
+                
+                <!-- Fav Starts -->
+                <div class="col-md-12">
+                    <app-favourite></app-favourite>
+                </div>
+                <!-- Fav end -->
+            </div>
+            
+        </div>
+
+        
+    <!--Aside end-->
+
+    <!--Artical Start-->
+    <div class="col-md-10">
+        <!--banner start-->
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="/assets/images/banner.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="/assets/images/banner.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/assets/images/banner.png" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--banner end-->
+        <!--Game details info start-->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="gamedetails">
+                    <!--Table 1-->
+                    <h6 class="text-white"><img src="/assets/images/inplay.png" width="20px"> INPLAY</h6>
+                    <table class="table table-hover" *ngFor="let singleMatchBySports of inPlayMatchListBySport?.[0]?.['sports']">
+                        <thead>
+                            <tr>
+                                <th width="30%" class="tfirstcol"><img src="/assets/images/{{singleMatchBySports?.sportName | lowercase}}.png" width="18"> {{singleMatchBySports?.sportName | uppercase}}</th>
+                                <th width="15%" class="coldark"></th>
+                                <th width="15%" class="coldark"></th>
+                                <th width="10%" colspan="2" class="text-center coldark">1</th>
+                                <th width="10%" colspan="2" class="text-center coldark">x</th>
+                                <th width="10%" colspan="2" class="text-center tlastcol coldark">2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
+                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['matchName'].split(' v ',2)[0]}} <br>{{singleMarket['matchName'].split(' v ',2)[1]}}</strong></a></td>
+                                <td><i class="fa fa-play"></i> </td>
+                                <td><i class="fas fa-broadcast-tower"></i></td>
+                                <td class="colblue light"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colpink light"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colgray">-</td>
+                                <td class="colgray">-</td>
+                                <td class="colblue"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colpink"><a href=""><strong>1.78</strong> <br>160</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--Adv. start-->
+                    <div class="row mt-3 mb-3">
+                        <div class="col-sm-12">
+                            <a href="https://playexch.co/_nuxt/img/premium-new.3513bd8.gif">
+                                <img src="https://playexch.co/_nuxt/img/premium-new.3513bd8.gif" width="100%">
+                            </a>
+                        </div>
+                    </div>
+                    <!--Adv. end-->
+                    <!--Table 2-->
+                    <h6 class="text-white"><img src="/assets/images/upcoming.png" width="20px"> UPCOMING</h6>
+                    <table class="table table-hover" *ngFor="let singleMatchBySports of upComingMatchListBySport?.[0]?.['sports']">
+                        <thead>
+                            <tr>
+                                <th width="30%" class="tfirstcol"><img src="/assets/images/{{singleMatchBySports?.sportName | lowercase}}.png" width="18"> {{singleMatchBySports?.sportName | uppercase}}</th>
+                                <th width="15%" class="coldark"></th>
+                                <th width="15%" class="coldark"></th>
+                                <th width="10%" colspan="2" class="text-center coldark">1</th>
+                                <th width="10%" colspan="2" class="text-center coldark">x</th>
+                                <th width="10%" colspan="2" class="text-center tlastcol coldark">2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
+                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['matchName'].split('v',2)[0]}} <br>{{singleMarket['matchName'].split(' v ',2)[1]}}</strong>
+                                    </a></td>
+                                <td></td>
+                                <td></td>
+                                <td class="colblue light"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colpink light"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colgray">-</td>
+                                <td class="colgray">-</td>
+                                <td class="colblue"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colpink"><a href=""><strong>1.78</strong> <br>160</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--Adv. start-->
+                    <div class="row mt-3 mb-3">
+                        <div class="col-sm-6">
+                            <a href="https://playexch.co/_nuxt/img/live-cards-banner.dc9c351.gif">
+                                <img src="https://playexch.co/_nuxt/img/live-cards-banner.dc9c351.gif" width="100%">
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="https://playexch.co/_nuxt/img/live-casino-banner.9c25697.gif">
+                                <img src="https://playexch.co/_nuxt/img/live-casino-banner.9c25697.gif" width="100%">
+                            </a>
+                        </div>
+                    </div>
+                    <!--Adv. end-->
+                </div>
+            </div>
+        </div>
+        <!--Game details info end-->
+    </div>
+    <!--Artical end-->
+
+</div>
