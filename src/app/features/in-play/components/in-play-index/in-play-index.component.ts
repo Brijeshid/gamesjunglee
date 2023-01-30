@@ -18,10 +18,10 @@ export class InPlayIndexComponent implements OnInit {
   webSocketUrl:string;
   setOrUnsetWebSocketParamsObj:any = {
     upcoming:{
-      centralIds:''
+      centralIds:[]
     },
     inplay:{
-      centralIds:''
+      centralIds:[]
     }
   };
   setResponse:any= {};
@@ -43,28 +43,28 @@ export class InPlayIndexComponent implements OnInit {
          res['matchDetails'][0]['sports'].map(sportsObj =>{
 
           paramsObj['upComing'] ?
-          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'] = _.map(sportsObj['markets'], 'market.centralId').join(',') +','+ this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']:
-          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.map(sportsObj['markets'], 'market.centralId').join(',') +','+ this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'];
+          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'] = _.merge(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']):
+          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.merge(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
 
           return sportsObj['markets'].map(marketObj=>{
               return marketObj['market']['runners'].map((runnerRes) => {
+                runnerRes['back0'] = '';
+                runnerRes['vback0'] = '';
+      
                 runnerRes['back1'] = '';
                 runnerRes['vback1'] = '';
       
                 runnerRes['back2'] = '';
                 runnerRes['vback2'] = '';
       
-                runnerRes['back3'] = '';
-                runnerRes['vback3'] = '';
+                runnerRes['lay0'] = '';
+                runnerRes['vlay0'] = '';
       
                 runnerRes['lay1'] = '';
                 runnerRes['vlay1'] = '';
       
                 runnerRes['lay2'] = '';
                 runnerRes['vlay2'] = '';
-      
-                runnerRes['lay3'] = '';
-                runnerRes['vlay3'] = '';
       
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -76,7 +76,7 @@ export class InPlayIndexComponent implements OnInit {
         console.log('inplay',this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
         // localStorage.setItem('unset',JSON.stringify(this.setOrUnsetWebSocketParamsObj));
         let newParamsObjs = paramsObj['upComing'] ? this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']:this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'];
-        if(newParamsObjs !=='') this._setOrUnsetWebSocketData(true,{'centralIds':newParamsObjs.replace(/,\s*$/, "")});
+        if(newParamsObjs.length > 0) this._setOrUnsetWebSocketData(true,{'centralIds':newParamsObjs});
       }
       console.log('data',res['matchDetails']);
       paramsObj['upComing'] ?  this.upComingMatchListBySport = res['matchDetails']: this.inPlayMatchListBySport = res['matchDetails'];
@@ -104,11 +104,93 @@ export class InPlayIndexComponent implements OnInit {
       });
   }
 
+
+  private _updateMarketData(data: any) {
+    let parseData = JSON.parse(data);
+    if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
+      console.log('data', JSON.parse(data));
+      let webSocketData = parseData['data'];
+      if(this.inPlayMatchListBySport[0]['sports'].length >0){
+        this.inPlayMatchListBySport[0]['sports'].map(sportsObj =>{
+          return sportsObj['markets'].map(resObj=>{
+              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
+              return resObj['market']['runners'].map((runnerRes) => {
+                let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+                for (let singleWebsocketRunner of webSocketRunners) {
+                  if (singleWebsocketRunner['ib']) {
+                    //back
+      
+                    //Live Rate
+                    runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+      
+                    //Volume from Betfair
+                    runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+      
+                  } else {
+                    //lay
+      
+                    //Live Rate
+                    runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+      
+                    //Volume from Betfair
+                    runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+      
+                  }
+                }
+                // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
+                //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
+                //       runnerRes['suspended'] = false;
+                // }
+                return runnerRes;
+              })
+          })
+        })
+      }
+      
+      if(this.upComingMatchListBySport[0]['sports'].length >0){
+        this.upComingMatchListBySport[0]['sports'].map(sportsObj =>{
+          return sportsObj['markets'].map(resObj=>{
+              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
+              return resObj['market']['runners'].map((runnerRes) => {
+                let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+                for (let singleWebsocketRunner of webSocketRunners) {
+                  if (singleWebsocketRunner['ib']) {
+                    //back
+      
+                    //Live Rate
+                    runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+      
+                    //Volume from Betfair
+                    runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+      
+                  } else {
+                    //lay
+      
+                    //Live Rate
+                    runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+      
+                    //Volume from Betfair
+                    runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+      
+                  }
+                }
+                // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
+                //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
+                //       runnerRes['suspended'] = false;
+                // }
+                return runnerRes;
+              })
+          })
+        })
+      }
+    }
+  }
+
   _subscribeWebSocket(){
     this.realDataWebSocket.subscribe(
       data => {
-        // if(typeof data == 'string') this._updateMarketData(data);
-        if(typeof data == 'string') console.log('sub',data);
+        if(typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
