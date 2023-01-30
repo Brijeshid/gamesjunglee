@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
-    this.getUserBalance();
+    if(this.isLoggedIn)this.getUserBalance();
   }
 
   getRightSidebarEvent(eventObj){

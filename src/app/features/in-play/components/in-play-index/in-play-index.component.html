@@ -9,7 +9,7 @@
                 
                 <!-- Fav Starts -->
                 <div class="col-md-12">
-                    <app-favourite></app-favourite>
+                    <app-favourite *ngIf="isLoggedIn"></app-favourite>
                 </div>
                 <!-- Fav end -->
             </div>
@@ -63,7 +63,7 @@
             <div class="col-md-12">
                 <div class="gamedetails">
                     <!--Table 1-->
-                    <h6 class="text-white"><img src="/assets/images/inplay.png" width="20px"> INPLAY</h6>
+                    <h6 class="text-white" *ngIf="inPlayMatchListBySport?.[0]?.['sports'].length > 0"><img src="/assets/images/inplay.png" width="20px" > INPLAY</h6>
                     <table class="table table-hover" *ngFor="let singleMatchBySports of inPlayMatchListBySport?.[0]?.['sports']">
                         <thead>
                             <tr>
@@ -77,15 +77,15 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['matchName'].split(' v ',2)[0]}} <br>{{singleMarket['matchName'].split(' v ',2)[1]}}</strong></a></td>
+                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
                                 <td><i class="fa fa-play"></i> </td>
                                 <td><i class="fas fa-broadcast-tower"></i></td>
-                                <td class="colblue light"><a href=""><strong>1.78</strong> <br>160</a></td>
-                                <td class="colpink light"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colblue light"><a href=""><strong>{{singleMarket['market']['runners'][0]['back3']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback3']}}</a></td>
+                                <td class="colpink light"><a href=""><strong>{{singleMarket['market']['runners'][0]['lay1']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay1']}}</a></td>
                                 <td class="colgray">-</td>
                                 <td class="colgray">-</td>
-                                <td class="colblue"><a href=""><strong>1.78</strong> <br>160</a></td>
-                                <td class="colpink"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colblue"><a href=""><strong>{{singleMarket['market']['runners'][1]['back3']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback3']}}</a></td>
+                                <td class="colpink"><a href=""><strong>{{singleMarket['market']['runners'][1]['lay1']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay1']}}</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,7 +99,7 @@
                     </div>
                     <!--Adv. end-->
                     <!--Table 2-->
-                    <h6 class="text-white"><img src="/assets/images/upcoming.png" width="20px"> UPCOMING</h6>
+                    <h6 class="text-white" *ngIf="upComingMatchListBySport?.[0]?.['sports'].length > 0"><img src="/assets/images/upcoming.png" width="20px"> UPCOMING</h6>
                     <table class="table table-hover" *ngFor="let singleMatchBySports of upComingMatchListBySport?.[0]?.['sports']">
                         <thead>
                             <tr>
@@ -113,16 +113,16 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['matchName'].split('v',2)[0]}} <br>{{singleMarket['matchName'].split(' v ',2)[1]}}</strong>
+                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
                                     </a></td>
                                 <td></td>
                                 <td></td>
-                                <td class="colblue light"><a href=""><strong>1.78</strong> <br>160</a></td>
-                                <td class="colpink light"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colblue light"><a href=""><strong>{{singleMarket['market']['runners'][0]['back3']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback3']}}</a></td>
+                                <td class="colpink light"><a href=""><strong>{{singleMarket['market']['runners'][0]['lay1']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay1']}}</a></td>
                                 <td class="colgray">-</td>
                                 <td class="colgray">-</td>
-                                <td class="colblue"><a href=""><strong>1.78</strong> <br>160</a></td>
-                                <td class="colpink"><a href=""><strong>1.78</strong> <br>160</a></td>
+                                <td class="colblue"><a href=""><strong>{{singleMarket['market']['runners'][1]['back3']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback3']}}</a></td>
+                                <td class="colpink"><a href=""><strong>{{singleMarket['market']['runners'][1]['lay1']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay1']}}</a></td>
                             </tr>
                         </tbody>
                     </table>

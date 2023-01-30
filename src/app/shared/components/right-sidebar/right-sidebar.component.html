@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper">
     <div class="row p-3 bg-pink">
         <div class="col-md-6">
-            <h5>{{userDetails['username']}}</h5>
+            <h5>{{userDetails['username'] | titlecase}}</h5>
         </div>
         <div class="col-md-6 text-end"> <a class="anchorTag" (click)="onClose()">X</a> </div>
     </div>
@@ -38,13 +38,13 @@
                     <a class="nav-link" href="#"><i class="fa fa-calendar-days"></i> Time Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-file-lines"></i> News</a>
+                    <a class="nav-link" [routerLink]="['/news']" [routerLinkActive]="'active'"><i class="fa fa-file-lines"></i> News</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-lock"></i> Change Password</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/rules-regulations"><i class="fa fa-memory"></i> Rules & Regulations</a>
+                    <a class="nav-link" [routerLink]="['/rules-regulations']" [routerLinkActive]="'active'"><i class="fa fa-memory"></i> Rules & Regulations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-gear"></i> Settings</a>

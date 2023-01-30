@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InPlayService } from '../../services/in-play.service';
 import { webSocket } from 'rxjs/webSocket';
+import * as _ from "lodash";
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-in-play-index',
@@ -14,23 +16,70 @@ export class InPlayIndexComponent implements OnInit {
 
   realDataWebSocket:any;
   webSocketUrl:string;
-  setOrUnsetWebSocketParamsObj = {};
+  setOrUnsetWebSocketParamsObj:any = {
+    upcoming:{
+      centralIds:''
+    },
+    inplay:{
+      centralIds:''
+    }
+  };
   setResponse:any= {};
+  isLoggedIn:boolean = false;
   
   constructor(
-    private _inPlayService: InPlayService
+    private _inPlayService: InPlayService,
+    private _sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
-    this.getInPlayUpcomingData({upComing:false}); //in-play
-    this.getInPlayUpcomingData({upComing:true});  //upcoming
+    this.isLoggedIn = this._sharedService.isLoggedIn();
+    this._getWebSocketUrl();
   }
 
   getInPlayUpcomingData(paramsObj){
     this._inPlayService._postInPlayUpcomingApi(paramsObj).subscribe((res)=>{
-      paramsObj['upComing'] ?  this.upComingMatchListBySport = res['matchDetails']: this.inPlayMatchListBySport = res['matchDetails'];
+      if(res['matchDetails'].length > 0){
+         res['matchDetails'][0]['sports'].map(sportsObj =>{
 
-      console.log('upComing',paramsObj['upComing'],res);
+          paramsObj['upComing'] ?
+          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'] = _.map(sportsObj['markets'], 'market.centralId').join(',') +','+ this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']:
+          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.map(sportsObj['markets'], 'market.centralId').join(',') +','+ this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'];
+
+          return sportsObj['markets'].map(marketObj=>{
+              return marketObj['market']['runners'].map((runnerRes) => {
+                runnerRes['back1'] = '';
+                runnerRes['vback1'] = '';
+      
+                runnerRes['back2'] = '';
+                runnerRes['vback2'] = '';
+      
+                runnerRes['back3'] = '';
+                runnerRes['vback3'] = '';
+      
+                runnerRes['lay1'] = '';
+                runnerRes['vlay1'] = '';
+      
+                runnerRes['lay2'] = '';
+                runnerRes['vlay2'] = '';
+      
+                runnerRes['lay3'] = '';
+                runnerRes['vlay3'] = '';
+      
+                runnerRes['suspended'] = true;
+                return runnerRes;
+              })
+          })
+        })
+
+        console.log('upcoming',this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']);
+        console.log('inplay',this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
+        // localStorage.setItem('unset',JSON.stringify(this.setOrUnsetWebSocketParamsObj));
+        let newParamsObjs = paramsObj['upComing'] ? this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']:this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'];
+        if(newParamsObjs !=='') this._setOrUnsetWebSocketData(true,{'centralIds':newParamsObjs.replace(/,\s*$/, "")});
+      }
+      console.log('data',res['matchDetails']);
+      paramsObj['upComing'] ?  this.upComingMatchListBySport = res['matchDetails']: this.inPlayMatchListBySport = res['matchDetails'];
     })
   }
 
@@ -40,7 +89,8 @@ export class InPlayIndexComponent implements OnInit {
         console.log('url',res);
         if(res){
           this.realDataWebSocket = webSocket(res['url']);
-          // this._getMarketData();
+          this.getInPlayUpcomingData({upComing:false}); //in-play
+          this.getInPlayUpcomingData({upComing:true});  //upcoming
         }
       });
   }

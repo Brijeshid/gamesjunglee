@@ -3,7 +3,7 @@
         <ul class="nav flex-column">
             <li class="nav-item leftuser" *ngIf="isLoggedIn">
                 <span class="leftb-icon float-start"><i class="fa fa-user"></i> </span> <span class="leftuserhead">
-                    {{userDetails['username']}} </span>
+                    {{userDetails['username'] | titlecase}} </span>
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item" *ngFor="let singleObj of mainMenu">
