@@ -10,8 +10,7 @@ const routes: Routes = [
     component:AuthMainComponent,
     children:[
       {path:'login', component:LoginComponent},
-      {path:'registration', component:RegistrationComponent},
-      {path:'', redirectTo:'/login', pathMatch:'full'}
+      {path:'registration', component:RegistrationComponent}
     ]
   }
 ];

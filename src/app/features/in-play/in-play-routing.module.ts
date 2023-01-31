@@ -8,7 +8,8 @@ const routes: Routes = [
     path:'',
     component:InPlayMainComponent,
     children:[
-      {path:'in-play', component:InPlayIndexComponent}
+      {path:'in-play', component:InPlayIndexComponent},
+      {path:'', redirectTo:'/in-play', pathMatch:'full'}
     ]
   }
 ];

@@ -11,10 +11,10 @@
                     <span class="leftb-icon">{{singleObj['marketCount']}}</span> </a>
             </li>
             <li class="nav-item" *ngIf="mainMenu.length > 0">
-                <a class="nav-link" href="#"><img src="/assets/images/live_card.png" width="15px"> Live Card</a>
+                <a class="nav-link" ><img src="/assets/images/live_card.png" width="15px"> Live Card</a>
             </li>
             <li class="nav-item" *ngIf="mainMenu.length > 0">
-                <a class="nav-link" href="#"><img src="/assets/images/slot_games.png" width="15px"> Slot Games</a>
+                <a class="nav-link" ><img src="/assets/images/slot_games.png" width="15px"> Slot Games</a>
             </li>
             <li class="nav-item">
                 <div class="row">
@@ -22,7 +22,7 @@
                         <div class="collapse multi-collapse" id="multiCollapseExample1">
                             <ul class="nav flex-column border-0 pt-0">
                                 <li class="nav-item" *ngFor="let singleNav of viewMoreNavList">
-                                    <a href="#" class="nav-link"><img src="{{singleNav?.menuLogo}}" width="15px"> <span>
+                                    <a class="nav-link"><img src="{{singleNav?.menuLogo}}" width="15px"> <span>
                                             {{singleNav?.menuName}} </span>
                                     </a>
                                 </li>

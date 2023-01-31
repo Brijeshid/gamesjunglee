@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
-  },
 
   {
     path: '',
     loadChildren: () => import('./features/in-play/in-play.module').then((m) => m.InPlayModule)
+  },
+
+  {
+    path: '',
+    loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
   },
 
   {

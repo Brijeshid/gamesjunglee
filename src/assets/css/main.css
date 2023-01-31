@@ -18,8 +18,23 @@
   font-size: 12px;
 }
 
+.w-30 {
+  width: 30% !important;
+}
+
 .text-pink {
   color: #ffa7a3 !important;
+}
+
+.btn-outline-pink {
+  color: #ffa7a3;
+  border-color: #ffa7a3;
+}
+
+.btn-outline-pink:hover {
+  color: #000;
+  background-color: #ffa7a3;
+  border-color: #ffa7a3;
 }
 
 .bg-blur {
@@ -49,7 +64,6 @@
   padding: 5px;
   margin-right: 5px;
 }
-
 .header-icon a {
   color: #fff;
 }
@@ -58,17 +72,14 @@
   background-image: linear-gradient(to top right, #3e4040, #303132, #222223, #151515, #000000);
   border-top: 0.8px solid rgba(255, 167, 163, 0.2);
 }
-
 .header-tow ul {
   padding: 0;
   margin: 5px 0 0 0;
 }
-
 .header-tow ul img {
   margin-top: -5px;
   width: 18px;
 }
-
 .header-tow li a {
   font-size: 12px;
   color: #fff;
@@ -77,19 +88,16 @@
   border: 1px solid rgba(62, 64, 64, 0);
   border-radius: 60px;
 }
-
 .header-tow li a:hover {
   border: 1px solid #ffa7a3;
   border-radius: 60px;
   color: #ffa7a3;
 }
-
 .header-tow li a.active {
   border: 1px solid #ffa7a3;
   border-radius: 60px;
   color: #ffa7a3;
 }
-
 .header-tow a:visited {
   color: #fff;
 }
@@ -98,15 +106,12 @@
   border-top: 0.8px solid rgba(255, 167, 163, 0.2);
   border-bottom: 0.8px solid rgba(255, 167, 163, 0.2) !important;
 }
-
 .accordionn .nav-tabs .nav-link {
   color: #fff;
 }
-
 .accordionn .nav-tabs .nav-link:hover {
   border: none;
 }
-
 .accordionn .nav-tabs .nav-link.active {
   border: 0;
   border-bottom: 3px solid #ffa7a3;
@@ -119,7 +124,6 @@
   border-right: 1px solid rgba(255, 168, 163, 0.3019607843);
   padding-top: 15px;
 }
-
 .asidenav ul {
   border: 1px solid #ffa7a3;
   border-radius: 15px;
@@ -127,21 +131,17 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
 .asidenav a {
   color: #fff;
   border-right: 3px solid #202121;
 }
-
 .asidenav a:visited {
   color: #fff;
 }
-
 .asidenav li a.active {
   border-right: 3px solid rgb(255, 167, 163);
   background: #ffa7a3;
 }
-
 .asidenav li a:hover {
   background-image: linear-gradient(to top right, #3e4040, #303132, #222223, #151515, #000000);
   border-right: 3px solid rgb(255, 167, 163);
@@ -183,26 +183,22 @@
   font-size: 12px;
   background: rgba(60, 62, 62, 0.7215686275);
 }
-
 .gamedetails .table {
   background-color: #fff;
   border-radius: 15px;
   vertical-align: middle;
   margin-bottom: 25px;
 }
-
 .gamedetails .table td {
   vertical-align: middle;
   padding: 5px;
   text-align: center;
 }
-
 .gamedetails .table a {
   color: #000;
   text-decoration: none;
   display: block;
 }
-
 .gamedetails th {
   border-color: inherit;
   border-style: none;
@@ -278,12 +274,23 @@ tr {
   border: 1px solid rgba(255, 255, 255, 0.3215686275);
   border-radius: 25px;
   padding: 10px;
-  background: #242424;
+  background: rgba(108, 108, 108, 0.5098039216);
   margin-top: 30px;
 }
-
 .login a {
   text-decoration: none;
+}
+.login .btn {
+  font-size: 14px;
+  padding: 12px 10px;
+}
+.login .form-control {
+  line-height: 2.5;
+}
+.login .form-control.is-invalid, .login .was-validated .form-control:invalid {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: none;
 }
 
 /*login end*/
@@ -292,7 +299,6 @@ tr {
   padding-right: 0;
   transition: all 0.5s ease;
 }
-
 #rightslider a {
   text-decoration: none;
   color: #fff;
@@ -301,12 +307,10 @@ tr {
 #rightslider.toggled {
   padding-right: 250px;
 }
-
 #rightslider.toggled #sidebar-wrapper {
   width: 250px;
   box-shadow: 0px 1px 2px #ffa7a3;
 }
-
 #rightslider.toggled #page-content-wrapper {
   position: absolute;
   margin-left: -250px;
@@ -367,7 +371,6 @@ tr {
   text-align: center;
   color: #000;
 }
-
 .number input {
   height: 33px;
   width: 71px;
@@ -385,7 +388,6 @@ tr {
   padding: 10px 10px;
   border-bottom: 1px solid #373737;
 }
-
 .leagues a:hover {
   background: rgb(43, 42, 42);
   color: #fff;
@@ -397,14 +399,12 @@ tr {
   background-color: #0f0f0f;
   color: #000 !important;
 }
-
 .rightacco .accordion-item .accordion-button.collapsed {
   border-radius: 25px;
   background: #ffa7a3;
   color: #000;
   margin-bottom: 25px;
 }
-
 .rightacco .accordion-body {
   padding: 1rem 0.3rem 0rem 0.3rem;
   border: 1px solid #404040;
@@ -412,9 +412,14 @@ tr {
   border-bottom-left-radius: 15px;
   margin-bottom: 25px;
 }
-
 .rightacco .accordion-button:not(.collapsed) {
   background-color: #ffa7a3;
+}
+.rightacco .accordion-body h6 {
+  font-size: 14px;
+}
+.rightacco .accordion-body p {
+  margin-bottom: 0;
 }
 
 .switch {
@@ -452,15 +457,15 @@ tr {
   transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: #2196f3;
 }
 
-input:focus+.slider {
+input:focus + .slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   transform: translateX(26px);
 }
 
@@ -545,135 +550,78 @@ input:checked+.slider:before {
   background-size: var(--s) var(--s);
   background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
   -webkit-animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
-  animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
+          animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
   background-color: #000;
-  padding-top: 10%;
+  padding-top: 4%;
   height: 100vh;
 }
 
 @-webkit-keyframes color {
-
-  0%,
-  25% {
+  0%, 25% {
     --bg: var(--c3);
   }
-
-  26%,
-  50% {
+  26%, 50% {
     --bg: var(--c1);
   }
-
-  51%,
-  75% {
+  51%, 75% {
     --bg: var(--c3);
   }
-
-  76%,
-  100% {
+  76%, 100% {
     --bg: var(--c2);
   }
 }
 
 @keyframes color {
-
-  0%,
-  25% {
+  0%, 25% {
     --bg: var(--c3);
   }
-
-  26%,
-  50% {
+  26%, 50% {
     --bg: var(--c1);
   }
-
-  51%,
-  75% {
+  51%, 75% {
     --bg: var(--c3);
   }
-
-  76%,
-  100% {
+  76%, 100% {
     --bg: var(--c2);
   }
 }
-
 @-webkit-keyframes position {
   0% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
   }
-
   25% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 4), calc(var(--p) * -1) calc(var(--p) * 5), calc(var(--p) * 1) calc(var(--p) * 3), calc(var(--p) * -1) calc(var(--p) * 4);
   }
-
   50% {
     background-position: calc(var(--p) * 3) calc(var(--p) * 8), calc(var(--p) * -3) calc(var(--p) * 9), calc(var(--p) * 2) calc(var(--p) * 7), calc(var(--p) * -2) calc(var(--p) * 8);
   }
-
   75% {
     background-position: calc(var(--p) * 3) calc(var(--p) * 12), calc(var(--p) * -3) calc(var(--p) * 13), calc(var(--p) * 2) calc(var(--p) * 11), calc(var(--p) * -2) calc(var(--p) * 12);
   }
-
   100% {
     background-position: calc(var(--p) * 5) calc(var(--p) * 16), calc(var(--p) * -5) calc(var(--p) * 17), calc(var(--p) * 5) calc(var(--p) * 15), calc(var(--p) * -5) calc(var(--p) * 16);
   }
 }
-
 @keyframes position {
   0% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
   }
-
   25% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 4), calc(var(--p) * -1) calc(var(--p) * 5), calc(var(--p) * 1) calc(var(--p) * 3), calc(var(--p) * -1) calc(var(--p) * 4);
   }
-
   50% {
     background-position: calc(var(--p) * 3) calc(var(--p) * 8), calc(var(--p) * -3) calc(var(--p) * 9), calc(var(--p) * 2) calc(var(--p) * 7), calc(var(--p) * -2) calc(var(--p) * 8);
   }
-
   75% {
     background-position: calc(var(--p) * 3) calc(var(--p) * 12), calc(var(--p) * -3) calc(var(--p) * 13), calc(var(--p) * 2) calc(var(--p) * 11), calc(var(--p) * -2) calc(var(--p) * 12);
   }
-
   100% {
     background-position: calc(var(--p) * 5) calc(var(--p) * 16), calc(var(--p) * -5) calc(var(--p) * 17), calc(var(--p) * 5) calc(var(--p) * 15), calc(var(--p) * -5) calc(var(--p) * 16);
   }
 }
-
 @media (prefers-reduced-motion) {
   body {
     -webkit-animation: none;
-    animation: none;
+            animation: none;
   }
-}
-
-/*Roopika SCSS*/
-/*Akash CSS*/
-/*# sourceMappingURL=main.css.map */
-
-
-
-.busy {
-  animation: spin 1s infinite linear;
-  display: inline-block;
-  font-weight: bold;
-  font-family: sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  color: #555;
-}
-
-.busy::before {
-  content: "\25E0";
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(359deg);
-  }
-}
+}/*# sourceMappingURL=main.css.map */

@@ -6,13 +6,27 @@ import { UserSettingsMainComponent } from './components/user-settings-main/user-
 import { RulesRegulationsComponent } from './components/rules-regulations/rules-regulations.component';
 import { SharedModule } from '@shared/shared.module';
 import { NewsComponent } from './components/news/news.component';
+import { FavouriteComponent } from './components/favourite/favourite.component';
+import { OpenBetsComponent } from './components/open-bets/open-bets.component';
+import { BettingPlComponent } from './components/betting-pl/betting-pl.component';
+import { TransferStatementComponent } from './components/transfer-statement/transfer-statement.component';
+import { TimeSettingsComponent } from './components/time-settings/time-settings.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
   declarations: [
     UserSettingsMainComponent,
     RulesRegulationsComponent,
-    NewsComponent
+    NewsComponent,
+    FavouriteComponent,
+    OpenBetsComponent,
+    BettingPlComponent,
+    TransferStatementComponent,
+    TimeSettingsComponent,
+    ChangePasswordComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,

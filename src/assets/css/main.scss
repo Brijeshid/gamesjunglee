@@ -27,8 +27,20 @@ $border-color_1: inherit;
 .form-control {
   font-size: 12px;
 }
+.w-30 {
+  width: 30% !important;
+}
 .text-pink {
   color: $color_2 !important;
+}
+.btn-outline-pink {
+  color: $color_2;
+  border-color: $color_2;
+}
+.btn-outline-pink:hover {
+  color: #000;
+  background-color: $color_2;
+  border-color: $color_2;
 }
 .bg-blur {
   filter: blur(4px);
@@ -271,11 +283,21 @@ tr {
   border: 1px solid #ffffff52;
   border-radius: 25px;
   padding: 10px;
-  background: #242424;
+  background: #6c6c6c82;
   margin-top: 30px;
   a {
     text-decoration: none;
   }
+  .btn {
+    font-size: 14px; padding: 12px 10px;
+  }
+  .form-control{line-height: 2.5;}
+  .form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+    background-image: none;
+  }
+
 }
 /*login end*/
 /*Right sidebar start*/
@@ -403,6 +425,8 @@ tr {
   .accordion-button:not(.collapsed) {
     background-color: #ffa7a3;
   }
+  .accordion-body h6{font-size: 14px;}
+  .accordion-body p{margin-bottom: 0;}
 }
 
 .switch {
@@ -542,7 +566,8 @@ background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) 
 calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
 animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
 background-color: #000;
-padding-top: 10%;
+padding-top: 4%;
+height: 100vh;
 }
 
 @keyframes color {
@@ -603,8 +628,5 @@ padding-top: 10%;
     animation: none;
   }
 }
-/*Roopika SCSS*/
 
 
-
-/*Akash CSS*/

@@ -1,5 +1,23 @@
-.v-btn {
-    height: 36px;
-    min-width: 64px;
-    padding: 0 16px;
-}
+.busy {
+    animation: spin 1s infinite linear;
+    display: inline-block;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    color: #555;
+  }
+  
+  .busy::before {
+    content: "\25E0";
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(359deg);
+    }
+  }
