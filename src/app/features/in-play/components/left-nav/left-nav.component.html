@@ -7,14 +7,14 @@
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item" *ngFor="let singleObj of mainMenu">
-                <a routerLink="/sportsbook/{{singleObj['sportName'] | lowercase}}" class="nav-link"><img src="/assets/images/{{singleObj['sportName'] | lowercase }}.png" width="15px"> <span> {{singleObj['sportName']}} </span>
+                <a routerLink="/sportsbook/{{singleObj['sportName'] | lowercase}}" class="nav-link"><img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="15px"> <span> {{singleObj['sportName']}} </span>
                     <span class="leftb-icon">{{singleObj['marketCount']}}</span> </a>
             </li>
             <li class="nav-item" *ngIf="mainMenu.length > 0">
-                <a class="nav-link" ><img src="/assets/images/live_card.png" width="15px"> Live Card</a>
+                <a class="nav-link" ><img src="assets/images/live_card.png" width="15px"> Live Card</a>
             </li>
             <li class="nav-item" *ngIf="mainMenu.length > 0">
-                <a class="nav-link" ><img src="/assets/images/slot_games.png" width="15px"> Slot Games</a>
+                <a class="nav-link" ><img src="assets/images/slot_games.png" width="15px"> Slot Games</a>
             </li>
             <li class="nav-item">
                 <div class="row">
