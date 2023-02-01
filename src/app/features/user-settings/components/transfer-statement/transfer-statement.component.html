@@ -20,26 +20,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-white">
-                            <td>16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
+                        <tr class="bg-white" *ngFor="let item of tranState">
+                            <td>{{item?.createdDate}}</td>
+                            <td>{{item?.transferTypeDescription}}</td>
+                            <td class="text-end" > {{item?.amount}}</td>
                         </tr>
-                        <tr class="bg-white">
-                            <td> 16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
-                        </tr>
-                        <tr class="bg-white">
-                            <td> 16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
-                        </tr>
-                        <tr class="bg-white">
-                            <td> 16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
 

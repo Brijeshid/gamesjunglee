@@ -290,5 +290,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_IN_PLAY_UPCOMING);
   }
 
+  public getTransferStatementEndPoint(): string{
+    return this.createUrl(this._constants.API_URL_TRANSFER_STATEMENT);
+
+  }
+
 
 }

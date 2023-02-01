@@ -17,6 +17,12 @@ export class UserSettingsMainService {
     return this._apiHttpService
       .get(this._apiEndpointsService.getTermCondEndPoint());
   } 
+  _getTransferStatementApi() {
+    console.log(this._apiEndpointsService.getTransferStatementEndPoint());
+    
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getTransferStatementEndPoint());
+  } 
 
 
 }

@@ -60,4 +60,5 @@ export class Constants {
     public readonly API_URL_GET_BALANCE_INFO:string = 'api/getBalanceInformation';                                    
     public readonly API_URL_GET_IN_PLAY_UPCOMING:string = 'api/getInPlayData';
     public readonly API_URL_GET_TERM_COND:string = 'api/termsAndCondition';
+    public readonly API_URL_TRANSFER_STATEMENT:string = 'api/getTransferStatement';
 }
