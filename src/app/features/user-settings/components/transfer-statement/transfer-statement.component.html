@@ -21,11 +21,13 @@
                     </thead>
                     <tbody>
                         <tr class="bg-white" *ngFor="let item of tranState">
-                            <td>{{item?.createdDate}}</td>
+                            <td>{{item?.createdDate | date :'d/MM/yyyy, h:mm:ss '}}</td>
                             <td>{{item?.transferTypeDescription}}</td>
-                            <td class="text-end" > {{item?.amount}}</td>
+                            <td class="text-end"
+                                [ngClass]="item.transferTypeDescription =='Transfer Out'?'text-danger':'text-success'"><span *ngIf="item.transferTypeDescription =='Transfer Out'">-</span>
+                                {{item?.amount}}</td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
 
