@@ -13,6 +13,7 @@ import { TransferStatementComponent } from './components/transfer-statement/tran
 import { TimeSettingsComponent } from './components/time-settings/time-settings.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +32,10 @@ import { SettingsComponent } from './components/settings/settings.component';
   imports: [
     CommonModule,
     UserSettingsRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ]
 })
 export class UserSettingsModule { }

@@ -17,6 +17,11 @@ export class UserSettingsMainService {
     return this._apiHttpService
       .get(this._apiEndpointsService.getTermCondEndPoint());
   } 
+  
+  _postChangePasswordApi(ChangePasswordBody: object){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getChangePasswordEndpoin(),ChangePasswordBody);
+  }
 
 
 }
