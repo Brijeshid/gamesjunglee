@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   showRightSidebar: boolean = false;
   isLoggedIn:boolean = false;
   isShowRightSideBar:boolean = false;
-  
+
   userBalance:any;
   constructor(
     private _sharedService: SharedService
@@ -25,6 +25,12 @@ export class HeaderComponent implements OnInit {
   getRightSidebarEvent(eventObj){
     this.isShowRightSideBar = !eventObj['isClose'];
   }
+onClickAvailableCredit(){
+  this.isShowRightSideBar=!this.isShowRightSideBar;
+  this._sharedService.sharedSubject.next({
+    'isShowRightSideBar':this.isShowRightSideBar
+  });
+}
 
   getUserBalance(){
     this._sharedService._getBalanceInfoApi().subscribe((res)=>{
@@ -33,6 +39,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  
+
 
 }

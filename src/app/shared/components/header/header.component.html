@@ -21,15 +21,34 @@
             <form class="d-flex">
                 <div class="input-group me-2 search">
                     <span class="input-group-text"><i class="fa fa-search"></i> </span>
-                    <input type="text" class="form-control" aria-label="" placeholder="Search for a Sport, Game or Team">
+
+                    <!--03012023-->
+                    <input list="browsers" name="browser" id="browser" class="form-control">
+                    <datalist id="browsers">
+                      <option value="Edge">
+                      <option value="Firefox">
+                      <option value="Chrome">
+                      <option value="Opera">
+                      <option value="Safari">
+                    </datalist>
+                    <!--03012023-->
+
+                    <!-- <input type="text" class="form-control" aria-label="" placeholder="Search for a Sport, Game or Team"> -->
                     <span class="input-group-text"><i class="fa fa-caret-down"></i> </span>
                 </div>
                 <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
                 <button class="btn text-white border-pink me-2 text-nowrap rounded-pill" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
                     Bets</button>
-                <button id="menu-toggle" class="btn text-white border-pink text-nowrap rounded-pill"
-                    type="button" *ngIf="isLoggedIn" (click)="isShowRightSideBar=!isShowRightSideBar">{{userBalance?.availableCredit | number}} <i class="fa fa-user bg-pink rounded-circle small p-1"></i></button>
-            </form>
+
+                    <a href="javascript:myBlurFunction(1);" class="btn text-white border-pink text-nowrap rounded-pill"
+                     *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
+                    <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
+                    </a>
+
+                <!-- <button id="menu-toggle" class="btn text-white border-pink text-nowrap rounded-pill"
+                    type="button" *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
+                    <i class="fa fa-user bg-pink rounded-circle small p-1"></i></button> -->
+                   </form>
         </div>
     </div>
 </nav>
@@ -67,7 +86,9 @@
 <!---Header 2 end-->
 
 <!--Right sidebar start-->
-<div id="rightslider" [ngClass]="{'toggled':isShowRightSideBar}">
+<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}">
+<div id="rightslider">
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
+</div>
 </div>
 <!--Right sidebar end-->

@@ -44,6 +44,7 @@ $border-color_1: inherit;
 }
 .bg-blur {
   filter: blur(4px);
+  height: 100vh;
 }
 .accordion-button {
   padding: 0.6rem 1rem;
@@ -54,7 +55,7 @@ $border-color_1: inherit;
   background-color: $background-color_1;
   position: sticky;
   top: 0;
-  z-index: 1020;
+  z-index: 1;
 }
 .header-icon {
   width: 35px;
@@ -301,12 +302,39 @@ tr {
 }
 /*login end*/
 /*Right sidebar start*/
+#overlay    {
+  position: fixed;
+  display: none;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(30, 30, 30, 0.8);
+  z-index: 999;
+  backdrop-filter: blur(8px);
+}
+
 #rightslider {
   padding-right: 0;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  width: 250px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 1000;
+  background: #202121;
+  color: #fff;
+  font-size: 10px;
+  overflow-x: hidden;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  box-shadow: 0px 1px 2px #ffa7a3;
   a {
     text-decoration: none;
     color: $color_1;
@@ -314,31 +342,11 @@ tr {
 }
 #rightslider.toggled {
   padding-right: 250px;
-  #sidebar-wrapper {
-    width: 250px;
-    box-shadow: 0px 1px 2px #ffa7a3;
-  }
+
   #page-content-wrapper {
     position: absolute;
     margin-left: -250px;
   }
-}
-#sidebar-wrapper {
-  z-index: 1100;
-  position: fixed;
-  top: 0px;
-  right: 250px;
-  width: 0;
-  height: 100%;
-  margin-right: -250px;
-  overflow-x: hidden;
-  background: #202121;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: $color_1;
-  font-size: 12px;
 }
 #page-content-wrapper {
   width: 100%;
@@ -562,7 +570,7 @@ input:checked + .slider:before {
 --e: cubic-bezier(0.76, 0, 0.24, 1);
 background-image: linear-gradient(45deg, #ffc0e612 25%, #0009 25%);
 background-size: var(--s) var(--s);
-background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), 
+background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1),
 calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
 animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
 background-color: #000;
@@ -587,38 +595,38 @@ height: 100vh;
 
 @keyframes position {
   0% {
-    background-position: 
-      calc(var(--p) *  1) calc(var(--p) *  0), 
-      calc(var(--p) * -1) calc(var(--p) *  1), 
-      calc(var(--p) *  1) calc(var(--p) * -1), 
+    background-position:
+      calc(var(--p) *  1) calc(var(--p) *  0),
+      calc(var(--p) * -1) calc(var(--p) *  1),
+      calc(var(--p) *  1) calc(var(--p) * -1),
       calc(var(--p) * -1) calc(var(--p) *  0);
   }
   25% {
-    background-position: 
-      calc(var(--p) *  1) calc(var(--p) *  4), 
-      calc(var(--p) * -1) calc(var(--p) *  5), 
-      calc(var(--p) *  1) calc(var(--p) *  3), 
+    background-position:
+      calc(var(--p) *  1) calc(var(--p) *  4),
+      calc(var(--p) * -1) calc(var(--p) *  5),
+      calc(var(--p) *  1) calc(var(--p) *  3),
       calc(var(--p) * -1) calc(var(--p) *  4);
   }
   50% {
-    background-position: 
-      calc(var(--p) *  3) calc(var(--p) * 8), 
-      calc(var(--p) * -3) calc(var(--p) * 9), 
-      calc(var(--p) *  2) calc(var(--p) * 7), 
+    background-position:
+      calc(var(--p) *  3) calc(var(--p) * 8),
+      calc(var(--p) * -3) calc(var(--p) * 9),
+      calc(var(--p) *  2) calc(var(--p) * 7),
       calc(var(--p) * -2) calc(var(--p) * 8);
   }
   75% {
-    background-position: 
-      calc(var(--p) *  3) calc(var(--p) * 12), 
-      calc(var(--p) * -3) calc(var(--p) * 13), 
-      calc(var(--p) *  2) calc(var(--p) * 11), 
+    background-position:
+      calc(var(--p) *  3) calc(var(--p) * 12),
+      calc(var(--p) * -3) calc(var(--p) * 13),
+      calc(var(--p) *  2) calc(var(--p) * 11),
       calc(var(--p) * -2) calc(var(--p) * 12);
   }
-  100% {    
-    background-position: 
-      calc(var(--p) *  5) calc(var(--p) * 16), 
-      calc(var(--p) * -5) calc(var(--p) * 17), 
-      calc(var(--p) *  5) calc(var(--p) * 15), 
+  100% {
+    background-position:
+      calc(var(--p) *  5) calc(var(--p) * 16),
+      calc(var(--p) * -5) calc(var(--p) * 17),
+      calc(var(--p) *  5) calc(var(--p) * 15),
       calc(var(--p) * -5) calc(var(--p) * 16);
   }
 }
@@ -628,5 +636,3 @@ height: 100vh;
     animation: none;
   }
 }
-
-

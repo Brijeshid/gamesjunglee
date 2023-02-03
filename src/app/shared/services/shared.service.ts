@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
@@ -9,7 +9,8 @@ import { Isports } from '../models/shared';
   providedIn: 'root'
 })
 export class SharedService {
- 
+
+  sharedSubject=new Subject();
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);

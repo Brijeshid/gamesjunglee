@@ -1,9 +1,9 @@
-<div id="sidebar-wrapper">
-    <div class="row p-3 bg-pink">
+<div id="sidebar-wrapper" class="opensidebar">
+    <div class="row p-3 bg-pink" id="menu-toggle">
         <div class="col-md-6">
             <h5>{{userDetails['username'] | titlecase}}</h5>
         </div>
-        <div class="col-md-6 text-end"> <a class="anchorTag" (click)="onClose()">X</a> </div>
+        <div class="col-md-6 text-end"> <a class="anchorTag" href="">X</a> </div>
     </div>
     <div class="row ps-4 pe-3">
         <div class="col-md-12 text-center p-3"><i class="fa fa-landmark"></i> Balance Information </div>
@@ -21,35 +21,35 @@
         <div class="col">
             <ul class="nav flex-column border-0 pt-0">
                 <li class="nav-item">
-                    <a [routerLink]="['/favorites']" [routerLinkActive]="'active'" class="nav-link"><i class="fa fa-star"></i> <span> Favorites </span>
+                    <a [routerLink]="['/favorites']" [routerLinkActive]="'active'" class="nav-link"  (click)="onClose()"><i class="fa fa-star"></i> <span> Favorites </span>
                         <!-- <span class="leftb-icon">12</span>  -->
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="['/bets']" [routerLinkActive]="'active'" class="nav-link"><i class="fa fa-list"></i> <span> Open Bets </span>
+                    <a [routerLink]="['/bets']" [routerLinkActive]="'active'" class="nav-link" (click)="onClose()"><i class="fa fa-list"></i> <span> Open Bets </span>
                         <!-- <span class="leftb-icon">10</span>  -->
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/profit-loss']" [routerLinkActive]="'active'"><i class="fa fa-coins"></i> Betting P&L</a>
+                    <a class="nav-link" [routerLink]="['/profit-loss']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-coins"></i> Betting P&L</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/transfer-statements']" [routerLinkActive]="'active'"><i class="fa fa-file-invoice"></i> Transfer Statements</a>
+                    <a class="nav-link" [routerLink]="['/transfer-statements']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-invoice"></i> Transfer Statements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/time-settings']" [routerLinkActive]="'active'"><i class="fa fa-calendar-days"></i> Time Settings</a>
+                    <a class="nav-link" [routerLink]="['/time-settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-calendar-days"></i> Time Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/news']" [routerLinkActive]="'active'"><i class="fa fa-file-lines"></i> News</a>
+                    <a class="nav-link" [routerLink]="['/news']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-lines"></i> News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/change-password']" [routerLinkActive]="'active'"><i class="fa fa-lock"></i> Change Password</a>
+                    <a class="nav-link" [routerLink]="['/change-password']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-lock"></i> Change Password</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/rules-regulations']" [routerLinkActive]="'active'"><i class="fa fa-memory"></i> Rules & Regulations</a>
+                    <a class="nav-link" [routerLink]="['/rules-regulations']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-memory"></i> Rules & Regulations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/settings']" [routerLinkActive]="'active'"><i class="fa fa-gear"></i> Settings</a>
+                    <a class="nav-link" [routerLink]="['/settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-gear"></i> Settings</a>
                 </li>
             </ul>
         </div>
