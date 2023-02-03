@@ -295,5 +295,9 @@ export class ApiEndpointsService {
 
   }
 
+  public getUserConfigEndPoint():string{
+    return this.createUrl(this._constants.API_URL_GET_USER_CONFIG)
+  }
+
 
 }

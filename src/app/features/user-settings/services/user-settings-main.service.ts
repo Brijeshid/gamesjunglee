@@ -16,13 +16,14 @@ export class UserSettingsMainService {
   _getTermCondApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getTermCondEndPoint());
-  } 
+  }
   _getTransferStatementApi() {
-    console.log(this._apiEndpointsService.getTransferStatementEndPoint());
-    
     return this._apiHttpService
       .get(this._apiEndpointsService.getTransferStatementEndPoint());
-  } 
-
+  }
+  _getUserConfigApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUserConfigEndPoint());
+  }
 
 }
