@@ -157,36 +157,36 @@ export class TourMarketListComponent implements OnInit {
       let webSocketData = parseData['data'];
       if(this.inPlayMatchListBySport.length >0){
         this.inPlayMatchListBySport.map(sportsObj =>{
-              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
-              return sportsObj['market']['runners'].map((runnerRes) => {
-                let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
-                for (let singleWebsocketRunner of webSocketRunners) {
-                  if (singleWebsocketRunner['ib']) {
-                    //back
-      
-                    //Live Rate
-                    runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-      
-                    //Volume from Betfair
-                    runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-      
-                  } else {
-                    //lay
-      
-                    //Live Rate
-                    runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-      
-                    //Volume from Betfair
-                    runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-      
-                  }
+            let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
+            return sportsObj['market']['runners'].map((runnerRes) => {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+              for (let singleWebsocketRunner of webSocketRunners) {
+                if (singleWebsocketRunner['ib']) {
+                  //back
+    
+                  //Live Rate
+                  runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+    
+                  //Volume from Betfair
+                  runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+    
+                } else {
+                  //lay
+    
+                  //Live Rate
+                  runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+    
+                  //Volume from Betfair
+                  runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+    
                 }
-                // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
-                //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
-                //       runnerRes['suspended'] = false;
-                // }
-                return runnerRes;
-              })
+              }
+              // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
+              //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
+              //       runnerRes['suspended'] = false;
+              // }
+              return runnerRes;
+          })
         })
       }
       
@@ -221,9 +221,9 @@ export class TourMarketListComponent implements OnInit {
                 //       runnerRes['suspended'] = false;
                 // }
                 return runnerRes;
-              })
-        })
-      }
+            })
+          })
+        }
     }
   }
 
