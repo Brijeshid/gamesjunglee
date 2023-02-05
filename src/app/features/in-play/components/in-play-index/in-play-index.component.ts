@@ -196,4 +196,11 @@ export class InPlayIndexComponent implements OnInit {
       () => console.log('complete') // Called when connection is closed (for whatever reason).
     );
   }
+
+  ngOnDestroy(): void {
+    this._setOrUnsetWebSocketData(false,_.merge(this.setOrUnsetWebSocketParamsObj['inplay'],this.setOrUnsetWebSocketParamsObj['upcoming']));
+    this.realDataWebSocket.complete();
+    // console.log('unset_destroy', this.centralIds);
+    // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
+  }
 }

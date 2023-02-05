@@ -155,11 +155,10 @@ export class TourMarketListComponent implements OnInit {
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       console.log('data', JSON.parse(data));
       let webSocketData = parseData['data'];
-      if(this.inPlayMatchListBySport[0]['sports'].length >0){
-        this.inPlayMatchListBySport[0]['sports'].map(sportsObj =>{
-          return sportsObj['markets'].map(resObj=>{
-              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
-              return resObj['market']['runners'].map((runnerRes) => {
+      if(this.inPlayMatchListBySport.length >0){
+        this.inPlayMatchListBySport.map(sportsObj =>{
+              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
+              return sportsObj['market']['runners'].map((runnerRes) => {
                 let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                 for (let singleWebsocketRunner of webSocketRunners) {
                   if (singleWebsocketRunner['ib']) {
@@ -188,15 +187,13 @@ export class TourMarketListComponent implements OnInit {
                 // }
                 return runnerRes;
               })
-          })
         })
       }
       
-      if(this.upComingMatchListBySport[0]['sports'].length >0){
-        this.upComingMatchListBySport[0]['sports'].map(sportsObj =>{
-          return sportsObj['markets'].map(resObj=>{
-              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
-              return resObj['market']['runners'].map((runnerRes) => {
+      if(this.upComingMatchListBySport.length >0){
+        this.upComingMatchListBySport.map(sportsObj =>{
+              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
+              return sportsObj['market']['runners'].map((runnerRes) => {
                 let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                 for (let singleWebsocketRunner of webSocketRunners) {
                   if (singleWebsocketRunner['ib']) {
@@ -225,7 +222,6 @@ export class TourMarketListComponent implements OnInit {
                 // }
                 return runnerRes;
               })
-          })
         })
       }
     }
@@ -234,12 +230,19 @@ export class TourMarketListComponent implements OnInit {
   _subscribeWebSocket(){
     this.realDataWebSocket.subscribe(
       data => {
-        // if(typeof data == 'string') this._updateMarketData(data);
-        if(typeof data == 'string') console.log('sub',data);
+        if(typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
     );
+  }
+
+  ngOnDestroy(): void {
+    this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+    this.realDataWebSocket.complete();
+    // console.log('unset_destroy', this.centralIds);
+    // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
 
 }
