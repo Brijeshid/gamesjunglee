@@ -11,11 +11,13 @@ export class LeaguesComponent implements OnInit {
   @Input() leaguesList:any = [];
   sportsName:string;
   constructor(
-    private _router: ActivatedRoute,
+    private _route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.sportsName = this._router.snapshot.params.sports;
+    this._route.params.subscribe((routeParams)=>{
+      this.sportsName = routeParams.sports;
+    })
   }
 
 }

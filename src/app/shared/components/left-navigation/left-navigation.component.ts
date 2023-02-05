@@ -16,12 +16,14 @@ export class LeftNavigationComponent implements OnInit {
   @Input() menuList:any;
 
   constructor(
-    private _router: ActivatedRoute,
+    private _route: ActivatedRoute,
     private _sharedService: SharedService,
   ) { }
 
   ngOnInit(): void {
-    this.sportsName = this._router.snapshot.params.sports;
+    this._route.params.subscribe((routeParams)=>{
+      this.sportsName = routeParams.sports;
+    })
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
   }

@@ -36,7 +36,6 @@ export class SportsMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.sports = this._route.snapshot.params.sports;
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.getSubNavList();
