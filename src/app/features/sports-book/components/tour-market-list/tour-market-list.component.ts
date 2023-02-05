@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { InPlayService } from '../../services/in-play.service';
+import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
-import { SharedService } from '@shared/services/shared.service';
 
 @Component({
-  selector: 'app-in-play-index',
-  templateUrl: './in-play-index.component.html',
-  styleUrls: ['./in-play-index.component.scss']
+  selector: 'app-tour-market-list',
+  templateUrl: './tour-market-list.component.html',
+  styleUrls: ['./tour-market-list.component.scss']
 })
-export class InPlayIndexComponent implements OnInit {
+export class TourMarketListComponent implements OnInit {
 
+  subNavList:any =[];
   inPlayMatchListBySport:any=[];
   upComingMatchListBySport:any=[];
 
@@ -25,29 +26,49 @@ export class InPlayIndexComponent implements OnInit {
     }
   };
   setResponse:any= {};
-  isLoggedIn:boolean = false;
-  
+
+  tourId:any;
+  tourName:string = 'NO MATCH AVAILABLE';
+
+  isBetSlipShow:boolean = false;
+
   constructor(
-    private _inPlayService: InPlayService,
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = this._sharedService.isLoggedIn();
-    this._getWebSocketUrl();
+    this._route.params.subscribe(routeParams =>{
+      this.tourId = routeParams.tourId;
+      this.getSubNavList();
+      this._getWebSocketUrl();
+    })
   }
 
-  getInPlayUpcomingData(paramsObj){
-    this._sharedService._postInPlayUpcomingApi(paramsObj).subscribe((res)=>{
-      if(res['matchDetails'].length > 0){
-         res['matchDetails'][0]['sports'].map(sportsObj =>{
+  getSubNavList(){
+    this._sharedService._getToursMatchesListApi(this.tourId).subscribe((matchListRes:any)=>{
+      console.log('subNavList',matchListRes);
+      if(matchListRes?.length >0){
+        let updatedMatchList = matchListRes.map((singleObj:any)=>(
+          {
+            'id':singleObj['matchId'],
+            'name':singleObj['matchName']
+          }
+        ));
+        this.subNavList = updatedMatchList;
+      }
+    });
+  }
 
-          paramsObj['upComing'] ?
-          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'] = _.merge(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']):
-          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.merge(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
+  getInPlayUpcomingData(){
+    this._sharedService._postInPlayUpcomingApi({tournamentId:this.tourId}).subscribe((res:any)=>{
+      if(res?.inPlayUpcomingMarket && (res['inPlayUpcomingMarket']['inPlayMarkets'].length > 0 
+        || res['inPlayUpcomingMarket']['upComingMarkets'].length > 0)){
 
-          return sportsObj['markets'].map(marketObj=>{
-              return marketObj['market']['runners'].map((runnerRes) => {
+         res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
+          if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
+          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
+          return sportsObj['market']['runners'].map(runnerRes=>{
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
       
@@ -68,18 +89,43 @@ export class InPlayIndexComponent implements OnInit {
       
                 runnerRes['suspended'] = true;
                 return runnerRes;
-              })
           })
         })
 
-        console.log('upcoming',this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']);
-        console.log('inplay',this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
-        // localStorage.setItem('unset',JSON.stringify(this.setOrUnsetWebSocketParamsObj));
-        let newParamsObjs = paramsObj['upComing'] ? this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']:this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'];
-        if(newParamsObjs.length > 0) this._setOrUnsetWebSocketData(true,{'centralIds':newParamsObjs});
+        res['inPlayUpcomingMarket']['upComingMarkets'].map(sportsObj =>{
+          if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
+          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
+          return sportsObj['market']['runners'].map(runnerRes=>{
+                runnerRes['back0'] = '';
+                runnerRes['vback0'] = '';
+      
+                runnerRes['back1'] = '';
+                runnerRes['vback1'] = '';
+      
+                runnerRes['back2'] = '';
+                runnerRes['vback2'] = '';
+      
+                runnerRes['lay0'] = '';
+                runnerRes['vlay0'] = '';
+      
+                runnerRes['lay1'] = '';
+                runnerRes['vlay1'] = '';
+      
+                runnerRes['lay2'] = '';
+                runnerRes['vlay2'] = '';
+      
+                runnerRes['suspended'] = true;
+                return runnerRes;
+          })
+        })
+
+        //merge both centralId
+        console.log('data',res['matchDetails']);
+        this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
+        this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
+        this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+
       }
-      console.log('data',res['matchDetails']);
-      paramsObj['upComing'] ?  this.upComingMatchListBySport = res['matchDetails']: this.inPlayMatchListBySport = res['matchDetails'];
     })
   }
 
@@ -89,8 +135,7 @@ export class InPlayIndexComponent implements OnInit {
         console.log('url',res);
         if(res){
           this.realDataWebSocket = webSocket(res['url']);
-          this.getInPlayUpcomingData({upComing:false}); //in-play
-          this.getInPlayUpcomingData({upComing:true});  //upcoming
+          this.getInPlayUpcomingData(); //in-play //upcoming
         }
       });
   }
@@ -189,11 +234,12 @@ export class InPlayIndexComponent implements OnInit {
   _subscribeWebSocket(){
     this.realDataWebSocket.subscribe(
       data => {
-        if(typeof data == 'string') this._updateMarketData(data);
-        // if(typeof data == 'string') console.log('sub',data);
+        // if(typeof data == 'string') this._updateMarketData(data);
+        if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
     );
   }
+
 }
