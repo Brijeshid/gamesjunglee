@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-leagues',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaguesComponent implements OnInit {
 
-  constructor() { }
+  @Input() leaguesList:any = [];
+  sportsName:string;
+  constructor(
+    private _router: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    this.sportsName = this._router.snapshot.params.sports;
   }
 
 }
