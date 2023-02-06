@@ -114,5 +114,30 @@ export class SharedService {
     return this._apiHttpService
       .get(this._apiEndpointsService.getAllNavEndPoint());
   }
+
+  getWebSocketURLApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getWebSocketURLEndpoint());
+  }
+
+  _postInPlayUpcomingApi(inPlayUpcomingBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getInPlayUpcomingEndPoint(), inPlayUpcomingBody);
+  }
+
+  postSetOrUnsetWebSocketDataApi(isSet:boolean,objParams:object) {
+    if(isSet){
+      return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('set'), objParams);
+    }else{
+      return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('unset'), objParams);
+    }
+  }
+
+  _postTourListApi(tourParams:any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSportsToursEndpoint(),tourParams);
+  }
 }
 

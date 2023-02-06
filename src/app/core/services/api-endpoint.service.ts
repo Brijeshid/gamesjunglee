@@ -192,6 +192,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ROLES)
   }
 
+  public getSportsToursEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_SPORTS_TOUR)
+  }
+
   public getSportsToursByIdEndpoint(
     id: string
   ): string {
@@ -289,6 +293,5 @@ export class ApiEndpointsService {
   public getInPlayUpcomingEndPoint(): string {
     return this.createUrl(this._constants.API_URL_GET_IN_PLAY_UPCOMING);
   }
-
 
 }

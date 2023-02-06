@@ -1,0 +1,156 @@
+<!--Header 3 start-->
+<div class="row m-0">
+  <div class="col-md-12 accordionn p-0">
+    <!-- Nav tabs -->
+    <ul class="nav justify-content-center nav-tabs w-100 m-auto border-bottom-0 pt-2" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="btn nav-link active" id="liveupcoming-tab" data-bs-toggle="tab" data-bs-target="#liveupcoming"
+          type="button" role="tab" aria-controls="liveupcoming" aria-selected="true">Live & Upcoming</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="btn nav-link" id="leagues-tab" data-bs-toggle="tab" data-bs-target="#leagues" type="button"
+          role="tab" aria-controls="leagues" aria-selected="false">Leagues</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="btn nav-link" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button"
+          role="tab" aria-controls="results" aria-selected="false">Results</button>
+      </li>
+    </ul>
+  </div>
+  <!-- Tab panes -->
+</div>
+<!--Header 3 end-->
+
+<div class="row m-0">
+  <!--Aside start-->
+  <div class="col-md-2 asidenav">
+    <app-left-navigation [menuList]="subNavList"></app-left-navigation>
+  </div>
+  <!--Aside end-->
+  <!--Artical Start-->
+  <div class="col-md-10">
+    <div class="row m-0">
+      <div class="mt-3" [ngClass]="isBetSlipShow ? 'col-md-8' :'col-md-12'">
+
+        <!--center content start-->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tab-content  text-white">
+              <!--liveupcoming start-->
+              <div class="tab-pane active" id="liveupcoming" role="tabpanel" aria-labelledby="home-tab">
+                <!--Game details info start-->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mt-0 innerpagem gamedetails ps-3 pe-3">
+                      <!--Table 1-->
+                      <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
+                        <span class="badge rounded-pill bg-success midbadge p-2">Live</span>
+                        <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleInPlay['marketType'] | titlecase}}</span>
+                        <table class="table table-hover">
+                          <thead class="collapsible">
+                            <tr>
+                              <th width="30%" class="tfirstcol"><i class="fa-solid fa-minus"></i>&nbsp; {{singleInPlay['matchName']}}
+                              </th>
+                              <th width="15%" class="coldark"></th>
+                              <th width="15%" class="coldark"></th>
+                              <th width="10%" colspan="2" class="text-center coldark">Back</th>
+                              <th width="10%" colspan="2" class="text-center coldark">Lay</th>
+                              <th width="10%" colspan="2" class="text-center tlastcol coldark"><i
+                                  class="fa fa-caret-right"></i> <i class="fa fa-star-of-david ms-4 text-pink"></i>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="content">
+                            <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last;" [ngClass]="{'border-0':last}">
+                              <td class="text-start ps-2"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
+                              <td><i class="fa fa-play"></i> </td>
+                              <td><i class="fas fa-broadcast-tower"></i></td>
+                              <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0']}}</a></td>
+                              <td class="colpink "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1']}}</a></td>
+                              <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2']}}</a></td>
+                              <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0']}}</a></td>
+                              <td class="colblue "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1']}}</a></td>
+                              <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2']}}</a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </ng-container>
+
+                      <!--Table 2-->
+                      <ng-container *ngFor="let singleUpcoming of upComingMatchListBySport">
+                        <span class="badge rounded-pill bg-primary midbadge p-2">Upcoming</span>
+                        <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}}</span>
+                        <table class="table table-hover">
+                          <thead class="collapsible">
+                            <tr>
+                              <th width="30%" class="tfirstcol"><i class="fa-solid fa-minus"></i>&nbsp; {{singleUpcoming['matchName']}}
+                              </th>
+                              <th width="15%" class="coldark"></th>
+                              <th width="15%" class="coldark"></th>
+                              <th width="10%" colspan="2" class="text-center coldark">Back</th>
+                              <th width="10%" colspan="2" class="text-center coldark">Lay</th>
+                              <th width="10%" colspan="2" class="text-center tlastcol coldark"><i
+                                  class="fa fa-caret-right"></i> <i class="fa fa-star-of-david ms-4 text-pink"></i>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="content">
+                            <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last;" [ngClass]="{'border-0':last}">
+                              <td class="text-start ps-2"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
+                              <td></td>
+                              <td></td>
+                              <td class="colblue dis"><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0']}}</a></td>
+                              <td class="colpink dis"><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1']}}</a></td>
+                              <td class="colblue dis"><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2']}}</a></td>
+                              <td class="colpink dis"><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0']}}</a></td>
+                              <td class="colblue dis"><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1']}}</a></td>
+                              <td class="colpink dis"><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2']}}</a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </ng-container>
+
+                      <!--Adv. start-->
+                      <div class="row mt-3 mb-3">
+                        <div class="col-sm-6">
+                          <a href="https://playexch.co/_nuxt/img/live-cards-banner.dc9c351.gif">
+                            <img src="https://playexch.co/_nuxt/img/live-cards-banner.dc9c351.gif" width="100%">
+                          </a>
+                        </div>
+                        <div class="col-sm-6">
+                          <a href="https://playexch.co/_nuxt/img/live-casino-banner.9c25697.gif">
+                            <img src="https://playexch.co/_nuxt/img/live-casino-banner.9c25697.gif" width="100%">
+                          </a>
+                        </div>
+                      </div>
+                      <!--Adv. end-->
+                    </div>
+                  </div>
+                </div>
+                <!--Game details info end-->
+              </div>
+              <!--liveupcoming end-->
+              <!--leagues start-->
+              <div class="tab-pane" id="leagues" role="tabpanel" aria-labelledby="profile-tab">
+                <app-leagues [leaguesList]="subNavList"></app-leagues>
+              </div>
+              <!--leagues end-->
+              <!--results start-->
+              <div class="tab-pane" id="results" role="tabpanel" aria-labelledby="messages-tab">
+                <app-results></app-results>
+              </div>
+              <!--results end-->
+            </div>
+          </div>
+        </div>
+        <!--Center content end-->
+      </div>
+      <!--Aside right start-->
+      <div class="col-md-4 mt-3" *ngIf="isBetSlipShow">
+        <app-bet-slip></app-bet-slip>
+      </div>
+      <!--Aside right end-->
+    </div>
+  </div>
+  <!--Artical end-->
+</div>
