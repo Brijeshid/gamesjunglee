@@ -139,5 +139,10 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getSportsToursEndpoint(),tourParams);
   }
+
+  _postSearchListApi(searchParams:any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSearchEventEndPoint(),searchParams);
+  }
 }
 

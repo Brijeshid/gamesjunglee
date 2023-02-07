@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
                 <li class="nav-item header-icon">
                     <a [routerLink]="['/news']">
                         <i class="fas fa-newspaper"></i></a>
@@ -33,7 +33,7 @@
                   /> -->
                     <!--03012023-->
 
-                    <!-- <input type="text" class="form-control" aria-label="" placeholder="Search for a Sport, Game or Team"> -->
+                    <input type="text" class="form-control" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
                     <span class="input-group-text"><i class="fa fa-caret-down"></i> </span>
                 </div>
                 <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
@@ -86,7 +86,7 @@
 <!---Header 2 end-->
 
 <!--Right sidebar start-->
-<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}">
+<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
 <div id="rightslider">
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
 </div>
