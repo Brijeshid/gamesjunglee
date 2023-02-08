@@ -4,12 +4,16 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { FavouriteComponent } from './components/favourite/favourite.component';
+import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
+import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     RightSidebarComponent,
-    FavouriteComponent
+    FavouriteComponent,
+    LeftNavigationComponent,
+    BetSlipComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,9 @@ import { FavouriteComponent } from './components/favourite/favourite.component';
   ],
   exports: [
     HeaderComponent,
-    FavouriteComponent
+    FavouriteComponent,
+    LeftNavigationComponent,
+    BetSlipComponent
   ]
 })
 export class SharedModule { }

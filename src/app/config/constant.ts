@@ -27,6 +27,7 @@ export class Constants {
     public readonly API_URL_ADDUSERS: string = '';
 
     public readonly API_URL_SPORTS: string = 'api/betfairSports'
+    public readonly API_URL_SPORTS_TOUR: string = 'api/betfairtournaments'
     public readonly API_URL_SPORTS_TOURNAMENT: string = 'api/betfairtournaments/sport'
     public readonly API_URL_TOURNAMENT_MATCHES: string = 'api/betfairmatches/tournament'
     public readonly API_URL_MATCHES: string = 'api/betfairmatches/match'

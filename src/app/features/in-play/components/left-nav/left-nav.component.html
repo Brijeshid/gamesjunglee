@@ -7,7 +7,7 @@
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item" *ngFor="let singleObj of mainMenu">
-                <a routerLink="/sportsbook/{{singleObj['sportName'] | lowercase}}" class="nav-link"><img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="15px"> <span> {{singleObj['sportName']}} </span>
+                <a routerLink="/sportsbook/{{singleObj['sportName'] | titlecase}}" class="nav-link"><img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="15px"> <span> {{singleObj['sportName']}} </span>
                     <span class="leftb-icon">{{singleObj['marketCount']}}</span> </a>
             </li>
             <li class="nav-item" *ngIf="mainMenu.length > 0">

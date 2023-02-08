@@ -24,6 +24,16 @@ $(document).ready(function() {
 });
 //plus minus end
 
-//Table open close start
+//BG blur start
+myBlurFunction = function(bgfunr) {
+  var overlayEle = document.getElementById('overlay');
+  if (bgfunr) {
+      overlayEle.style.display = 'block';
+      containerElement.setAttribute('class', 'bg-blur');
+  } else {
+      overlayEle.style.display = 'none';
+      containerElement.setAttribute('class', null);
+  }
+};
+//BG blur end
 
-//Table open close end

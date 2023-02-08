@@ -38,7 +38,7 @@ export class InPlayIndexComponent implements OnInit {
   }
 
   getInPlayUpcomingData(paramsObj){
-    this._inPlayService._postInPlayUpcomingApi(paramsObj).subscribe((res)=>{
+    this._sharedService._postInPlayUpcomingApi(paramsObj).subscribe((res)=>{
       if(res['matchDetails'].length > 0){
          res['matchDetails'][0]['sports'].map(sportsObj =>{
 
@@ -84,7 +84,7 @@ export class InPlayIndexComponent implements OnInit {
   }
 
   _getWebSocketUrl(){
-    this._inPlayService.getWebSocketURLApi().subscribe(
+    this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
         console.log('url',res);
         if(res){
@@ -96,7 +96,7 @@ export class InPlayIndexComponent implements OnInit {
   }
 
   _setOrUnsetWebSocketData(isSet:boolean,setOrUnsetWebSocketParamsObj){
-    this._inPlayService.postSetOrUnsetWebSocketDataApi(isSet,setOrUnsetWebSocketParamsObj).subscribe(
+    this._sharedService.postSetOrUnsetWebSocketDataApi(isSet,setOrUnsetWebSocketParamsObj).subscribe(
       (res: any) => {
         console.log('market',res);
         if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
@@ -195,5 +195,12 @@ export class InPlayIndexComponent implements OnInit {
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
     );
+  }
+
+  ngOnDestroy(): void {
+    this._setOrUnsetWebSocketData(false,_.merge(this.setOrUnsetWebSocketParamsObj['inplay'],this.setOrUnsetWebSocketParamsObj['upcoming']));
+    this.realDataWebSocket.complete();
+    // console.log('unset_destroy', this.centralIds);
+    // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
 }

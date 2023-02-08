@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="innerpagem ps-3 pe-3 pb-3">
+        <div class="list-group leagues">
+          <a *ngFor="let league of leaguesList" routerLink="/sportsbook/{{sportsName}}/{{league['id']}}" class="list-group-item list-group-item-action"
+            aria-current="true">{{league['name'] | titlecase}}</a>
+        </div>
+      </div>
+    </div>
+  </div>

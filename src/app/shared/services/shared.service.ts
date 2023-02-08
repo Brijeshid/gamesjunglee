@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
@@ -9,7 +9,8 @@ import { Isports } from '../models/shared';
   providedIn: 'root'
 })
 export class SharedService {
- 
+
+  sharedSubject=new Subject();
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -112,6 +113,36 @@ export class SharedService {
   _getAllNavListApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getAllNavEndPoint());
+  }
+
+  getWebSocketURLApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getWebSocketURLEndpoint());
+  }
+
+  _postInPlayUpcomingApi(inPlayUpcomingBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getInPlayUpcomingEndPoint(), inPlayUpcomingBody);
+  }
+
+  postSetOrUnsetWebSocketDataApi(isSet:boolean,objParams:object) {
+    if(isSet){
+      return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('set'), objParams);
+    }else{
+      return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('unset'), objParams);
+    }
+  }
+
+  _postTourListApi(tourParams:any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSportsToursEndpoint(),tourParams);
+  }
+
+  _postSearchListApi(searchParams:any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSearchEventEndPoint(),searchParams);
   }
 }
 
