@@ -11,7 +11,7 @@
       <label class="form-check-label text-pink" for="gridCheck">
         <h5>One Click Betting</h5>
       </label>
-      <label class="switch float-end me-1"> <input type="checkbox" checked> <span class="slider round"></span></label>
+      <label class="switch float-end me-1"> <input type="checkbox" (click)='onActivateAll()'  checked> <span class="slider round"></span></label>
       <hr class="hr" />
       <div class="row">
         <div class="col-md-6 text-center mb-4">
@@ -19,11 +19,11 @@
             <h6>Edit One-click Stakes</h6>
           </div>
           <div class="innerpagem pt-0">
-            <div class="row m-0 p-2">
-              <div class="p-2 col-md-4" *ngFor="let item of userConfig.userConfig.editOneClickStakeBtn"><button [ngClass]="item==userConfig.userConfig.editOneClickStakeActiveBtn?'bg-pink':'bg-light'"
-                  type="button" class="btn bg-light w-100 active" aria-pressed="true">{{item}}</button></div>
+            <div class="row m-0 p-2"  >
+              <div class="p-2 col-md-4" *ngFor="let item of userConfig.userConfig.editOneClickStakeBtn" ><button [ngClass]="item==userConfig.userConfig.editOneClickStakeActiveBtn?'bg-pink':'bg-light'"
+                  type="button" class="btn bg-light w-100 active" aria-pressed="true" [disabled]="!oneClickBetting==true" >  +{{item | number}}</button></div>
 
-              <div class="col-md-6 mt-3 "><button type="button" class="btn border w-100 btn-light">Edit</button> </div>
+              <div class="col-md-6 mt-3 "><button type="button" [disabled]="!oneClickBetting==true" class="btn border w-100 btn-light">Edit</button> </div>
               <div class="col-md-6 mt-3 "><button type="submit"
                   class="btn btn-light bg-light border disabled w-100">Save </button> </div>
             </div>
@@ -36,7 +36,7 @@
           </div>
           <div class="innerpagem pt-0">
             <div class="row m-0 p-2">
-              <div class="p-2 col-md-4"  *ngFor="let item of userConfig.userConfig.EditStakesBtn"><button type="button" class="btn bg-light w-100 active" aria-pressed="true">{{item}}</button></div>
+              <div class="p-2 col-md-4"  *ngFor="let item of userConfig.userConfig.EditStakesBtn"><button type="button" class="btn bg-light w-100 active" aria-pressed="true">+{{item | number}}</button></div>
 
               <div class="col-md-6 mt-3 "><button type="button" class="btn border w-100 btn-light">Edit</button> </div>
               <div class="col-md-6 mt-3 "><button type="submit"

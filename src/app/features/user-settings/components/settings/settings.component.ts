@@ -8,11 +8,18 @@ import { UserSettingsMainService } from '../../services/user-settings-main.servi
 })
 export class SettingsComponent implements OnInit {
   userConfig:any;
+  oneClickBetting:boolean=true;
   constructor(
     private _userSettingsService: UserSettingsMainService
 
-  ) { }
-
+    ) { }
+    
+    onActivateAll(){
+      this.oneClickBetting=!this.oneClickBetting;
+      console.log(this.oneClickBetting);
+    }
+    
+  
   ngOnInit(): void {
     this.getUserConfig()
 
