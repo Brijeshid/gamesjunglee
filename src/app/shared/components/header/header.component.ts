@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,8 @@ export class HeaderComponent implements OnInit {
   showRightSidebar: boolean = false;
   isLoggedIn:boolean = false;
   isShowRightSideBar:boolean = false;
-  
+  searchList:any = [];
+
   userBalance:any;
   constructor(
     private _sharedService: SharedService
@@ -26,6 +29,13 @@ export class HeaderComponent implements OnInit {
     this.isShowRightSideBar = !eventObj['isClose'];
   }
 
+  onClickAvailableCredit(){
+    this.isShowRightSideBar=!this.isShowRightSideBar;
+    this._sharedService.sharedSubject.next({
+      'isShowRightSideBar':this.isShowRightSideBar
+    });
+  }
+
   getUserBalance(){
     this._sharedService._getBalanceInfoApi().subscribe((res)=>{
       this.userBalance = res;
@@ -33,6 +43,16 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  
+  postSearchList(searchText:any){
+    this._sharedService._postSearchListApi({"searchText":searchText})
+    .pipe(
+      filter(_=>searchText.length >= 3),
+      distinctUntilChanged()
+    )
+    .subscribe((res)=>{
+      this.searchList = res;
+      console.log('res_data',res);
+    })
+  }
 
 }
