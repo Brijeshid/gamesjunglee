@@ -192,6 +192,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ROLES)
   }
 
+  public getSportsToursEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_SPORTS_TOUR)
+  }
+
   public getSportsToursByIdEndpoint(
     id: string
   ): string {
@@ -290,5 +294,16 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_IN_PLAY_UPCOMING);
   }
 
+  public getTransferStatementEndPoint(): string{
+    return this.createUrl(this._constants.API_URL_TRANSFER_STATEMENT);
+  }
+
+  public getUserConfigEndPoint():string{
+    return this.createUrl(this._constants.API_URL_GET_USER_CONFIG)
+  }
+
+  public getSearchEventEndPoint(): string {
+    return this.createUrl(this._constants.API_URL_LIST_DATA_BY_SEARCH);
+  }
 
 }

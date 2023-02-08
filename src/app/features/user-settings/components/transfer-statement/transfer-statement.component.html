@@ -16,30 +16,18 @@
                         <tr>
                             <th width="30%" class="tfirstcol">Date</th>
                             <th width="15%" class="bg-pink">Description</th>
-                            <th width="10%" class="text-end tlastcol bg-pink">Amount</th>
+                            <th width="10%" class="text-center tlastcol bg-pink">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-white">
-                            <td>16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
+                        <tr class="bg-white" *ngFor="let item of tranState">
+                            <td>{{item?.createdDate | date :'d/MM/yyyy, h:mm:ss '}}</td>
+                            <td>{{item?.transferTypeDescription}}</td>
+                            <td class="text-center"
+                                [ngClass]="item.transferTypeDescription =='Transfer Out'?'text-danger':'text-success'"><span *ngIf="item.transferTypeDescription =='Transfer Out'">-</span>
+                                {{item?.amount}}</td>
                         </tr>
-                        <tr class="bg-white">
-                            <td> 16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
-                        </tr>
-                        <tr class="bg-white">
-                            <td> 16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
-                        </tr>
-                        <tr class="bg-white">
-                            <td> 16.01.2023, 7:41:35</td>
-                            <td>Transfer In</td>
-                            <td class="text-end">194</td>
-                        </tr>
+
                     </tbody>
                 </table>
 

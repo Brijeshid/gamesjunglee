@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-12">
+      <ul class="nav flex-column">
+        <li class="nav-item leftuser" *ngIf="isLoggedIn">
+            <span class="leftb-icon float-start"><i class="fa fa-user"></i> </span> <span class="leftuserhead">
+            {{userDetails['username'] | titlecase}} </span>
+        </li>
+        <div class="dropdown-divider"></div>
+        <!-- RK home icon -->
+        <li class="nav-item">
+          <a  class="nav-link"><i class="fa fa-home"></i> <span><strong>Sports</strong> </span></a>
+        </li>
+        <!-- ends here -->
+        <li class="nav-item">
+          <a  class="nav-link active"><img src="assets/images/{{sportsName | lowercase}}.png" width="15px"> <span> {{sportsName | titlecase}}
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link"><i class="fa fa-angle-left"></i> <span>Previous</span></a>
+        </li>
+        <li class="nav-item" *ngFor="let singleMenu of menuList">
+          <a routerLink="/sportsbook/{{sportsName}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>
+        </li>
+      </ul>
+    </div>
+</div>

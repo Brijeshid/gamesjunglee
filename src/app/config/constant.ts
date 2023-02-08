@@ -27,6 +27,7 @@ export class Constants {
     public readonly API_URL_ADDUSERS: string = '';
 
     public readonly API_URL_SPORTS: string = 'api/betfairSports'
+    public readonly API_URL_SPORTS_TOUR: string = 'api/betfairtournaments'
     public readonly API_URL_SPORTS_TOURNAMENT: string = 'api/betfairtournaments/sport'
     public readonly API_URL_TOURNAMENT_MATCHES: string = 'api/betfairmatches/tournament'
     public readonly API_URL_MATCHES: string = 'api/betfairmatches/match'
@@ -60,4 +61,7 @@ export class Constants {
     public readonly API_URL_GET_BALANCE_INFO:string = 'api/getBalanceInformation';                                    
     public readonly API_URL_GET_IN_PLAY_UPCOMING:string = 'api/getInPlayData';
     public readonly API_URL_GET_TERM_COND:string = 'api/termsAndCondition';
+    public readonly API_URL_TRANSFER_STATEMENT:string = 'api/getTransferStatement';
+    public readonly API_URL_GET_USER_CONFIG:string = 'api/getUserConfig';
+
 }

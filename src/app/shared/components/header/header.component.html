@@ -2,13 +2,13 @@
 <nav class="navbar navbar-expand-lg navbar-light header-one">
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/in-play']"><img src="assets/images/logo.png" width="100px"></a>
-        <button class="navbar-toggler border" type="button" data-bs-toggle="collapse"
+        <button class="navbar-toggler border bg-body" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon text-white bg-pink"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
                 <li class="nav-item header-icon">
                     <a [routerLink]="['/news']">
                         <i class="fas fa-newspaper"></i></a>
@@ -21,15 +21,34 @@
             <form class="d-flex">
                 <div class="input-group me-2 search">
                     <span class="input-group-text"><i class="fa fa-search"></i> </span>
-                    <input type="text" class="form-control" aria-label="" placeholder="Search for a Sport, Game or Team">
+
+                    <!--03012023-->
+                    <!-- <input
+                    id="typeahead-format"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="model"
+                    [ngbTypeahead]="search"
+                    [resultFormatter]="formatter"
+                  /> -->
+                    <!--03012023-->
+
+                    <input type="text" class="form-control" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
                     <span class="input-group-text"><i class="fa fa-caret-down"></i> </span>
                 </div>
                 <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
                 <button class="btn text-white border-pink me-2 text-nowrap rounded-pill" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
                     Bets</button>
-                <button id="menu-toggle" class="btn text-white border-pink text-nowrap rounded-pill"
-                    type="button" *ngIf="isLoggedIn" (click)="isShowRightSideBar=!isShowRightSideBar">{{userBalance?.availableCredit | number}} <i class="fa fa-user bg-pink rounded-circle small p-1"></i></button>
-            </form>
+
+                    <a href="javascript:myBlurFunction(1);" class="btn text-white border-pink text-nowrap rounded-pill"
+                     *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
+                    <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
+                    </a>
+
+                <!-- <button id="menu-toggle" class="btn text-white border-pink text-nowrap rounded-pill"
+                    type="button" *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
+                    <i class="fa fa-user bg-pink rounded-circle small p-1"></i></button> -->
+                   </form>
         </div>
     </div>
 </nav>
@@ -42,13 +61,13 @@
             <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img src="assets/images/soccer.png"> INPLAY</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/cricket']" [routerLinkActive]="'active'"><img src="assets/images/cricket.png"> CRICKET</a>
+            <a class="nav-link" [routerLink]="['/sportsbook/Cricket']" [routerLinkActive]="'active'"><img src="assets/images/cricket.png"> CRICKET</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/soccer']" [routerLinkActive]="'active'"><img src="assets/images/soccer.png"> SOCCER</a>
+            <a class="nav-link" [routerLink]="['/sportsbook/Soccer']" [routerLinkActive]="'active'"><img src="assets/images/soccer.png"> SOCCER</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/tennis']" [routerLinkActive]="'active'"><img src="assets/images/tennis.png"> TENNIS</a>
+            <a class="nav-link" [routerLink]="['/sportsbook/Tennis']" [routerLinkActive]="'active'"><img src="assets/images/tennis.png"> TENNIS</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" ><img src="assets/images/casino.png"> CASINO</a>
@@ -67,7 +86,9 @@
 <!---Header 2 end-->
 
 <!--Right sidebar start-->
-<div id="rightslider" [ngClass]="{'toggled':isShowRightSideBar}">
+<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
+<div id="rightslider">
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
+</div>
 </div>
 <!--Right sidebar end-->
