@@ -16,7 +16,7 @@
             <div class="input-group mt-4">
                 <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Enter Password"
                     formControlName="password">
-                <span class="input-group-text bg-white">
+                <span class="input-group-text bg-white" (click)="show=!show">
                     <span class="fa text-dark" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
                 </span>
             </div>
