@@ -49,25 +49,8 @@ export class MatchMarketListComponent implements OnInit {
     this._route.params.subscribe(routeParams =>{
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
-      this.getSubNavList();
       this._getWebSocketUrl();
     })
-  }
-
-  getSubNavList(){
-    this._sharedService._getToursMatchesListApi(this.tourId).subscribe((matchListRes:any)=>{
-      console.log('subNavList',matchListRes);
-      if(matchListRes?.length >0){
-        let updatedMatchList = matchListRes.map((singleObj:any)=>(
-          { 
-            'id':singleObj['matchId'],
-            'refTournamentId':singleObj['refTournamentId'],
-            'name':singleObj['matchName']
-          }
-        ));
-        this.subNavList = updatedMatchList;
-      }
-    });
   }
 
   getInPlayUpcomingData(){

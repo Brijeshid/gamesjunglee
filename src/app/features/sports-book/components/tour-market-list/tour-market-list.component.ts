@@ -40,25 +40,8 @@ export class TourMarketListComponent implements OnInit {
   ngOnInit(): void {
     this._route.params.subscribe(routeParams =>{
       this.tourId = routeParams.tourId;
-      this.getSubNavList();
       this._getWebSocketUrl();
     })
-  }
-
-  getSubNavList(){
-    this._sharedService._getToursMatchesListApi(this.tourId).subscribe((matchListRes:any)=>{
-      console.log('subNavList',matchListRes);
-      if(matchListRes?.length >0){
-        let updatedMatchList = matchListRes.map((singleObj:any)=>(
-          { 
-            'id':singleObj['matchId'],
-            'refTournamentId':singleObj['refTournamentId'],
-            'name':singleObj['matchName']
-          }
-        ));
-        this.subNavList = updatedMatchList;
-      }
-    });
   }
 
   getInPlayUpcomingData(){
