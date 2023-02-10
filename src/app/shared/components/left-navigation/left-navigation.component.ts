@@ -9,6 +9,9 @@ import { SharedService } from '@shared/services/shared.service';
 })
 export class LeftNavigationComponent implements OnInit {
 
+  mainMenu:any = [];
+  viewMoreNavList:any = [];
+  
   isLoggedIn:boolean = false;
   sportsName:string;
   userDetails:any;
@@ -31,6 +34,9 @@ export class LeftNavigationComponent implements OnInit {
       if(this.sportsName){
         this.matchId ? this.getSubNavBySportsWithTourAndMatchList() 
                     : this.tourId ? this.getSubNavBySportsWithTourList() : this.getSubNavBySportsList();
+      }else{
+        this.getNavList();
+        this.getSubNavList();
       }
       
     })
@@ -82,6 +88,20 @@ export class LeftNavigationComponent implements OnInit {
         ));
         this.menuList = updatedMatchList;
       }
+    });
+  }
+
+
+  getNavList(){
+    this._sharedService._getSportsListApi().subscribe((res)=>{
+      console.log('sportslist',res);
+      this.mainMenu = res;
+    });
+  }
+  getSubNavList(){
+    this._sharedService._getAllNavListApi().subscribe((res)=>{
+      this.viewMoreNavList = res['menuList'];
+      console.log(res);
     });
   }
 
