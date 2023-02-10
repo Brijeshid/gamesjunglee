@@ -20,7 +20,8 @@
           <a href="dashboard.html" class="nav-link"><i class="fa fa-angle-left"></i> <span>Previous</span></a>
         </li>
         <li class="nav-item" *ngFor="let singleMenu of menuList">
-          <a routerLink="/sportsbook/{{sportsName}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>
+          <a *ngIf="!singleMenu?.refTournamentId" routerLink="/sportsbook/{{sportsName}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>
+          <a *ngIf="singleMenu?.refTournamentId" routerLink="/sportsbook/{{sportsName}}/{{singleMenu['refTournamentId']}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>
         </li>
       </ul>
     </div>

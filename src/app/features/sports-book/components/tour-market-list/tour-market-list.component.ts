@@ -50,8 +50,9 @@ export class TourMarketListComponent implements OnInit {
       console.log('subNavList',matchListRes);
       if(matchListRes?.length >0){
         let updatedMatchList = matchListRes.map((singleObj:any)=>(
-          {
+          { 
             'id':singleObj['matchId'],
+            'refTournamentId':singleObj['refTournamentId'],
             'name':singleObj['matchName']
           }
         ));
