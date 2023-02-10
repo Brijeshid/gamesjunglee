@@ -27,9 +27,12 @@ export class LeftNavigationComponent implements OnInit {
       this.sportsName = routeParams.sports;
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
-
-      this.matchId ? this.getSubNavBySportsWithTourAndMatchList() 
+      
+      if(this.sportsName){
+        this.matchId ? this.getSubNavBySportsWithTourAndMatchList() 
                     : this.tourId ? this.getSubNavBySportsWithTourList() : this.getSubNavBySportsList();
+      }
+      
     })
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
