@@ -38,6 +38,7 @@ export class MatchMarketListComponent implements OnInit {
   matchName:string = 'NO MATCH AVAILABLE';
 
   isBetSlipShow:boolean = false;
+  isLoggedIn:boolean = false;
   
   constructor(
     private _sharedService: SharedService,
@@ -46,6 +47,7 @@ export class MatchMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
@@ -93,23 +95,12 @@ export class MatchMarketListComponent implements OnInit {
         res.map(sportsObj =>{
           this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'].push(sportsObj['centralId']);
           return sportsObj['runners'].map(runnerRes=>{
+
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
       
-                runnerRes['back1'] = '';
-                runnerRes['vback1'] = '';
-      
-                runnerRes['back2'] = '';
-                runnerRes['vback2'] = '';
-      
                 runnerRes['lay0'] = '';
                 runnerRes['vlay0'] = '';
-      
-                runnerRes['lay1'] = '';
-                runnerRes['vlay1'] = '';
-      
-                runnerRes['lay2'] = '';
-                runnerRes['vlay2'] = '';
       
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -203,14 +194,49 @@ export class MatchMarketListComponent implements OnInit {
               return runnerRes;
           })
       }
+
+      if(this.bookMakerMarket){
+        let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', this.bookMakerMarket['marketId']]);
+            this.bookMakerMarket['runners'].map((runnerRes) => {
+              let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
+              for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                if (singleWebsocketRunnerBook['ib']) {
+                  //back
+    
+                  //Live Rate
+                  runnerRes['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  runnerRes['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                } else {
+                  //lay
+    
+                  //Live Rate
+                  runnerRes['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  runnerRes['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                }
+              }
+              return runnerRes;
+          })
+      }
+
+      if(this.fancyMarket){
+
+      }
+
+
     }
   }
 
   _subscribeWebSocket(){
     this.realDataWebSocket.subscribe(
       data => {
-        if(typeof data == 'string') this._updateMarketData(data);
-        // if(typeof data == 'string') console.log('sub',data);
+        // if(typeof data == 'string') this._updateMarketData(data);
+        if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).

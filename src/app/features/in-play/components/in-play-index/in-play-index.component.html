@@ -76,21 +76,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
+                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
+                                <td class="text-start ps-2"><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></td>
                                 <td><i class="fa fa-play"></i> </td>
                                 <td><i class="fas fa-broadcast-tower"></i></td>
-                                <td class="colblue light"><a href=""><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</a></td>
-                                <td class="colpink light"><a href=""><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0']}}</a></td>
+                                <td class="colblue light"><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</td>
+                                <td class="colpink light"><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0']}}</td>
 
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                <td class="colblue light" *ngIf="singleMarket?.market?.runners[2]"><a href=""><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2']}}</a></td>
-                                <td class="colpink light" *ngIf="singleMarket?.market?.runners[2]"><a href=""><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0']}}</a></td>
+                                <td class="colblue light" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2']}}</td>
+                                <td class="colpink light" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0']}}</td>
 
-                                <td class="colblue light"><a href=""><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2']}}</a></td>
-                                <td class="colpink light"><a href=""><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0']}}</a></td>
+                                <td class="colblue light"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2']}}</td>
+                                <td class="colpink light"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0']}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -117,22 +117,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2"><a href=""><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
-                                    </a></td>
+                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
+                                <td class="text-start ps-2"><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></td>
                                 <td></td>
                                 <td></td>
-                                <td class="colblue dis"><a href=""><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</a></td>
-                                <td class="colpink dis"><a href=""><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0']}}</a></td>
+                                <td class="colblue dis"><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</td>
+                                <td class="colpink dis"><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0']}}</td>
                                 
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                <td class="colblue dis" *ngIf="singleMarket?.market?.runners[2]"><a href=""><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2']}}</a></td>
-                                <td class="colpink dis" *ngIf="singleMarket?.market?.runners[2]"><a href=""><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0']}}</a></td>
+                                <td class="colblue dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2']}}</td>
+                                <td class="colpink dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0']}}</td>
 
-                                <td class="colblue dis"><a href=""><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2']}}</a></td>
-                                <td class="colpink dis"><a href=""><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0']}}</a></td>
+                                <td class="colblue dis"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2']}}</td>
+                                <td class="colpink dis"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0']}}</td>
                             </tr>
                         </tbody>
                     </table>
