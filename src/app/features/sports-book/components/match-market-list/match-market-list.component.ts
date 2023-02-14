@@ -38,6 +38,7 @@ export class MatchMarketListComponent implements OnInit {
   matchName:string = 'NO MATCH AVAILABLE';
 
   isBetSlipShow:boolean = false;
+  isLoggedIn:boolean = false;
   
   constructor(
     private _sharedService: SharedService,
@@ -46,6 +47,7 @@ export class MatchMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
@@ -93,23 +95,12 @@ export class MatchMarketListComponent implements OnInit {
         res.map(sportsObj =>{
           this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'].push(sportsObj['centralId']);
           return sportsObj['runners'].map(runnerRes=>{
+
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
       
-                runnerRes['back1'] = '';
-                runnerRes['vback1'] = '';
-      
-                runnerRes['back2'] = '';
-                runnerRes['vback2'] = '';
-      
                 runnerRes['lay0'] = '';
                 runnerRes['vlay0'] = '';
-      
-                runnerRes['lay1'] = '';
-                runnerRes['vlay1'] = '';
-      
-                runnerRes['lay2'] = '';
-                runnerRes['vlay2'] = '';
       
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -203,6 +194,68 @@ export class MatchMarketListComponent implements OnInit {
               return runnerRes;
           })
       }
+
+      if(this.bookMakerMarket){
+        this.bookMakerMarket.map(bookMakerObj=>{
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', bookMakerObj['marketId']]);
+            return bookMakerObj['runners'].map((runnerRes) => {
+              let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
+              for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                if (singleWebsocketRunnerBook['ib']) {
+                  //back
+    
+                  //Live Rate
+                  runnerRes['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  runnerRes['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                } else {
+                  //lay
+    
+                  //Live Rate
+                  runnerRes['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  runnerRes['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                }
+              }
+              return runnerRes;
+          })
+        })
+      }
+
+      if(this.fancyMarket){
+        this.fancyMarket.map(fancyMarketObj=>{
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', fancyMarketObj['marketId']]);
+              let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
+              for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                if (singleWebsocketRunnerBook['ib']) {
+                  //back
+    
+                  //Live Rate
+                  fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                } else {
+                  //lay
+    
+                  //Live Rate
+                  fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                }
+              }
+              return fancyMarketObj;
+        })
+      }
+
+
     }
   }
 

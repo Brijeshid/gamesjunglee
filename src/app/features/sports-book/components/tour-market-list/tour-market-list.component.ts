@@ -29,8 +29,10 @@ export class TourMarketListComponent implements OnInit {
 
   tourId:any;
   tourName:string = 'NO MATCH AVAILABLE';
+  sports:string;
 
   isBetSlipShow:boolean = false;
+  isLoggedIn:boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -38,7 +40,9 @@ export class TourMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
+      this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this._getWebSocketUrl();
     })

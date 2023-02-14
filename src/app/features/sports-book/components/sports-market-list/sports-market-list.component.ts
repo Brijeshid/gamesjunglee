@@ -29,6 +29,7 @@ export class SportsMarketListComponent implements OnInit {
 
   sports:string;
   isBetSlipShow:boolean = false;
+  isLoggedIn:boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -36,6 +37,7 @@ export class SportsMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn(); 
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this._getWebSocketUrl();
