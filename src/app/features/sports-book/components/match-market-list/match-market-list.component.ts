@@ -196,8 +196,9 @@ export class MatchMarketListComponent implements OnInit {
       }
 
       if(this.bookMakerMarket){
-        let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', this.bookMakerMarket['marketId']]);
-            this.bookMakerMarket['runners'].map((runnerRes) => {
+        this.bookMakerMarket.map(bookMakerObj=>{
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', bookMakerObj['marketId']]);
+            return bookMakerObj['runners'].map((runnerRes) => {
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                 if (singleWebsocketRunnerBook['ib']) {
@@ -222,10 +223,36 @@ export class MatchMarketListComponent implements OnInit {
               }
               return runnerRes;
           })
+        })
       }
 
       if(this.fancyMarket){
-
+        this.fancyMarket.map(fancyMarketObj=>{
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', fancyMarketObj['marketId']]);
+              let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
+              for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                if (singleWebsocketRunnerBook['ib']) {
+                  //back
+    
+                  //Live Rate
+                  fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                } else {
+                  //lay
+    
+                  //Live Rate
+                  fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+    
+                  //Volume from Betfair
+                  fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
+    
+                }
+              }
+              return fancyMarketObj;
+        })
       }
 
 
@@ -235,8 +262,8 @@ export class MatchMarketListComponent implements OnInit {
   _subscribeWebSocket(){
     this.realDataWebSocket.subscribe(
       data => {
-        // if(typeof data == 'string') this._updateMarketData(data);
-        if(typeof data == 'string') console.log('sub',data);
+        if(typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
