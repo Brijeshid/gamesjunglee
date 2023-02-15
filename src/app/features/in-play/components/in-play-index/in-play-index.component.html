@@ -80,17 +80,17 @@
                                 <td class="text-start ps-2"><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></td>
                                 <td><i class="fa fa-play"></i> </td>
                                 <td><i class="fas fa-broadcast-tower"></i></td>
-                                <td class="colblue"><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</td>
-                                <td class="colpink"><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0']}}</td>
+                                <td class="colblue"><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</td>
+                                <td class="colpink"><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</td>
 
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                <td class="colblue" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2']}}</td>
-                                <td class="colpink" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0']}}</td>
+                                <td class="colblue" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</td>
+                                <td class="colpink" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</td>
 
-                                <td class="colblue"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2']}}</td>
-                                <td class="colpink"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0']}}</td>
+                                <td class="colblue"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</td>
+                                <td class="colpink"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -121,17 +121,17 @@
                                 <td class="text-start ps-2"><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></td>
                                 <td></td>
                                 <td></td>
-                                <td class="colblue dis"><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</td>
-                                <td class="colpink dis"><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0']}}</td>
+                                <td class="colblue dis"><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</td>
+                                <td class="colpink dis"><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</td>
                                 
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                 <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                <td class="colblue dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2']}}</td>
-                                <td class="colpink dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0']}}</td>
+                                <td class="colblue dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</td>
+                                <td class="colpink dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</td>
 
-                                <td class="colblue dis"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2']}}</td>
-                                <td class="colpink dis"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0']}}</td>
+                                <td class="colblue dis"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</td>
+                                <td class="colpink dis"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</td>
                             </tr>
                         </tbody>
                     </table>
