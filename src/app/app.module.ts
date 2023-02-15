@@ -15,7 +15,6 @@ import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
 import { SubscriptionTokenInterceptor } from './core/interceptors/subscription-token.interceptor';
 import { LoaderModule } from './shared/loader/loader.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedService } from '@shared/services/shared.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -52,7 +51,5 @@ import { SharedService } from '@shared/services/shared.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  constructor(private _sharedservice: SharedService){}
-}
+export class AppModule { }
 
