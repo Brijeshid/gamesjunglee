@@ -37,4 +37,14 @@ export class UserSettingsMainService {
       .post(this._apiEndpointsService.getSaveUserConfigEndPoint(),saveUserConfig);
   }
 
+  _getUserBets() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUserBets());
+  }
+
+  _getProfitLossApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getProfitLoss());
+  }
+
 }
