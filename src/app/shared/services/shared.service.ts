@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
+// import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +15,39 @@ import { Isports } from '../models/shared';
 export class SharedService {
 
   sharedSubject=new Subject();
+  
+   
+  private previousUrl: string = '';
+  private currentUrl: string = '';
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
+  router: any;
   constructor(
     private _toastr: ToastrService,
     private _apiHttpService: ApiHttpService,
-    private _apiEndpointsService: ApiEndpointsService
-  ) { }
+    private _apiEndpointsService: ApiEndpointsService,
+    private _router:Router,
+    private _location:Location
+  ) {
+    // this.currentUrl = this._route.url;
+    // _route.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.previousUrl = this.currentUrl;
+    //     this.currentUrl = event.url;
+    //   };
+    //   console.log('Event',event);
+    // });
+
+    // this._location.back();
+      // console.log('Event',this._location.back());
+  }
+
+   public getPreviousUrl(){
+    console.log('Event',this._location.back());
+
+    return this._location.back();
+  }    
 
   _getUserDetailsApi() {
     return this._apiHttpService

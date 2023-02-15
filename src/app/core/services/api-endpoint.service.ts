@@ -306,4 +306,8 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_LIST_DATA_BY_SEARCH);
   }
 
+  public getSaveUserConfigEndPoint():string{
+    return this.createUrl(this._constants.API_URL_SAVE_USER_CONFIG)
+  }
+
 }
