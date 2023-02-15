@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-9">
       <form class="d-flex float-end">
-        <div class="searchs"><a href="" class="text-dark"><i class="fa fa-search bg-pink rounded-circle p-2 me-2"></i></a></div>
+        <div class="searchs"><a href="" class="text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-search bg-pink rounded-circle p-2 me-2"></i></a></div>
         <div class="searchs"><a href="" class="text-dark"><i class="fa fa-bars bg-pink rounded-circle p-2 me-2"></i></a></div>
         <div class="dropdown me-4 searchlist mt-1 disnone">
           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,7 +51,7 @@
             </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-   <app-left-navigation *ngIf="false"></app-left-navigation>
+   <app-left-navigation></app-left-navigation>
         </div>
 
 </nav>
@@ -96,6 +96,42 @@
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
 </div>
 </div>
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Search</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="dropdown me-4 searchlist mt-1">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-search searchi"></i>
+            <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
+            <!-- <input type="text" class="form-control float-start searchinput"> -->
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+            <li> <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Football</a></li>
+            <li><a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Cricket</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- <div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
   <div id="rightslider">

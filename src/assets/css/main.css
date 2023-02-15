@@ -122,8 +122,7 @@
 }
 
 .asidenav {
-  border-right: 1px solid rgba(255, 168, 163, 0.3019607843);
-  padding-top: 15px;
+  padding-top: 8px;
 }
 .asidenav ul {
   border: 1px solid #ffa7a3;
@@ -308,10 +307,10 @@ tr {
   top: 0px;
   right: 0px;
   bottom: 0px;
-  background: rgba(30, 30, 30, 0.8);
+  background: rgba(2, 2, 2, 0.8);
   z-index: 999;
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
 }
 
 #rightslider {
@@ -697,4 +696,8 @@ input:checked + .slider:before {
 /*search end*/
 .searchs {
   display: none;
+}
+
+.lmv {
+  display: none !important;
 }/*# sourceMappingURL=main.css.map */

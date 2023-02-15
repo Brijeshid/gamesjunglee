@@ -134,8 +134,8 @@ $border-color_1: inherit;
   // .nav-tabs .nav-link{color: #fff;}
 }
 .asidenav {
-  border-right: 1px solid #ffa8a34d;
-  padding-top: 15px;
+  // border-right: 1px solid #ffa8a34d;
+  padding-top: 8px;
 
   ul {
     border: 1px solid $color_2;
@@ -313,9 +313,9 @@ tr {
   top: 0px;
   right: 0px;
   bottom: 0px;
-  background: rgba(30, 30, 30, 0.8);
+  background: rgba(2, 2, 2, 0.8);
   z-index: 999;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(1px);
 }
 
 #rightslider {
@@ -689,3 +689,5 @@ color:#626262;
 
 /*search end*/
 .searchs{display: none;}
+.lmv{display: none !important;}
+
