@@ -12,14 +12,18 @@ import { UserSettingsMainService } from 'src/app/features/user-settings/services
 })
 export class ChangePasswordComponent implements OnInit {
   title = 'changePassword';
-  changepasswordform!: FormGroup;
+  changePasswordForm!: FormGroup;
+  clickMessage : any;
+  
   constructor(private formbuilder: FormBuilder,
     private _SettingsService: UserSettingsMainService,
     private _sharedService: SharedService,
     private _router: Router) { 
-      this.changepasswordform = this.formbuilder.group({
+      this.changePasswordForm = this.formbuilder.group({
         oldPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-        newPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+        newPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
+              )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),  
     },
     {
@@ -29,7 +33,7 @@ export class ChangePasswordComponent implements OnInit {
   )
 }
 get f() {
-  return this.changepasswordform.controls;
+  return this.changePasswordForm.controls;
 }
 
   ngOnInit(): void {
@@ -39,28 +43,28 @@ get f() {
     if (confirm('Are you sure you want to Update Password?\n or\nYou need to Stay Here')) {
 
       let changePwdData = {
-        oldPassword: this.changepasswordform.controls['oldPassword'].value,
-        newPassword: this.changepasswordform.controls['newPassword'].value,
+        oldPassword: this.changePasswordForm.controls['oldPassword'].value,
+        newPassword: this.changePasswordForm.controls['newPassword'].value,
       }
       this._SettingsService._postChangePasswordApi(changePwdData).subscribe((res) => {
         console.log("pwd Changed", res);
         this._sharedService.getToastPopup('Password Changed Successfully', 'Password Change', 'success');
       })
 
-      console.warn(this.changepasswordform.value);
+      console.warn(this.changePasswordForm.value);
     }
   }
   get oldPasswordVail() {
-    return this.changepasswordform.get('oldPassword')
+    return this.changePasswordForm.get('oldPassword')
   }
 
 
   get newPasswordVail() {
-    return this.changepasswordform.get('newPassword')
+    return this.changePasswordForm.get('newPassword')
   }
 
   get confirmPasswordVail() {
-    return this.changepasswordform.get('confirmPassword')
+    return this.changePasswordForm.get('confirmPassword')
   }
 
 
@@ -80,5 +84,9 @@ get f() {
       }
     }
   };
+
+  onClickMe(){
+    this.clickMessage = '● Password must be min of 8 characters and max of 20 \n ● It should contain \n 1 aplha-numeric character   \n  1 upper case character   \n 1 lower case character   \n 1 special character';
+  }
 
 }

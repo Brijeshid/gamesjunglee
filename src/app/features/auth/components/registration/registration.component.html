@@ -4,20 +4,27 @@
     <div class="text-center"><img src="assets/images/logo.png" width="60%"></div>
     <div class="row login pb-4 pt-5">
       <div class="input-group pt-3">
-        <input type="text" class="form-control" placeholder="Name" formControlName="name">
+        <input type="text" class="form-control" placeholder="Name" formControlName="name" id="validationServer03" required>
         <span class="input-group-text bg-white">
           <span class="fa fa-user text-dark"></span>
         </span>
-        <!-- <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid name.
-        </div> -->
+      </div>
+      <div id="validationServer03" class="text-danger" *ngIf="nameVail && nameVail.invalid && nameVail.touched">
+        Please provide a valid name.
       </div>
       <div class="input-group mt-4">
-        <input type="text" class="form-control" placeholder="Phone Number" formControlName="phoneNo">
+        <input type="number"    class="form-control" placeholder="Phone Number" formControlName="phoneNo" (click)="onClickMe">
         <span class="input-group-text bg-white">
           <span class="fa fa-phone text-dark"></span>
         </span>
       </div>
+      <!-- <p style="white-space: pre-line">{{clickMessage}}</p> -->
+
+      <div id="validationServer03" class="text-danger" *ngIf="phoneNumVail && phoneNumVail.invalid && phoneNumVail.touched">
+        <div *ngIf="phoneNumVail.errors?.['required']">Mobile Number is required.</div>  
+        <div *ngIf="phoneNumVail.errors?.['maxLength']" class="text-white">Maximum 10 number require</div>       
+      </div>
+
       <div class="input-group">
         <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100 pt-3 pb-3"
           [disabled]="signUpForm.invalid">

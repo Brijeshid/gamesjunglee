@@ -65,5 +65,8 @@ export class Constants {
     public readonly API_URL_GET_TERM_COND:string = 'api/termsAndCondition';
     public readonly API_URL_TRANSFER_STATEMENT:string = 'api/getTransferStatement';
     public readonly API_URL_GET_USER_CONFIG:string = 'api/getUserConfig';
+    public readonly API_URL_SAVE_USER_CONFIG:string = 'api/saveUserConfig';
+
+
 
 }
