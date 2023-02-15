@@ -294,6 +294,14 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_IN_PLAY_UPCOMING);
   }
 
+  public getBookMakerEndPoint(): string {
+    return this.createUrl(this._constants.API_URL_GET_BOOKMAKER_MARKET);
+  }
+
+  public getFancyMarketEndPoint(): string {
+    return this.createUrl(this._constants.API_URL_GET_FANCY_MARKET);
+  }
+
   public getTransferStatementEndPoint(): string{
     return this.createUrl(this._constants.API_URL_TRANSFER_STATEMENT);
   }

@@ -10,9 +10,9 @@ const routes: Routes = [
     path:'',
     component: SportsBookMainComponent,
     children:[
-      {path:'sportsbook/:sports',component:SportsMarketListComponent},
+      {path:'sportsbook/:sports/:tourId/:matchId',component:MatchMarketListComponent},
       {path:'sportsbook/:sports/:tourId',component:TourMarketListComponent},
-      {path:'sportsbook/:sports/:tourId/:matchId',component:MatchMarketListComponent}
+      {path:'sportsbook/:sports',component:SportsMarketListComponent}
     ]
   }
 ];

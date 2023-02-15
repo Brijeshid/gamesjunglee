@@ -29,8 +29,10 @@ export class TourMarketListComponent implements OnInit {
 
   tourId:any;
   tourName:string = 'NO MATCH AVAILABLE';
+  sports:string;
 
   isBetSlipShow:boolean = false;
+  isLoggedIn:boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -38,26 +40,12 @@ export class TourMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
+      this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
-      this.getSubNavList();
       this._getWebSocketUrl();
     })
-  }
-
-  getSubNavList(){
-    this._sharedService._getToursMatchesListApi(this.tourId).subscribe((matchListRes:any)=>{
-      console.log('subNavList',matchListRes);
-      if(matchListRes?.length >0){
-        let updatedMatchList = matchListRes.map((singleObj:any)=>(
-          {
-            'id':singleObj['matchId'],
-            'name':singleObj['matchName']
-          }
-        ));
-        this.subNavList = updatedMatchList;
-      }
-    });
   }
 
   getInPlayUpcomingData(){
