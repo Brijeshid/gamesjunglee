@@ -34,16 +34,16 @@
             <!--Betting P&L start-->
             <div class="row p-0 mb-1">
                 <!-- accordin -->
-                <div class="col-md-12 pb-0 ps-4 pe-4">
+                <div class="col-md-12 pb-0 ps-4 pe-4" *ngFor="let pl of profitLoss;let i= index;">
                     <div class="accordion rightacco" id="accordionExample">
                         <div class="accordion-item mb-1 ">
                             <h2 class="accordion-header" id="heading_one">
                                 <button class="accordion-button collapsed text-dark" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapse_one" aria-expanded="false"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_one'+ i" aria-expanded="false"
                                     aria-controls="collapse_one">
-                                    January 20th 2023</button>
+                                    {{pl.settledDate | date}}</button>
                             </h2>
-                            <div id="collapse_one" class="accordion-collapse collapse" aria-labelledby="collapse_one"
+                            <div id="collapse_one{{i}}" class="accordion-collapse collapse" aria-labelledby="collapse_one"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body ps-3 pe-3 text-dark bg-white">
                                     <div class="row">
@@ -59,353 +59,29 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pe-5">
-                                            <h6><a href=""> Auckland v Wellington - Match Odds</a></h6>
+                                            <h6><a href=""> {{pl.matchName}}-{{pl.marketName}}</a></h6>
                                         </div>
                                         <div class="col-md-3">
                                             <p><strong>Net Win :</strong></p>
                                         </div>
                                         <div class="col-md-3">
-                                            <p class="float-end">-6500</p>
+                                            <p class="float-end" [ngClass]="pl.netAmt>=0?'text-success':'text-danger'">{{pl.netAmt}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pe-5">
-                                            <h6><strong>Settled Date: </strong>20/01/2023, 12:18:16 pm</h6>
+                                            <h6><strong>Settled Date: </strong>{{pl.settledDate | date}}</h6>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pe-5">
-                                            <h6><strong>Winner: </strong>Auckland</h6>
+                                            <h6><strong>Winner: </strong>{{pl.winningHorseName}}</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- accordin_end -->
-                        <!-- accordin -->
-                        <div class="accordion-item mb-1 ">
-                            <h2 class="accordion-header" id="heading_two">
-                                <button class="accordion-button collapsed text-dark" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapse_two" aria-expanded="false"
-                                    aria-controls="collapse_two">
-                                    January 18th 2023</button>
-                            </h2>
-                            <div id="collapse_two" class="accordion-collapse collapse" aria-labelledby="collapse_one"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body ps-3 pe-3 text-dark bg-white">
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6>SportBook</h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p><strong>Comm :</strong></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">-3.2</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><a href=""> India v New Zealand - Match Odds</a></h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p><strong>Net Win :</strong></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">156</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Settled Date: </strong>18/01/2023,10:04:46 pm</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Winner: </strong>India</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- accordin_end -->
-                        <!-- accordin -->
-                        <div class="accordion-item mb-1 ">
-                            <h2 class="accordion-header" id="heading_three">
-                                <button class="accordion-button collapsed text-dark" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapse_three" aria-expanded="false"
-                                    aria-controls="collapse_three">
-                                    January 17th 2023</button>
-                            </h2>
-                            <div id="collapse_three" class="accordion-collapse collapse" aria-labelledby="collapse_one"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body ps-3 pe-3 text-dark bg-white">
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6>SportBook</h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p><strong>Comm :</strong></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">-24.50</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><a href=""> Ionikos v NFC Volos - Match Odds</a></h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p><strong>Net Win :</strong></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">1200.50</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Settled Date: </strong>17/01/2023, 12:58:55 am</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Winner: </strong>NFC Volos</h6>
-                                        </div>
-                                    </div>
-                                    <hr SIZE="3">
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6>SportBook</h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p><strong>Comm :</strong></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">-24.50</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><a href=""> Ionikos v NFC Volos - Match Odds</a></h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p><strong>Net Win :</strong></p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">1200.50</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Settled Date: </strong>17/01/2023, 12:58:55 am</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Winner: </strong>NFC Volos</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- accordin_end -->
-                        <!-- accordin -->
-                        <!-- <div class="accordion-item mb-1 ">
-        <h2 class="accordion-header" id="heading_four">
-      <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_four" aria-expanded="false" aria-controls="collapse_four">
-        January 16th 2023</button>
-        </h2>
-        <div id="collapse_four" class="accordion-collapse collapse" aria-labelledby="collapse_one" data-bs-parent="#accordionExample">
-      <div class="accordion-body ps-3 pe-3  text-dark bg-white">
-          <div class="row">
-            <div class="col-md-6 pe-5">
-              <h6>SportBook</h6>
-            </div>
-            <div class="col-md-3">
-              <p><strong>Comm :</strong></p>
-            </div>
-            <div class="col-md-3">
-              <p class="float-end">0</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pe-5">
-              <h6><a href=""> Australia Women v Pakistan Women - Match Odds</a></h6>
-            </div>
-            <div class="col-md-3">
-              <h6 class="float-end"><strong>Net Win :</strong></h6>
-            </div>
-            <div class="col-md-3">
-              <p class="float-end">-6500</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><strong>Settled Date: </strong>16/01/2023, 12:53:36 pm</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><strong>Winner: </strong>Australia Women</h6>
-            </div>
-          </div>
-      </div>
-        </div>
-      </div> -->
-                        <!-- accordin_end -->
-                        <!-- accordin -->
-                        <!-- <div class="accordion-item mb-1 ">
-        <h2 class="accordion-header" id="heading_three">
-      <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_three" aria-expanded="false" aria-controls="collapse_three">
-        January 12th 2023</button>
-        </h2>
-        <div id="collapse_three" class="accordion-collapse collapse" aria-labelledby="collapse_one" data-bs-parent="#accordionExample">
-      <div class="accordion-body ps-3 pe-3  text-dark bg-white">
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6>SportBook</h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end"><strong>Comm :</strong></h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end">-3.4</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><a href=""> India v Sri Lanka - Match Odds</a></h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end"><strong>Net Win :</strong></h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end">166.60</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><strong>Settled Date: </strong>12/01/2023, 8:55:07 pm</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><strong>Winner: </strong> India</h6>
-            </div>
-          </div>
-          <hr SIZE="3">
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6>SportBook</h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end"><strong>Comm :</strong></h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end">0</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><a href=""> India v Sri Lanka - Match Winner (BookMaker)</a></h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end"><strong>Net Win :</strong></h6>
-            </div>
-            <div class="col-md-4">
-              <h6 class="float-end">27.50</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><strong>Settled Date: </strong>12/01/2023, 8:52:42 pm</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pe-5">
-              <h6><strong>Winner: </strong>India</h6>
-            </div>
-          </div>
-      </div>
-        </div>
-      </div> -->
-                        <!-- accordin_end -->
-                        <!-- accordin -->
-                        <!-- <div class="accordion-item mb-1 ">
-      <h2 class="accordion-header" id="heading_three">
-    <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_three" aria-expanded="false" aria-controls="collapse_three">
-      January 10th 2023</button>
-      </h2>
-      <div id="collapse_three" class="accordion-collapse collapse" aria-labelledby="collapse_one" data-bs-parent="#accordionExample">
-    <div class="accordion-body ps-3 pe-3  text-dark bg-white">
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6>SportBook</h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end"><strong>Comm :</strong></h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end">-2.40</h6>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6><a href=""> India v Sri Lanka - Match Odds</a></h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end"><strong>Net Win :</strong></h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end">117.60</h6>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6><strong>Settled Date: </strong>10/01/2023, 9:30:21 pm</h6>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6><strong>Winner: </strong> India</h6>
-          </div>
-        </div>
-        <hr SIZE="3">
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6>SportBook</h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end"><strong>Comm :</strong></h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end">0</h6>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6><a href=""> India v Sri Lanka - Match Winner (BookMaker)</a></h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end"><strong>Net Win :</strong></h6>
-          </div>
-          <div class="col-md-4">
-            <h6 class="float-end">40</h6>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6><strong>Settled Date: </strong>10/01/2023, 9:24:24 pm</h6>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pe-5">
-            <h6><strong>Winner: </strong>India</h6>
-          </div>
-        </div>
-    </div>
-      </div>
-    </div> -->
+                        
 
                     </div>
                 </div>

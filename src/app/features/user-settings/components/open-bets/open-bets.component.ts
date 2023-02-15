@@ -10,6 +10,7 @@ export class OpenBetsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

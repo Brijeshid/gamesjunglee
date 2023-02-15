@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserSettingsMainService } from '../../services/user-settings-main.service';
 
 @Component({
   selector: 'app-betting-pl',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./betting-pl.component.scss']
 })
 export class BettingPlComponent implements OnInit {
+  profitLoss : any[] = [];
+  
 
-  constructor() { }
+  constructor(
+    private _userSettingsService: UserSettingsMainService,
+  ) { }
 
   ngOnInit(): void {
+    this.getProfitLoss()
+  }
+
+  getProfitLoss(){
+    this._userSettingsService._getProfitLossApi().subscribe(
+      (res:any) => { 
+       this.profitLoss = res.profitLoss.reverse();
+        console.log("getUser", res);
+      }
+    );
   }
 
 }
