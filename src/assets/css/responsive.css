@@ -3,7 +3,19 @@
    .w-30 {
      width: 85%;
    }
+   .searchs{display: block;}
    .disnone{display: none;}
+
+   .gamedetails {
+    border: none;
+    margin-top: 30px;
+    border-radius: 30px;
+    padding: 0;
+    color: #fff;
+    font-size: 12px;
+    background: none;
+  }
+  .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 40px; height: auto;}
  }
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -13,7 +25,12 @@
  @media only screen and (min-width: 768px) {}
 
  /* Large devices (laptops/desktops, 992px and up) */
- @media only screen and (min-width: 992px) {}
+ @media only screen and (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: none !important;
+    flex-basis: auto;
+  }
+ }
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {}
