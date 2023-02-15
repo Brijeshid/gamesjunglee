@@ -40,8 +40,24 @@ export class SportsMarketListComponent implements OnInit {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn(); 
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
+      this.getSubNavBySportsList();
       this._getWebSocketUrl();
     })
+  }
+
+  getSubNavBySportsList(){
+    this._sharedService._postTourListApi({name:this.sports}).subscribe((tourListRes:any)=>{
+      console.log('subNavList',tourListRes);
+      if(tourListRes?.length >0){
+        let updatedTourList = tourListRes.map((singleObj:any)=>(
+          {
+            'id':singleObj['tournamentId'],
+            'name':singleObj['tournamentName']
+          }
+        ));
+        this.subNavList = updatedTourList;
+      }
+    });
   }
 
   getInPlayUpcomingData(){
