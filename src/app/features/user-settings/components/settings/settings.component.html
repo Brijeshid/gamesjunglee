@@ -1,9 +1,9 @@
 <!--body start-->
 <div class="row m-0">
-  <div class="col-md-12 pb-2 pt-2">
-    <a href="" class="text-white small text-decoration-none"><i class="fa fa-arrow-alt-circle-left"></i> Setting</a>
-  </div>
-  <hr class="text-pink">
+    <div class="col-md-12 pb-2 pt-2">
+      <a href="" class="text-pink small text-decoration-none"><i class="fa fa-angle-left text-white"></i> Setting</a> 
+     </div>
+     <hr class="text-pink">
   <!--Artical Start-->
   <div class="col-md-12 ps-5 pe-5 accordionn">
     <div class="innerpagem p-3">
@@ -13,39 +13,77 @@
       </label>
       <label class="switch float-end me-1"> <input type="checkbox" (click)='onActivateAll()'  checked> <span class="slider round"></span></label>
       <hr class="hr" />
-      <div class="row">
-        <div class="col-md-6 text-center mb-4">
-          <div class="text-pink text-start">
-            <h6>Edit One-click Stakes</h6>
-          </div>
-          <div class="innerpagem pt-0">
-            <div class="row m-0 p-2"  >
-              <div class="p-2 col-md-4" *ngFor="let item of userConfig.userConfig.editOneClickStakeBtn" ><button [ngClass]="item==userConfig.userConfig.editOneClickStakeActiveBtn?'bg-pink':'bg-light'"
-                  type="button" class="btn bg-light w-100 active" aria-pressed="true" [disabled]="!oneClickBetting==true" >  +{{item | number}}</button></div>
+      
+        <form  (ngSubmit)="onSubmitSave()">
+          <div class="row">
+          <div class="col-md-6 text-center mb-4">
+            <div class="text-pink text-start">
+              <h6>Edit One-click Stakes</h6>
+            </div>
+            
+              <div class="innerpagem pt-0" >
+                <div class="row m-0 p-2">
+                  <ng-container *ngIf="!isEditMode">
+                    <div  class="p-2 col-md-4"  *ngFor="let item of userConfig?.userConfig?.editOneClickStakeBtn">
+                      <button type="button" class="btn bg-light w-100 active" aria-pressed="true" [ngClass]="item==userConfig.userConfig.editOneClickStakeActiveBtn?'bg-pink':'bg-light'">+{{item | number}}</button>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="isEditMode">
+                    <div  class="p-2 col-md-4" *ngFor="let item of editBetting.controls;let i=index">
+                      <input type="number" class="text-center form-control bg-light" value="userConfig.userConfig.editOneClickStakeBtn[i]" [formControl]="getControl(i)">                  
+                    </div>
+                  </ng-container>
 
-              <div class="col-md-6 mt-3 "><button type="button" [disabled]="!oneClickBetting==true" class="btn border w-100 btn-light">Edit</button> </div>
-              <div class="col-md-6 mt-3 "><button type="submit"
-                  class="btn btn-light bg-light border disabled w-100">Save </button> </div>
+                  
+                    <div class="col-md-6 mt-3 "><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode=!isEditMode">{{isEditMode?'Cancel':'Edit'}}</button> </div>
+                    <div class="col-md-6 mt-3 "><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  class="btn btn-light bg-light border w-100" (click)="onSubmitSave()">Save </button> </div>
+                </div>
+              </div>
+            
+          </div>
+        <!-- <div class="col-md-6 text-center mb-4">
+          <div class="text-pink text-start">
+            <h6>Edit Stakes</h6>
+          </div>
+          
+          <div class="innerpagem pt-0">
+            <div class="row m-0 p-2">
+                <div class="p-2 col-md-4"  *ngFor="let item of userConfig.userConfig.EditStakesBtn"><button type="button" class="btn bg-light w-100 active" aria-pressed="true">+{{item | number}}</button></div>
+                <div class="col-md-6 mt-3 "><button type="button" class="btn border w-100 btn-light" >Edit</button> </div>
+                <div class="col-md-6 mt-3 "><button type="submit" class="btn btn-light bg-light border disabled w-100">Save </button> </div>
             </div>
           </div>
+        
+        </div> -->
 
-        </div>
         <div class="col-md-6 text-center mb-4">
           <div class="text-pink text-start">
             <h6>Edit Stakes</h6>
           </div>
-          <div class="innerpagem pt-0">
-            <div class="row m-0 p-2">
-              <div class="p-2 col-md-4"  *ngFor="let item of userConfig.userConfig.EditStakesBtn"><button type="button" class="btn bg-light w-100 active" aria-pressed="true">+{{item | number}}</button></div>
+          
+            <div class="innerpagem pt-0" >
+              <div class="row m-0 p-2">
+                <ng-container *ngIf="!isEditMode1">
+                  <div  class="p-2 col-md-4"  *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
+                    <button type="button" class="btn bg-light w-100 active" aria-pressed="true">+{{item | number}}</button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="isEditMode1">
+                  <div  class="p-2 col-md-4" *ngFor="let item of editBettingEditStake.controls;let i=index">
+                    <input type="number" class="text-center form-control bg-light" value="userConfig.userConfig.EditStakesBtn[i]" [formControl]="getControl1(i)">                  
+                  </div>
+                </ng-container>
 
-              <div class="col-md-6 mt-3 "><button type="button" class="btn border w-100 btn-light">Edit</button> </div>
-              <div class="col-md-6 mt-3 "><button type="submit"
-                  class="btn btn-light bg-light border disabled w-100">Save </button> </div>
+                
+                  <div class="col-md-6 mt-3 "><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode1=!isEditMode1">{{isEditMode1?'Cancel':'Edit'}}</button> </div>
+                  <div class="col-md-6 mt-3 "><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode1==false"class="btn btn-light bg-light border  w-100">Save </button> </div>
+              </div>
             </div>
-          </div>
-
+          
         </div>
       </div>
+        </form>
+      
 
       <!--Setting end-->
     </div>

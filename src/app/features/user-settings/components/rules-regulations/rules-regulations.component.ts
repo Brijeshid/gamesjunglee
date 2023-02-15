@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { filter } from 'rxjs/operators';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 
 @Component({
@@ -10,12 +12,16 @@ import { UserSettingsMainService } from '../../services/user-settings-main.servi
 export class RulesRegulationsComponent implements OnInit {
 
   termCond:any;
+  previousUrl: string;
+
   constructor(
-    private _userSettingsService: UserSettingsMainService
-  ) { }
+    private _userSettingsService: UserSettingsMainService,
+    private _sharedservice: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.getTermCond();
+    // this.goToPrevious();
   }
 
   getTermCond(){
@@ -25,6 +31,14 @@ export class RulesRegulationsComponent implements OnInit {
         console.log(res);
       }
     );
+  }
+
+  public goToPrevious()  {
+    return this._sharedservice.getPreviousUrl();
+    
+    // if(previous != undefined)
+    //   this._sharedservice.router.navigateByUrl(previous);
+
   }
 
 }
