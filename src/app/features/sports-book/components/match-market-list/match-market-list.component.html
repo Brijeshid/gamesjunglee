@@ -56,12 +56,12 @@
                                 <td class="text-start ps-2 heading border-top"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
                                 <td class="border-top"></td>
                                 <td class="border-top"></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2']}}</a></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1']}}</a></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0']}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0']}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1']}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2']}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -87,12 +87,12 @@
                                 <td class="text-start ps-2 heading border-top"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
                                 <td class="border-top"></td>
                                 <td class="border-top"></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2']}}</a></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1']}}</a></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0']}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0']}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1']}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2']}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -112,29 +112,16 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let singleFancyMarket of fancyMarket; let last=last;" [ngClass]="{'border-0':last}">
-<<<<<<< HEAD
                               <td class="text-start ps-2 heading border-top"><a href=""><strong>{{singleFancyMarket['marketName']}} <br> </strong>
                                 </a></td>
                               <td class="border-top"></td>
                               <td class="border-top"></td>
-                              <td class="colblue "><strong>1.78</strong> <br>160</td>
-                              <td class="colblue "><strong>1.78</strong> <br>160</td>
-                              <td class="colblue "><a href=""><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0']}}</a></td>
-                              <td class="colpink "><a href=""><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0']}}</a></td>
-                              <td class="colpink "><strong>1.78</strong> <br>160</td>
-                              <td class="colpink "><strong>1.78</strong> <br>160</td>
-=======
-                              <td class="text-start ps-2 heading"><strong>{{singleFancyMarket['marketName']}} <br> </strong>
-                                </td>
-                              <td></td>
-                              <td></td>
                               <td ><strong></strong> <br></td>
                               <td ><strong></strong> <br></td>
                               <td class="colblue "><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0'] | marketRateFormater}}</td>
                               <td class="colpink "><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0'] | marketRateFormater}}</td>
                               <td ><strong></strong> <br></td>
                               <td ><strong></strong> <br></td>
->>>>>>> 65f00ac670dbb92e786109d27dd8d5c5cd570565
                             </tr>
                           </tbody>
                         </table>
