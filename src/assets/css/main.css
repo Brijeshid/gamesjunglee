@@ -273,6 +273,11 @@ tr {
   border-right: 0px;
 }
 
+.colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last {
+  min-width: 60px;
+  height: 40px;
+}
+
 /*Table end*/
 /*login start*/
 .login {

@@ -77,7 +77,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2 heading border-top"><a href=""> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
+                                <td class="text-start ps-2 heading border-top"><a href=""><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
                                 <td class="border-top disnone"><i class="fa fa-play"></i> </td>
                                 <td class="border-top disnone"><i class="fas fa-broadcast-tower"></i></td>
                                 <td class="colblue light"><a href=""><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2']}}</a></td>

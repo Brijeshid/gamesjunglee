@@ -254,6 +254,7 @@ tr {
   background: #272727 !important;
   color: $color_1;
 }
+//color box start
 .colblue {
   background-color: $background-color_3 !important;
   border-left: 1px solid #fff;
@@ -282,6 +283,8 @@ tr {
   border-bottom-right-radius: 15px;
   border-right: 0px;
 }
+.colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 60px; height: 40px;}
+//color box end
 /*Table end*/
 /*login start*/
 .login {

@@ -15,6 +15,7 @@
     font-size: 12px;
     background: none;
   }
+  .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 40px; height: auto;}
  }
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
