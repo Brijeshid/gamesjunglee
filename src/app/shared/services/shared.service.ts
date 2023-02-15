@@ -4,6 +4,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +13,33 @@ import { Isports } from '../models/shared';
 export class SharedService {
 
   sharedSubject=new Subject();
+  private previousUrl: string = '';
+  private currentUrl: string = '';
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
+  router: any;
   constructor(
     private _toastr: ToastrService,
     private _apiHttpService: ApiHttpService,
-    private _apiEndpointsService: ApiEndpointsService
-  ) { }
+    private _apiEndpointsService: ApiEndpointsService,
+    private _router:Router,
+    private _location:Location
+  ) {
+    // this.currentUrl = this._route.url;
+    // _route.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.previousUrl = this.currentUrl;
+    //     this.currentUrl = event.url;
+    //   };
+    // });
+
+    // this._location.back();
+  }
+
+   public getPreviousUrl(){
+    return this._location.back();
+  }    
 
   _getUserDetailsApi() {
     return this._apiHttpService

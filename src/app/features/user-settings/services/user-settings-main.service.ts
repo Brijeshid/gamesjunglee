@@ -32,4 +32,9 @@ export class UserSettingsMainService {
       .get(this._apiEndpointsService.getUserConfigEndPoint());
   }
 
+  _getSaveUserConfigApi(saveUserConfig: object) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSaveUserConfigEndPoint(),saveUserConfig);
+  }
+
 }

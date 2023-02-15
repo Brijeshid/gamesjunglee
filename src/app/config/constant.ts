@@ -14,7 +14,6 @@ export class Constants {
     public readonly API_URL_LOGIN: string = 'api/login/user';
     public readonly API_URL_SIGNUP: string = 'api/userRegistration';
 
-    
     public readonly API_URL_CHANGEPASSWORD: string = 'api/ChangePassword';
     public readonly API_URL_CLIENTDATA: string = 'api/junglee-admin/getClientsData';
     public readonly API_URL_SAVECLIENTDATA: string = 'api/junglee-admin/saveClient';
@@ -42,7 +41,6 @@ export class Constants {
     public readonly API_URL_DEPOSIT_WITHDRAW_HISTORY: string = 'api/getTransactions';
     public readonly API_URL_ROLES:string = 'api/getRoles'
 
-
     public readonly API_URL_GET_BANK_DETAILS: string = 'api/getUserAccountInfo';
     public readonly API_URL_SAVE_TRANSACTION: string = 'api/saveTransactions';
     public readonly API_URL_DEPOSIT_WITHDRAW_HISTORY_STATUS: string = 'api/junglee-admin/getTransactionStatus';
@@ -54,7 +52,6 @@ export class Constants {
     public readonly API_URL_PLACE_BET: string = 'api/placeBet';
     public readonly API_URL_GET_USER_BET: string = 'api/getUserBets';
 
-
     public readonly API_URL_LIST_ALL_MENU:string = 'api/getAllMenu';
     public readonly API_URL_LIST_SPORTS_BY_TOUR:string = 'api/getTournamentBySportId';
     public readonly API_URL_LIST_DATA_BY_SEARCH:string = 'api/searchEvent';
@@ -65,5 +62,5 @@ export class Constants {
     public readonly API_URL_GET_TERM_COND:string = 'api/termsAndCondition';
     public readonly API_URL_TRANSFER_STATEMENT:string = 'api/getTransferStatement';
     public readonly API_URL_GET_USER_CONFIG:string = 'api/getUserConfig';
-
+    public readonly API_URL_SAVE_USER_CONFIG:string = 'api/saveUserConfig';
 }
