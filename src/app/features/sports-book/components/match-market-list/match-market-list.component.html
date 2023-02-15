@@ -112,6 +112,7 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let singleFancyMarket of fancyMarket; let last=last;" [ngClass]="{'border-0':last}">
+<<<<<<< HEAD
                               <td class="text-start ps-2 heading border-top"><a href=""><strong>{{singleFancyMarket['marketName']}} <br> </strong>
                                 </a></td>
                               <td class="border-top"></td>
@@ -122,6 +123,18 @@
                               <td class="colpink "><a href=""><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0']}}</a></td>
                               <td class="colpink "><strong>1.78</strong> <br>160</td>
                               <td class="colpink "><strong>1.78</strong> <br>160</td>
+=======
+                              <td class="text-start ps-2 heading"><strong>{{singleFancyMarket['marketName']}} <br> </strong>
+                                </td>
+                              <td></td>
+                              <td></td>
+                              <td ><strong></strong> <br></td>
+                              <td ><strong></strong> <br></td>
+                              <td class="colblue "><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0'] | marketRateFormater}}</td>
+                              <td class="colpink "><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0'] | marketRateFormater}}</td>
+                              <td ><strong></strong> <br></td>
+                              <td ><strong></strong> <br></td>
+>>>>>>> 65f00ac670dbb92e786109d27dd8d5c5cd570565
                             </tr>
                           </tbody>
                         </table>

@@ -6,6 +6,7 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
 import { FavouriteComponent } from './components/favourite/favourite.component';
 import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
 import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
+import { MarketRateFormaterPipe } from './pipes/market-rate-formater.pipe';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
     RightSidebarComponent,
     FavouriteComponent,
     LeftNavigationComponent,
-    BetSlipComponent
+    BetSlipComponent,
+    MarketRateFormaterPipe
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
     HeaderComponent,
     FavouriteComponent,
     LeftNavigationComponent,
-    BetSlipComponent
+    BetSlipComponent,
+    MarketRateFormaterPipe
   ]
 })
 export class SharedModule { }
