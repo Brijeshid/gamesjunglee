@@ -47,20 +47,21 @@
                               <th width="10%" class="coldark"></th>
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="15%" colspan="3" class="text-center coldark tlastcol">Lay</th>
-                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-star-of-david ms-4 text-pink"></i></th> -->
+                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-pink fa-regular fa-star"></i> -->
+                                <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody class="content">
-                            <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last;" [ngClass]="{'border-0':last}" >
-                                <td class="text-start ps-2"><strong>{{runner['RunnerName']}}</strong></td>
-                                <td></td>
-                                <td></td>
-                                <td class="colblue "><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</td>
-                                <td class="colblue "><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</td>
-                                <td class="colblue "><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</td>
-                                <td class="colpink "><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</td>
-                                <td class="colpink "><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</td>
-                                <td class="colpink "><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</td>
+                            <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last;" [ngClass]="{'border-0':last}">
+                                <td class="text-start ps-2 heading border-top"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td class="border-top"></td>
+                                <td class="border-top"></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2']}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1']}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0']}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0']}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1']}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2']}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -77,20 +78,21 @@
                               <th width="10%" class="coldark"></th>
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="15%" colspan="4" class="text-center coldark tlastcol">Lay</th>
-                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-star-of-david ms-4 text-pink"></i></th> -->
+                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-pink fa-regular fa-star"></i> -->
+                                <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody>
                             <tr *ngFor="let runner of singleBookMaker['runners']; let last=last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2"><strong>{{runner['RunnerName']}}</strong></td>
-                                <td></td>
-                                <td></td>
-                                <td ><strong></strong> <br></td>
-                                <td ><strong></strong> <br></td>
-                                <td class="colblue "><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</td>
-                                <td class="colpink "><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</td>
-                                <td ><strong></strong> <br></td>
-                                <td ><strong></strong> <br></td>
+                                <td class="text-start ps-2 heading border-top"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td class="border-top"></td>
+                                <td class="border-top"></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2']}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1']}}</a></td>
+                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0']}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0']}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1']}}</a></td>
+                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2']}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -104,11 +106,24 @@
                               <th width="10%" class="coldark"></th>
                               <th width="15%" colspan="3" class="text-center coldark">No</th>
                               <th width="15%" colspan="3" class="text-center coldark tlastcol">Yes</th>
-                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-star-of-david ms-4 text-pink"></i></th> -->
+                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-pink fa-regular fa-star"></i> -->
+                                <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody>
                             <tr *ngFor="let singleFancyMarket of fancyMarket; let last=last;" [ngClass]="{'border-0':last}">
+<<<<<<< HEAD
+                              <td class="text-start ps-2 heading border-top"><a href=""><strong>{{singleFancyMarket['marketName']}} <br> </strong>
+                                </a></td>
+                              <td class="border-top"></td>
+                              <td class="border-top"></td>
+                              <td class="colblue "><strong>1.78</strong> <br>160</td>
+                              <td class="colblue "><strong>1.78</strong> <br>160</td>
+                              <td class="colblue "><a href=""><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0']}}</a></td>
+                              <td class="colpink "><a href=""><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0']}}</a></td>
+                              <td class="colpink "><strong>1.78</strong> <br>160</td>
+                              <td class="colpink "><strong>1.78</strong> <br>160</td>
+=======
                               <td class="text-start ps-2 heading"><strong>{{singleFancyMarket['marketName']}} <br> </strong>
                                 </td>
                               <td></td>
@@ -119,6 +134,7 @@
                               <td class="colpink "><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0'] | marketRateFormater}}</td>
                               <td ><strong></strong> <br></td>
                               <td ><strong></strong> <br></td>
+>>>>>>> 65f00ac670dbb92e786109d27dd8d5c5cd570565
                             </tr>
                           </tbody>
                         </table>

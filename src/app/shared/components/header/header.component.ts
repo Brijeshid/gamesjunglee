@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 
@@ -16,6 +16,11 @@ export class HeaderComponent implements OnInit {
   searchList:any = [];
 
   userBalance:any;
+
+  @HostListener('document:click', ['$event']) onDocumentClick(event) {
+    if(this.isShowRightSideBar) this.onClickAvailableCredit();
+  }
+
   constructor(
     private _sharedService: SharedService
   ) { }

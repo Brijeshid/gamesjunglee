@@ -11,7 +11,7 @@ export class LeftNavigationComponent implements OnInit {
 
   mainMenu:any = [];
   viewMoreNavList:any = [];
-  
+
   isLoggedIn:boolean = false;
   sportsName:string;
   userDetails:any;
@@ -27,18 +27,19 @@ export class LeftNavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe((routeParams)=>{
-      this.sportsName = routeParams.sports;
+      // this.sportsName = routeParams.sports;
+      this.sportsName = 'Cricket';
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
-      
+
       if(this.sportsName){
-        this.matchId ? this.getSubNavBySportsWithTourAndMatchList() 
+        this.matchId ? this.getSubNavBySportsWithTourAndMatchList()
                     : this.tourId ? this.getSubNavBySportsWithTourList() : this.getSubNavBySportsList();
       }else{
         this.getNavList();
         this.getSubNavList();
       }
-      
+
     })
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
@@ -64,7 +65,7 @@ export class LeftNavigationComponent implements OnInit {
       console.log('subNavList',matchListRes);
       if(matchListRes?.length >0){
         let updatedMatchList = matchListRes.map((singleObj:any)=>(
-          { 
+          {
             'id':singleObj['matchId'],
             'refTournamentId':singleObj['refTournamentId'],
             'name':singleObj['matchName']
@@ -80,7 +81,7 @@ export class LeftNavigationComponent implements OnInit {
       console.log('subNavList',matchListRes);
       if(matchListRes?.length >0){
         let updatedMatchList = matchListRes.map((singleObj:any)=>(
-          { 
+          {
             'id':singleObj['matchId'],
             'refTournamentId':singleObj['refTournamentId'],
             'name':singleObj['matchName']

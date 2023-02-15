@@ -1,57 +1,62 @@
 <!--Header 1 start-->
+<div class="container-fluid">
+  <div class="row">
 <nav class="navbar navbar-expand-lg navbar-light header-one">
-    <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/in-play']"><img src="assets/images/logo.png" width="100px"></a>
-        <button class="navbar-toggler border bg-body" type="button" data-bs-toggle="collapse"
+        <div class="col-md-1">
+<button class="navbar-toggler bg-pink" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <i class="fa fa-bars-staggered"></i>
+           <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
-                <li class="nav-item header-icon">
-                    <a [routerLink]="['/news']">
-                        <i class="fas fa-newspaper"></i></a>
-                </li>
-                <li class="nav-item header-icon">
-                    <a href="">
-                        <i class="fas fa-rotate-right"></i></a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <div class="input-group me-2 search">
-                    <span class="input-group-text"><i class="fa fa-search"></i> </span>
-
-                    <!--03012023-->
-                    <!-- <input
-                    id="typeahead-format"
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="model"
-                    [ngbTypeahead]="search"
-                    [resultFormatter]="formatter"
-                  /> -->
-                    <!--03012023-->
-
-                    <input type="text" class="form-control" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
-                    <span class="input-group-text"><i class="fa fa-caret-down"></i> </span>
-                </div>
-                <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-                <button class="btn text-white border-pink me-2 text-nowrap rounded-pill" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
-                    Bets</button>
-
-                    <a href="javascript:myBlurFunction(1);" class="btn text-white border-pink text-nowrap rounded-pill"
-                     *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
-                    <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
-                    </a>
-
-                <!-- <button id="menu-toggle" class="btn text-white border-pink text-nowrap rounded-pill"
-                    type="button" *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
-                    <i class="fa fa-user bg-pink rounded-circle small p-1"></i></button> -->
-                   </form>
-        </div>
+        <a class="navbar-brand" [routerLink]="['/in-play']"><img src="assets/images/logo.png" width="100px"></a>
+</div>
+<div class="col-md-2">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
+          <li class="nav-item header-icon">
+              <a [routerLink]="['/news']">
+                  <i class="fas fa-newspaper"></i></a>
+          </li>
+          <li class="nav-item header-icon">
+              <a href="">
+                  <i class="fas fa-rotate-right"></i></a>
+          </li>
+      </ul>
     </div>
+    <div class="col-md-9">
+      <form class="d-flex float-end">
+        <div class="searchs"><a href="" class="text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-search bg-pink rounded-circle p-2 me-2"></i></a></div>
+        <div class="searchs"><a href="" class="text-dark"><i class="fa fa-bars bg-pink rounded-circle p-2 me-2"></i></a></div>
+        <div class="dropdown me-4 searchlist mt-1 disnone">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-search searchi"></i>
+            <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
+            <!-- <input type="text" class="form-control float-start searchinput"> -->
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+            <li> <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Football</a></li>
+            <li><a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Cricket</a></li>
+          </ul>
+        </div>
+          <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+          <button class="btn text-white border-pink me-2 text-nowrap rounded-pill disnone" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
+              Bets</button>
+
+              <a href="javascript:myBlurFunction(1);" class="btn text-white border-pink text-nowrap rounded-pill"
+               *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
+              <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
+              </a>
+             </form>
+            </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <app-left-navigation></app-left-navigation>
+        </div>
+
 </nav>
+</div>
+</div>
 <!--Header 1 end-->
 
 <!--Header 2 start--->
@@ -86,9 +91,50 @@
 <!---Header 2 end-->
 
 <!--Right sidebar start-->
-<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
+<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}">
 <div id="rightslider">
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
 </div>
 </div>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Search</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="dropdown me-4 searchlist mt-1">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-search searchi"></i>
+            <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
+            <!-- <input type="text" class="form-control float-start searchinput"> -->
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+            <li> <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Football</a></li>
+            <li><a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Cricket</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
+  <div id="rightslider">
+      <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
+  </div>
+  </div> -->
 <!--Right sidebar end-->
