@@ -118,7 +118,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2 heading border-top"><a href=""><span class="text-danger">Today At 1:30 PM</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
+                                <td class="text-start ps-2 heading border-top"><a href=""> <span class="text-danger">{{singleMarket['matchTime'] | date: 'EEEE At h:mm a'}}</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
                                     </a></td>
                                 <td class="border-top disnone"></td>
                                 <td class="border-top disnone"></td>

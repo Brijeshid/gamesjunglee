@@ -191,14 +191,18 @@
 }
 .gamedetails .table td {
   vertical-align: middle;
-  padding: 5px;
+  padding: 2px 5px;
   text-align: center;
   border-top: 2px solid #fff;
+  font-size: 11px;
+  line-height: 13px;
 }
 .gamedetails .table a {
   color: #000;
   text-decoration: none;
   display: block;
+  font-size: 11px;
+  line-height: 13px;
 }
 .gamedetails th {
   border-color: inherit;
@@ -261,6 +265,8 @@ tr {
 
 .colpink.dis {
   background-color: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
+  font-size: 11px;
+  line-height: 13px;
 }
 
 .colgray {
