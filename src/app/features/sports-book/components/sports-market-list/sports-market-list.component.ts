@@ -30,6 +30,9 @@ export class SportsMarketListComponent implements OnInit {
   sports:string;
   isBetSlipShow:boolean = false;
   isLoggedIn:boolean = false;
+  isBetSlipActive:boolean = false;
+  betSlipObj:any = {};
+
 
   constructor(
     private _sharedService: SharedService,
@@ -235,6 +238,28 @@ export class SportsMarketListComponent implements OnInit {
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
     );
+  }
+
+  onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
+    console.log(runnerObj,marketData);
+    this.isBetSlipActive = true;
+    this.betSlipObj = {
+        "event":marketData['matchName'],
+        "marketId":marketData['market']['marketId'],
+        "marketName":marketData['marketType'],
+        "sportName":this.sports,
+        "odds": positionObj['odds'],
+        "betPosition":positionObj['index'],
+        "profit":0,
+        "selectionId":runnerObj['SelectionId'],
+        "selectionName":runnerObj['RunnerName'],
+        "stake": 0,
+        "isBack": positionObj['isBack'],
+        "centralId":marketData['market']['centralId'],
+        "runs":null,
+        "matchTime":marketData['matchTime'],
+        "book":marketData['market']['runners']
+    }
   }
 
   ngOnDestroy(): void {

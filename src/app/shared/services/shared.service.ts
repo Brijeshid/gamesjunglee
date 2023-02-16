@@ -165,5 +165,10 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getSearchEventEndPoint(),searchParams);
   }
+
+  _postPlaceBetApi(placeBetObjParams:object) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getPlaceBetEndpoint(),placeBetObjParams);
+  }
 }
 
