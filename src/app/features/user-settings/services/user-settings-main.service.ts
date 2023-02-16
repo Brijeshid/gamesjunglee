@@ -6,7 +6,7 @@ import { ApiHttpService } from '@core/services/api-http.service';
   providedIn: 'root'
 })
 export class UserSettingsMainService {
-
+  private currentBet:any = {};
   constructor(
     private _apiHttpService: ApiHttpService,
     private _apiEndpointsService: ApiEndpointsService
@@ -46,5 +46,17 @@ export class UserSettingsMainService {
     return this._apiHttpService
       .get(this._apiEndpointsService.getProfitLoss());
   }
+
+
+    getPlBets(){
+        console.log('pnl2',this.currentBet)
+        return this.currentBet;
+    }
+
+    setPlBets(currentBet:any){
+        this.currentBet =currentBet;
+        console.log('pnl3',currentBet)
+
+    }
 
 }

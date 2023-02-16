@@ -12,11 +12,12 @@ export class BettingPlComponent implements OnInit {
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
+    // private _userSettingsService:UserSettingsDataService
   ) { }
 
   ngOnInit(): void {
     this.getProfitLoss()
-  }
+    }
 
   getProfitLoss(){
     this._userSettingsService._getProfitLossApi().subscribe(
@@ -25,6 +26,12 @@ export class BettingPlComponent implements OnInit {
         console.log("getUser", res);
       }
     );
+  }
+
+  setPlBet(bets){
+    console.log(bets)
+    this._userSettingsService.setPlBets(bets)
+    console.log('res',bets)
   }
 
 }
