@@ -211,14 +211,19 @@ $border-color_1: inherit;
     margin-bottom: 25px;
     td {
       vertical-align: middle;
-      padding: 5px;
+      padding: 2px 5px;
       text-align: center;border-top: 2px solid #fff;
+      font-size: 11px;
+      line-height: 13px;
     }
     a {
       color: $color_3;
       text-decoration: none;
       display: block;
+      font-size: 11px;
+      line-height: 13px;
     }
+
   }
   th {
     border-color: $border-color_1;
@@ -274,6 +279,8 @@ tr {
 }
 .colpink.dis {
   background-color: $background-color_8 !important;
+  font-size: 11px;
+  line-height: 13px;
 }
 .colgray {
   background-color: $background-color_9 !important;
