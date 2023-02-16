@@ -27,8 +27,8 @@ export class LeftNavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe((routeParams)=>{
-      // this.sportsName = routeParams.sports;
-      this.sportsName = 'Cricket';
+      this.sportsName = routeParams.sports;
+      // this.sportsName = 'Cricket';
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
 

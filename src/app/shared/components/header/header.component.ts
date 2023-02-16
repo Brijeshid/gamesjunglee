@@ -10,16 +10,10 @@ import { distinctUntilChanged, filter } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
 
-  showRightSidebar: boolean = false;
   isLoggedIn:boolean = false;
   isShowRightSideBar:boolean = false;
   searchList:any = [];
-
   userBalance:any;
-
-  @HostListener('document:click', ['$event']) onDocumentClick(event) {
-    if(this.isShowRightSideBar) this.onClickAvailableCredit();
-  }
 
   constructor(
     private _sharedService: SharedService
