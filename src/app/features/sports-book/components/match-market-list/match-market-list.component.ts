@@ -12,7 +12,6 @@ import { SportsBookService } from '../../services/sports-book.service';
 })
 export class MatchMarketListComponent implements OnInit {
 
-
   subNavList:any =[];
   inPlayUpcomingMarket:any=[];
   bookMakerMarket:any=[];
@@ -39,6 +38,10 @@ export class MatchMarketListComponent implements OnInit {
 
   isBetSlipShow:boolean = false;
   isLoggedIn:boolean = false;
+
+  isBetSlipActive:boolean = false;
+  betSlipObj:any = {};
+  sports:string;
   
   constructor(
     private _sharedService: SharedService,
@@ -49,6 +52,7 @@ export class MatchMarketListComponent implements OnInit {
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
+      this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
       this._getWebSocketUrl();
@@ -268,6 +272,28 @@ export class MatchMarketListComponent implements OnInit {
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
     );
+  }
+
+  onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
+    console.log(runnerObj,marketData);
+    this.isBetSlipActive = true;
+    this.betSlipObj = {
+        "event":marketData['matchName'],
+        "marketId":marketData['market']['marketId'],
+        "marketName":marketData['marketType'],
+        "sportName":this.sports,
+        "odds": positionObj['odds'],
+        "betPosition":positionObj['index'],
+        "profit":0,
+        "selectionId":runnerObj['SelectionId'],
+        "selectionName":runnerObj['RunnerName'],
+        "stake": 0,
+        "isBack": positionObj['isBack'],
+        "centralId":marketData['market']['centralId'],
+        "runs":null,
+        "matchTime":marketData['matchTime'],
+        "book":marketData['market']['runners']
+    }
   }
 
 }

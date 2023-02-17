@@ -62,7 +62,7 @@
                             </tr>
                           </thead>
                           <tbody class="content">
-                            <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last;" [ngClass]="{'border-0':last}">
+                            <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}">
                               <td class="text-start ps-2 heading border-top"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                               <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                               <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
@@ -97,7 +97,7 @@
                             </tr>
                           </thead>
                           <tbody class="content">
-                            <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last;" [ngClass]="{'border-0':last}">
+                            <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
                               <td class="text-start ps-2 heading border-top"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                               <!-- <td class="border-top"></td>
                               <td class="border-top"></td> -->

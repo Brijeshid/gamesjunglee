@@ -53,15 +53,15 @@
                           </thead>
                           <tbody class="content">
                             <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a ><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -85,11 +85,11 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let runner of singleBookMaker['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a href=""><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td class="colblue "><a href=""><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a href=""><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
+                                <td class="colpink "><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                               </tr>
@@ -111,7 +111,7 @@
                             </tr>
                           </thead>
                           <tbody><tr *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a href=""><strong>{{singleFancyMarket['marketName']}} <br> </strong>
+                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}} <br> </strong>
                                 </a></td>
                               <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                               <td class="border-top" [ngClass]="{'border-top':!first}"></td>
@@ -289,7 +289,7 @@
         </div>
         <!--Aside right start-->
         <div class="col-md-4 mt-3" *ngIf="isBetSlipShow">
-            <app-bet-slip></app-bet-slip>
+            <app-bet-slip [isBetSlipActive] ="isBetSlipActive" [betSlipParams]="betSlipObj"></app-bet-slip>
         </div>
         <!--Aside right end-->
       </div>
