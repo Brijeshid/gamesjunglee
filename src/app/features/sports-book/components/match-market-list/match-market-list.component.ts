@@ -165,6 +165,7 @@ export class MatchMarketListComponent implements OnInit {
     let parseData = JSON.parse(data);
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       console.log('data', JSON.parse(data));
+      if(parseData['messageType'] == 'fancy') debugger;
       let webSocketData = parseData['data'];
       if(this.inPlayUpcomingMarket?.matchName){
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', this.inPlayUpcomingMarket['marketId']]);
@@ -232,7 +233,7 @@ export class MatchMarketListComponent implements OnInit {
 
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
-          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', fancyMarketObj['marketId']]);
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                 if (singleWebsocketRunnerBook['ib']) {
