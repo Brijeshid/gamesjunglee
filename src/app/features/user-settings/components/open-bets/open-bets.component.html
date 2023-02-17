@@ -27,7 +27,7 @@
                             <div class="accordion rightacco" id="accordionExample">
                                 <div class="accordion-item mb-1 ">
                                     <h2 class="accordion-header" id="headingSix">
-                                        <button class="accordion-button collapsed text-dark" type="button"
+                                        <button class="accordion-button collapsed text-white bg-dark border-pink" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                             aria-expanded="false" aria-controls="collapseSix">
                                             Unmatched Bets</button>
@@ -35,34 +35,26 @@
                                     <div id="collapseSix" class="accordion-collapse collapse"
                                         aria-labelledby="headingSix" data-bs-parent="#accordionExample">
                                         <div class="accordion-body text-white">
-                                            <div class="form-check border-bottom border-secondary mb-2">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Average Odds
-                                                </label>
+                                            <div class="row ps-2 pe-2 mb-2" *ngFor="let bet of unMatchedBets">
+                                                <p class="mb-1">{{bet.matchName}}</p>
+                                                <div *ngFor="let market of bet.markets">
+                                                    <p class="mb-1">{{market.name}}</p>
+                                            
+                                                <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
+                                                    <p><strong>{{b.heading}}</strong></p>
+                                                    <small>{{b.market}}</small><br>
+                                                    <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>  
+                                                </div>
+                                               
+                                                </div>
+                                                
                                             </div>
-                                            <p class="mb-1">Auckland v Wellington</p>
-                                            <table class="table text-white small">
-                                                <tr>
-                                                    <th class="ps-0">Match Odds</th>
-                                                    <th>Odds</th>
-                                                    <th>Stake</th>
-                                                    <th>Profit/Liability</th>
-                                                </tr>
-                                                <tr class="colblue">
-                                                    <td>Wellington</td>
-                                                    <td>1.62</td>
-                                                    <td>6,500</td>
-                                                    <td>4,030</td>
-                                                </tr>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item mb-1">
                                     <h2 class="accordion-header" id="headingFour">
-                                        <button class="accordion-button collapsed text-dark" type="button"
+                                        <button class="accordion-button collapsed text-white bg-dark border-pink" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                             aria-expanded="false" aria-controls="collapseFour">
                                             Matched Bets</button>
@@ -70,49 +62,64 @@
                                     <div id="collapseFour" class="accordion-collapse collapse"
                                         aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                         <div class="accordion-body text-white">
-                                            <div class="form-check border-bottom border-secondary mb-2">
+                                            <!-- <div class="form-check border-bottom border-secondary mb-2">
                                                 <input class="form-check-input" type="checkbox" value=""
-                                                    id="defaultCheck1">
+                                                    id="defaultCheck1"> 
                                                 <label class="form-check-label" for="defaultCheck1">
                                                     Average Odds
                                                 </label>
+                                            </div> -->
+                                            <!-- <p class="mb-1 colblue">Auckland v Wellington</p>
+                                            <table class="table text-dark small colblue">
+                                                <tr>
+                                                    <th class="ps-0">Match Odds</th>
+                                                    <th>Odds</th>
+                                                    <th>Stake</th>
+                                                    <th>Profit/Liability</th>
+                                                </tr>
+                                                <tr class="colblue">
+                                                    <td>Wellington</td>
+                                                    <td>1.62</td>
+                                                    <td>6,500</td>
+                                                    <td>4,030</td>
+                                                </tr>
+                                            </table> -->
+                                            <!-- <p class="mb-1 colpink">Auckland v Wellington</p>
+                                            <table class="table text-dark small colpink">
+                                                <tr>
+                                                    <th class="ps-0">Match Odds</th>
+                                                    <th>Odds</th>
+                                                    <th>Stake</th>
+                                                    <th>Profit/Liability</th>
+                                                </tr>
+                                                <tr class="colpink">
+                                                    <td>Wellington</td>
+                                                    <td>1.62</td>
+                                                    <td>6,500</td>
+                                                    <td>4,030</td>
+                                                </tr>
+                                            </table> -->
+                                            <!-- ******** -->
+                                            <div class="row ps-2 pe-2 mb-2" *ngFor="let bet of matchedBets">
+                                                <p class="mb-1">{{bet.matchName}}</p>
+                                                <div *ngFor="let market of bet.markets">
+                                                    <p class="mb-1">{{market.name}}</p>
+                                            
+                                                <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
+                                                    <p><strong>{{b.heading}}</strong></p>
+                                                    <small>{{b.market}}</small><br>
+                                                    <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>  
+                                                </div>
+                                               
+                                                </div>
+                                                
                                             </div>
-                                            <p class="mb-1">Auckland v Wellington</p>
-                                            <table class="table text-white small">
-                                                <tr>
-                                                    <th class="ps-0">Match Odds</th>
-                                                    <th>Odds</th>
-                                                    <th>Stake</th>
-                                                    <th>Profit/Liability</th>
-                                                </tr>
-                                                <tr class="colblue">
-                                                    <td>Wellington</td>
-                                                    <td>1.62</td>
-                                                    <td>6,500</td>
-                                                    <td>4,030</td>
-                                                </tr>
-                                            </table>
-                                            <p class="mb-1">Auckland v Wellington</p>
-                                            <table class="table text-white small">
-                                                <tr>
-                                                    <th class="ps-0">Match Odds</th>
-                                                    <th>Odds</th>
-                                                    <th>Stake</th>
-                                                    <th>Profit/Liability</th>
-                                                </tr>
-                                                <tr class="colblue">
-                                                    <td>Wellington</td>
-                                                    <td>1.62</td>
-                                                    <td>6,500</td>
-                                                    <td>4,030</td>
-                                                </tr>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item mb-1">
                                     <h2 class="accordion-header" id="headingFive">
-                                        <button class="accordion-button collapsed text-dark" type="button"
+                                        <button class="accordion-button collapsed text-white bg-dark border-pink" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                             aria-expanded="false" aria-controls="collapseFive">
                                             Premium SportsBook Bets <a class="btn btn-danger btn-sm ms-3">CANCEL

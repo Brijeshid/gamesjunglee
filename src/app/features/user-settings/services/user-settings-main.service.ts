@@ -37,7 +37,7 @@ export class UserSettingsMainService {
       .post(this._apiEndpointsService.getSaveUserConfigEndPoint(),saveUserConfig);
   }
 
-  _getUserBets() {
+  _getUserBetsApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserBets());
   }
@@ -47,16 +47,12 @@ export class UserSettingsMainService {
       .get(this._apiEndpointsService.getProfitLoss());
   }
 
+  getPlBets(){
+      return this.currentBet;
+  }
 
-    getPlBets(){
-        console.log('pnl2',this.currentBet)
-        return this.currentBet;
-    }
-
-    setPlBets(currentBet:any){
-        this.currentBet =currentBet;
-        console.log('pnl3',currentBet)
-
-    }
+  setPlBets(currentBet:any){
+      this.currentBet =currentBet;
+  }
 
 }
