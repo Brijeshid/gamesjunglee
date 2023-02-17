@@ -165,7 +165,6 @@ export class MatchMarketListComponent implements OnInit {
     let parseData = JSON.parse(data);
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       console.log('data', JSON.parse(data));
-      if(parseData['messageType'] == 'fancy') debugger;
       let webSocketData = parseData['data'];
       if(this.inPlayUpcomingMarket?.matchName){
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', this.inPlayUpcomingMarket['marketId']]);
