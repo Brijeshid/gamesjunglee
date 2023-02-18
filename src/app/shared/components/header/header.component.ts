@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 
@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
     this._sharedService.sharedSubject.next({
       'isShowRightSideBar':this.isShowRightSideBar
     });
+
   }
 
   getUserBalance(){
@@ -53,5 +54,4 @@ export class HeaderComponent implements OnInit {
       console.log('res_data',res);
     })
   }
-
 }

@@ -201,7 +201,7 @@ export class MatchMarketListComponent implements OnInit {
 
       if(this.bookMakerMarket){
         this.bookMakerMarket.map(bookMakerObj=>{
-          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', bookMakerObj['marketId']]);
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +bookMakerObj['marketId']]);
             return bookMakerObj['runners'].map((runnerRes) => {
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
@@ -232,7 +232,7 @@ export class MatchMarketListComponent implements OnInit {
 
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
-          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', fancyMarketObj['marketId']]);
+          let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                 if (singleWebsocketRunnerBook['ib']) {

@@ -1,3 +1,4 @@
+<app-header></app-header>
 <!--body start-->
 <div class="row m-0">
     <!--Aside start-->
@@ -60,14 +61,15 @@
                               <th width="15%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                              <th width="5%" colspan="1" class="text-center tlastcol coldark"><i
-                                  class="fa fa-caret-right"></i> <i class="fa ms-4 text-pink fa-regular fa-star"></i>
+                              <th width="5%" colspan="1" class="text-center tlastcol coldark">
+                                <i class="fa fa-caret-right"></i> 
+                                <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star"></i>
                                   <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
                               </th>
                             </tr>
                           </thead>
                           <tbody class="content">
-                            <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}">
+                            <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last;" [ngClass]="{'border-0':last}" >
                               <td class="text-start ps-2 heading border-top"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                               <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                               <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
@@ -97,14 +99,14 @@
                               <th width="15%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                              <th width="5%" colspan="1" class="text-center tlastcol coldark"><i
-                                  class="fa fa-caret-right"></i> <i class="fa ms-4 text-pink fa-regular fa-star"></i>
+                              <th width="5%" colspan="1" class="text-center tlastcol coldark">
+                                  <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star"></i>
                                   <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
                               </th>
                             </tr>
                           </thead>
                           <tbody class="content">
-                            <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
+                            <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last;" [ngClass]="{'border-0':last}" >
                               <td class="text-start ps-2 heading border-top"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                               <!-- <td class="border-top"></td>
                               <td class="border-top"></td> -->
