@@ -33,6 +33,11 @@ export class SportsMarketListComponent implements OnInit {
   isBetSlipActive:boolean = false;
   betSlipObj:any = {};
 
+  allTabState:any={
+    liveUpcoming: true,
+    leagues: false,
+    results: false,
+  };
 
   constructor(
     private _sharedService: SharedService,
@@ -42,10 +47,43 @@ export class SportsMarketListComponent implements OnInit {
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn(); 
     this._route.params.subscribe(routeParams =>{
+      this.allTabState={
+        liveUpcoming: true,
+        leagues: false,
+        results: false,
+      };
       this.sports = routeParams.sports;
       this.getSubNavBySportsList();
       this._getWebSocketUrl();
     })
+  }
+
+  onClickTab(activeTab){
+    switch(activeTab){
+      case 'liveUpcoming':
+        this.allTabState={
+          liveUpcoming: true,
+          leagues: false,
+          results: false,
+        };
+      break;
+
+      case 'leagues':
+        this.allTabState={
+          liveUpcoming: false,
+          leagues: true,
+          results: false,
+        };
+      break;
+
+      case 'results':
+        this.allTabState={
+          liveUpcoming: false,
+          leagues: false,
+          results: true,
+        };
+      break;
+    }
   }
 
   getSubNavBySportsList(){

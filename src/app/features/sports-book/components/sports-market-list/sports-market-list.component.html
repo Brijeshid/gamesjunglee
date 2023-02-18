@@ -5,16 +5,16 @@
     <!-- Nav tabs -->
     <ul class="nav justify-content-center nav-tabs w-100 m-auto border-bottom-0 pt-2" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="btn nav-link active" id="liveupcoming-tab" data-bs-toggle="tab" data-bs-target="#liveupcoming"
-          type="button" role="tab" aria-controls="liveupcoming" aria-selected="true">Live & Upcoming</button>
+        <button class="btn nav-link" [class.active]="allTabState['liveUpcoming']" id="liveupcoming-tab" data-bs-toggle="tab" data-bs-target="#liveupcoming"
+          type="button" role="tab" aria-controls="liveupcoming" [attr.aria-selected]="allTabState['liveUpcoming']" (click)="onClickTab('liveUpcoming')">Live & Upcoming</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="btn nav-link" id="leagues-tab" data-bs-toggle="tab" data-bs-target="#leagues" type="button"
-          role="tab" aria-controls="leagues" aria-selected="false">Leagues</button>
+        <button class="btn nav-link" [class.active]="allTabState['leagues']" id="leagues-tab" data-bs-toggle="tab" data-bs-target="#leagues" type="button"
+          role="tab" aria-controls="leagues" [attr.aria-selected]="allTabState['leagues']" (click)="onClickTab('leagues')">Leagues</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="btn nav-link" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button"
-          role="tab" aria-controls="results" aria-selected="false">Results</button>
+        <button class="btn nav-link" [class.active]="allTabState['results']" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button"
+          role="tab" aria-controls="results" [attr.aria-selected]="allTabState['results']" (click)="onClickTab('results')">Results</button>
       </li>
     </ul>
   </div>
@@ -38,7 +38,7 @@
           <div class="col-md-12">
             <div class="tab-content  text-white">
               <!--liveupcoming start-->
-              <div class="tab-pane active" id="liveupcoming" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane" id="liveupcoming" role="tabpanel" aria-labelledby="home-tab" [class.active]="allTabState['liveUpcoming']">
                 <!--Game details info start-->
                 <div class="row">
                   <div class="col-md-12">
@@ -136,12 +136,12 @@
               </div>
               <!--liveupcoming end-->
               <!--leagues start-->
-              <div class="tab-pane" id="leagues" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="tab-pane" id="leagues" role="tabpanel" aria-labelledby="profile-tab" [class.active]="allTabState['leagues']">
                 <app-leagues [leaguesList]="subNavList"></app-leagues>
               </div>
               <!--leagues end-->
               <!--results start-->
-              <div class="tab-pane" id="results" role="tabpanel" aria-labelledby="messages-tab">
+              <div class="tab-pane" id="results" role="tabpanel" aria-labelledby="messages-tab" [class.active]="allTabState['results']">
                 <app-results></app-results>
               </div>
               <!--results end-->
