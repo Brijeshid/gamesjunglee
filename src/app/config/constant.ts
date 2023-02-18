@@ -63,7 +63,7 @@ export class Constants {
     public readonly API_URL_TRANSFER_STATEMENT:string = 'api/getTransferStatement';
     public readonly API_URL_GET_USER_CONFIG:string = 'api/getUserConfig';
     public readonly API_URL_SAVE_USER_CONFIG:string = 'api/saveUserConfig';
-    public readonly API_URL_USER_BETS:string = 'api/getUserBets';
+    public readonly API_URL_USER_OPEN_BETS:string = 'api/getUserBets';
     public readonly API_URL_OPEN_BETS:string = 'api/getOpenBets';
     public readonly API_URL_PROFIT_LOSS:string = 'api/getProfitAndLoss';
 }

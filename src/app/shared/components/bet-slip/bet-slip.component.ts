@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
+import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 
 @Component({
   selector: 'app-bet-slip',
@@ -12,8 +13,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
   @Input() betSlipParams:any;
   odds:number;
   stake:number;
+  matchedBets :any[] = [];
   
-  constructor(private _sharedService: SharedService,) { }
+  constructor(private _sharedService: SharedService,
+    private _userSettingsService: UserSettingsMainService,
+    private _SharedService:SharedService
+    ) { }
 
   ngOnChanges(changes: SimpleChanges){
     console.log('changes');
@@ -22,7 +27,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit(): void {
-
+    this._getUserOpenBet()
   }
 
   onClickPlaceBet(){
@@ -38,6 +43,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
       });
   }
 
+  _getUserOpenBet(){
+    this._SharedService._getUserOpenBetsApi().subscribe(
+      (res) => {
+            console.log(res)
 
+          })
+   }
 
 }

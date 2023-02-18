@@ -119,14 +119,14 @@
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                       data-bs-parent="#accordionExample">
-                      <div class="accordion-body text-white">
+                      <div class="accordion-body text-white" *ngFor="let bet of matchedBets">
                         <div class="form-check border-bottom border-secondary mb-2">
                           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                           <label class="form-check-label" for="defaultCheck1">
                             Average Odds
                           </label>
                         </div>
-                        <p class="mb-1">Auckland v Wellington</p>
+                        <p class="mb-1">{{bet.matchName}}</p>
                         <table class="table text-white small">
                           <tr>
                             <th class="ps-0">Match Odds</th>
