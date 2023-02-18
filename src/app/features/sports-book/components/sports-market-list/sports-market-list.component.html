@@ -56,8 +56,9 @@
                               <th width="15%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                              <th width="5%" colspan="1" class="text-center tlastcol coldark"><i
-                                  class="fa fa-caret-right"></i> <i class="fa ms-4 text-pink fa-regular fa-star"></i>
+                              <th width="5%" colspan="1" class="text-center tlastcol coldark">
+                                <i class="fa fa-caret-right"></i> 
+                                <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star"></i>
                                   <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
                               </th>
                             </tr>
@@ -92,7 +93,8 @@
                               <th width="15%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                              <th width="5%" colspan="1" class="text-center tlastcol coldark"><i class="fa ms-4 text-pink fa-regular fa-star"></i>
+                              <th width="5%" colspan="1" class="text-center tlastcol coldark">
+                                <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star"></i>
                                   <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
                               </th>
                             </tr>
