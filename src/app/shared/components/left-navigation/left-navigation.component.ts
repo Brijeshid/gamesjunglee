@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 
 @Component({

@@ -43,7 +43,7 @@
           <button class="btn text-white border-pink me-2 text-nowrap rounded-pill disnone" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
               Bets</button>
 
-              <a href="javascript:myBlurFunction(1);" class="btn text-white border-pink text-nowrap rounded-pill"
+              <a class="btn text-white border-pink text-nowrap rounded-pill"
                *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
               <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
               </a>
@@ -91,7 +91,7 @@
 <!---Header 2 end-->
 
 <!--Right sidebar start-->
-<div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
+<div id="overlay" *ngIf="isShowRightSideBar" [ngClass]="{'toggled':isShowRightSideBar}" [style.display]="isShowRightSideBar ? 'block':'none'">
 <div id="rightslider">
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
 </div>
