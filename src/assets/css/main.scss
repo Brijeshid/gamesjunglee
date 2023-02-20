@@ -228,7 +228,9 @@ $border-color_1: inherit;
   th {
     border-color: $border-color_1;
     border-style: none;
-    border-width: 0;
+    border-width: 0; font-size: 11px;
+    height: 50px;
+    vertical-align: middle;
   }
   .heading{
     font-size: 10px;
@@ -290,7 +292,7 @@ tr {
   border-bottom-right-radius: 15px;
   border-right: 0px;
 }
-.colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 60px; height: 40px;}
+.colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 45px; height: 40px;}
 //color box end
 /*Table end*/
 /*login start*/
@@ -695,10 +697,15 @@ color:#626262;
   background-color: #343535;
   border-color: rgba(0,0,0,.15);
 }
-
+.search-dd{position: absolute;
+  width: 450px;
+  padding:10px 0;
+  list-style-type: none;}
+  .search-dd li{padding: 10px 15px;
+  cursor: pointer;}
+  .search-dd li:hover{background-color: rgb(83, 83, 83);padding:  10px 15px;}
 
 /*search end*/
 .searchs{display: none;}
 .lmv{display: none !important;}
 
-.accordionn  li{width: 100%;}

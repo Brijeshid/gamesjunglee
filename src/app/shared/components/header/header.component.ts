@@ -45,10 +45,6 @@ export class HeaderComponent implements OnInit {
 
   postSearchList(searchText:any){
     this._sharedService._postSearchListApi({"searchText":searchText})
-    .pipe(
-      filter(_=>searchText.length >= 3),
-      distinctUntilChanged()
-    )
     .subscribe((res)=>{
       this.searchList = res;
       console.log('res_data',res);

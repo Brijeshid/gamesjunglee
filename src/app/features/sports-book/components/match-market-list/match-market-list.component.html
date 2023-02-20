@@ -62,7 +62,7 @@
                                 <td class="colblue "><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
                                 <td class="colpink "><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                                 <td class="colpink "><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
+                                <td class="colpink" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -92,7 +92,7 @@
                                 <td class="colblue "><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
                                 <td class="colpink "><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}"></td>
                               </tr>
                           </tbody>
                         </table>
@@ -119,7 +119,7 @@
                               <td class="colblue "><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0'] | marketRateFormater}}</td>
                               <td class="colpink "><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0'] | marketRateFormater}}</td>
                               <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                              <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}"></td>
                             </tr>
                           </tbody>
                         </table>
