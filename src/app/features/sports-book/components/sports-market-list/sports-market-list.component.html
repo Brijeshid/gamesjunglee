@@ -59,7 +59,7 @@
                               <th width="5%" colspan="1" class="text-center tlastcol coldark">
                                 <i class="fa fa-caret-right"></i>
                                 <!-- <i [[ngClass]="{fa-regular: fa-solid}"] [ngClass.fa-solid]=false class="fa ms-4 text-pink fa-regular fa-star"></i> -->
-                                <i class="fa ms-4 text-pink fa-regular fa-star"></i>
+                                <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star"></i>
                                   <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
                               </th>
                             </tr>
