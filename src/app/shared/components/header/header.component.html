@@ -106,12 +106,12 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content bg-dark text-white">
-      <div class="modal-header">
+      <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="staticBackdropLabel">Search</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
-        <div class="dropdown me-4 searchlist mt-1">
+        <div class="dropdown me-4 searchlist mt-1 w-100">
           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-search searchi"></i>
             <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
@@ -123,9 +123,8 @@
           </ul>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+      <div class="modal-footer border-top-0 justify-content-start">
+        <a href="" class="text-pink text-decoration-none" data-bs-dismiss="modal">Close</a>
       </div>
     </div>
   </div>
