@@ -14,6 +14,7 @@ import { TimeSettingsComponent } from './components/time-settings/time-settings.
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatchNamePlComponent } from './components/match-name-pl/match-name-pl.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TransferStatementComponent,
     TimeSettingsComponent,
     ChangePasswordComponent,
-    SettingsComponent
+    SettingsComponent,
+    MatchNamePlComponent
   ],
   imports: [
     CommonModule,

@@ -322,6 +322,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_OPEN_BETS)
   }
 
+  public getUserOpenBets():string{
+    return this.createUrl(this._constants.API_URL_USER_OPEN_BETS)
+  }
+
   public getProfitLoss():string{
     return this.createUrl(this._constants.API_URL_PROFIT_LOSS)
   }

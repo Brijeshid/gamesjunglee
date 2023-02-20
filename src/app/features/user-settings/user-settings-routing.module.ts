@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BettingPlComponent } from './components/betting-pl/betting-pl.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { FavouriteComponent } from './components/favourite/favourite.component';
+import { MatchNamePlComponent } from './components/match-name-pl/match-name-pl.component';
 import { NewsComponent } from './components/news/news.component';
 import { OpenBetsComponent } from './components/open-bets/open-bets.component';
 import { RulesRegulationsComponent } from './components/rules-regulations/rules-regulations.component';
@@ -23,7 +24,8 @@ const routes: Routes = [{
     {path:'news',component:NewsComponent},
     {path:'change-password',component:ChangePasswordComponent},
     {path:'rules-regulations', component:RulesRegulationsComponent},
-    {path:'settings', component:SettingsComponent}
+    {path:'settings', component:SettingsComponent},
+    {path:'profit-loss/matchName-pl', component:MatchNamePlComponent},
   ]
 }];
 
