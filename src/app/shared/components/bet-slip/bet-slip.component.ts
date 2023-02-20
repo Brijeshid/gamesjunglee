@@ -36,16 +36,30 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   placeBet(){
+    
+    if(this.betSlipParams.marketName == 'MATCH ODDS'){
+      let multiplier
+      if(this.betSlipParams.odds >= 1){
+        multiplier = this.betSlipParams.odds - 1
+      }else{
+        multiplier = 1- this.betSlipParams.odds 
+      }
+      
+      this.betSlipParams.profit = multiplier * this.betSlipParams.stake
+      this.betSlipParams.marketName = 'Match Odds'
+    }
+    console.log('Profit',this.betSlipParams)
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
       (res: any) => {
         console.log('placebet',res);
         this._sharedService.getToastPopup('You have Successfully Placed Bet','Market Bet','success');
-      });
-  }
+      });  
+    }
 
   _getUserOpenBet(){
     this._SharedService._getUserOpenBetsApi().subscribe(
-      (res) => {
+      (res:any) => {
+        this.matchedBets = res
             console.log(res)
 
           })

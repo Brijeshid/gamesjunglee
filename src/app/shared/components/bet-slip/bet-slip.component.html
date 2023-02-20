@@ -56,7 +56,7 @@
                         <div class="col-md-6 mt-3"><button type="button"
                             class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button> </div>
                         <div class="col-md-6 mt-3"><button type="submit"
-                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place </button> </div>
+                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place</button> </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"
                           aria-hidden="true"></i> Min Bet: 500 Max Bet: 1000000 Max Winning: 5000000</p>
@@ -119,14 +119,14 @@
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                       data-bs-parent="#accordionExample">
-                      <div class="accordion-body text-white" *ngFor="let bet of matchedBets">
+                      <div class="accordion-body text-white" >
                         <div class="form-check border-bottom border-secondary mb-2">
                           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                           <label class="form-check-label" for="defaultCheck1">
                             Average Odds
                           </label>
                         </div>
-                        <p class="mb-1">{{bet.matchName}}</p>
+                        <p class="mb-1">Auckland v Wellington</p>
                         <table class="table text-white small">
                           <tr>
                             <th class="ps-0">Match Odds</th>
