@@ -57,6 +57,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
       (res: any) => {
         console.log('placebet',res);
         this._sharedService.getToastPopup(res.message,'Market Bet','success');
+        this._getUserOpenBet()
         this.isBetSlipActive = false;
       });
     }
