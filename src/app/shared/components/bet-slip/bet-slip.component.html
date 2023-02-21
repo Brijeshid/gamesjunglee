@@ -41,7 +41,7 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-4 mb-1"><button type="button"
+                        <!-- <div class="col-md-4 mb-1"><button type="button"
                             class="btn btn-sm w-100 rounded-pill bg-pink">+10000</button> </div>
                         <div class="col-md-4 mb-1"><button type="button"
                             class="btn btn-sm w-100 rounded-pill bg-pink">+50000</button> </div>
@@ -52,11 +52,19 @@
                         <div class="col-md-4 mb-1"><button type="button"
                             class="btn btn-sm w-100 rounded-pill bg-pink">+10000</button> </div>
                         <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+30000</button> </div>
+                            class="btn btn-sm w-100 rounded-pill bg-pink">+30000</button> </div> -->
+                        
+                          <div class="col-md-6 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn"> 
+                            <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" >+{{item | number}}</button>  
+                          </div>
+                        
+                        
                         <div class="col-md-6 mt-3"><button type="button"
-                            class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button> </div>
+                            class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button> 
+                        </div>
                         <div class="col-md-6 mt-3"><button type="submit"
-                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place</button> </div>
+                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place</button>
+                        </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"
                           aria-hidden="true"></i> Min Bet: 500 Max Bet: 1000000 Max Winning: 5000000</p>
@@ -85,7 +93,7 @@
                         Unmatched Bets</button>
                     </h2>
                     <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                      data-bs-parent="#accordionExample">
+                      data-bs-parent="#accordionExample" [ngClass]="unMatchedBets.length > 0 ? 'show': ''">
                       <div class="accordion-body text-white">
                         <div class="form-check border-bottom border-secondary mb-2">
                           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
@@ -93,7 +101,7 @@
                             Average Odds
                           </label>
                         </div>
-                        <p class="mb-1">Auckland v Wellington</p>
+                        <!-- <p class="mb-1">Auckland v Wellington</p>
                         <table class="table text-white small">
                           <tr>
                             <th class="ps-0">Match Odds</th>
@@ -107,7 +115,27 @@
                             <td>6,500</td>
                             <td>4,030</td>
                           </tr>
-                        </table>
+                        </table> -->
+                        <div  *ngFor = "let bet of unMatchedBets">
+                          <p class="mb-1">{{bet.matchName}}</p>
+                          <div  *ngFor="let market of bet.markets">
+                            <table class="table text-white small" *ngFor="let runner of market.runners">
+                              <tr>
+                                <th class="ps-0">{{market.name}}</th>
+                                <th>Odds</th>
+                                <th>Stake</th>
+                                <th>Profit/Liability</th>
+                              </tr>
+                              <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                                <td><b>{{b.horse}}</b></td>
+                                <td><b>{{b.odds}}</b></td>
+                                <td><b>{{b.stake}}</b></td>
+                                <td><b>{{(b.odds-1) * b.stake | number : '1.2-2'}}</b></td>
+                              </tr>
+                            </table>
+                          </div>
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -118,7 +146,7 @@
                         Matched Bets</button>
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                      data-bs-parent="#accordionExample">
+                      data-bs-parent="#accordionExample"  [ngClass]="matchedBets.length > 0 ? 'show': ''">
                       <div class="accordion-body text-white" >
                         <div class="form-check border-bottom border-secondary mb-2">
                           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
@@ -126,23 +154,29 @@
                             Average Odds
                           </label>
                         </div>
-                        <p class="mb-1">Auckland v Wellington</p>
-                        <table class="table text-white small">
-                          <tr>
-                            <th class="ps-0">Match Odds</th>
-                            <th>Odds</th>
-                            <th>Stake</th>
-                            <th>Profit/Liability</th>
-                          </tr>
-                          <tr class="colblue">
-                            <td>Wellington</td>
-                            <td>1.62</td>
-                            <td>6,500</td>
-                            <td>4,030</td>
-                          </tr>
-                        </table>
+                        <div  *ngFor = "let bet of matchedBets">
+                          <p class="mb-1">{{bet.matchName}}</p>
+                          <div  *ngFor="let market of bet.markets">
+                            <table class="table text-white small" *ngFor="let runner of market.runners">
+                              <tr>
+                                <th class="ps-0">{{market.name}}</th>
+                                <th>Odds</th>
+                                <th>Stake</th>
+                                <th>Profit/Liability</th>
+                              </tr>
+                              <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                                <td><b>{{b.horse}}</b></td>
+                                <td><b>{{b.odds}}</b></td>
+                                <td><b>{{b.stake}}</b></td>
+                                <td><b>{{(b.odds-1) * b.stake | number : '1.2-2'}}</b></td>
+                              </tr>
+                            </table>
+                          </div>
 
-                        <p class="mb-1">Auckland v Wellington</p>
+                        </div>
+                        
+
+                        <!-- <p class="mb-1">Auckland v Wellington</p>
                         <table class="table text-white small">
                           <tr>
                             <th class="ps-0">Match Odds</th>
@@ -155,8 +189,8 @@
                             <td>1.62</td>
                             <td>6,500</td>
                             <td>4,030</td>
-                          </tr>
-                        </table>
+                          </tr> 
+                        </table>-->
                       </div>
                     </div>
                   </div>
