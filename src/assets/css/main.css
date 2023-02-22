@@ -208,6 +208,9 @@
   border-color: inherit;
   border-style: none;
   border-width: 0;
+  font-size: 11px;
+  height: 50px;
+  vertical-align: middle;
 }
 .gamedetails .heading {
   font-size: 10px;
@@ -280,7 +283,7 @@ tr {
 }
 
 .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last {
-  min-width: 60px;
+  min-width: 45px;
   height: 40px;
 }
 
@@ -702,6 +705,23 @@ input:checked + .slider:before {
 .searchlist .dropdown-menu-dark {
   background-color: #343535;
   border-color: rgba(0, 0, 0, 0.15);
+}
+
+.search-dd {
+  position: absolute;
+  width: 450px;
+  padding: 10px 0;
+  list-style-type: none;
+}
+
+.search-dd li {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.search-dd li:hover {
+  background-color: rgb(83, 83, 83);
+  padding: 10px 15px;
 }
 
 /*search end*/
