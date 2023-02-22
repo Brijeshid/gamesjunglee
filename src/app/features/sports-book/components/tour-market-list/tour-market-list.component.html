@@ -70,7 +70,7 @@
                           </thead>
                           <tbody class="content">
                             <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
+                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                               <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                               <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
                               <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:2,odds:runner['back2']})"><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
@@ -107,7 +107,7 @@
                           </thead>
                           <tbody class="content">
                             <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
+                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                               <!-- <td class="border-top"></td>
                               <td class="border-top"></td> -->
                               <td class="colblue dis"><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>

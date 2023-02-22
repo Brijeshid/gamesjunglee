@@ -205,6 +205,7 @@ export class MatchMarketListComponent implements OnInit {
         this.bookMakerMarket.map(bookMakerObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +bookMakerObj['marketId']]);
             return bookMakerObj['runners'].map((runnerRes) => {
+              runnerRes['SelectionId'] = runnerRes['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                 if (singleWebsocketRunnerBook['ib']) {
@@ -235,6 +236,7 @@ export class MatchMarketListComponent implements OnInit {
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
+              fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                 if (singleWebsocketRunnerBook['ib']) {
@@ -281,20 +283,20 @@ export class MatchMarketListComponent implements OnInit {
     this.isBetSlipActive = true;
     this.betSlipObj = {
         "event":marketData['matchName'],
-        "marketId":marketData['market']['marketId'],
+        "marketId":marketData['marketId'],
         "marketName":marketData['marketType'],
         "sportName":this.sports,
         "odds": positionObj['odds'],
         "betPosition":positionObj['index'],
         "profit":0,
-        "selectionId":runnerObj['SelectionId'],
-        "selectionName":runnerObj['RunnerName'],
+        "selectionId":runnerObj ? runnerObj['SelectionId']: marketData['SelectionId'],
+        "selectionName":runnerObj? runnerObj['RunnerName']: marketData['RunnerName'],
         "stake": 0,
         "isBack": positionObj['isBack'],
-        "centralId":marketData['market']['centralId'],
+        "centralId":marketData['centralId'],
         "runs":null,
         "matchTime":marketData['matchTime'],
-        "book":marketData['market']['runners']
+        "book":marketData['runners']
     }
   }
 
