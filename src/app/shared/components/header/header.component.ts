@@ -54,4 +54,10 @@ export class HeaderComponent implements OnInit {
       console.log('res_data',res);
     })
   }
+
+  // Refresh
+
+  refreshPage(){
+    window.location.reload();
+  }
 }
