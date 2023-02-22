@@ -29,20 +29,17 @@
         <div class="searchs"><a  class="text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-search bg-pink rounded-circle p-2 me-2"></i></a></div>
         <div class="searchs"><a  class="text-dark"><i class="fa fa-bars bg-pink rounded-circle p-2 me-2"></i></a></div>
         <div class="dropdown me-4 searchlist mt-1 disnone">
-          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-search searchi"></i>
-            <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
-            <!-- <input type="text" class="form-control float-start searchinput"> -->
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-            <li> <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Football</a></li>
-            <li><a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Cricket</a></li>
-          </ul>
+        <div class="dropdown-toggle">
+          <i class="fa fa-search searchi"></i>
+          <input type="text" class="form-control searchinput" aria-label="" #inputRef (keypress)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
         </div>
+          <ul *ngIf="searchList.length >0" class="dropdown-menu-dark search-dd">
+          <li *ngFor="let singleObj of searchList"> <a><img src="assets/images/{{singleObj['sportType']['sportName'] | lowercase}}.png" width="45px" class="pe-4"> {{singleObj['matchName']}}<br> <span class="ps-5">{{singleObj['openDate']| date :'d/MM/yy, h:mm a'}}</span> </a></li>
+          </ul>
+          </div>
           <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
           <button class="btn text-white border-pink me-2 text-nowrap rounded-pill disnone" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
               Bets</button>
-
               <a class="btn text-white border-pink text-nowrap rounded-pill"
                *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
               <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
@@ -53,7 +50,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
    <app-left-navigation></app-left-navigation>
         </div>
-
 </nav>
 </div>
 </div>
@@ -89,14 +85,12 @@
     </ul>
 </div>
 <!---Header 2 end-->
-
 <!--Right sidebar start-->
 <div id="overlay" *ngIf="isShowRightSideBar" [ngClass]="{'toggled':isShowRightSideBar}" [style.display]="isShowRightSideBar ? 'block':'none'">
 <div id="rightslider">
     <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
 </div>
 </div>
-
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Launch static backdrop modal
