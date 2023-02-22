@@ -41,7 +41,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   placeBet(){
     
-    if(this.betSlipParams.marketName == 'MATCH ODDS'){
+    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
       let multiplier
       if(this.betSlipParams.odds >= 1){
         multiplier = this.betSlipParams.odds - 1
