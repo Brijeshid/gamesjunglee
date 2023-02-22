@@ -4,6 +4,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
 import { SportsBookService } from '../../services/sports-book.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-match-market-list',
@@ -46,7 +47,8 @@ export class MatchMarketListComponent implements OnInit {
   constructor(
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -294,6 +296,10 @@ export class MatchMarketListComponent implements OnInit {
         "matchTime":marketData['matchTime'],
         "book":marketData['market']['runners']
     }
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 
@@ -14,6 +14,9 @@ export class BetSlipComponent implements OnInit, OnChanges {
   odds:number;
   stake:number;
   matchedBets :any[] = [];
+  unMatchedBets :any[] = [];
+
+ userConfig:any=[];
   
   constructor(private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
@@ -28,6 +31,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
   ngOnInit(): void {
     this._getUserOpenBet()
+    this.getUserConfig()
   }
 
   onClickPlaceBet(){
@@ -52,17 +56,35 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
       (res: any) => {
         console.log('placebet',res);
-        this._sharedService.getToastPopup('You have Successfully Placed Bet','Market Bet','success');
-      });  
+        this._sharedService.getToastPopup(res.message,'Market Bet','success');
+        this._getUserOpenBet()
+        this.isBetSlipActive = false;
+      });
     }
 
   _getUserOpenBet(){
     this._SharedService._getUserOpenBetsApi().subscribe(
       (res:any) => {
-        this.matchedBets = res
-            console.log(res)
+        console.log('User Bet',res)
+
+        res.userBets.forEach(bet=>{
+          if(bet.status == "EXECUTION_COMPLETE"){
+            this.matchedBets = bet.bets
+          }else{
+            this.unMatchedBets = bet.bets
+          }
+        })
+           
 
           })
    }
+
+   getUserConfig() {
+    this._userSettingsService._getUserConfigApi().subscribe(
+      (res) => {
+        this.userConfig = res  ;
+        console.log('Event',res)
+      });
+  }
 
 }
