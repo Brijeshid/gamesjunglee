@@ -323,7 +323,7 @@ export class SportsMarketListComponent implements OnInit {
       this.inPlayMatchListBySport.map((sportsObj)=>{
         let horseDataByMarketId = _.find(this.booksForMarket,['marketId',sportsObj['market']['marketId']]);
         return sportsObj['market']['runners'].map((singleRunner)=>{
-          singleRunner['hourseAmt']= _.find(horseDataByMarketId['horses'],['horse',singleRunner['SelectionId']]);
+          singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
           return singleRunner;
         })
       });
