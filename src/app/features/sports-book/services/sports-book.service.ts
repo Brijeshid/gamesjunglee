@@ -21,4 +21,9 @@ export class SportsBookService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getFancyMarketEndPoint(), inPlayUpcomingBody);
   }
+
+  _getBooksForMarketApi(marketIdListBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBooksForMarket(), marketIdListBody);
+  }
 }

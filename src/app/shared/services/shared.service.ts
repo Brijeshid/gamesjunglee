@@ -15,6 +15,7 @@ export class SharedService {
   sharedSubject=new Subject();
   private previousUrl: string = '';
   private currentUrl: string = '';
+  getUserBalance = new Subject();
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);

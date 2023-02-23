@@ -15,7 +15,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   stake:number;
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
-
+  @Input() showMAtchwiseBet = ''
  userConfig:any=[];
   
   constructor(private _sharedService: SharedService,
@@ -59,6 +59,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
         this._sharedService.getToastPopup(res.message,'Market Bet','success');
         this._getUserOpenBet()
         this.isBetSlipActive = false;
+        this._SharedService.getUserBalance.next();
       });
     }
 
@@ -66,17 +67,27 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._SharedService._getUserOpenBetsApi().subscribe(
       (res:any) => {
         console.log('User Bet',res)
-
+        console.log(this.showMAtchwiseBet)
+        if(!this.showMAtchwiseBet){
         res.userBets.forEach(bet=>{
           if(bet.status == "EXECUTION_COMPLETE"){
             this.matchedBets = bet.bets
           }else{
             this.unMatchedBets = bet.bets
           }
-        })
-           
-
-          })
+        })      
+      }else{
+        res.userBets.forEach(bet=>{
+          bet.bets = bet.bets.filter(b => b.matchName == this.showMAtchwiseBet)
+          console.log(bet)
+          if(bet.status == "EXECUTION_COMPLETE"){
+            this.matchedBets = bet.bets
+          }else{
+            this.unMatchedBets = bet.bets
+          }
+        })   
+      }
+      })
    }
 
    getUserConfig() {

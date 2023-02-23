@@ -3,6 +3,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
 import { ActivatedRoute } from '@angular/router';
+import { SportsBookService } from '../../services/sports-book.service';
 
 @Component({
   selector: 'app-sports-market-list',
@@ -39,9 +40,12 @@ export class SportsMarketListComponent implements OnInit {
     results: false,
   };
 
+  booksForMarket = [];
+
   constructor(
     private _sharedService: SharedService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _SportsBookService: SportsBookService,
   ) { }
 
   ngOnInit(): void {
@@ -162,6 +166,10 @@ export class SportsMarketListComponent implements OnInit {
         //merge both centralId
         console.log('data',res['matchDetails']);
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
+        console.log(this.inPlayMatchListBySport)
+        if(this.inPlayMatchListBySport.length > 0){
+          this.getBooksForMarket(this.inPlayMatchListBySport)
+        }
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
 
@@ -307,6 +315,28 @@ export class SportsMarketListComponent implements OnInit {
     this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
+  }
+
+  getBooksForMarket(marketList){
+    console.log(marketList)
+    let markets= {
+      marketIds : marketList.map(m=>m.market.marketId)
+    }
+    this._SportsBookService._getBooksForMarketApi(markets).subscribe((res:any) =>{
+      this.booksForMarket = res.booksForMarket
+      console.log(res)
+    }
+
+    )
+    
+  }
+
+  setBooks(market,horseName){
+    const marketId = market.marketId;
+    const runnerName = horseName.RunnerName
+    console.log(marketId,runnerName)
+    console.log(this.booksForMarket)
+
   }
 
 }

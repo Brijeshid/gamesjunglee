@@ -293,7 +293,7 @@
         </div>
         <!--Aside right start-->
         <div class="col-md-4 mt-3" *ngIf="isBetSlipShow">
-            <app-bet-slip [isBetSlipActive] ="isBetSlipActive" [betSlipParams]="betSlipObj"></app-bet-slip>
+            <app-bet-slip [isBetSlipActive] ="isBetSlipActive" [betSlipParams]="betSlipObj" *ngIf="matchName != 'NO MATCH AVAILABLE'" [showMAtchwiseBet] = "matchName"></app-bet-slip>
         </div>
         <!--Aside right end-->
       </div>
