@@ -111,16 +111,19 @@
                                 <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
-                          <tbody><tr *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}} <br> </strong>
-                                </a></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="colblue " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:true,index:0,odds:singleFancyMarket['back0']})"><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0'] | marketRateFormater}}</td>
-                              <td class="colpink " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:false,index:0,odds:singleFancyMarket['lay0']})"><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0'] | marketRateFormater}}</td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}"></td>
-                            </tr>
+                          <tbody>
+                            <ng-container *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" >
+                              <tr *ngIf="singleFancyMarket['status'] != '4'" [ngClass]="{'border-0':last}">
+                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}}<br> </strong>
+                                  </a></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="colblue " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:true,index:1,odds:singleFancyMarket['back1']})"><strong>{{singleFancyMarket['back1']}}</strong> <br>{{singleFancyMarket['vback1'] | marketRateFormater}}</td>
+                                <td class="colpink " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:false,index:1,odds:singleFancyMarket['lay1']})"><strong>{{singleFancyMarket['lay1']}}</strong> <br>{{singleFancyMarket['vlay1'] | marketRateFormater}}</td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}"></td>
+                              </tr>
+                            </ng-container>
                           </tbody>
                         </table>
 
