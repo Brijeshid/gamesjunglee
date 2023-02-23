@@ -61,6 +61,7 @@ export class TourMarketListComponent implements OnInit {
         || res['inPlayUpcomingMarket']['upComingMarkets'].length > 0)){
 
          res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
+          sportsObj['isExpand'] = true;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
@@ -88,6 +89,7 @@ export class TourMarketListComponent implements OnInit {
         })
 
         res['inPlayUpcomingMarket']['upComingMarkets'].map(sportsObj =>{
+          sportsObj['isExpand'] = true;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
