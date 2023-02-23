@@ -125,17 +125,17 @@ export class MatchMarketListComponent implements OnInit {
       if(res.length > 0){
         res.map(sportsObj =>{
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
-                sportsObj['back0'] = '';
-                sportsObj['vback0'] = '';
+                sportsObj['back1'] = '';
+                sportsObj['vback1'] = '';
 
-                sportsObj['lay0'] = '';
-                sportsObj['vlay0'] = '';
+                sportsObj['lay1'] = '';
+                sportsObj['vlay1'] = '';
       
                 sportsObj['suspended'] = true;
         })
         //merge both centralId
         this.fancyMarket = res;
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
+        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']});
       }
     })
   }
@@ -236,29 +236,33 @@ export class MatchMarketListComponent implements OnInit {
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
-              fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId'].toString();
-              let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
-              for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
-                if (singleWebsocketRunnerBook['ib']) {
-                  //back
-    
-                  //Live Rate
-                  fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-    
-                  //Volume from Betfair
-                  fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
-    
-                } else {
-                  //lay
-    
-                  //Live Rate
-                  fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-    
-                  //Volume from Betfair
-                  fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
-    
+              if(singleWebSocketMarketDataBook != undefined){
+                fancyMarketObj['status'] = singleWebSocketMarketDataBook['ms'];
+                fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId'].toString();
+                let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
+                for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                  if (singleWebsocketRunnerBook['ib']) {
+                    //back
+      
+                    //Live Rate
+                    fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+      
+                    //Volume from Betfair
+                    fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['pt'];
+      
+                  } else {
+                    //lay
+      
+                    //Live Rate
+                    fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+      
+                    //Volume from Betfair
+                    fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['pt'];
+      
+                  }
                 }
               }
+              
               return fancyMarketObj;
         })
       }
