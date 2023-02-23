@@ -69,7 +69,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
         console.log('User Bet',res)
         console.log(this.showMAtchwiseBet)
         if(!this.showMAtchwiseBet){
-          console.log('inside If')
         res.userBets.forEach(bet=>{
           if(bet.status == "EXECUTION_COMPLETE"){
             this.matchedBets = bet.bets
@@ -78,7 +77,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
           }
         })      
       }else{
-        console.log('Inside else')
         res.userBets.forEach(bet=>{
           bet.bets = bet.bets.filter(b => b.matchName == this.showMAtchwiseBet)
           console.log(bet)

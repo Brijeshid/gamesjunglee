@@ -167,7 +167,9 @@ export class SportsMarketListComponent implements OnInit {
         console.log('data',res['matchDetails']);
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         console.log(this.inPlayMatchListBySport)
-        this.getBooksForMarket(this.inPlayMatchListBySport)
+        if(this.inPlayMatchListBySport.length > 0){
+          this.getBooksForMarket(this.inPlayMatchListBySport)
+        }
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
 
@@ -316,6 +318,7 @@ export class SportsMarketListComponent implements OnInit {
   }
 
   getBooksForMarket(marketList){
+    console.log(marketList)
     let markets= {
       marketIds : marketList.map(m=>m.market.marketId)
     }
@@ -325,6 +328,7 @@ export class SportsMarketListComponent implements OnInit {
     }
 
     )
+    
   }
 
   setBooks(market,horseName){
