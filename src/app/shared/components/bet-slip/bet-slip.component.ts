@@ -16,15 +16,15 @@ export class BetSlipComponent implements OnInit, OnChanges {
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
   @Input() showMAtchwiseBet = ''
- userConfig:any=[];
+  userConfig:any=[];
   
-  constructor(private _sharedService: SharedService,
+  constructor(
+    private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
     private _SharedService:SharedService
     ) { }
 
   ngOnChanges(changes: SimpleChanges){
-    console.log('changes');
     if(!changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue']
     }
@@ -35,27 +35,14 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   onClickPlaceBet(){
-    // this.betSlipParams['profit'] = ;
-    this.placeBet();
-  }
-
-  placeBet(){
-    
     if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
-      let multiplier
-      if(this.betSlipParams.odds >= 1){
-        multiplier = this.betSlipParams.odds - 1
-      }else{
-        multiplier = 1- this.betSlipParams.odds 
-      }
-      
+      let multiplier = this.betSlipParams.odds >= 1 ? this.betSlipParams.odds - 1 : 1- this.betSlipParams.odds;
       this.betSlipParams.profit = multiplier * this.betSlipParams.stake
       this.betSlipParams.marketName = 'Match Odds'
     }
-    console.log('Profit',this.betSlipParams)
+
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
       (res: any) => {
-        console.log('placebet',res);
         this._sharedService.getToastPopup(res.message,'Market Bet','success');
         this._getUserOpenBet()
         this.isBetSlipActive = false;
@@ -66,35 +53,21 @@ export class BetSlipComponent implements OnInit, OnChanges {
   _getUserOpenBet(){
     this._SharedService._getUserOpenBetsApi().subscribe(
       (res:any) => {
-        console.log('User Bet',res)
-        console.log(this.showMAtchwiseBet)
-        if(!this.showMAtchwiseBet){
         res.userBets.forEach(bet=>{
-          if(bet.status == "EXECUTION_COMPLETE"){
-            this.matchedBets = bet.bets
-          }else{
-            this.unMatchedBets = bet.bets
-          }
-        })      
-      }else{
-        res.userBets.forEach(bet=>{
-          bet.bets = bet.bets.filter(b => b.matchName == this.showMAtchwiseBet)
-          console.log(bet)
+          if(this.showMAtchwiseBet) bet.bets = bet.bets.filter(b => b.matchName == this.showMAtchwiseBet)
           if(bet.status == "EXECUTION_COMPLETE"){
             this.matchedBets = bet.bets
           }else{
             this.unMatchedBets = bet.bets
           }
         })   
-      }
       })
    }
 
    getUserConfig() {
     this._userSettingsService._getUserConfigApi().subscribe(
       (res) => {
-        this.userConfig = res  ;
-        console.log('Event',res)
+        this.userConfig = res ;
       });
   }
 

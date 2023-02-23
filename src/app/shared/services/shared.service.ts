@@ -176,5 +176,10 @@ export class SharedService {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserOpenBets());
   }
+
+  _getBooksForMarketApi(marketIdListBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBooksForMarket(), marketIdListBody);
+  }
 }
 

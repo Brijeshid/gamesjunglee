@@ -3,8 +3,6 @@ import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
 import { ActivatedRoute } from '@angular/router';
-import { SportsBookService } from '../../services/sports-book.service';
-
 @Component({
   selector: 'app-sports-market-list',
   templateUrl: './sports-market-list.component.html',
@@ -44,8 +42,7 @@ export class SportsMarketListComponent implements OnInit {
 
   constructor(
     private _sharedService: SharedService,
-    private _route: ActivatedRoute,
-    private _SportsBookService: SportsBookService,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -107,6 +104,7 @@ export class SportsMarketListComponent implements OnInit {
 
   getInPlayUpcomingData(){
     this._sharedService._postInPlayUpcomingApi({sportName:this.sports}).subscribe((res:any)=>{
+
       if(res?.inPlayUpcomingMarket && (res['inPlayUpcomingMarket']['inPlayMarkets'].length > 0 
         || res['inPlayUpcomingMarket']['upComingMarkets'].length > 0)){
 
@@ -167,11 +165,10 @@ export class SportsMarketListComponent implements OnInit {
         console.log('data',res['matchDetails']);
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         console.log(this.inPlayMatchListBySport)
-        if(this.inPlayMatchListBySport.length > 0){
-          this.getBooksForMarket(this.inPlayMatchListBySport)
-        }
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+        
+        if(this.inPlayMatchListBySport.length > 0) this.getBooksForMarket(this.inPlayMatchListBySport);
 
       }
     })
@@ -288,9 +285,9 @@ export class SportsMarketListComponent implements OnInit {
 
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
-    if(!this.isBetSlipActive){
-    this.isBetSlipActive = true;
-    }
+
+    if(!this.isBetSlipActive) this.isBetSlipActive = true;
+
     this.betSlipObj = {
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],
@@ -317,26 +314,17 @@ export class SportsMarketListComponent implements OnInit {
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
 
-  getBooksForMarket(marketList){
-    console.log(marketList)
-    let markets= {
-      marketIds : marketList.map(m=>m.market.marketId)
-    }
-    this._SportsBookService._getBooksForMarketApi(markets).subscribe((res:any) =>{
-      this.booksForMarket = res.booksForMarket
-      console.log(res)
-    }
-
-    )
-    
+  getBooksForMarket(marketList:any){
+    let markets= {marketIds : marketList.map(m=>m.market.marketId)}
+    this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
+      this.booksForMarket = res?.booksForMarket;
+      this.inPlayMatchListBySport.map((sportsObj)=>{
+        let horseDataByMarketId = _.find(this.booksForMarket,['marketId',sportsObj['market']['marketId']]);
+        return sportsObj['market']['runners'].map((singleRunner)=>{
+          singleRunner['hourseAmt']= _.find(horseDataByMarketId['horses'],['horse',singleRunner['SelectionId']]);
+          return singleRunner;
+        })
+      });
+    })
   }
-
-  setBooks(market,horseName){
-    const marketId = market.marketId;
-    const runnerName = horseName.RunnerName
-    console.log(marketId,runnerName)
-    console.log(this.booksForMarket)
-
-  }
-
 }
