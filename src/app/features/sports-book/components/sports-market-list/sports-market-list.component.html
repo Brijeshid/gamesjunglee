@@ -74,7 +74,8 @@
                               <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:0,odds:runner['back0']})"><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
                               <td class="colpink "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:0,odds:runner['lay0']})"><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                               <td class="colpink "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:1,odds:runner['lay1']})"><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                              <td class="colpink " [ngClass]="{'last':last}"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:2,odds:runner['lay2']})"><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
+                              <td class="colpink " [ngClass]="{'last':last}"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:2,odds:runner['lay2']})"><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a>
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -110,7 +111,18 @@
                               <td class="colblue dis"><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
                               <td class="colpink dis"><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                               <td class="colpink dis"><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                              <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
+                              <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a>
+                               <!--online start-->
+                                <div class="suspendedbm1">
+                                  <button type="button" class="suspendedm1 marketlist-on">Suspended</button>
+                                </div>
+                                <!--online end-->
+                                <!--Offline start-->
+                                <!-- <div class="suspendedbm1">
+                                  <button type="button" class="suspendedm1 marketlist-off">Suspended</button>
+                                </div> -->
+                                <!--Offline end-->
+                              </td>
                             </tr>
                           </tbody>
                         </table>
