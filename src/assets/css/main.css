@@ -816,3 +816,15 @@ input:checked + .slider:before {
 .lmv {
   display: none !important;
 }/*# sourceMappingURL=main.css.map */
+
+
+/* right-panel text (font-size) as per playExch*/
+.rightpanelFont{
+  font-size: .8125rem;
+  font-weight: 500;
+  line-height: 1rem;
+}
+
+.headerFont{
+  font-size: .875rem
+}

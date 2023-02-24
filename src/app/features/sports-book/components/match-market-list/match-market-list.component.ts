@@ -4,6 +4,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
 import { SportsBookService } from '../../services/sports-book.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-match-market-list',
@@ -46,7 +47,8 @@ export class MatchMarketListComponent implements OnInit {
   constructor(
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -123,17 +125,17 @@ export class MatchMarketListComponent implements OnInit {
       if(res.length > 0){
         res.map(sportsObj =>{
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
-                sportsObj['back0'] = '';
-                sportsObj['vback0'] = '';
+                sportsObj['back1'] = '';
+                sportsObj['vback1'] = '';
 
-                sportsObj['lay0'] = '';
-                sportsObj['vlay0'] = '';
+                sportsObj['lay1'] = '';
+                sportsObj['vlay1'] = '';
       
                 sportsObj['suspended'] = true;
         })
         //merge both centralId
         this.fancyMarket = res;
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
+        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']});
       }
     })
   }
@@ -203,6 +205,7 @@ export class MatchMarketListComponent implements OnInit {
         this.bookMakerMarket.map(bookMakerObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +bookMakerObj['marketId']]);
             return bookMakerObj['runners'].map((runnerRes) => {
+              runnerRes['SelectionId'] = runnerRes['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                 if (singleWebsocketRunnerBook['ib']) {
@@ -233,28 +236,33 @@ export class MatchMarketListComponent implements OnInit {
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
-              let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
-              for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
-                if (singleWebsocketRunnerBook['ib']) {
-                  //back
-    
-                  //Live Rate
-                  fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-    
-                  //Volume from Betfair
-                  fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
-    
-                } else {
-                  //lay
-    
-                  //Live Rate
-                  fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-    
-                  //Volume from Betfair
-                  fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
-    
+              if(singleWebSocketMarketDataBook != undefined){
+                fancyMarketObj['status'] = singleWebSocketMarketDataBook['ms'];
+                fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId'].toString();
+                let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
+                for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                  if (singleWebsocketRunnerBook['ib']) {
+                    //back
+      
+                    //Live Rate
+                    fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+      
+                    //Volume from Betfair
+                    fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['pt'];
+      
+                  } else {
+                    //lay
+      
+                    //Live Rate
+                    fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
+      
+                    //Volume from Betfair
+                    fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['pt'];
+      
+                  }
                 }
               }
+              
               return fancyMarketObj;
         })
       }
@@ -279,21 +287,25 @@ export class MatchMarketListComponent implements OnInit {
     this.isBetSlipActive = true;
     this.betSlipObj = {
         "event":marketData['matchName'],
-        "marketId":marketData['market']['marketId'],
+        "marketId":marketData['marketId'],
         "marketName":marketData['marketType'],
         "sportName":this.sports,
         "odds": positionObj['odds'],
         "betPosition":positionObj['index'],
         "profit":0,
-        "selectionId":runnerObj['SelectionId'],
-        "selectionName":runnerObj['RunnerName'],
+        "selectionId":runnerObj ? runnerObj['SelectionId']: marketData['SelectionId'],
+        "selectionName":runnerObj? runnerObj['RunnerName']: marketData['RunnerName'],
         "stake": 0,
         "isBack": positionObj['isBack'],
-        "centralId":marketData['market']['centralId'],
+        "centralId":marketData['centralId'],
         "runs":null,
         "matchTime":marketData['matchTime'],
-        "book":marketData['market']['runners']
+        "book":marketData['runners']
     }
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

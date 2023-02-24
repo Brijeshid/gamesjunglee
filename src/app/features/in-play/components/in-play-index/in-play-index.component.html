@@ -124,8 +124,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first=first;" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
-                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a > <span class="text-danger">{{singleMarket['matchTime'] | date: 'EEEE At h:mm a'}}</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
+                            <tr *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first=first" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
+                                <td class="text-start ps-2 heading border-top" style="cursor: pointer;"><a > <span class="text-danger">{{singleMarket['matchTime'] | date: 'EEEE At h:mm a'}}</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
                                     </a></td>
                                 <td class="border-top disnone" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top disnone" [ngClass]="{'border-top':!first}"></td>

@@ -69,5 +69,7 @@ export class SettingsComponent implements OnInit {
       (res) => {
         this.userConfig = res  ;      
       });
+      this._sharedService.getToastPopup("User Settings saved sucessfully",'Settings','success');
+
     }
 }

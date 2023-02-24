@@ -2,7 +2,7 @@
 <!--body start-->
 <div class="row m-0">
     <div class="col-md-12 pb-2 pt-2">
-      <a class="text-white small text-decoration-none"><i class="fa fa-arrow-alt-circle-left"></i> {{matchName | uppercase}}</a>
+      <a class="text-pink small text-decoration-none"><i (click)="goBack()" class="fa fa-angle-left text-white" style="cursor: pointer;"></i> {{matchName | uppercase}}</a>
     </div>
     <hr class="text-pink">
     <!--Aside start-->
@@ -57,14 +57,12 @@
                                 <td class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td class="colblue "><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
-                                <td class="colblue "><a ><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
-                                <td class="colblue "><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                                <td class="colpink" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a>
-
-                                </td>
+                                <td class="colblue" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:true,index:2,odds:runner['back2']})"><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
+                                <td class="colblue" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:true,index:1,odds:runner['back1']})"><a ><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
+                                <td class="colblue" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:true,index:0,odds:runner['back0']})"><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
+                                <td class="colpink" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:false,index:0,odds:runner['lay0']})"><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
+                                <td class="colpink" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:false,index:1,odds:runner['lay1']})"><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
+                                <td class="colpink" [ngClass]="{'last':last}" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:false,index:2,odds:runner['lay2']})"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
                               </tr>
                           </tbody>
                         </table>
@@ -91,8 +89,8 @@
                                 <td class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td class="colblue dis"><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
-                                <td class="colpink dis"><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
+                                <td class="colblue" (click)="onClickLiveMarketRate(runner,singleBookMaker,{isBack:true,index:0,odds:runner['back0']})" ><a><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
+                                <td class="colpink"><a (click)="onClickLiveMarketRate(runner,singleBookMaker,{isBack:false,index:0,odds:runner['lay0']})"><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}">
                                   <!--Online start-->
@@ -141,16 +139,19 @@
                                 <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
-                          <tbody><tr *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                              <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}} <br> </strong>
-                                </a></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="colblue "><strong>{{singleFancyMarket['back0']}}</strong> <br>{{singleFancyMarket['vback0'] | marketRateFormater}}</td>
-                              <td class="colpink "><strong>{{singleFancyMarket['lay0']}}</strong> <br>{{singleFancyMarket['vlay0'] | marketRateFormater}}</td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                              <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}"></td>
-                            </tr>
+                          <tbody>
+                            <ng-container *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" >
+                              <tr *ngIf="singleFancyMarket['status'] != '4'" [ngClass]="{'border-0':last}">
+                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}}<br> </strong>
+                                  </a></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="colblue " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:true,index:1,odds:singleFancyMarket['back1']})"><strong>{{singleFancyMarket['back1']}}</strong> <br>{{singleFancyMarket['vback1'] | marketRateFormater}}</td>
+                                <td class="colpink " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:false,index:1,odds:singleFancyMarket['lay1']})"><strong>{{singleFancyMarket['lay1']}}</strong> <br>{{singleFancyMarket['vlay1'] | marketRateFormater}}</td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}"></td>
+                              </tr>
+                            </ng-container>
                           </tbody>
                         </table>
 
@@ -320,7 +321,7 @@
         </div>
         <!--Aside right start-->
         <div class="col-md-4 mt-3" *ngIf="isBetSlipShow">
-            <app-bet-slip [isBetSlipActive] ="isBetSlipActive" [betSlipParams]="betSlipObj"></app-bet-slip>
+            <app-bet-slip [isBetSlipActive] ="isBetSlipActive" [betSlipParams]="betSlipObj" *ngIf="matchName != 'NO MATCH AVAILABLE'" [showMAtchwiseBet] = "matchName"></app-bet-slip>
         </div>
         <!--Aside right end-->
       </div>

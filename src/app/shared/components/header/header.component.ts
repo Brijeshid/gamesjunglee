@@ -22,6 +22,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     if(this.isLoggedIn)this.getUserBalance();
+    this._sharedService.getUserBalance.subscribe(res =>{
+      this.getUserBalance();
+    })
   }
 
   getRightSidebarEvent(eventObj){
@@ -49,5 +52,11 @@ export class HeaderComponent implements OnInit {
       this.searchList = res;
       console.log('res_data',res);
     })
+  }
+
+  // Refresh
+
+  refreshPage(){
+    window.location.reload();
   }
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-tour-market-list',
@@ -39,7 +41,9 @@ export class TourMarketListComponent implements OnInit {
 
   constructor(
     private _sharedService: SharedService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _location: Location
+
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +61,7 @@ export class TourMarketListComponent implements OnInit {
         || res['inPlayUpcomingMarket']['upComingMarkets'].length > 0)){
 
          res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
+          sportsObj['isExpand'] = true;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
@@ -84,6 +89,7 @@ export class TourMarketListComponent implements OnInit {
         })
 
         res['inPlayUpcomingMarket']['upComingMarkets'].map(sportsObj =>{
+          sportsObj['isExpand'] = true;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
@@ -256,6 +262,10 @@ export class TourMarketListComponent implements OnInit {
     this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

@@ -11,16 +11,16 @@
            <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
         </button>
         <a class="navbar-brand" [routerLink]="['/in-play']"><img src="assets/images/logo.png" width="100px"></a>
-</div>
+</div>&nbsp;&nbsp;
 <div class="col-md-2">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
           <li class="nav-item header-icon">
               <a [routerLink]="['/news']">
                   <i class="fas fa-newspaper"></i></a>
-          </li>
+          </li>&nbsp;&nbsp;
           <li class="nav-item header-icon">
               <a >
-                  <i class="fas fa-rotate-right"></i></a>
+                  <i (click)="refreshPage()" class="fas fa-rotate-right" style="cursor: pointer;"></i></a>
           </li>
       </ul>
     </div>
@@ -38,9 +38,9 @@
           </ul>
           </div>
           <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-          <button class="btn text-white border-pink me-2 text-nowrap rounded-pill disnone" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
+          <button class="btn text-white border-pink me-2 text-nowrap rounded-pill disnone headerFont" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
               Bets</button>
-              <a class="btn text-white border-pink text-nowrap rounded-pill"
+              <a class="btn text-white border-pink text-nowrap rounded-pill headerFont"
                *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
               <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
               </a>

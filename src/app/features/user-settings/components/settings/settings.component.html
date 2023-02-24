@@ -34,7 +34,7 @@
                     </div>
                   </ng-container>
                     <div class="col-md-6 mt-3 col-6"><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode=!isEditMode">{{isEditMode?'Cancel':'Edit'}}</button> </div>
-                    <div class="col-md-6 mt-3 col-6"><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  class="btn btn-light bg-light border w-100" (click)="onSubmitSave()">Save </button> </div>
+                    <div class="col-md-6 mt-3 col-6"><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  class="btn btn-light bg-light border w-100" (click)="onSubmitSave()" [ngClass]="isEditMode? 'bg-pink':''">Save </button> </div>
                 </div>
               </div>
 
@@ -74,7 +74,7 @@
 
 
                   <div class="col-md-6 mt-3 col-6"><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode1=!isEditMode1">{{isEditMode1?'Cancel':'Edit'}}</button> </div>
-                  <div class="col-md-6 mt-3 col-6"><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode1==false"class="btn btn-light bg-light border  w-100">Save </button> </div>
+                  <div class="col-md-6 mt-3 col-6"><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode1==false"class="btn btn-light bg-light border  w-100" [ngClass]="isEditMode1? 'bg-pink':''">Save </button> </div>
               </div>
             </div>
 

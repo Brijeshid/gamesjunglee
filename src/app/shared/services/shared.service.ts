@@ -15,6 +15,7 @@ export class SharedService {
   sharedSubject=new Subject();
   private previousUrl: string = '';
   private currentUrl: string = '';
+  getUserBalance = new Subject();
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -174,6 +175,11 @@ export class SharedService {
   _getUserOpenBetsApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserOpenBets());
+  }
+
+  _getBooksForMarketApi(marketIdListBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBooksForMarket(), marketIdListBody);
   }
 }
 

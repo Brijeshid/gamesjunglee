@@ -23,7 +23,7 @@ export class ChangePasswordComponent implements OnInit {
       this.changePasswordForm = this.formbuilder.group({
         oldPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         newPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
-          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
+          "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
               )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),  
     },
