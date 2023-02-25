@@ -99,6 +99,7 @@ export class MatchMarketListComponent implements OnInit {
     this._sportsBookService._postBookMakerMarketApi({matchId:this.matchId}).subscribe((res:any)=>{
       if(res.length > 0){
         res.map(sportsObj =>{
+          sportsObj['status'] = 1;
           this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'].push(sportsObj['centralId']);
           return sportsObj['runners'].map(runnerRes=>{
 
@@ -124,6 +125,7 @@ export class MatchMarketListComponent implements OnInit {
       console.log('res',res);
       if(res.length > 0){
         res.map(sportsObj =>{
+          sportsObj['status'] = 1;
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
                 sportsObj['back1'] = '';
                 sportsObj['vback1'] = '';
