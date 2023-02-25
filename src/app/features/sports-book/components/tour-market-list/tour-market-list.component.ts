@@ -123,6 +123,7 @@ export class TourMarketListComponent implements OnInit {
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+        if(this.inPlayMatchListBySport.length > 0) this.getBooksForMarket(this.inPlayMatchListBySport);
 
       }
     })
@@ -265,6 +266,24 @@ export class TourMarketListComponent implements OnInit {
     }
   }
 
+  getBooksForMarket(marketList:any){
+    let markets= {marketIds : marketList.map(m=>m.market.marketId)}
+    this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
+      let booksForMarket = res?.booksForMarket;
+      this.inPlayMatchListBySport.map((sportsObj)=>{
+        let horseDataByMarketId = _.find(booksForMarket,['marketId',sportsObj['market']['marketId']]);
+        return sportsObj['market']['runners'].map((singleRunner)=>{
+          singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
+          return singleRunner;
+        })
+      });
+    })
+  }
+  
+  goBack(){
+    this._location.back();
+  }
+
   ngOnDestroy(): void {
     this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
     this.realDataWebSocket.complete();
@@ -272,8 +291,5 @@ export class TourMarketListComponent implements OnInit {
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
 
-  goBack(){
-    this._location.back();
-  }
 
 }

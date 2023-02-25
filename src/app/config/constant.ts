@@ -66,6 +66,6 @@ export class Constants {
     public readonly API_URL_USER_OPEN_BETS:string = 'api/getUserBets';
     public readonly API_URL_OPEN_BETS:string = 'api/getOpenBets';
     public readonly API_URL_PROFIT_LOSS:string = 'api/getProfitAndLoss';
-    public readonly API_URL_BOOKS_MARKET:string = '/api/getBooksForMarket';
+    public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
 
 }

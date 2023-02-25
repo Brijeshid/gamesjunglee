@@ -43,7 +43,7 @@
                         <table class="table table-hover" *ngIf="inPlayUpcomingMarket?.runners && inPlayUpcomingMarket['status'] != '4' && inPlayUpcomingMarket['status'] != undefined">
                           <thead class="collapsible">
                             <tr>
-                              <th width="30%" class="tfirstcol"> Match Odds </th>
+                              <th width="30%" class="tfirstcol"> Match Odds {{inPlayUpcomingMarket['status']}} </th>
                               <th width="10%" class="coldark text-center"><i class="fas fa-clock"></i> 5</th>
                               <th width="10%" class="coldark"></th>
                               <th width="15%" colspan="3" class="text-end coldark">Back</th>
@@ -54,7 +54,8 @@
                           </thead>
                           <tbody class="content">
                             <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                                <td class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
+                                  <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'"><strong>{{runner?.hourseAmt?.amount}}</strong></a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="colblue" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:true,index:2,odds:runner['back2']})"><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>

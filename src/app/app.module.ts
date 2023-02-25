@@ -32,21 +32,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     Constants,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpErrorInterceptor,
-    //   multi: true
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: SubscriptionTokenInterceptor,
-    //   multi: true
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: JwtTokenInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SubscriptionTokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtTokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

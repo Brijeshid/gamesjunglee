@@ -92,6 +92,7 @@ export class MatchMarketListComponent implements OnInit {
         //merge both centralId
         this.inPlayUpcomingMarket = res['inPlayUpcomingMarket'];
         this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
+        if(this.inPlayUpcomingMarket) this.getBooksForMarket(this.inPlayUpcomingMarket);
       }
     })
   }
@@ -311,6 +312,18 @@ export class MatchMarketListComponent implements OnInit {
         "matchTime":marketData['matchTime'],
         "book":marketData['runners']
     }
+  }
+
+  getBooksForMarket(marketList:any){
+    let markets= {marketIds : [marketList['marketId']]}
+    this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
+      let booksForMarket = res?.booksForMarket;
+        let horseDataByMarketId = _.find(booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
+        this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
+          singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
+          return singleRunner;
+        })
+    })
   }
 
   goBack(){

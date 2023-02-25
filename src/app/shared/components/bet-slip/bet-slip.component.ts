@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
+import * as _ from "lodash";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-bet-slip',
@@ -17,28 +19,43 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   @Input() showMAtchwiseBet = ''
   userConfig:any=[];
+  betSlipForm:FormGroup;
   
   constructor(
     private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
-    private _SharedService:SharedService
+    private _SharedService:SharedService,
+    private _fb: FormBuilder,
     ) { }
 
   ngOnChanges(changes: SimpleChanges){
     if(!changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue']
+      this.betSlipForm.patchValue({
+        odds:this.betSlipParams['odds'],
+        stake:this.betSlipParams['stake'],
+      })
     }
   }
   ngOnInit(): void {
-    this._getUserOpenBet()
-    this.getUserConfig()
+    this._getUserOpenBet();
+    this.getUserConfig();
+    this._createBetSlipForm();
+  }
+  _createBetSlipForm(){
+    this.betSlipForm = this._fb.group({
+      odds:['',Validators.required],
+      stake:['',Validators.required]
+    })
   }
 
   onClickPlaceBet(){
     if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
-      let multiplier = this.betSlipParams.odds >= 1 ? this.betSlipParams.odds - 1 : 1- this.betSlipParams.odds;
-      this.betSlipParams.profit = multiplier * this.betSlipParams.stake
+      let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
+      this.betSlipParams.profit = multiplier * this.betSlipForm.controls['stake'].value
       this.betSlipParams.marketName = 'Match Odds'
+      this.betSlipParams.odds = this.betSlipForm.controls['odds'].value;
+      this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }
 
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
@@ -63,6 +80,18 @@ export class BetSlipComponent implements OnInit, OnChanges {
         })   
       })
    }
+
+  stakeVal(val:any){
+    debugger;
+  }
+
+  upAndDownOddsValue(isUp:boolean){
+    this.betSlipForm.controls['odds'].setValue(isUp ? +(this.betSlipForm.controls['odds'].value + 0.01).toFixed(2) : +(this.betSlipForm.controls['odds'].value - 0.01).toFixed(2)) ;
+  }
+
+  updateStack(stackVal:any){
+    this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ; 
+  }
 
    getUserConfig() {
     this._userSettingsService._getUserConfigApi().subscribe(

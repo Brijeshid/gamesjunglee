@@ -15,48 +15,36 @@
           <!--Betslip start-->
           <div class="tab-pane fade" [ngClass]="{'show active':isBetSlipActive}" id="betslip" role="tabpanel" aria-labelledby="betslip-tab">
             <div class="card">
-              <div class="loader"></div>
-              <p class="card-header text-dark">Chattogram Challengers v Khulna Tigers Chattogram Challengers
-              </p>
-              <div class="card-body batsliploader">
+              <!-- <div class="loader"></div> -->
+              <p class="card-header text-dark">{{betSlipParams['event']}}</p>
+              <!-- <div class="card-body batsliploader"> -->
+                <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 pe-4">
-                    <form>
+                    <form [formGroup]="betSlipForm">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="number">
-                            <span class="minus">-</span>
-                            <input type="number" [(ngModel)]="betSlipParams['odds']" name="odds"/>
-                            <span class="plus">+</span>
+                            <span class="minus" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
+                            <input type="number" formControlName="odds"/>
+                            <span class="plus" (click)="upAndDownOddsValue(true)">+</span>
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <input type="number" class="form-control" placeholder="Stake" [(ngModel)]="betSlipParams['stake']"  name="stake">
-                          <!-- <span class="text-danger">Stake is required</span> -->
+                          <input type="text" class="form-control" placeholder="Stake" formControlName="stake">
+                          <span class="text-danger">Stake is required</span>
                         </div>
                         <div class="col-md-6">
                           <p class="text-dark">or Choose You Stake Size</p>
                         </div>
                         <div class="col-md-6 text-end">
-                          <a class="text-pink" >EDIT STAKES</a>
+                          <a class="text-pink" routerLink="/settings">EDIT STAKES</a>
                         </div>
                       </div>
                       <div class="row">
-                        <!-- <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+10000</button> </div>
-                        <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+50000</button> </div>
-                        <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+100000</button> </div>
-                        <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+10000</button> </div>
-                        <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+10000</button> </div>
-                        <div class="col-md-4 mb-1"><button type="button"
-                            class="btn btn-sm w-100 rounded-pill bg-pink">+30000</button> </div> -->
                         
                           <div class="col-md-6 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn"> 
-                            <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" >+{{item | number}}</button>  
+                            <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" (click)="updateStack(item)">+{{item | number}}</button>  
                           </div>
                         
                         
@@ -64,7 +52,7 @@
                             class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button> 
                         </div>
                         <div class="col-md-6 mt-3"><button type="submit"
-                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place</button>
+                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place 5s</button>
                         </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"

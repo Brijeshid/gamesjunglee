@@ -7,7 +7,7 @@ import { FavouriteComponent } from './components/favourite/favourite.component';
 import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
 import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
 import { MarketRateFormaterPipe } from './pipes/market-rate-formater.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
