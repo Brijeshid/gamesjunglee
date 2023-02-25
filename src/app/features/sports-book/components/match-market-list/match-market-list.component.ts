@@ -65,6 +65,7 @@ export class MatchMarketListComponent implements OnInit {
     this._sharedService._postInPlayUpcomingApi({matchId:this.matchId}).subscribe((res:any)=>{
       if(res?.inPlayUpcomingMarket && res['inPlayUpcomingMarket']?.matchName){
           this.matchName =  res['inPlayUpcomingMarket']['matchName'];
+          res['inPlayUpcomingMarket']['status'] = 1;
           this.setOrUnsetWebSocketParamsObj['match']['centralIds'].push(res['inPlayUpcomingMarket']['centralId']);
           res['inPlayUpcomingMarket']['runners'].map(runnerRes=>{
                 runnerRes['back0'] = '';
@@ -172,44 +173,50 @@ export class MatchMarketListComponent implements OnInit {
       let webSocketData = parseData['data'];
       if(this.inPlayUpcomingMarket?.matchName){
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', this.inPlayUpcomingMarket['marketId']]);
-            this.inPlayUpcomingMarket['runners'].map((runnerRes) => {
-              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
-              for (let singleWebsocketRunner of webSocketRunners) {
-                if (singleWebsocketRunner['ib']) {
-                  //back
-    
-                  //Live Rate
-                  runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-    
-                  //Volume from Betfair
-                  runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-    
-                } else {
-                  //lay
-    
-                  //Live Rate
-                  runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-    
-                  //Volume from Betfair
-                  runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-    
+            if(singleWebSocketMarketData != undefined){
+              this.inPlayUpcomingMarket['status'] = singleWebSocketMarketData['ms'];
+              this.inPlayUpcomingMarket['runners'].map((runnerRes) => {
+                let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+                for (let singleWebsocketRunner of webSocketRunners) {
+                  if (singleWebsocketRunner['ib']) {
+                    //back
+      
+                    //Live Rate
+                    runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+      
+                    //Volume from Betfair
+                    runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+      
+                  } else {
+                    //lay
+      
+                    //Live Rate
+                    runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+      
+                    //Volume from Betfair
+                    runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+      
+                  }
                 }
-              }
-              // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
-              //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
-              //       runnerRes['suspended'] = false;
-              // }
-              return runnerRes;
-          })
+                // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
+                //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
+                //       runnerRes['suspended'] = false;
+                // }
+                return runnerRes;
+              })
+            }
       }
 
       if(this.bookMakerMarket){
         this.bookMakerMarket.map(bookMakerObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +bookMakerObj['marketId']]);
+          if(singleWebSocketMarketDataBook != undefined){
+            bookMakerObj['status'] = singleWebSocketMarketDataBook['ms'];  
             return bookMakerObj['runners'].map((runnerRes) => {
               runnerRes['SelectionId'] = runnerRes['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
+                runnerRes['status'] = singleWebsocketRunnerBook['st'];
                 if (singleWebsocketRunnerBook['ib']) {
                   //back
     
@@ -231,7 +238,8 @@ export class MatchMarketListComponent implements OnInit {
                 }
               }
               return runnerRes;
-          })
+            })
+          }
         })
       }
 
@@ -263,9 +271,8 @@ export class MatchMarketListComponent implements OnInit {
       
                   }
                 }
+                return fancyMarketObj;
               }
-              
-              return fancyMarketObj;
         })
       }
 

@@ -56,7 +56,7 @@
                         <table class="table table-hover"  style="cursor: pointer;">
                           <thead class="collapsible">
                             <tr valign="middle">
-                              <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleInPlay['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']"></i>&nbsp; 
+                              <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleInPlay['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']"></i>&nbsp;
                                 <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}">
                                   {{singleInPlay['matchName']}}
                                 </span>
@@ -100,7 +100,7 @@
                         <table class="table table-hover">
                           <thead class="collapsible">
                             <tr valign="middle">
-                              <th width="30%" class="tfirstcol" ><i class="fa-solid" [ngClass]="singleUpcoming['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleUpcoming['isExpand'] = !singleUpcoming['isExpand']"></i>&nbsp; 
+                              <th width="30%" class="tfirstcol" ><i class="fa-solid" [ngClass]="singleUpcoming['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleUpcoming['isExpand'] = !singleUpcoming['isExpand']"></i>&nbsp;
                                 <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
                                   {{singleUpcoming['matchName']}}<br>
                                   <span>{{singleUpcoming['matchTime'] | date: 'EEEE At h:mm a'}}</span>
@@ -127,7 +127,18 @@
                                 <td class="colblue dis"><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
                                 <td class="colpink dis"><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                                 <td class="colpink dis"><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                                <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
+                                <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a>
+                                <!--Online start-->
+                                <!-- <div class="suspendedbm1">
+                                  <button type="button" class="suspendedm1 tourmarketlist-on">Suspended</button>
+                                </div> -->
+                                <!--Online end-->
+                                <!--Offline start-->
+                                <!-- <div class="suspendedbm1">
+                                  <button type="button" class="suspendedm1 tourmarketlist-off">Suspended</button>
+                                </div> -->
+                                <!--Offline end-->
+                                </td>
                               </tr>
                             </ng-container>
                           </tbody>
