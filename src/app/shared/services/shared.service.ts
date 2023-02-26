@@ -3,7 +3,6 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
-import { Isports } from '../models/shared';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -17,7 +16,6 @@ export class SharedService {
   private currentUrl: string = '';
   getUserBalance = new Subject();
 
-  sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
   constructor(

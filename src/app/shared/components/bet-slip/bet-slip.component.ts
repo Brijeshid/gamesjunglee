@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
-import * as _ from "lodash";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EMarketType } from '@shared/models/shared';
 
 @Component({
   selector: 'app-bet-slip',
@@ -13,11 +13,14 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   @Input() isBetSlipActive:boolean = false;
   @Input() betSlipParams:any;
+  @Input() showMAtchwiseBet = ''
+  @Input() marketType:any = EMarketType.MATCH_TYPE;
+
+  EMarketType:typeof EMarketType = EMarketType;
   odds:number;
   stake:number;
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
-  @Input() showMAtchwiseBet = ''
   userConfig:any=[];
   betSlipForm:FormGroup;
   
@@ -35,6 +38,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
         odds:this.betSlipParams['odds'],
         stake:this.betSlipParams['stake'],
       })
+    }
+    if(!changes['marketType'].isFirstChange() && changes['marketType'].currentValue){
+      this.marketType = changes['marketType']['currentValue'];
+      if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
     }
   }
   ngOnInit(): void {

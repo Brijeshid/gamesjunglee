@@ -5,6 +5,7 @@ import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
 import { SportsBookService } from '../../services/sports-book.service';
 import {Location} from '@angular/common';
+import { EMarketType } from '@shared/models/shared';
 
 @Component({
   selector: 'app-match-market-list',
@@ -43,6 +44,9 @@ export class MatchMarketListComponent implements OnInit {
   isBetSlipActive:boolean = false;
   betSlipObj:any = {};
   sports:string;
+
+  EMarketType:typeof EMarketType = EMarketType;
+  marketType = EMarketType.MATCH_TYPE;
   
   constructor(
     private _sharedService: SharedService,
@@ -292,9 +296,10 @@ export class MatchMarketListComponent implements OnInit {
     );
   }
 
-  onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
+  onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any,marketType:number){
     console.log(runnerObj,marketData);
     this.isBetSlipActive = true;
+    this.marketType = marketType;
     this.betSlipObj = {
         "event":marketData['matchName'],
         "marketId":marketData['marketId'],
