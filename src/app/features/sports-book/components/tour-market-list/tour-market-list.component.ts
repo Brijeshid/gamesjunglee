@@ -123,7 +123,7 @@ export class TourMarketListComponent implements OnInit {
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-        if(this.inPlayMatchListBySport.length > 0) this.getBooksForMarket(this.inPlayMatchListBySport);
+        if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
 
       }
     })

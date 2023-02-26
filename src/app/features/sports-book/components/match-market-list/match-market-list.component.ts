@@ -92,7 +92,7 @@ export class MatchMarketListComponent implements OnInit {
         //merge both centralId
         this.inPlayUpcomingMarket = res['inPlayUpcomingMarket'];
         this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
-        if(this.inPlayUpcomingMarket) this.getBooksForMarket(this.inPlayUpcomingMarket);
+        if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket(this.inPlayUpcomingMarket);
       }
     })
   }
