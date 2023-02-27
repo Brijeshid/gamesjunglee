@@ -23,7 +23,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   userConfig:any=[];
   betSlipForm:FormGroup;
-  
+
   constructor(
     private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
@@ -84,7 +84,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
           }else{
             this.unMatchedBets = bet.bets
           }
-        })   
+        })
       })
    }
 
@@ -97,7 +97,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   updateStack(stackVal:any){
-    this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ; 
+    this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ;
   }
 
    getUserConfig() {

@@ -127,13 +127,15 @@
 .asidenav ul {
   border: 1px solid #ffa7a3;
   border-radius: 15px;
-  font-size: 12px;
+  font-size: 14px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 .asidenav a {
   color: #fff;
   border-right: 3px solid #202121;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .asidenav a:visited {
   color: #fff;
@@ -572,9 +574,9 @@ input:checked + .slider:before {
   background: rgba(38, 38, 38, 0.63);
   color: #fff;
   border-radius: 35px;
-  padding: 12px 75px;
+  padding: 5px 75px;
   position: absolute;
-  top: 0px;
+  top: 7px;
   text-align: center;
   right: 116px;
   border: 0px;
@@ -627,6 +629,15 @@ input:checked + .slider:before {
   border-top: 8px solid #585858;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+}
+
+.loadtime {
+  position: absolute;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  top: 47%;
+  left: 48%;
 }
 
 @-webkit-keyframes spin {
@@ -816,15 +827,3 @@ input:checked + .slider:before {
 .lmv {
   display: none !important;
 }/*# sourceMappingURL=main.css.map */
-
-
-/* right-panel text (font-size) as per playExch*/
-.rightpanelFont{
-  font-size: .8125rem;
-  font-weight: 500;
-  line-height: 1rem;
-}
-
-.headerFont{
-  font-size: .875rem
-}
