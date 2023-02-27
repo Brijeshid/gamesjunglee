@@ -83,13 +83,15 @@ export class BetSlipComponent implements OnInit, OnChanges {
             this.matchedBets = bet.bets
           }else{
             this.unMatchedBets = bet.bets
+            this._sharedService.unmatchedBetsList = bet.bets;
           }
         })   
       })
    }
 
   stakeVal(val:any){
-    debugger;
+    //calculate profit and loss with marketID
+    this._sharedService.marketBookCalSubject.next({});
   }
 
   upAndDownOddsValue(isUp:boolean){

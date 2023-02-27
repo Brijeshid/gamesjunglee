@@ -31,7 +31,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <input type="text" class="form-control" placeholder="Stake" formControlName="stake">
+                          <input type="text" class="form-control" placeholder="Stake" formControlName="stake" (input)="stakeVal($event)">
                           <span class="text-danger">Stake is required</span>
                         </div>
                         <div class="col-md-6">
