@@ -49,11 +49,13 @@
                         </div>
                       </div>
                       <div class="row">
+
                           <div class="col-md-6 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
                             <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" (click)="updateStack(item)">+{{item | number}}</button>
                           </div>
+
                         <div class="col-md-6 mt-3"><button type="button"
-                            class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button>
+                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="isBetSlipActive=false">Cancel</button>
                         </div>
                         <div class="col-md-6 mt-3"><button type="submit"
                             class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()" [disabled]="isLoaderStart && !isBetSlipCallCompleted">Place {{marketType == EMarketType.MATCH_TYPE ? '5s':''}}</button>
