@@ -45,6 +45,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
           odds:this.betSlipParams['odds'],
         })
       }else{
+        console.log("inside else")
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['runs'],
         })
