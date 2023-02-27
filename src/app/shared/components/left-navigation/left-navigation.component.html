@@ -10,14 +10,14 @@
         <ng-container *ngIf="!sportsName;else commonNav">
 
         <li class="nav-item" *ngFor="let singleObj of mainMenu">
-            <a routerLink="/sportsbook/{{singleObj['sportName'] | titlecase}}" class="nav-link"><img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="15px"> <span> {{singleObj['sportName']}} </span>
+            <a routerLink="/sportsbook/{{singleObj['sportName'] | titlecase}}" class="nav-link"> <img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="18px" class="me-2">  <span> {{singleObj['sportName']}} </span>
                 <span class="leftb-icon">{{singleObj['marketCount']}}</span> </a>
         </li>
         <li class="nav-item" *ngIf="mainMenu.length > 0">
-            <a class="nav-link" ><img src="assets/images/live_card.png" width="15px"> Live Card</a>
+            <a class="nav-link" ><img src="assets/images/live_card.png" width="18px" class="me-2"> Live Card</a>
         </li>
         <li class="nav-item" *ngIf="mainMenu.length > 0">
-            <a class="nav-link" ><img src="assets/images/slot_games.png" width="15px"> Slot Games</a>
+            <a class="nav-link" ><img src="assets/images/slot_games.png" width="18px" class="me-2"> Slot Games</a>
         </li>
         <li class="nav-item">
             <div class="row">
@@ -25,7 +25,7 @@
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
                         <ul class="nav flex-column border-0 pt-0">
                             <li class="nav-item" *ngFor="let singleNav of viewMoreNavList">
-                                <a class="nav-link"><img src="{{singleNav?.menuLogo}}" width="15px"> <span>
+                                <a class="nav-link"><img src="{{singleNav?.menuLogo}}" width="18px" class="me-2"> <span>
                                         {{singleNav?.menuName}} </span>
                                 </a>
                             </li>
@@ -35,21 +35,21 @@
             </div>
         </li>
         <li class="nav-item" *ngIf="mainMenu.length > 0"><a class="nav-link text-white" data-bs-toggle="collapse"
-                href="#multiCollapseExample1"><i class="fas fa-arrow-alt-circle-down"></i> View More</a></li>
+                href="#multiCollapseExample1"><i class="fas fa-arrow-alt-circle-down me-3"></i> View More</a></li>
 
         </ng-container>
 
         <ng-template #commonNav>
           <li class="nav-item">
-            <a routerLink="/in-play" class="nav-link"><i class="fa fa-home"></i> <span><strong>Sports</strong> </span></a>
+            <a routerLink="/in-play" class="nav-link"><i class="fa fa-home me-2"></i> <span><strong>Sports</strong> </span></a>
           </li>
           <li class="nav-item">
-            <a routerLink="/sportsbook/{{sportsName}}" class="nav-link active"><img src="assets/images/{{sportsName | lowercase}}.png" width="15px"> <span> {{sportsName | titlecase}}
+            <a routerLink="/sportsbook/{{sportsName}}" class="nav-link active"><img src="assets/images/{{sportsName | lowercase}}.png" width="18px" class="me-2"> <span> {{sportsName | titlecase}}
               </span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="dashboard.html" class="nav-link"><i class="fa fa-angle-left"></i> <span>Previous</span></a>
+            <a href="dashboard.html" class="nav-link"><i class="fa fa-angle-left me-2"></i> <span>Previous</span></a>
           </li>
           <li class="nav-item" *ngFor="let singleMenu of menuList">
             <a *ngIf="!singleMenu?.refTournamentId" routerLink="/sportsbook/{{sportsName}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>

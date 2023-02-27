@@ -140,13 +140,15 @@ $border-color_1: inherit;
   ul {
     border: 1px solid $color_2;
     border-radius: 15px;
-    font-size: 12px;
+    font-size: 14px;
     padding-top: 10px;
     padding-bottom: 10px;
   }
   a {
     color: $color_1;
     border-right: 3px solid #202121;
+    padding-top: 10px;
+    padding-bottom: 10px;
     &:visited {
       color: $color_1;
     }
@@ -573,9 +575,9 @@ input:checked + .slider:before {
   background: rgba(38, 38, 38, 0.63);
   color: #fff;
   border-radius: 35px;
-  padding: 12px 75px;
+  padding: 5px 75px;
   position: absolute;
-  top: 0px;
+  top: 7px;
   text-align: center;
   right: 116px;
   border: 0px;
@@ -607,6 +609,14 @@ input:checked + .slider:before {
   border-top: 8px solid #585858;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+}
+.loadtime{
+  position: absolute;
+color: #000;
+font-size: 18px;
+font-weight: bold;
+top: 47%;
+left: 48%;
 }
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
