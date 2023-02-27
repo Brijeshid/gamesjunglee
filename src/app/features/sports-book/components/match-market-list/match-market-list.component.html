@@ -105,7 +105,7 @@
                             </tbody>
                           </table>
                         </ng-container>
-                        
+
 
                         <!--Table 3-->
                         <table class="table table-hover" *ngIf="fancyMarket.length >0">
@@ -128,15 +128,15 @@
                                   </a></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td class="colblue " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:true,index:1,odds:singleFancyMarket['back1']},EMarketType.BOOKMAKER_TYPE)"><strong>{{singleFancyMarket['back1']}}</strong> <br>{{singleFancyMarket['vback1'] | marketRateFormater}}</td>
-                                <td class="colpink " (click)="onClickLiveMarketRate({},singleFancyMarket,{isBack:false,index:1,odds:singleFancyMarket['lay1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['lay1']}}</strong> <br>{{singleFancyMarket['vlay1'] | marketRateFormater}}</td>
+                                <td class="colblue " (click)="onClickLiveMarketRate('',singleFancyMarket,{isBack:true,index:0,odds:singleFancyMarket['vback1'],runs:singleFancyMarket['back1']},EMarketType.BOOKMAKER_TYPE)"><strong>{{singleFancyMarket['back1']}}</strong> <br>{{singleFancyMarket['vback1'] | marketRateFormater}}</td>
+                                <td class="colpink " (click)="onClickLiveMarketRate('',singleFancyMarket,{isBack:false,index:0,odds:singleFancyMarket['vlay1'],runs:singleFancyMarket['lay1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['lay1']}}</strong> <br>{{singleFancyMarket['vlay1'] | marketRateFormater}}</td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td class="border-top" [ngClass]="{'border-top':!first}" [ngClass]="{'last':last}">
                                   <div class="suspendedbm1" *ngIf="singleFancyMarket['status']=='3' || singleFancyMarket['status']=='9'">
                                     <button type="button" class="suspendedm1" [ngClass]="isLoggedIn ? 'matchmarketlist-on' : 'matchmarketlist-off'">{{singleFancyMarket['status']=='3' ? 'Suspended': 'Ball Running'}}</button>
                                   </div>
                                 </td>
-                                
+
                               </tr>
                             </ng-container>
                           </tbody>
@@ -308,9 +308,9 @@
         </div>
         <!--Aside right start-->
         <div class="col-md-4 mt-3" *ngIf="isBetSlipShow">
-            <app-bet-slip *ngIf="matchName != 'NO MATCH AVAILABLE'" 
-              [isBetSlipActive] ="isBetSlipActive" 
-              [betSlipParams]="betSlipObj" 
+            <app-bet-slip *ngIf="matchName != 'NO MATCH AVAILABLE'"
+              [isBetSlipActive] ="isBetSlipActive"
+              [betSlipParams]="betSlipObj"
               [showMAtchwiseBet] = "matchName"
               [marketType]="marketType"
             ></app-bet-slip>

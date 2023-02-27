@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-6">
                           <input type="text" class="form-control" placeholder="Stake" formControlName="stake">
-                          <span class="text-danger">Stake is required</span>
+                          <!-- <span class="text-danger">Stake is required</span> -->
                         </div>
                         <div class="col-md-6">
                           <p class="text-dark">or Choose You Stake Size</p>
@@ -42,14 +42,14 @@
                         </div>
                       </div>
                       <div class="row">
-                        
-                          <div class="col-md-6 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn"> 
-                            <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" (click)="updateStack(item)">+{{item | number}}</button>  
+
+                          <div class="col-md-6 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
+                            <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" (click)="updateStack(item)">+{{item | number}}</button>
                           </div>
-                        
-                        
+
+
                         <div class="col-md-6 mt-3"><button type="button"
-                            class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button> 
+                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="isBetSlipActive=false">Cancel</button>
                         </div>
                         <div class="col-md-6 mt-3"><button type="submit"
                             class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place 5s</button>
@@ -163,7 +163,7 @@
                           </div>
 
                         </div>
-                        
+
 
                         <!-- <p class="mb-1">Auckland v Wellington</p>
                         <table class="table text-white small">
@@ -178,7 +178,7 @@
                             <td>1.62</td>
                             <td>6,500</td>
                             <td>4,030</td>
-                          </tr> 
+                          </tr>
                         </table>-->
                       </div>
                     </div>
