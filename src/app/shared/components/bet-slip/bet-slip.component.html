@@ -15,30 +15,31 @@
           <!--Betslip start-->
           <div class="tab-pane fade" [ngClass]="{'show active':isBetSlipActive}" id="betslip" role="tabpanel" aria-labelledby="betslip-tab">
             <div class="card">
-              <span class="loadtime">5</span>
-               <div class="loader"> </div>
+              <ng-container *ngIf="isLoaderStart">
+                <span class="loadtime">{{count}}</span>
+                <div class="loader"> </div>
+              </ng-container>
               <p class="card-header text-dark">{{betSlipParams['event']}}{{marketType}}</p>
-              <div class="card-body batsliploader">
-                <!-- <div class="card-body"> -->
+                <div class="card-body" [class.batsliploader]="isLoaderStart">
                 <div class="row">
                   <div class="col-md-12 pe-4">
                     <form [formGroup]="betSlipForm">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="number">
-                            <span class="minus" *ngIf="marketType == EMarketType.MATCH_TYPE" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
-                            <!--for sports page start-->
-                            <!-- <input type="number" formControlName="odds"/> -->
-                            <!--for sports page end-->
-                             <!--for sports inner page start-->
-                            <input type="number" class="w-100" formControlName="odds"/>
-                            <!--for sports inner page end-->
-                            <span class="plus" *ngIf="marketType == EMarketType.MATCH_TYPE" (click)="upAndDownOddsValue(true)">+</span>
+                            <ng-container *ngIf="marketType == EMarketType.MATCH_TYPE; else otherMarket">
+                              <span class="minus" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
+                              <input type="number" formControlName="odds"/>
+                              <span class="plus" (click)="upAndDownOddsValue(true)">+</span>
+                            </ng-container>
+                            <ng-template #otherMarket>
+                              <input type="number" class="w-100" formControlName="odds"/>
+                            </ng-template>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <input type="text" class="form-control" placeholder="Stake" formControlName="stake" (input)="stakeVal($event)">
-                          <span class="text-danger">Stake is required</span>
+                          <!-- <span class="text-danger">Stake is required</span> -->
                         </div>
                         <div class="col-md-6">
                           <p class="text-dark">or Choose You Stake Size</p>
@@ -55,7 +56,7 @@
                             class="btn btn-sm border-pink w-100 rounded-pill">Cancel</button>
                         </div>
                         <div class="col-md-6 mt-3"><button type="submit"
-                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()">Place 5s</button>
+                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()" [disabled]="isLoaderStart && !isBetSlipCallCompleted">Place {{marketType == EMarketType.MATCH_TYPE ? '5s':''}}</button>
                         </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"

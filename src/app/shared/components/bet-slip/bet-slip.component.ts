@@ -23,6 +23,9 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   userConfig:any=[];
   betSlipForm:FormGroup;
+  isBetSlipCallCompleted:boolean = false
+  isLoaderStart:boolean = false;
+  count:number = 5;
 
   constructor(
     private _sharedService: SharedService,
@@ -32,14 +35,14 @@ export class BetSlipComponent implements OnInit, OnChanges {
     ) { }
 
   ngOnChanges(changes: SimpleChanges){
-    if(!changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
+    if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue']
       this.betSlipForm.patchValue({
         odds:this.betSlipParams['odds'],
         stake:this.betSlipParams['stake'],
       })
     }
-    if(!changes['marketType'].isFirstChange() && changes['marketType'].currentValue){
+    if(changes['marketType'] && !changes['marketType'].isFirstChange() && changes['marketType'].currentValue){
       this.marketType = changes['marketType']['currentValue'];
       if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
     }
@@ -57,6 +60,23 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   onClickPlaceBet(){
+    if(this.marketType == EMarketType.MATCH_TYPE){
+      this.isLoaderStart = true;
+      let internvalCount = setInterval(()=>{
+        this.count--;
+        if(this.count <= 0){
+          this.isLoaderStart = false;
+          clearInterval(internvalCount);
+        }
+      },1000);
+      this._placeBetCall();
+    }else{
+      this.count =0;
+      this._placeBetCall();
+    }
+  }
+
+  private _placeBetCall(){
     if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
       let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
       this.betSlipParams.profit = multiplier * this.betSlipForm.controls['stake'].value
@@ -66,13 +86,16 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
 
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
-      (res: any) => {
-        this._sharedService.getToastPopup(res.message,'Market Bet','success');
-        this._getUserOpenBet()
-        this.isBetSlipActive = false;
-        this._SharedService.getUserBalance.next();
+      (betSlipRes: any) => {
+            if(this.count <=0){
+              this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
+              this._getUserOpenBet();
+              this.isBetSlipActive = false;
+              this.isBetSlipCallCompleted = true;
+              this._SharedService.getUserBalance.next();
+            }
       });
-    }
+  }
 
   _getUserOpenBet(){
     this._SharedService._getUserOpenBetsApi().subscribe(

@@ -306,7 +306,7 @@ export class SportsMarketListComponent implements OnInit {
         "profit":0,
         "selectionId":runnerObj['SelectionId'],
         "selectionName":runnerObj['RunnerName'],
-        "stake": 0,
+        "stake": '',
         "isBack": positionObj['isBack'],
         "centralId":marketData['market']['centralId'],
         "runs":null,

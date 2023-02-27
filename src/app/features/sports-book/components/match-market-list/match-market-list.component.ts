@@ -310,7 +310,7 @@ export class MatchMarketListComponent implements OnInit {
         "profit":0,
         "selectionId":runnerObj ? runnerObj['SelectionId']: marketData['SelectionId'],
         "selectionName":runnerObj? runnerObj['RunnerName']: marketData['RunnerName'],
-        "stake": 0,
+        "stake": '',
         "isBack": positionObj['isBack'],
         "centralId":marketData['centralId'],
         "runs":null,
