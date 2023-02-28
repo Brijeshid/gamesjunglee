@@ -44,7 +44,7 @@ export class SportsMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn(); 
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
       this.allTabState={
         liveUpcoming: true,
@@ -103,7 +103,7 @@ export class SportsMarketListComponent implements OnInit {
   getInPlayUpcomingData(){
     this._sharedService._postInPlayUpcomingApi({sportName:this.sports}).subscribe((res:any)=>{
 
-      if(res?.inPlayUpcomingMarket && (res['inPlayUpcomingMarket']['inPlayMarkets'].length > 0 
+      if(res?.inPlayUpcomingMarket && (res['inPlayUpcomingMarket']['inPlayMarkets'].length > 0
         || res['inPlayUpcomingMarket']['upComingMarkets'].length > 0)){
 
          res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
@@ -113,22 +113,22 @@ export class SportsMarketListComponent implements OnInit {
           return sportsObj['market']['runners'].map(runnerRes=>{
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
-      
+
                 runnerRes['back1'] = '';
                 runnerRes['vback1'] = '';
-      
+
                 runnerRes['back2'] = '';
                 runnerRes['vback2'] = '';
-      
+
                 runnerRes['lay0'] = '';
                 runnerRes['vlay0'] = '';
-      
+
                 runnerRes['lay1'] = '';
                 runnerRes['vlay1'] = '';
-      
+
                 runnerRes['lay2'] = '';
                 runnerRes['vlay2'] = '';
-      
+
                 runnerRes['suspended'] = true;
                 return runnerRes;
           })
@@ -142,22 +142,22 @@ export class SportsMarketListComponent implements OnInit {
           return sportsObj['market']['runners'].map(runnerRes=>{
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
-      
+
                 runnerRes['back1'] = '';
                 runnerRes['vback1'] = '';
-      
+
                 runnerRes['back2'] = '';
                 runnerRes['vback2'] = '';
-      
+
                 runnerRes['lay0'] = '';
                 runnerRes['vlay0'] = '';
-      
+
                 runnerRes['lay1'] = '';
                 runnerRes['vlay1'] = '';
-      
+
                 runnerRes['lay2'] = '';
                 runnerRes['vlay2'] = '';
-      
+
                 runnerRes['suspended'] = true;
                 return runnerRes;
           })
@@ -169,7 +169,7 @@ export class SportsMarketListComponent implements OnInit {
         console.log(this.inPlayMatchListBySport)
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-        
+
         if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
 
       }
@@ -212,22 +212,22 @@ export class SportsMarketListComponent implements OnInit {
                   for (let singleWebsocketRunner of webSocketRunners) {
                     if (singleWebsocketRunner['ib']) {
                       //back
-        
+
                       //Live Rate
                       runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-        
+
                       //Volume from Betfair
                       runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-        
+
                     } else {
                       //lay
-        
+
                       //Live Rate
                       runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-        
+
                       //Volume from Betfair
                       runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-        
+
                     }
                   }
                   // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
@@ -239,7 +239,7 @@ export class SportsMarketListComponent implements OnInit {
               }
         })
       }
-      
+
       if(this.upComingMatchListBySport.length >0){
         this.upComingMatchListBySport.map(sportsObj =>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
@@ -250,22 +250,22 @@ export class SportsMarketListComponent implements OnInit {
                   for (let singleWebsocketRunner of webSocketRunners) {
                     if (singleWebsocketRunner['ib']) {
                       //back
-        
+
                       //Live Rate
                       runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-        
+
                       //Volume from Betfair
                       runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-        
+
                     } else {
                       //lay
-        
+
                       //Live Rate
                       runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-        
+
                       //Volume from Betfair
                       runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-        
+
                     }
                   }
                   // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
@@ -293,9 +293,6 @@ export class SportsMarketListComponent implements OnInit {
 
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
-
-    if(!this.isBetSlipActive) this.isBetSlipActive = true;
-
     this.betSlipObj = {
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],
@@ -311,7 +308,8 @@ export class SportsMarketListComponent implements OnInit {
         "centralId":marketData['market']['centralId'],
         "runs":null,
         "matchTime":marketData['matchTime'],
-        "book":marketData['market']['runners']
+        "book":marketData['market']['runners'],
+        "isBetSlipActive":true
     }
   }
 

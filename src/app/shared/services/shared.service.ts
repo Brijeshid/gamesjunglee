@@ -12,9 +12,11 @@ import { Location } from '@angular/common';
 export class SharedService {
 
   sharedSubject=new Subject();
+  marketBookCalSubject=new Subject();
   private previousUrl: string = '';
   private currentUrl: string = '';
   getUserBalance = new Subject();
+  unmatchedBetsList:any = [];
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;

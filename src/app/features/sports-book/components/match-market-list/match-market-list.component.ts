@@ -47,7 +47,7 @@ export class MatchMarketListComponent implements OnInit {
 
   EMarketType:typeof EMarketType = EMarketType;
   marketType = EMarketType.MATCH_TYPE;
-  
+
   constructor(
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
@@ -74,22 +74,22 @@ export class MatchMarketListComponent implements OnInit {
           res['inPlayUpcomingMarket']['runners'].map(runnerRes=>{
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
-      
+
                 runnerRes['back1'] = '';
                 runnerRes['vback1'] = '';
-      
+
                 runnerRes['back2'] = '';
                 runnerRes['vback2'] = '';
-      
+
                 runnerRes['lay0'] = '';
                 runnerRes['vlay0'] = '';
-      
+
                 runnerRes['lay1'] = '';
                 runnerRes['vlay1'] = '';
-      
+
                 runnerRes['lay2'] = '';
                 runnerRes['vlay2'] = '';
-      
+
                 runnerRes['suspended'] = true;
                 return runnerRes;
           })
@@ -111,10 +111,10 @@ export class MatchMarketListComponent implements OnInit {
 
                 runnerRes['back0'] = '';
                 runnerRes['vback0'] = '';
-      
+
                 runnerRes['lay0'] = '';
                 runnerRes['vlay0'] = '';
-      
+
                 runnerRes['suspended'] = true;
                 return runnerRes;
           })
@@ -138,7 +138,7 @@ export class MatchMarketListComponent implements OnInit {
 
                 sportsObj['lay1'] = '';
                 sportsObj['vlay1'] = '';
-      
+
                 sportsObj['suspended'] = true;
         })
         //merge both centralId
@@ -174,7 +174,7 @@ export class MatchMarketListComponent implements OnInit {
   private _updateMarketData(data: any) {
     let parseData = JSON.parse(data);
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
-      console.log('data', JSON.parse(data));
+      // console.log('data', JSON.parse(data));
       let webSocketData = parseData['data'];
       if(this.inPlayUpcomingMarket?.matchName){
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', this.inPlayUpcomingMarket['marketId']]);
@@ -185,22 +185,22 @@ export class MatchMarketListComponent implements OnInit {
                 for (let singleWebsocketRunner of webSocketRunners) {
                   if (singleWebsocketRunner['ib']) {
                     //back
-      
+
                     //Live Rate
                     runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-      
+
                     //Volume from Betfair
                     runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-      
+
                   } else {
                     //lay
-      
+
                     //Live Rate
                     runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-      
+
                     //Volume from Betfair
                     runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-      
+
                   }
                 }
                 // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
@@ -216,7 +216,7 @@ export class MatchMarketListComponent implements OnInit {
         this.bookMakerMarket.map(bookMakerObj=>{
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +bookMakerObj['marketId']]);
           if(singleWebSocketMarketDataBook != undefined){
-            bookMakerObj['status'] = singleWebSocketMarketDataBook['ms'];  
+            bookMakerObj['status'] = singleWebSocketMarketDataBook['ms'];
             return bookMakerObj['runners'].map((runnerRes) => {
               runnerRes['SelectionId'] = runnerRes['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
@@ -224,22 +224,22 @@ export class MatchMarketListComponent implements OnInit {
                 runnerRes['status'] = singleWebsocketRunnerBook['st'];
                 if (singleWebsocketRunnerBook['ib']) {
                   //back
-    
+
                   //Live Rate
                   runnerRes['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-    
+
                   //Volume from Betfair
                   runnerRes['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
-    
+
                 } else {
                   //lay
-    
+
                   //Live Rate
                   runnerRes['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-    
+
                   //Volume from Betfair
                   runnerRes['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
-    
+
                 }
               }
               return runnerRes;
@@ -258,22 +258,22 @@ export class MatchMarketListComponent implements OnInit {
                 for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                   if (singleWebsocketRunnerBook['ib']) {
                     //back
-      
+
                     //Live Rate
                     fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-      
+
                     //Volume from Betfair
                     fancyMarketObj['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['pt'];
-      
+
                   } else {
                     //lay
-      
+
                     //Live Rate
                     fancyMarketObj['lay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
-      
+
                     //Volume from Betfair
                     fancyMarketObj['vlay' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['pt'];
-      
+
                   }
                 }
                 return fancyMarketObj;
@@ -298,7 +298,8 @@ export class MatchMarketListComponent implements OnInit {
 
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any,marketType:number){
     console.log(runnerObj,marketData);
-    this.isBetSlipActive = true;
+    console.log(marketData['SelectionId'])
+    console.log(marketData['RunnerName'])
     this.marketType = marketType;
     this.betSlipObj = {
         "event":marketData['matchName'],
@@ -309,14 +310,17 @@ export class MatchMarketListComponent implements OnInit {
         "betPosition":positionObj['index'],
         "profit":0,
         "selectionId":runnerObj ? runnerObj['SelectionId']: marketData['SelectionId'],
-        "selectionName":runnerObj? runnerObj['RunnerName']: marketData['RunnerName'],
+        "selectionName":runnerObj? runnerObj['RunnerName']: marketData['marketName'],
         "stake": 0,
         "isBack": positionObj['isBack'],
         "centralId":marketData['centralId'],
-        "runs":null,
         "matchTime":marketData['matchTime'],
-        "book":marketData['runners']
+        "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
+        "isBetSlipActive":true,
+        "runs":positionObj['runs']
     }
+
+    console.log(this.betSlipObj)
   }
 
   getBooksForMarket(marketList:any){

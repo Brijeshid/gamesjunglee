@@ -51,7 +51,7 @@
                         <!--Table 1-->
                       <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
                         <span class="badge rounded-pill bg-success midbadge">Live</span>
-                        <span class="badge rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span>
+                        <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleInPlay['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover"  style="cursor: pointer;">
                           <thead class="collapsible">
                             <tr valign="middle">
@@ -92,8 +92,8 @@
                       <!--Table 2-->
                       <ng-container *ngFor="let singleUpcoming of upComingMatchListBySport">
                         <span class="badge rounded-pill bg-primary midbadge">Upcoming</span>
-                        <span class="badge rounded-pill bg-secondary midbadge float-end">{{singleUpcoming['marketType'] | titlecase}}
-                        </span>
+                        <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}} -->
+                        <!-- </span> -->
                         <table class="table table-hover">
                           <thead class="collapsible">
                             <tr valign="middle">
@@ -126,9 +126,9 @@
                                 <td class="colpink dis"><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
                                 <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a>
                                 <!--Online start-->
-                                <div class="suspendedbm1">
+                                <!-- <div class="suspendedbm1">
                                   <button type="button" class="suspendedm1 tourmarketlist-on">Suspended</button>
-                                </div>
+                                </div> -->
                                 <!--Online end-->
                                 <!--Offline start-->
                                 <!-- <div class="suspendedbm1">

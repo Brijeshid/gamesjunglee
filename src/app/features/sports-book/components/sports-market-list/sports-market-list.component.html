@@ -46,8 +46,8 @@
                       <!--Table 1-->
                       <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
                         <ng-container *ngIf="singleInPlay['status'] != '4' && singleInPlay['status'] != undefined">
-                        <span class="badge rounded-pill bg-success midbadge"><i> LIVE</i></span>
-                        <span class="badge rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span>
+                        <span class="badge rounded-pill bg-success midbadge">Live</span>
+                        <!-- <span class=" rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover">
                           <thead class="collapsible">
                             <tr valign="middle">
@@ -60,13 +60,14 @@
                               <th width="15%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-center coldark">Back</th>
                               <th width="15%" colspan="3" class="text-center coldark">Lay
-                                <div class="float-end">
-                                  <i class="fa fa-caret-right fa-2x"></i>
-                                <!-- <i [[ngClass]="{fa-regular: fa-solid}"] [ngClass.fa-solid]=false class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i> -->
-                                <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i>
-                                  <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
-                                </div>
+                              <div class="float-end tlastcol">
+                                <i class="fa fa-caret-right fa-2x"></i>
+                              <!-- <i [[ngClass]="{fa-regular: fa-solid}"] [ngClass.fa-solid]=false class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i> -->
+                              <i *ngIf="isLoggedIn" class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i>
+                                <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
+                              </div>
                               </th>
+
                             </tr>
                           </thead>
                           <tbody class="content">
@@ -93,7 +94,7 @@
                       <ng-container *ngFor="let singleUpcoming of upComingMatchListBySport">
                         <ng-container *ngIf="singleUpcoming['status'] != '4' && singleUpcoming['status'] != undefined">
                         <span class="badge rounded-pill bg-primary midbadge">Upcoming</span>
-                        <span class="badge rounded-pill bg-secondary midbadge float-end">{{singleUpcoming['marketType'] | titlecase}}</span>
+                        <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover">
                           <thead class="collapsible">
                             <tr valign="middle">
