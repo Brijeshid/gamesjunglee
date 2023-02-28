@@ -384,6 +384,9 @@ tr {
 .midbadge {
   top: 7px;
   position: relative;
+  padding: 7px 15px;
+  text-transform: uppercase;
+  font-style: italic;
 }
 
 .number .minus,
