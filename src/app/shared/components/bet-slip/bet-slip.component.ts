@@ -26,6 +26,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isBetSlipCallCompleted:boolean = false
   isLoaderStart:boolean = false;
   count:number = 5;
+  stakeLabel:string = 'Min.500 Max.10000';
 
   constructor(
     private _sharedService: SharedService,
@@ -65,7 +66,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
       odds:['',Validators.required],
-      stake:['',Validators.required]
+      stake:['',[Validators.required,Validators.min(500),Validators.max(10000)]]
     })
   }
 
@@ -89,13 +90,13 @@ export class BetSlipComponent implements OnInit, OnChanges {
   private _placeBetCall(){
     if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" || this.betSlipParams.marketName == "BOOKMAKER"){
       let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
-      this.betSlipParams.profit = multiplier * this.betSlipForm.controls['stake'].value
+      this.betSlipParams.profit = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
       this.betSlipParams.marketName = 'Match Odds'
       this.betSlipParams.odds = this.betSlipForm.controls['odds'].value;
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }else if(this.betSlipParams.marketName == 'FANCY'){
       let multiplier = this.betSlipParams['odds']/100;
-      this.betSlipParams.profit = multiplier * this.betSlipForm.controls['stake'].value
+      this.betSlipParams.profit = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
       this.betSlipParams.marketName = 'Fancy'
       this.betSlipParams.odds = this.betSlipParams['odds'];
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
@@ -112,6 +113,16 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this._SharedService.getUserBalance.next();
             }
       });
+  }
+
+  get profit(){
+    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" || this.betSlipParams.marketName == "BOOKMAKER"){
+      let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
+      return Math.round(multiplier * this.betSlipForm.controls['stake'].value)
+    }else{
+      let multiplier = this.betSlipParams['odds']/100;
+      return Math.round(multiplier * this.betSlipForm.controls['stake'].value)
+    }
   }
 
   _getUserOpenBet(){
@@ -139,7 +150,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   updateStack(stackVal:any){
-    this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ;
+    if(isNaN(this.betSlipForm.controls['stake'].value) || this.betSlipForm.controls['stake'].value == ""){
+      this.betSlipForm.controls['stake'].setValue(parseInt(stackVal)) ;
+    }else{
+      this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ;
+    }
+    
   }
 
    getUserConfig() {

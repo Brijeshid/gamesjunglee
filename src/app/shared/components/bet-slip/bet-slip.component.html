@@ -42,8 +42,13 @@
                         </div>
                         <div class="col-md-6">
                           <label class="text-dark">Stake</label>
-                          <input type="text" class="form-control" placeholder="Stake" formControlName="stake" (input)="stakeVal($event)">
-                          <!-- <span class="text-danger">Stake is required</span> -->
+                          <input type="number" class="form-control" [attr.placeholder]="stakeLabel" formControlName="stake" (input)="stakeVal($event)">
+                          <ng-container *ngIf="(betSlipForm.controls['stake'].touched || betSlipForm.controls['stake'].dirty)  && betSlipForm.controls['stake'].invalid">
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.required">Stake is required</span>
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.min">Min :500</span>
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.max">Max :1000</span>
+                          </ng-container>
+                          
                         </div>
                         <div class="col-md-6 mt-3">
                           <p class="text-dark mb-2">or Choose You Stake</p>
@@ -66,10 +71,10 @@
                         </div>
                         <div class="col-md-6 p-1 mt-3">
                            <button type="submit" class="btn w-100 p-1 rounded-pill betbtn" (click)="onClickPlaceBet()"
-                          [disabled]="isLoaderStart && !isBetSlipCallCompleted" [ngClass]="isLoaderStart && !isBetSlipCallCompleted ? 'disabled bg-secondary' : 'bg-success text-white'">
+                          [disabled]="betSlipForm.controls['stake'].invalid" [ngClass]="betSlipForm.controls['stake'].invalid ? 'disabled bg-secondary' : 'bg-success text-white'">
                               <span class="d-block">PLACE BET</span>
-                             <ng-container *ngIf="!(isLoaderStart && !isBetSlipCallCompleted)">
-                              <span class="d-block small prof">PROFIT: 85</span>
+                             <ng-container *ngIf="!betSlipForm.controls['stake'].invalid">
+                              <span class="d-block small prof">{{betSlipParams['isBack'] ? 'PROFIT':'LIABILITY'}}: {{profit}}</span>
                               <div class="sec-text">
                                   <span>5s</span>
                               </div>
@@ -93,7 +98,7 @@
                         </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"
-                          aria-hidden="true"></i> Min Bet: 500 Max Bet: 1000000 Max Winning: 5000000</p>
+                          aria-hidden="true"></i> Min Bet: 500 Max Bet: 10000 Max Winning: 5000000</p>
                       <div class="form-group">
                         <label class="form-check-label text-dark" for="gridCheck">Confirm bets before
                           placing</label>
