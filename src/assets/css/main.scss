@@ -30,6 +30,13 @@ $border-color_1: inherit;
 .w-30 {
   width:30%;
 }
+.pointer {cursor: pointer;}
+.not-allowed {cursor: not-allowed;}
+.timer {
+  filter: brightness(0) invert(1);
+  width: 20px;
+  height: 20px;
+}
 .text-pink {
   color: $color_2 !important;
 }
@@ -301,22 +308,38 @@ tr {
 .login {
   border: 1px solid #ffffff52;
   border-radius: 25px;
-  padding: 10px;
+  padding: 10px 35px;
   background: #6c6c6c82;
   margin-top: 30px;
   a {
-    text-decoration: none;
+    text-decoration: none;color: $color_2;padding: 5px 10px;
+  }
+  a:hover{
+    background: #ffa7a32e;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: $color_2;
   }
   .btn {
-    font-size: 14px; padding: 12px 10px;
+    font-size: 14px; padding: 12px 10px;border-radius: 14px;
   }
-  .form-control{line-height: 2.5;}
+  .form-control{line-height: 3.5;border-radius: 14px;border: 1px solid $color_2; border-right: none;}
   .form-control.is-invalid, .was-validated .form-control:invalid {
     border-color: #dc3545;
     padding-right: calc(1.5em + .75rem);
     background-image: none;
   }
-
+  .form-control::placeholder{
+    font-size: 16px;
+  }
+  .form-control:focus{
+    outline: none !important; box-shadow: none;
+}
+  .input-group-text{
+    border: 1px solid $color_2;
+    border-left: none;
+    border-radius: 14px;
+  }
 }
 /*login end*/
 /*Right sidebar start*/
@@ -578,12 +601,13 @@ input:checked + .slider:before {
   background: rgba(38, 38, 38, 0.63);
   color: #fff;
   border-radius: 35px;
-  padding: 5px 75px;
+  padding: 13px 5px;
   position: absolute;
-  top: 7px;
+  top: 5px;
   text-align: center;
-  right: 116px;
   border: 0px;
+  width: 196px;
+  font-size: 14px;
 }
 .suspendedm1.inplay-o{right:78px;}
 
@@ -613,6 +637,24 @@ input:checked + .slider:before {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
+.betbtn{
+  font-size: 15px;
+letter-spacing: 2px;
+height: 45px;
+}
+.prof{
+  font-size: 11px;
+  margin-top: -5px;
+}
+.sec-text{
+  position: relative;
+}
+.sec-text span{
+  position: absolute;
+  right: 5px;
+  top: -36px;
+  font-size: 11px;
+}
 .loadtime{
   position: absolute;
 color: #000;
@@ -633,7 +675,7 @@ left: 48%;
 /*Loder end*/
 
 #loginregbg {
-  --s: 10vmin;
+--s: 10vmin;
 --p: calc(var(--s) / 2);
 --c1: #ffc0e636;
 --c2: #00418063;
@@ -766,3 +808,28 @@ color:#626262;
 .searchs{display: none;}
 .lmv{display: none !important;}
 
+/*Login / registration loader start*/
+.busy {
+  animation: spin 1s infinite linear;
+  display: inline-block;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  color: #555;
+}
+
+.busy::before {
+  content: "\25E0";
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+/*Login / registration loader end*/

@@ -21,19 +21,19 @@
       <!-- <p style="white-space: pre-line">{{clickMessage}}</p> -->
 
       <div class="text-danger" *ngIf="phoneNumVail && phoneNumVail.invalid && phoneNumVail.touched">
-        <div *ngIf="phoneNumVail.errors?.['required']">Mobile Number is required.</div>  
-        <div *ngIf="phoneNumVail.errors?.['maxLength']" class="text-white">Maximum 10 number require</div>       
+        <div *ngIf="phoneNumVail.errors?.['required']">Mobile Number is required.</div>
+        <div *ngIf="phoneNumVail.errors?.['maxLength']" class="text-white">Maximum 10 number require</div>
       </div>
 
       <div class="input-group">
-        <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100 pt-3 pb-3"
-          [disabled]="signUpForm.invalid">
+        <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100"
+          [disabled]="signUpForm.invalid" [ngClass]="isLoading ? 'p-1': 'pt-3 pb-3'">
           <i class="busy" *ngIf="isLoading"></i>
           <span *ngIf="!isLoading">REGISTER</span>
         </button>
       </div>
       <div class="col mt-4 text-center text-white">
-        <span class="text-white"> Already a member?</span> <a routerLink="/login" class="p-1 ps-2 pe-2 btn btn-outline-pink ms-2">LOGIN</a><br>
+        <span class="text-white me-2"> Already a member?</span> <a routerLink="/login">LOGIN</a><br>
         <span class="small pt-3"> Powered by </span><br>
         <img src="assets/images/betfair_logo.png" width="150px">
       </div>

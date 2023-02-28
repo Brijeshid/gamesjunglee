@@ -19,13 +19,16 @@
                 <span class="loadtime">{{count}}</span>
                 <div class="loader"> </div>
               </ng-container>
-              <p class="card-header text-dark">{{betSlipParams['event']}}{{marketType}}</p>
-                <div class="card-body" [class.batsliploader]="isLoaderStart">
+              <p class="card-header text-dark">{{betSlipParams['event']}}{{marketType}} <br>
+                {{betSlipParams['selectionName']}}
+              </p>
+                <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
                 <div class="row">
-                  <div class="col-md-12 pe-4">
+                  <div class="col-md-12">
                     <form [formGroup]="betSlipForm">
                       <div class="row">
                         <div class="col-md-6">
+                          <label class="text-dark">Odds</label>
                           <div class="number">
                             <ng-container *ngIf="marketType == EMarketType.MATCH_TYPE; else otherMarket">
                               <span class="minus" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
@@ -38,27 +41,55 @@
                           </div>
                         </div>
                         <div class="col-md-6">
+                          <label class="text-dark">Stake</label>
                           <input type="text" class="form-control" placeholder="Stake" formControlName="stake" (input)="stakeVal($event)">
                           <!-- <span class="text-danger">Stake is required</span> -->
                         </div>
-                        <div class="col-md-6">
-                          <p class="text-dark">or Choose You Stake Size</p>
+                        <div class="col-md-6 mt-3">
+                          <p class="text-dark mb-2">or Choose You Stake</p>
                         </div>
-                        <div class="col-md-6 text-end">
-                          <a class="text-pink" routerLink="/settings">EDIT STAKES</a>
+                        <div class="col-md-6 mt-3 text-end">
+                          <a class="text-pink text-decoration-none" routerLink="/settings">EDIT STAKES</a>
+                        </div>
+                        <div class="col-md-12">
+                          <p class="text-dark mb-1"><strong>Size</strong></p>
                         </div>
                       </div>
                       <div class="row">
 
-                          <div class="col-md-6 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
-                            <button type="button" class="btn btn-sm w-100 rounded-pill bg-pink" (click)="updateStack(item)">+{{item | number}}</button>
+                          <div class="col-md-4 p-1 mb-1" *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
+                            <button type="button" class="btn w-100 rounded-pill bg-pink" (click)="updateStack(item)">+{{item | number}}</button>
                           </div>
 
-                        <div class="col-md-6 mt-3"><button type="button"
-                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="isBetSlipActive=false">Cancel</button>
+                        <div class="col-md-6 p-1 mt-3"><button type="button"
+                            class="btn border-pink w-100 p-2 rounded-pill betbtn" (click)="isBetSlipActive=false">CANCLE</button>
                         </div>
-                        <div class="col-md-6 mt-3"><button type="submit"
-                            class="btn btn-sm border-pink w-100 rounded-pill" (click)="onClickPlaceBet()" [disabled]="isLoaderStart && !isBetSlipCallCompleted">Place {{marketType == EMarketType.MATCH_TYPE ? '5s':''}}</button>
+                        <div class="col-md-6 p-1 mt-3">
+                           <button type="submit" class="btn w-100 p-1 rounded-pill betbtn" (click)="onClickPlaceBet()"
+                          [disabled]="isLoaderStart && !isBetSlipCallCompleted" [ngClass]="isLoaderStart && !isBetSlipCallCompleted ? 'disabled bg-secondary' : 'bg-success text-white'">
+                              <span class="d-block">PLACE BET</span>
+                             <ng-container *ngIf="!(isLoaderStart && !isBetSlipCallCompleted)">
+                              <span class="d-block small prof">PROFIT: 85</span>
+                              <div class="sec-text">
+                                  <span>5s</span>
+                              </div>
+                            </ng-container>
+                          </button>
+
+<!--
+                          <button class="btn bg-success w-100 rounded-pill p-1 text-white betbtn">
+                            <span class="d-block">PLACE BET</span>
+                            <span class="d-block small prof">PROFIT: 85</span>
+                            <div class="sec-text">
+                              <span>5s</span>
+                              </div>
+
+                          </button> -->
+
+
+
+                          <!-- <button type="submit" class="btn border-pink w-100 rounded-pill betbtn" (click)="onClickPlaceBet()"
+                          [disabled]="isLoaderStart && !isBetSlipCallCompleted">Place {{marketType == EMarketType.MATCH_TYPE ? '5s':''}}</button> -->
                         </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"

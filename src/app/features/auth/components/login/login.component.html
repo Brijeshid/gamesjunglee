@@ -3,30 +3,29 @@
     <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
         <div class="text-center"><img src="assets/images/logo.png" width="60%"></div>
         <div class="row login pb-4 pt-5">
-            <div class="input-group pt-3">
+            <div class="input-group p-0">
                 <input type="text" class="form-control" placeholder="Enter User Name" formControlName="username">
                 <span class="input-group-text bg-white">
                     <span class="fa fa-user text-dark"></span>
                 </span>
             </div>
-            <div class="input-group mt-4">
+            <div class="input-group p-0 mt-4">
                 <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Enter Password"
                     formControlName="password">
                 <span class="input-group-text bg-white" (click)="show=!show">
                     <span class="fa text-dark" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
                 </span>
             </div>
-            <div class="input-group">
-                <button type="submit" class="btn btn-light bg-pink border-0  mt-4 w-100 pt-3 pb-3"
-                    [disabled]="signInForm.invalid">
+            <div class="input-group p-0">
+                <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100"
+                    [disabled]="signInForm.invalid" [ngClass]="isLoading ? 'p-1': 'pt-3 pb-3'">
                     <i class="busy" *ngIf="isLoading"></i>
-                    <span *ngIf="!isLoading">LOGIN</span>
+                   <span *ngIf="!isLoading">LOGIN</span>
                 </button>
             </div>
             <div class="col mt-4 text-center text-white">
-                <span class="small"> Not a member?</span> <a routerLink="/registration"
-                    class="p-1 ps-2 pe-2 btn btn-outline-pink ms-2">JOIN
-                    NOW</a><br>
+                <span class="small me-2"> Not a member?</span>
+                <a routerLink="/registration">JOIN NOW</a><br>
                 <span class="small pt-3"> Powered by </span><br>
                 <img src="assets/images/betfair_logo.png" width="150px">
             </div>

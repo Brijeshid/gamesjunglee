@@ -37,3 +37,7 @@ myBlurFunction = function(bgfunr) {
 };
 //BG blur end
 
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

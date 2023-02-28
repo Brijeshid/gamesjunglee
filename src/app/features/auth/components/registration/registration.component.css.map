@@ -1,1 +1,1 @@
-{"version":3,"sources":["registration.component.css","registration.component.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACAhB;EACI,0CAAA;UAAA,kCAAA;EACA,qBAAA;EACA,iBAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;EACA,WAAA;ADEJ;;ACCE;EACE,YAAA;ADEJ;;ACCE;EACE;IACE,uBAAA;EDEJ;ECCE;IACE,yBAAA;EDCJ;AACF;;ACRE;EACE;IACE,uBAAA;EDEJ;ECCE;IACE,yBAAA;EDCJ;AACF","file":"registration.component.css"}
+{"version":3,"sources":[],"names":[],"mappings":"","file":"registration.component.css"}
