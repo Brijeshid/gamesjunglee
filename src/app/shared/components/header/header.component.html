@@ -34,7 +34,7 @@
           <input type="text" class="form-control searchinput" aria-label="" #inputRef (keypress)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
         </div>
           <ul *ngIf="searchList.length >0" class="dropdown-menu-dark search-dd">
-          <li *ngFor="let singleObj of searchList"> <a><img src="assets/images/{{singleObj['sportType']['sportName'] | lowercase}}.png" width="45px" class="pe-4"> {{singleObj['matchName']}}<br> <span class="ps-5">{{singleObj['openDate']| date :'d/MM/yy, h:mm a'}}</span> </a></li>
+          <li *ngFor="let singleObj of searchList" routerLink="/sportsbook/{{singleObj['sportType']['sportName'] | titlecase}}/{{singleObj['tournament']['tournamentId']}}/{{singleObj['matchId']}}"> <a><img src="assets/images/{{singleObj['sportType']['sportName'] | lowercase}}.png" width="45px" class="pe-4"> {{singleObj['matchName']}}<br> <span class="ps-5">{{singleObj['openDate']| date :'d/MM/yy, h:mm a'}}</span> </a></li>
           </ul>
           </div>
           <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
@@ -102,14 +102,12 @@
     <div class="modal-content bg-dark text-white">
       <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="staticBackdropLabel">Search</h5>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
         <div class="dropdown me-4 searchlist mt-1 w-100">
           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-search searchi"></i>
             <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
-            <!-- <input type="text" class="form-control float-start searchinput"> -->
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
             <li> <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Football</a></li>
