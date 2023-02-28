@@ -71,12 +71,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   onClickPlaceBet(){
+    this.count = 5;
     if(this.marketType == EMarketType.MATCH_TYPE){
       this.isLoaderStart = true;
       let internvalCount = setInterval(()=>{
         this.count--;
         if(this.count <= 0){
-          this.isLoaderStart = false;
           clearInterval(internvalCount);
         }
       },1000);
@@ -110,6 +110,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this.betSlipForm.reset();
               this.isBetSlipActive = false;
               this.isBetSlipCallCompleted = true;
+              this.isLoaderStart = false;
               this._SharedService.getUserBalance.next();
             }
       });
