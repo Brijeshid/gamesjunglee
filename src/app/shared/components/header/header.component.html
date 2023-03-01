@@ -38,7 +38,7 @@
           </ul>
           </div>
           <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-          <button class="btn text-white border-pink me-2 text-nowrap rounded-pill disnone headerFont" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
+          <button class="btn border-pink me-2 text-nowrap rounded-pill disnone btn-pink headerFont" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
               Bets</button>
               <a class="btn text-white border-pink text-nowrap rounded-pill headerFont"
                *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
