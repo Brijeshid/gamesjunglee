@@ -26,7 +26,8 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isBetSlipCallCompleted:boolean = false
   isLoaderStart:boolean = false;
   count:number = 5;
-  stakeLabel:string = 'Min.500 Max.10000';
+  // stakeLabel:string = 'Min.500 Max.10000';
+  userBalance:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -62,11 +63,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._getUserOpenBet();
     this.getUserConfig();
     this._createBetSlipForm();
+    this.getUserBalance();
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
       odds:['',Validators.required],
-      stake:['',[Validators.required,Validators.min(500),Validators.max(10000)]]
+      stake:['',[Validators.required,Validators.min(500),Validators.max(500000)]]
     })
   }
 
@@ -151,7 +153,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   updateStack(stackVal:any){
-    if(isNaN(this.betSlipForm.controls['stake'].value) || this.betSlipForm.controls['stake'].value == ""){
+    if(isNaN(this.betSlipForm.controls['stake'].value) || this.betSlipForm.controls['stake'].value == "" || this.betSlipForm.controls['stake'].value == null){
       this.betSlipForm.controls['stake'].setValue(parseInt(stackVal)) ;
     }else{
       this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ;
@@ -164,6 +166,13 @@ export class BetSlipComponent implements OnInit, OnChanges {
       (res) => {
         this.userConfig = res ;
       });
+  }
+
+  getUserBalance(){
+    this._sharedService._getBalanceInfoApi().subscribe((res)=>{
+      this.userBalance = res;
+      console.log('res_data',res);
+    })
   }
 
 }

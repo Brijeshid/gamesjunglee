@@ -79,20 +79,20 @@
                         <tbody>
                             <ng-container *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first = first;">
                                 <tr *ngIf="singleMarket['status'] != '4' && singleMarket['status'] != undefined" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
-                                    <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" style="cursor: pointer;"><a ><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
-                                    <td class="border-top disnone" [ngClass]="{'border-top':!first}"><i class="fa fa-play text-success"></i> </td>
-                                    <td class="border-top disnone" [ngClass]="{'border-top':!first}"><i class="fas fa-broadcast-tower text-success"></i></td>
-                                    <td class="colblue"><a ><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</a></td>
-                                    <td class="colpink"><a ><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</a></td>
+                                    <td class="text-start ps-2 heading border-top pointer" [ngClass]="{'border-top':!first}"><a ><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
+                                    <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"><i class="fa fa-play text-success"></i> </td>
+                                    <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"><i class="fas fa-broadcast-tower text-success"></i></td>
+                                    <td class="colblue pointer"><a ><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</a></td>
+                                    <td class="colpink pointer"><a ><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</a></td>
 
                                     <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                     <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                    <td class="colblue" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</td>
-                                    <td class="colpink" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</td>
+                                    <td class="colblue pointer" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</td>
+                                    <td class="colpink pointer" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</td>
 
-                                    <td class="colblue"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</td>
-                                    <td class="colpink" [ngClass]="{'last':last}"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</td>
+                                    <td class="colblue pointer"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</td>
+                                    <td class="colpink pointer" [ngClass]="{'last':last}"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</td>
                                 </tr>
                             </ng-container>
                         </tbody>
@@ -122,21 +122,21 @@
                         <tbody>
                             <ng-container *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first=first" >
                                 <tr *ngIf="singleMarket['status'] != '4' && singleMarket['status'] != undefined" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
-                                    <td class="text-start ps-2 heading border-top" style="cursor: pointer;"><a > <span class="text-danger">{{singleMarket['matchTime'] | date: 'EEEE At h:mm a'}}</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}{{singleMarket['status']}}</strong>
+                                    <td class="text-start ps-2 heading border-top pointer"><a > <span class="text-danger">{{singleMarket['matchTime'] | date: 'EEEE At h:mm a'}}</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}{{singleMarket['status']}}</strong>
                                         </a></td>
-                                    <td class="border-top disnone" [ngClass]="{'border-top':!first}"></td>
-                                    <td class="border-top disnone" [ngClass]="{'border-top':!first}"></td>
-                                    <td class="colblue dis"><a ><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</a></td>
-                                    <td class="colpink dis"><a ><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</a></td>
+                                    <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"></td>
+                                    <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"></td>
+                                    <td class="colblue dis pointer"><a ><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</a></td>
+                                    <td class="colpink dis pointer"><a ><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</a></td>
 
                                     <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                     <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                    <td class="colblue dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</td>
-                                    <td class="colpink dis" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</td>
+                                    <td class="colblue di pointers" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</td>
+                                    <td class="colpink dis pointer" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</td>
 
-                                    <td class="colblue dis"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</td>
-                                    <td class="colpink dis" [ngClass]="{'last':last}"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</td>
+                                    <td class="colblue dis pointer"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</td>
+                                    <td class="colpink dis pointer" [ngClass]="{'last':last}"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</td>
                                 </tr>
                             </ng-container>
                         </tbody>

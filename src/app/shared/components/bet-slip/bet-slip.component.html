@@ -3,7 +3,7 @@
       <div class="innerpagem">
         <ul class="nav nav-tabs justify-content-center border-0" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link" [ngClass]="{'active':isBetSlipActive}" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
+            <button class="nav-link pointer" [ngClass]="{'active':isBetSlipActive}" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
               type="button" role="tab" aria-controls="betslip" aria-selected="true" [disabled]="!isBetSlipActive">BETSLIP</button>
           </li>
           <li class="nav-item" role="presentation">
@@ -19,7 +19,7 @@
                 <span class="loadtime">{{count}}</span>
                 <div class="loader"> </div>
               </ng-container>
-              <p class="card-header text-dark">{{betSlipParams['event']}}{{marketType}} <br>
+              <p class="card-header text-dark">{{betSlipParams['event']}}<br>
                 {{betSlipParams['selectionName']}}
               </p>
                 <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
@@ -42,11 +42,11 @@
                         </div>
                         <div class="col-md-6">
                           <label class="text-dark">Stake</label>
-                          <input type="number" class="form-control" [attr.placeholder]="stakeLabel" formControlName="stake" (input)="stakeVal($event)">
+                          <input type="number" class="form-control" placeholder="Min.{{userBalance?.minimumBet}} Max.{{userBalance?.maxBet}}" formControlName="stake" (input)="stakeVal($event)">
                           <ng-container *ngIf="(betSlipForm.controls['stake'].touched || betSlipForm.controls['stake'].dirty)  && betSlipForm.controls['stake'].invalid">
                             <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.required">Stake is required</span>
-                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.min">Min :500</span>
-                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.max">Max :1000</span>
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.min">Min :{{userBalance?.minimumBet}}</span>
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.max">Max :{{userBalance?.maxBet}}</span>
                           </ng-container>
                           
                         </div>
@@ -98,7 +98,7 @@
                         </div>
                       </div>
                       <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"
-                          aria-hidden="true"></i> Min Bet: 500 Max Bet: 10000 Max Winning: 5000000</p>
+                          aria-hidden="true"></i> Min Bet: {{userBalance?.minimumBet}} Max Bet: {{userBalance?.maxBet}} Max Winning: 5000000</p>
                       <div class="form-group">
                         <label class="form-check-label text-dark" for="gridCheck">Confirm bets before
                           placing</label>
