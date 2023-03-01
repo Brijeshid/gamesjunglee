@@ -47,6 +47,7 @@ export class MatchMarketListComponent implements OnInit {
 
   EMarketType:typeof EMarketType = EMarketType;
   marketType = EMarketType.MATCH_TYPE;
+  placeBetData:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -56,12 +57,19 @@ export class MatchMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
       this._getWebSocketUrl();
+    });
+    this._preConfig();
+  }
+
+  private _preConfig(){
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
     })
   }
 

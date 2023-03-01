@@ -27,6 +27,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isLoaderStart:boolean = false;
   count:number;
   stakeLabel:string = 'Min.500 Max.10000';
+  isBack:boolean;
 
   constructor(
     private _sharedService: SharedService,
@@ -38,8 +39,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
+      this.isBack = changes['betSlipParams']['currentValue']['isBack'];
       if(changes['betSlipParams']['currentValue']['marketName']!= EMarketType.FANCY_TYPE){
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
@@ -57,9 +60,11 @@ export class BetSlipComponent implements OnInit, OnChanges {
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
       this.marketType = changes['marketType']['currentValue'];
       if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
   }
   ngOnInit(): void {
+    this.isBack = this.betSlipParams?.isBack;
     this._getUserOpenBet();
     this.getUserConfig();
     this._createBetSlipForm();
@@ -147,7 +152,37 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   stakeVal(val:any){
     //calculate profit and loss with marketID
-    this._sharedService.marketBookCalSubject.next({});
+    if(this.betSlipForm.controls['stake'].valid){
+      let marketObj = {};
+      marketObj[this.betSlipParams['marketId']] = {
+        profit:0,
+        loss:0,
+        marketId:this.betSlipParams['marketId'],
+        selectionId:this.betSlipParams['selectionId'],
+        marketType:this.marketType
+      };
+      let calCulatedAmount;
+      if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" || this.betSlipParams.marketName == "BOOKMAKER"){
+        let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
+        calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
+      }else{
+        let multiplier = this.betSlipParams['odds']/100;
+        calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
+      }
+
+      marketObj[this.betSlipParams['marketId']]['profit'] = calCulatedAmount;
+      marketObj[this.betSlipParams['marketId']]['loss'] = this.betSlipForm.controls['stake'].value;
+
+      if(this.isBack){
+        marketObj[this.betSlipParams['marketId']]['loss'] = this.betSlipForm.controls['stake'].value * -1;
+      }else{
+        marketObj[this.betSlipParams['marketId']]['profit'] = calCulatedAmount * -1;
+      }
+      this._sharedService.marketBookCalSubject.next(marketObj);
+    }else{
+      this._sharedService.marketBookCalSubject.next({});
+    }
+    
   }
 
   upAndDownOddsValue(isUp:boolean){
