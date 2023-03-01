@@ -40,7 +40,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
-      this.marketType = changes['betSlipParams']['currentValue']['marketName'];
       if(changes['betSlipParams']['currentValue']['marketName']!= EMarketType.FANCY_TYPE){
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
