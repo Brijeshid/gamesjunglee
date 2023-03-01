@@ -23,10 +23,11 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   userConfig:any=[];
   betSlipForm:FormGroup;
-  isBetSlipCallCompleted:boolean = false
+  isBetSlipPlaceCall:boolean = false;
+  isBetSlipCallCompleted:boolean = true;
   isLoaderStart:boolean = false;
   count:number = 5;
-  // stakeLabel:string = 'Min.500 Max.10000';
+  stakeLabel:string = 'Min.500 Max.10000';
   userBalance:any;
 
   constructor(
