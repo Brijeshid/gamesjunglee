@@ -71,34 +71,21 @@
                         </div>
                         <div class="col-md-6 p-1 mt-3">
                            <button type="submit" class="btn w-100 p-1 rounded-pill betbtn" (click)="onClickPlaceBet()"
-                          [disabled]="betSlipForm.controls['stake'].invalid" [ngClass]="betSlipForm.controls['stake'].invalid ? 'disabled bg-secondary' : 'bg-success text-white'">
+                          [disabled]="betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall" [ngClass]="(betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall) ? 'disabled bg-secondary' : 'bg-success text-white'">
                               <span class="d-block">PLACE BET</span>
                              <ng-container *ngIf="!betSlipForm.controls['stake'].invalid">
                               <span class="d-block small prof">{{betSlipParams['isBack'] ? 'PROFIT':'LIABILITY'}}: {{profit}}</span>
                               <div class="sec-text">
-                                  <span>5s</span>
+                                  <span>{{marketType == EMarketType.MATCH_TYPE ? '5s':marketType == EMarketType.FANCY_TYPE ? '2s':'1s'}}</span>
                               </div>
                             </ng-container>
                           </button>
-
-<!--
-                          <button class="btn bg-success w-100 rounded-pill p-1 text-white betbtn">
-                            <span class="d-block">PLACE BET</span>
-                            <span class="d-block small prof">PROFIT: 85</span>
-                            <div class="sec-text">
-                              <span>5s</span>
-                              </div>
-
-                          </button> -->
-
-
-
-                          <!-- <button type="submit" class="btn border-pink w-100 rounded-pill betbtn" (click)="onClickPlaceBet()"
-                          [disabled]="isLoaderStart && !isBetSlipCallCompleted">Place {{marketType == EMarketType.MATCH_TYPE ? '5s':''}}</button> -->
                         </div>
                       </div>
-                      <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"
-                          aria-hidden="true"></i> Min Bet: 500 Max Bet: 10000 Max Winning: 5000000</p>
+                      <p class="text-bold text-pink mt-3">
+                        <i class="fa fa-exclamation-circle"
+                          aria-hidden="true"></i> Min Bet: 500 Max Bet: 10000 Max Winning: 5000000
+                      </p>
                       <div class="form-group">
                         <label class="form-check-label text-dark" for="gridCheck">Confirm bets before
                           placing</label>

@@ -23,9 +23,9 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   userConfig:any=[];
   betSlipForm:FormGroup;
-  isBetSlipCallCompleted:boolean = false
+  isBetSlipPlaceCall:boolean = false
   isLoaderStart:boolean = false;
-  count:number = 5;
+  count:number;
   stakeLabel:string = 'Min.500 Max.10000';
 
   constructor(
@@ -40,13 +40,15 @@ export class BetSlipComponent implements OnInit, OnChanges {
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
-
-      if(changes['betSlipParams']['currentValue']['marketName']!="FANCY"){
+      this.marketType = changes['betSlipParams']['currentValue']['marketName'];
+      if(changes['betSlipParams']['currentValue']['marketName']!= EMarketType.FANCY_TYPE){
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
         })
+        changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 1;
       }else{
         console.log("inside else")
+        this.count = 2;
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['runs'],
         })
@@ -71,9 +73,16 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   onClickPlaceBet(){
-    this.count = 5;
+    this.isBetSlipPlaceCall = true;
     if(this.marketType == EMarketType.MATCH_TYPE){
-      this.isLoaderStart = true;
+      this.count = 5;
+    }else if(this.marketType == EMarketType.FANCY_TYPE){
+      this.count = 2;
+    }else{
+      this.count = 1;
+    }
+
+    this.isLoaderStart = true;
       let internvalCount = setInterval(()=>{
         this.count--;
         if(this.count <= 0){
@@ -81,10 +90,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
         }
       },1000);
       this._placeBetCall();
-    }else{
-      this.count =0;
-      this._placeBetCall();
-    }
   }
 
   private _placeBetCall(){
@@ -109,7 +114,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this._getUserOpenBet();
               this.betSlipForm.reset();
               this.isBetSlipActive = false;
-              this.isBetSlipCallCompleted = true;
+              this.isBetSlipPlaceCall = false;
               this.isLoaderStart = false;
               this._SharedService.getUserBalance.next();
             }
