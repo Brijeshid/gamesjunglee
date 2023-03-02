@@ -6,17 +6,17 @@
         <div class="col-md-6 col-2 text-end"> <a class="anchorTag" (click)="onClose()">X</a> </div>
     </div>
     <div class="row ps-4 pe-2">
-        <div class="col-md-12 text-center p-3 rightpanelFont"><i class="fa fa-landmark text-pink"></i>&nbsp; Balance Information </div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont">Available Credit</div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont"> {{userBalance?.availableCredit | number}} </div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont">Credit Limit</div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont"> {{userBalance?.creditLimit | number}} </div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont">Winnings</div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont" *ngIf="userBalance?.winnings !=0" [ngClass]="userBalance?.winnings > 0 ?'text-success':'text-danger'">{{userBalance?.winnings | number}} </div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont" *ngIf="userBalance?.winnings == 0" >{{userBalance?.winnings | number}} </div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont">Net Exposure</div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont"  *ngIf="userBalance?.exposure !=0" [ngClass]="userBalance?.exposure > 0 ?'text-success':'text-danger'">{{userBalance?.exposure | number}}</div>
-        <div class="col-md-6 col-6 p-2 rightpanelFont" *ngIf="userBalance?.exposure == 0" >{{userBalance?.exposure | number}} </div>
+        <div class="col-md-12 text-center p-3 "><i class="fa fa-landmark text-pink me-2"></i> <strong>Balance Information</strong></div>
+        <div class="col-md-6 col-6 p-2 ">Available Credit</div>
+        <div class="col-md-6 col-6 p-2 "> {{userBalance?.availableCredit | number}} </div>
+        <div class="col-md-6 col-6 p-2 ">Credit Limit</div>
+        <div class="col-md-6 col-6 p-2 "> {{userBalance?.creditLimit | number}} </div>
+        <div class="col-md-6 col-6 p-2 ">Winnings</div>
+        <div class="col-md-6 col-6 p-2 " *ngIf="userBalance?.winnings !=0" [ngClass]="userBalance?.winnings > 0 ?'text-success':'text-danger'">{{userBalance?.winnings | number}} </div>
+        <div class="col-md-6 col-6 p-2 " *ngIf="userBalance?.winnings == 0" >{{userBalance?.winnings | number}} </div>
+        <div class="col-md-6 col-6 p-2 ">Net Exposure</div>
+        <div class="col-md-6 col-6 p-2 "  *ngIf="userBalance?.exposure !=0" [ngClass]="userBalance?.exposure > 0 ?'text-success':'text-danger'">{{userBalance?.exposure | number}}</div>
+        <div class="col-md-6 col-6 p-2 " *ngIf="userBalance?.exposure == 0" >{{userBalance?.exposure | number}} </div>
 
     </div>
     <hr>
@@ -24,35 +24,35 @@
         <div class="col">
             <ul class="nav flex-column border-0 pt-0">
                 <li class="nav-item">
-                    <a [routerLink]="['/favorites']" [routerLinkActive]="'active'" class="nav-link rightpanelFont"  (click)="onClose()"><i class="fa fa-star text-pink me-1"></i>&nbsp; &nbsp;<span> Favorites </span>
+                    <a [routerLink]="['/favorites']" [routerLinkActive]="'active'" class="nav-link "  (click)="onClose()"><i class="fa fa-star text-pink me-1"></i>&nbsp; &nbsp;<span> Favorites </span>
                         <!-- <span class="leftb-icon">12</span>  -->
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="['/bets']" [routerLinkActive]="'active'" class="nav-link rightpanelFont" (click)="onClose()"><i class="fa fa-list text-pink me-1"></i> &nbsp; &nbsp;<span> Open Bets </span>
+                    <a [routerLink]="['/bets']" [routerLinkActive]="'active'" class="nav-link " (click)="onClose()"><i class="fa fa-list text-pink me-1"></i> &nbsp; &nbsp;<span> Open Bets </span>
                         <!-- <span class="leftb-icon">10</span>  -->
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/profit-loss']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-coins text-pink me-1"></i> &nbsp; &nbsp;<span>Betting P&L</span></a>
+                    <a class="nav-link " [routerLink]="['/profit-loss']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-coins text-pink me-1"></i> &nbsp; &nbsp;<span>Betting P&L</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/transfer-statements']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-invoice text-pink me-1"></i>&nbsp; &nbsp; <span>Transfer Statements</span></a>
+                    <a class="nav-link " [routerLink]="['/transfer-statements']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-invoice text-pink me-1"></i>&nbsp; &nbsp; <span>Transfer Statements</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/time-settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-calendar-days text-pink me-1"></i>&nbsp; &nbsp;<span>Time Settings</span></a>
+                    <a class="nav-link " [routerLink]="['/time-settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-calendar-days text-pink me-1"></i>&nbsp; &nbsp;<span>Time Settings</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/news']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-lines text-pink me-1"></i> &nbsp; &nbsp;<span>News</span></a>
+                    <a class="nav-link " [routerLink]="['/news']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-lines text-pink me-1"></i> &nbsp; &nbsp;<span>News</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/change-password']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-lock text-pink"></i>&nbsp; &nbsp; <span>Change Password</span></a>
+                    <a class="nav-link " [routerLink]="['/change-password']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-lock text-pink"></i>&nbsp; &nbsp; <span>Change Password</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/rules-regulations']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-memory text-pink"></i> &nbsp; &nbsp;<span>Rules & Regulations</span></a>
+                    <a class="nav-link " [routerLink]="['/rules-regulations']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-memory text-pink"></i> &nbsp; &nbsp;<span>Rules & Regulations</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rightpanelFont" [routerLink]="['/settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-gear text-pink"></i> &nbsp; &nbsp;<span>Settings</span></a>
+                    <a class="nav-link " [routerLink]="['/settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-gear text-pink"></i> &nbsp; &nbsp;<span>Settings</span></a>
                 </li>
             </ul>
         </div>
