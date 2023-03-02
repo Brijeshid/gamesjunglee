@@ -41,8 +41,17 @@ export class BetSlipComponent implements OnInit, OnChanges {
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.stakeVal(this.betSlipForm.controls['stake'].value);
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
-      this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
       this.isBack = changes['betSlipParams']['currentValue']['isBack'];
+      this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
+
+      if(!this.isBetSlipActive){
+        this.betSlipForm.patchValue({
+          odds:0,
+          stake:0
+        })
+        this.stakeVal(0);
+      }
+
       if(changes['betSlipParams']['currentValue']['marketName']!= EMarketType.FANCY_TYPE){
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
@@ -65,10 +74,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
   ngOnInit(): void {
     this.isBack = this.betSlipParams?.isBack;
-    this._getUserOpenBet();
-    this.getUserConfig();
     this._createBetSlipForm();
     this.getUserBalance();
+    this._getUserOpenBet();
+    this.getUserConfig();
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
@@ -210,7 +219,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._sharedService._getBalanceInfoApi().subscribe((res:any)=>{
       this.userBalance = res;
       if(res){
-        this.betSlipForm.controls['stake'].setValidators([Validators.min(res?.minimumBet),Validators.max(res?.maxBet)]);
+        this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(res?.minimumBet),Validators.max(res?.maxBet)]);
       }
     })
   }

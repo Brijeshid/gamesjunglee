@@ -262,7 +262,7 @@ export class TourMarketListComponent implements OnInit {
         "runs":null,
         "matchTime":marketData['matchTime'],
         "book":marketData['market']['runners'],
-        "isBetSlipActive":true
+        "isBetSlipActive":positionObj['odds'] > 0 ? true: false
     }
   }
 

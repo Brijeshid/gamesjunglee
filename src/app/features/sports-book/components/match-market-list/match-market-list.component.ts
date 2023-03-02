@@ -324,7 +324,7 @@ export class MatchMarketListComponent implements OnInit {
         "centralId":marketData['centralId'],
         "matchTime":marketData['matchTime'],
         "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
-        "isBetSlipActive":true,
+        "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "runs":positionObj['runs']
     }
 

@@ -103,7 +103,23 @@
                             </thead>
                             <tbody>
                               <tr *ngFor="let runner of singleBookMaker['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                                <td width="30%" class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td width="30%" class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
+                                  <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
+                                    <strong>{{runner?.hourseAmt?.amount}}</strong>
+                                  </a>
+                                  
+                                  <ng-container *ngIf="placeBetData?.[singleBookMaker?.marketId]?.selectionId == runner?.SelectionId; else loss">
+                                    <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.profit > 0 ? 'text-success':'text-danger'">
+                                      <strong>{{placeBetData?.[singleBookMaker?.marketId]?.profit}}</strong>
+                                    </a>
+                                  </ng-container>
+
+                                  <ng-template #loss>
+                                    <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.loss > 0 ? 'text-success':'text-danger'">
+                                      <strong>{{placeBetData?.[singleBookMaker?.marketId]?.loss}}</strong>
+                                    </a>
+                                  </ng-template>
+                                </td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                   <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
