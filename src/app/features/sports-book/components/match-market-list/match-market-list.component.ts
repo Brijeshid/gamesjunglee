@@ -229,7 +229,7 @@ export class MatchMarketListComponent implements OnInit {
               runnerRes['SelectionId'] = runnerRes['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
-                runnerRes['status'] = singleWebsocketRunnerBook['st'];
+                // runnerRes['status'] = singleWebsocketRunnerBook['st'];
                 if (singleWebsocketRunnerBook['ib']) {
                   //back
 
