@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EMarketType } from '@shared/models/shared';
+import { EMarketName, EMarketType } from '@shared/models/shared';
 
 @Component({
   selector: 'app-bet-slip',
@@ -26,8 +26,8 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isBetSlipPlaceCall:boolean = false;
   isBetSlipCallCompleted:boolean = true;
   isLoaderStart:boolean = false;
-  count:number = 5;
-  stakeLabel:string = 'Min.500 Max.10000';
+  count:number;
+  isBack:boolean;
   userBalance:any;
 
   constructor(
@@ -69,7 +69,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
       odds:['',Validators.required],
-      stake:['',[Validators.required,Validators.min(500),Validators.max(500000)]]
+      stake:['',[Validators.required]]
     })
   }
 
@@ -91,27 +91,23 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   private _placeBetCall(){
-    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" ){
+    if(this.betSlipParams.marketName == EMarketName.MATCH_ODDS_SPACE || this.betSlipParams.marketName == EMarketName.MATCH_ODDS_UNDERSCORE){
       let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
       this.betSlipParams.profit = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
-      this.betSlipParams.marketName = 'Match Odds'
+      this.betSlipParams.marketName = 'Match Odds';
       this.betSlipParams.odds = this.betSlipForm.controls['odds'].value;
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
-    }else if(this.betSlipParams.marketName == 'FANCY' || this.betSlipParams.marketName == "BOOKMAKER"){
+    }else if(this.betSlipParams.marketName == EMarketName.FANCY || this.betSlipParams.marketName == EMarketName.BOOKMAKER){
       let multiplier = this.betSlipParams['odds']/100;
       this.betSlipParams.profit = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
-      if(this.betSlipParams.marketName == 'FANCY'){
-      this.betSlipParams.marketName = 'Fancy'
-      } else if(this.betSlipParams.marketName == "BOOKMAKER"){
-        this.betSlipParams.marketName = 'Bookmaker'
-      }
+      this.betSlipParams.marketName = this.betSlipParams.marketName == EMarketName.FANCY ? 'Fancy': 'Bookmaker';
       this.betSlipParams.odds = this.betSlipParams['odds'];
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }
 
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
       (betSlipRes: any) => {
-            if(this.count <=0){
+            if(this.count <=0 || betSlipRes){
               this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
               this._getUserOpenBet();
               this.betSlipForm.reset();
@@ -124,7 +120,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   get profit(){
-    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
+    if(this.betSlipParams.marketName == EMarketName.MATCH_ODDS_SPACE || this.betSlipParams.marketName == EMarketName.MATCH_ODDS_UNDERSCORE){
       let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
       return Math.round(multiplier * this.betSlipForm.controls['stake'].value)
     }else{
@@ -174,9 +170,11 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   getUserBalance(){
-    this._sharedService._getBalanceInfoApi().subscribe((res)=>{
+    this._sharedService._getBalanceInfoApi().subscribe((res:any)=>{
       this.userBalance = res;
-      console.log('res_data',res);
+      if(res){
+        this.betSlipForm.controls['stake'].setValidators([Validators.min(res?.minimumBet),Validators.max(res?.maxBet)]);
+      }
     })
   }
 

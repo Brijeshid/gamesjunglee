@@ -19,7 +19,7 @@
                 <span class="loadtime">{{count}}</span>
                 <div class="loader"> </div>
               </ng-container>
-              <p class="card-header text-dark">{{betSlipParams['event']}}<br>
+              <p class="card-header text-dark">{{betSlipParams['event']}} <br>
                 {{betSlipParams['selectionName']}}
               </p>
                 <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
@@ -82,8 +82,10 @@
                           </button>
                         </div>
                       </div>
-                      <p class="text-bold text-pink mt-3"><i class="fa fa-exclamation-circle"
-                          aria-hidden="true"></i> Min Bet: {{userBalance?.minimumBet}} Max Bet: {{userBalance?.maxBet}} Max Winning: 5000000</p>
+                      <p class="text-bold text-pink mt-3">
+                        <i class="fa fa-exclamation-circle"
+                          aria-hidden="true"></i> Min Bet: {{userBalance?.minimumBet}} Max Bet: {{userBalance?.maxBet}}
+                      </p>
                       <div class="form-group">
                         <label class="form-check-label text-dark" for="gridCheck">Confirm bets before
                           placing</label>
