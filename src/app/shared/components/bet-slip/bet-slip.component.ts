@@ -114,7 +114,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
       (betSlipRes: any) => {
-            if(this.count <=0){
+            if(this.count <=0 || betSlipRes){
               this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
               this._getUserOpenBet();
               this.betSlipForm.reset();
