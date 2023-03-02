@@ -42,11 +42,11 @@
                         </div>
                         <div class="col-md-6">
                           <label class="text-dark">Stake</label>
-                          <input type="number" class="form-control" [attr.placeholder]="stakeLabel" formControlName="stake" (input)="stakeVal($event)">
+                          <input type="number" class="form-control" placeholder="Min.{{userBalance?.minimumBet}} Max.{{userBalance?.maxBet}}" formControlName="stake" (input)="stakeVal($event)">
                           <ng-container *ngIf="(betSlipForm.controls['stake'].touched || betSlipForm.controls['stake'].dirty)  && betSlipForm.controls['stake'].invalid">
                             <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.required">Stake is required</span>
-                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.min">Min :500</span>
-                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.max">Max :1000</span>
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.min">Min :{{userBalance?.minimumBet}}</span>
+                            <span class="text-danger" *ngIf="betSlipForm.controls['stake'].errors?.max">Max :{{userBalance?.maxBet}}</span>
                           </ng-container>
                           
                         </div>
@@ -84,7 +84,7 @@
                       </div>
                       <p class="text-bold text-pink mt-3">
                         <i class="fa fa-exclamation-circle"
-                          aria-hidden="true"></i> Min Bet: 500 Max Bet: 10000 Max Winning: 5000000
+                          aria-hidden="true"></i> {{userBalance?.minimumBet}} Max Bet: {{userBalance?.maxBet}}
                       </p>
                       <div class="form-group">
                         <label class="form-check-label text-dark" for="gridCheck">Confirm bets before
