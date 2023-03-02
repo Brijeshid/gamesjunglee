@@ -91,16 +91,20 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   private _placeBetCall(){
-    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" || this.betSlipParams.marketName == "BOOKMAKER"){
+    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" ){
       let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
       this.betSlipParams.profit = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
       this.betSlipParams.marketName = 'Match Odds'
       this.betSlipParams.odds = this.betSlipForm.controls['odds'].value;
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
-    }else if(this.betSlipParams.marketName == 'FANCY'){
+    }else if(this.betSlipParams.marketName == 'FANCY' || this.betSlipParams.marketName == "BOOKMAKER"){
       let multiplier = this.betSlipParams['odds']/100;
       this.betSlipParams.profit = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
+      if(this.betSlipParams.marketName == 'FANCY'){
       this.betSlipParams.marketName = 'Fancy'
+      } else if(this.betSlipParams.marketName == "BOOKMAKER"){
+        this.betSlipParams.marketName = 'Bookmaker'
+      }
       this.betSlipParams.odds = this.betSlipParams['odds'];
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }
@@ -120,7 +124,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   get profit(){
-    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" || this.betSlipParams.marketName == "BOOKMAKER"){
+    if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
       let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
       return Math.round(multiplier * this.betSlipForm.controls['stake'].value)
     }else{
