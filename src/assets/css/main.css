@@ -15,6 +15,15 @@
   font-size: 12px;
 }
 
+.btn-pink {
+  color: #fff;
+}
+
+.btn-pink:hover {
+  background: #ffa7a3;
+  color: #000;
+}
+
 .form-control {
   font-size: 12px;
 }
@@ -385,7 +394,7 @@ tr {
   z-index: 1000;
   background: #202121;
   color: #fff;
-  font-size: 10px;
+  font-size: 12px;
   overflow-x: hidden;
   transition: all 0.5s ease;
   box-shadow: 0px 1px 2px #ffa7a3;
@@ -857,7 +866,7 @@ input:checked + .slider:before {
 }
 
 .searchlist input {
-  background: rgba(60, 62, 62, 0.7215686275);
+  background: #fff;
   color: #626262;
   border: 0.8px solid rgba(255, 167, 163, 0.2);
 }
