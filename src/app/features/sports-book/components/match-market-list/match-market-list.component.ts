@@ -229,7 +229,7 @@ export class MatchMarketListComponent implements OnInit {
               runnerRes['SelectionId'] = runnerRes['SelectionId'].toString();
               let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', runnerRes['SelectionId']]);
               for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
-                runnerRes['status'] = singleWebsocketRunnerBook['st'];
+                // runnerRes['status'] = singleWebsocketRunnerBook['st'];
                 if (singleWebsocketRunnerBook['ib']) {
                   //back
 
@@ -326,7 +326,7 @@ export class MatchMarketListComponent implements OnInit {
         "centralId":marketData['centralId'],
         "matchTime":marketData['matchTime'],
         "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
-        "isBetSlipActive":true,
+        "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "runs":positionObj['runs']
     }
 

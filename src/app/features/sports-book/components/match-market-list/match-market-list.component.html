@@ -92,7 +92,7 @@
                                 <th colspan="10" class="h-100">Bookmaker (0% Commission & Instant Bet)</th>
                               </tr>
                               <tr>
-                                <th width="30%" class="tfirstcol"> {{singleBookMaker['marketName']}} </th>
+                                <th width="30%" class="tfirstcol"> {{singleBookMaker['marketName']}}</th>
                                 <th width="10%" class="coldark"><img src="/assets/images/fast.png" class="timer"> </th>
                                 <!-- <th width="10%" class="coldark"></th> -->
                                 <th width="15%" colspan="3" class="text-end coldark">Back</th>
@@ -103,19 +103,40 @@
                             </thead>
                             <tbody class="pointer">
                               <tr *ngFor="let runner of singleBookMaker['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                                <td width="30%" class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
+                                <td width="30%" class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
+                                  <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
+                                    <strong>{{runner?.hourseAmt?.amount}}</strong>
+                                  </a>
+                                  
+                                  <ng-container *ngIf="placeBetData?.[singleBookMaker?.marketId]?.selectionId == runner?.SelectionId; else loss">
+                                    <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.profit > 0 ? 'text-success':'text-danger'">
+                                      <strong>{{placeBetData?.[singleBookMaker?.marketId]?.profit}}</strong>
+                                    </a>
+                                  </ng-container>
+
+                                  <ng-template #loss>
+                                    <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.loss > 0 ? 'text-success':'text-danger'">
+                                      <strong>{{placeBetData?.[singleBookMaker?.marketId]?.loss}}</strong>
+                                    </a>
+                                  </ng-template>
+                                </td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                   <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                   <td width="10%" class="colblue" (click)="onClickLiveMarketRate(runner,singleBookMaker,{isBack:true,index:0,odds:runner['back0']},EMarketType.BOOKMAKER_TYPE)" ><a><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
                                   <td width="10%" class="colpink"><a (click)="onClickLiveMarketRate(runner,singleBookMaker,{isBack:false,index:0,odds:runner['lay0']},EMarketType.BOOKMAKER_TYPE)"><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
                                   <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                  <td width="10%" class="border-top" [ngClass]="{'border-top':!first}">
+                                  <!-- <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"> -->
                                      <!--Online start-->
                                     <!-- <div class="suspendedbm1" *ngIf="runner['st']=='1' || runner['st']==''">
                                       <button type="button" class="suspendedm1" [ngClass]="isLoggedIn ? 'matchmarketlist-on' : 'matchmarketlist-off'">Suspended</button>
                                     </div> -->
                                      <!--Online end-->
+                                  <!-- </td> -->
+                                  <td width="10%" class="border-top" [ngClass]="{'border-top':!first}">
+                                    <div class="suspendedbm1" *ngIf="singleBookMaker['status']=='3' || singleBookMaker['status']=='9'">
+                                      <button type="button" class="suspendedm1" [ngClass]="isLoggedIn ? 'matchmarketlist-on' : 'matchmarketlist-off'">{{singleBookMaker['status']=='3' ? 'Suspended': 'Ball Running'}}</button>
+                                    </div>
                                   </td>
                                 </tr>
                             </tbody>
