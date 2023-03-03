@@ -172,7 +172,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
         marketType:this.marketType
       };
       let calCulatedAmount;
-      if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS" || this.betSlipParams.marketName == "BOOKMAKER"){
+      if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
         let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
         calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
       }else{
@@ -192,7 +192,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }else{
       this._sharedService.marketBookCalSubject.next({});
     }
-    
+
   }
 
   upAndDownOddsValue(isUp:boolean){
@@ -205,7 +205,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }else{
       this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ;
     }
-    
+
   }
 
    getUserConfig() {
