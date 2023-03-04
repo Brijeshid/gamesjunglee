@@ -23,8 +23,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   userConfig:any=[];
   betSlipForm:FormGroup;
-  isBetSlipPlaceCall:boolean = false;
-  isBetSlipCallCompleted:boolean = true;
+  isBetSlipPlaceCall:boolean = false
   isLoaderStart:boolean = false;
   count:number;
   isBack:boolean;
@@ -40,6 +39,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBack = changes['betSlipParams']['currentValue']['isBack'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
@@ -56,8 +56,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
         })
+        changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 1;
       }else{
         console.log("inside else")
+        this.count = 2;
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['runs'],
         })
@@ -67,6 +69,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
       this.marketType = changes['marketType']['currentValue'];
       if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
   }
   ngOnInit(): void {
@@ -84,9 +87,16 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   onClickPlaceBet(){
-    this.count = 5;
+    this.isBetSlipPlaceCall = true;
     if(this.marketType == EMarketType.MATCH_TYPE){
-      this.isLoaderStart = true;
+      this.count = 5;
+    }else if(this.marketType == EMarketType.FANCY_TYPE){
+      this.count = 2;
+    }else{
+      this.count = 1;
+    }
+
+    this.isLoaderStart = true;
       let internvalCount = setInterval(()=>{
         this.count--;
         if(this.count <= 0){
@@ -94,10 +104,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
         }
       },1000);
       this._placeBetCall();
-    }else{
-      this.count =0;
-      this._placeBetCall();
-    }
   }
 
   private _placeBetCall(){
@@ -122,7 +128,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this._getUserOpenBet();
               this.betSlipForm.reset();
               this.isBetSlipActive = false;
-              this.isBetSlipCallCompleted = true;
+              this.isBetSlipPlaceCall = false;
               this.isLoaderStart = false;
               this._SharedService.getUserBalance.next();
             }
