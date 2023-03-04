@@ -49,7 +49,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="dashboard.html" class="nav-link"><i class="fa fa-angle-left me-2"></i> <span>Previous</span></a>
+            <a class="nav-link"><i class="fa fa-angle-left me-2"></i> <span>Previous</span></a>
           </li>
           <li class="nav-item" *ngFor="let singleMenu of menuList">
             <a *ngIf="!singleMenu?.refTournamentId" routerLink="/sportsbook/{{sportsName}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>

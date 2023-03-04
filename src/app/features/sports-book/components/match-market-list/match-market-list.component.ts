@@ -235,6 +235,8 @@ export class MatchMarketListComponent implements OnInit {
 
                   //Live Rate
                   runnerRes['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt']>1?+((singleWebsocketRunnerBook['rt']-1)*100).toFixed(0):+((1-singleWebsocketRunnerBook['rt'])*100).toFixed(0);
+                  console.log('rt',singleWebsocketRunnerBook['rt'])
+              
 
                   //Volume from Betfair
                   runnerRes['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];

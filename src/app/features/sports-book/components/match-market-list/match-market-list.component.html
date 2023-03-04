@@ -2,7 +2,7 @@
 <!--body start-->
 <div class="row m-0">
     <div class="col-md-12 pb-2 pt-2">
-      <a class="text-pink small text-decoration-none"><i (click)="goBack()" class="fa fa-angle-left text-white" style="cursor: pointer;"></i> {{matchName | uppercase}}</a>
+      <a class="text-pink small text-decoration-none pointer"><i (click)="goBack()" class="fa fa-angle-left text-white"></i> {{matchName | uppercase}}</a>
     </div>
     <hr class="text-pink">
     <!--Aside start-->
@@ -52,7 +52,7 @@
                                 <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
-                          <tbody class="content">
+                          <tbody class="content pointer">
                             <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
                                   
@@ -101,7 +101,7 @@
                                   <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                               </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="pointer">
                               <tr *ngFor="let runner of singleBookMaker['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
@@ -157,7 +157,7 @@
                                 <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody class="pointer">
                             <ng-container *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" >
                               <tr *ngIf="singleFancyMarket['status'] != '4' && singleFancyMarket['status'] != undefined" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}}<br> </strong>
@@ -211,6 +211,7 @@
                     <div class="col-md-12">
                       <div class="innerpagem ps-3 pe-3 pb-3">
                         <div class="accordion" id="accordionExample">
+                          <!-- accordin 1 -->
                           <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                               <button class="accordion-button bg-transparent bg-pink text-dark" type="button"
@@ -231,6 +232,7 @@
                               </div>
                             </div>
                           </div>
+                          <!--  accordin 2-->
                           <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
                               <button class="accordion-button collapsed bg-transparent bg-pink text-dark"
@@ -251,6 +253,7 @@
                               </div>
                             </div>
                           </div>
+                          <!-- accordin 3 -->
                           <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
                               <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
@@ -271,15 +274,16 @@
                               </div>
                             </div>
                           </div>
+                          <!-- accordin 4 -->
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
+                            <h2 class="accordion-header" id="headingFour">
                               <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                aria-expanded="false" aria-controls="collapseFour">
                                 Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
                               </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                               data-bs-parent="#accordionExample">
                               <div class="accordion-body text-center">
                                 <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -291,15 +295,16 @@
                               </div>
                             </div>
                           </div>
+                          <!-- accordin 5 -->
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
+                            <h2 class="accordion-header" id="headingFive">
                               <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                aria-expanded="false" aria-controls="collapseFive">
                                 Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
                               </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
                               data-bs-parent="#accordionExample">
                               <div class="accordion-body text-center">
                                 <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -311,15 +316,16 @@
                               </div>
                             </div>
                           </div>
+                          <!-- accordin 6 -->
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
+                            <h2 class="accordion-header" id="headingSix">
                               <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                aria-expanded="false" aria-controls="collapseSix">
                                 Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
                               </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
                               data-bs-parent="#accordionExample">
                               <div class="accordion-body text-center">
                                 <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

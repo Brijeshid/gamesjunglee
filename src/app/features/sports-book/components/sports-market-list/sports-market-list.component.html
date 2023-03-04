@@ -42,13 +42,13 @@
                 <!--Game details info start-->
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="mt-0 innerpagem gamedetails ps-3 pe-3" style="cursor: pointer;">
+                    <div class="mt-0 innerpagem gamedetails ps-3 pe-3">
                       <!--Table 1-->
                       <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
                         <ng-container *ngIf="singleInPlay['status'] != '4' && singleInPlay['status'] != undefined">
                         <span class="badge rounded-pill bg-success midbadge">Live</span>
                         <!-- <span class=" rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span> -->
-                        <table class="table table-hover">
+                        <table class="table table-hover pointer">
                           <thead class="collapsible">
                             <tr valign="middle">
                               <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleInPlay['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']"></i>&nbsp;
@@ -95,7 +95,7 @@
                         <span class="badge rounded-pill bg-primary midbadge">Upcoming</span>
                         <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover">
-                          <thead class="collapsible">
+                          <thead class="collapsible pointer">
                             <tr valign="middle">
                               <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleUpcoming['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleUpcoming['isExpand'] = !singleUpcoming['isExpand']"></i>&nbsp;
                                 <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
@@ -118,7 +118,7 @@
                           <tbody class="content">
                             <ng-container *ngIf="singleUpcoming['isExpand']">
                               <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
+                                <td class="text-start ps-2 heading border-top pointer" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
                                   <a ><strong>{{runner['RunnerName']}}</strong></a>
                                 </td>
                                 <!-- <td class="border-top"></td>
