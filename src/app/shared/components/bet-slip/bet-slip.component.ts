@@ -3,6 +3,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EMarketName, EMarketType } from '@shared/models/shared';
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-bet-slip',
@@ -81,7 +82,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
-      odds:['',Validators.required],
+      odds:['',Validators.required,Validators],
       stake:['',[Validators.required]]
     })
   }
@@ -97,13 +98,13 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
 
     this.isLoaderStart = true;
-      let internvalCount = setInterval(()=>{
-        this.count--;
-        if(this.count <= 0){
-          clearInterval(internvalCount);
-        }
-      },1000);
-      this._placeBetCall();
+    let internvalCount = setInterval(()=>{
+      this.count--;
+      if(this.count <= 0){
+        clearInterval(internvalCount);
+      }
+    },1000);
+    this._placeBetCall();
   }
 
   private _placeBetCall(){
@@ -132,6 +133,15 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this.isLoaderStart = false;
               this._SharedService.getUserBalance.next();
             }
+      },
+      (err)=>{},
+      ()=>{
+        this._getUserOpenBet();
+        this.betSlipForm.reset();
+        this.isBetSlipActive = false;
+        this.isBetSlipPlaceCall = false;
+        this.isLoaderStart = false;
+        this._SharedService.getUserBalance.next();
       });
   }
 
@@ -164,30 +174,37 @@ export class BetSlipComponent implements OnInit, OnChanges {
     //calculate profit and loss with marketID
     if(this.betSlipForm.controls['stake'].valid){
       let marketObj = {};
-      marketObj[this.betSlipParams['marketId']] = {
-        profit:0,
-        loss:0,
-        marketId:this.betSlipParams['marketId'],
-        selectionId:this.betSlipParams['selectionId'],
-        marketType:this.marketType
-      };
-      let calCulatedAmount;
+      let calCulatedAmount = 0;
       if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
         let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
-        calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
+        calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
       }else{
         let multiplier = this.betSlipParams['odds']/100;
         calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
       }
 
-      marketObj[this.betSlipParams['marketId']]['profit'] = calCulatedAmount;
-      marketObj[this.betSlipParams['marketId']]['loss'] = this.betSlipForm.controls['stake'].value;
+      let backUnMatchRunnerAmount = this.betSlipForm.controls['stake'].value * -1;
+      let layUnMatchRunnerAmount = calCulatedAmount * -1;
 
-      if(this.isBack){
-        marketObj[this.betSlipParams['marketId']]['loss'] = this.betSlipForm.controls['stake'].value * -1;
-      }else{
-        marketObj[this.betSlipParams['marketId']]['profit'] = calCulatedAmount * -1;
-      }
+      let marketId = this.betSlipParams['marketId'];
+      marketObj['marketType'] = this.marketType;
+
+      marketObj[marketId] = {};
+      let bookMarketByMarketId = _.find(this.betSlipParams.booksForMarket,['marketId',marketId]);
+      this.getRunnerId().map((runnerId:any)=>{
+        marketObj[marketId][runnerId] = {};
+        if(runnerId == this.betSlipParams.selectionId){
+          marketObj[marketId][runnerId]['amount'] = this.isBack ? calCulatedAmount  : layUnMatchRunnerAmount;
+        }else{
+          marketObj[marketId][runnerId]['amount'] = this.isBack ? backUnMatchRunnerAmount : this.betSlipForm.controls['stake'].value;
+        }
+        if(this.betSlipParams?.booksForMarket.length > 0){
+          if(bookMarketByMarketId){
+            let bookMarketAmtByRunnerId = _.find(bookMarketByMarketId?.horses,['horse',runnerId]); //need to add amount variable from horse
+            bookMarketAmtByRunnerId ? marketObj[marketId][runnerId]['amount'] +=  bookMarketAmtByRunnerId?.amount : '';
+          }
+        }
+      })
       this._sharedService.marketBookCalSubject.next(marketObj);
     }else{
       this._sharedService.marketBookCalSubject.next({});
@@ -222,6 +239,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
         this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(res?.minimumBet),Validators.max(res?.maxBet)]);
       }
     })
+  }
+
+  getRunnerId(){
+    return _.map(this.betSlipParams['runnerObj'],'SelectionId');
   }
 
 }
