@@ -3,6 +3,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EMarketName, EMarketType } from '@shared/models/shared';
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-bet-slip',
@@ -23,8 +24,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   unMatchedBets :any[] = [];
   userConfig:any=[];
   betSlipForm:FormGroup;
-  isBetSlipPlaceCall:boolean = false;
-  isBetSlipCallCompleted:boolean = true;
+  isBetSlipPlaceCall:boolean = false
   isLoaderStart:boolean = false;
   count:number;
   isBack:boolean;
@@ -40,6 +40,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBack = changes['betSlipParams']['currentValue']['isBack'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
@@ -56,8 +57,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
         })
+        changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 1;
       }else{
         console.log("inside else")
+        this.count = 2;
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['runs'],
         })
@@ -67,6 +70,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
       this.marketType = changes['marketType']['currentValue'];
       if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
   }
   ngOnInit(): void {
@@ -78,26 +82,29 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
-      odds:['',Validators.required],
+      odds:['',Validators.required,Validators],
       stake:['',[Validators.required]]
     })
   }
 
   onClickPlaceBet(){
-    this.count = 5;
+    this.isBetSlipPlaceCall = true;
     if(this.marketType == EMarketType.MATCH_TYPE){
-      this.isLoaderStart = true;
-      let internvalCount = setInterval(()=>{
-        this.count--;
-        if(this.count <= 0){
-          clearInterval(internvalCount);
-        }
-      },1000);
-      this._placeBetCall();
+      this.count = 5;
+    }else if(this.marketType == EMarketType.FANCY_TYPE){
+      this.count = 2;
     }else{
-      this.count =0;
-      this._placeBetCall();
+      this.count = 1;
     }
+
+    this.isLoaderStart = true;
+    let internvalCount = setInterval(()=>{
+      this.count--;
+      if(this.count <= 0){
+        clearInterval(internvalCount);
+      }
+    },1000);
+    this._placeBetCall();
   }
 
   private _placeBetCall(){
@@ -122,10 +129,19 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this._getUserOpenBet();
               this.betSlipForm.reset();
               this.isBetSlipActive = false;
-              this.isBetSlipCallCompleted = true;
+              this.isBetSlipPlaceCall = false;
               this.isLoaderStart = false;
               this._SharedService.getUserBalance.next();
             }
+      },
+      (err)=>{},
+      ()=>{
+        this._getUserOpenBet();
+        this.betSlipForm.reset();
+        this.isBetSlipActive = false;
+        this.isBetSlipPlaceCall = false;
+        this.isLoaderStart = false;
+        this._SharedService.getUserBalance.next();
       });
   }
 
@@ -158,30 +174,37 @@ export class BetSlipComponent implements OnInit, OnChanges {
     //calculate profit and loss with marketID
     if(this.betSlipForm.controls['stake'].valid){
       let marketObj = {};
-      marketObj[this.betSlipParams['marketId']] = {
-        profit:0,
-        loss:0,
-        marketId:this.betSlipParams['marketId'],
-        selectionId:this.betSlipParams['selectionId'],
-        marketType:this.marketType
-      };
-      let calCulatedAmount;
+      let calCulatedAmount = 0;
       if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
         let multiplier = this.betSlipForm.controls['odds'].value >= 1 ? this.betSlipForm.controls['odds'].value - 1 : 1- this.betSlipForm.controls['odds'].value;
-        calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
+        calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value);
       }else{
         let multiplier = this.betSlipParams['odds']/100;
         calCulatedAmount = Math.round(multiplier * this.betSlipForm.controls['stake'].value)
       }
 
-      marketObj[this.betSlipParams['marketId']]['profit'] = calCulatedAmount;
-      marketObj[this.betSlipParams['marketId']]['loss'] = this.betSlipForm.controls['stake'].value;
+      let backUnMatchRunnerAmount = this.betSlipForm.controls['stake'].value * -1;
+      let layUnMatchRunnerAmount = calCulatedAmount * -1;
 
-      if(this.isBack){
-        marketObj[this.betSlipParams['marketId']]['loss'] = this.betSlipForm.controls['stake'].value * -1;
-      }else{
-        marketObj[this.betSlipParams['marketId']]['profit'] = calCulatedAmount * -1;
-      }
+      let marketId = this.betSlipParams['marketId'];
+      marketObj['marketType'] = this.marketType;
+
+      marketObj[marketId] = {};
+      let bookMarketByMarketId = _.find(this.betSlipParams.booksForMarket,['marketId',marketId]);
+      this.getRunnerId().map((runnerId:any)=>{
+        marketObj[marketId][runnerId] = {};
+        if(runnerId == this.betSlipParams.selectionId){
+          marketObj[marketId][runnerId]['amount'] = this.isBack ? calCulatedAmount  : layUnMatchRunnerAmount;
+        }else{
+          marketObj[marketId][runnerId]['amount'] = this.isBack ? backUnMatchRunnerAmount : this.betSlipForm.controls['stake'].value;
+        }
+        if(this.betSlipParams?.booksForMarket.length > 0){
+          if(bookMarketByMarketId){
+            let bookMarketAmtByRunnerId = _.find(bookMarketByMarketId?.horses,['horse',runnerId]); //need to add amount variable from horse
+            bookMarketAmtByRunnerId ? marketObj[marketId][runnerId]['amount'] +=  bookMarketAmtByRunnerId?.amount : '';
+          }
+        }
+      })
       this._sharedService.marketBookCalSubject.next(marketObj);
     }else{
       this._sharedService.marketBookCalSubject.next({});
@@ -216,6 +239,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
         this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(res?.minimumBet),Validators.max(res?.maxBet)]);
       }
     })
+  }
+
+  getRunnerId(){
+    return _.map(this.betSlipParams['runnerObj'],'SelectionId');
   }
 
 }

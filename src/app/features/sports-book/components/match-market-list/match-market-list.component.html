@@ -59,19 +59,11 @@
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
                                   </a>
-                                  
-                                  <ng-container *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.selectionId == runner?.SelectionId; else loss">
-                                    <a [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.profit > 0 ? 'text-success':'text-danger'">
-                                      <strong>{{placeBetData?.[inPlayUpcomingMarket['marketId']]?.profit}}</strong>
-                                    </a>
-                                  </ng-container>
 
-                                  <ng-template #loss>
-                                    <a [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.loss > 0 ? 'text-success':'text-danger'">
-                                      <strong>{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.loss}}</strong>
-                                    </a>
-                                  </ng-template>
-                                  
+                                  <a [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
+                                    <strong>{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                  </a>
+
                                 </td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="colblue" [class.dis]="inPlayUpcomingMarket['inPlayStatus'] == 0" (click)="inPlayUpcomingMarket['inPlayStatus'] && onClickLiveMarketRate(runner,inPlayUpcomingMarket,{isBack:true,index:2,odds:runner['back2']},EMarketType.MATCH_TYPE)"><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>

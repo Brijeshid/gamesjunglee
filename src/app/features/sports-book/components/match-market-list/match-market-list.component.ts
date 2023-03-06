@@ -48,6 +48,7 @@ export class MatchMarketListComponent implements OnInit {
   EMarketType:typeof EMarketType = EMarketType;
   marketType = EMarketType.MATCH_TYPE;
   placeBetData:any;
+  booksForMarket:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -326,7 +327,10 @@ export class MatchMarketListComponent implements OnInit {
         "matchTime":marketData['matchTime'],
         "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
-        "runs":positionObj['runs']
+        "runs":positionObj['runs'],
+        "eventId":marketData['matchId'],
+        "booksForMarket":this.booksForMarket,
+        "runnerObj":marketData['runners']
     }
 
     console.log(this.betSlipObj)
@@ -335,7 +339,7 @@ export class MatchMarketListComponent implements OnInit {
   getBooksForMarket(marketList:any){
     let markets= {marketIds : [marketList['marketId']]}
     this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
-      let booksForMarket = res?.booksForMarket;
+      let booksForMarket =this.booksForMarket = res?.booksForMarket;
         let horseDataByMarketId = _.find(booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
         this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
           singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
