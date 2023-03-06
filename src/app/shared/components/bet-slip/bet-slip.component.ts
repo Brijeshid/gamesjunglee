@@ -163,7 +163,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
             this.matchedBets = bet.bets
           }else{
             this.unMatchedBets = bet.bets
-            this._sharedService.unmatchedBetsList = bet.bets;
+            this._sharedService.unMatchedBetsList = bet.bets;
           }
         })
       })
