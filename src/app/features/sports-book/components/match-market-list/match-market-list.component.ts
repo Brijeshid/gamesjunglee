@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -54,7 +54,8 @@ export class MatchMarketListComponent implements OnInit {
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
     private _route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -67,11 +68,15 @@ export class MatchMarketListComponent implements OnInit {
     this._preConfig();
   }
 
-  private _preConfig(){
-    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+  ngAfterContentChecked() {
     this._sharedService.marketBookCalSubject.subscribe(res=>{
       this.placeBetData = res;
     })
+    this._cdref.detectChanges();
+  }
+
+  private _preConfig(){
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
   }
 
   getInPlayUpcomingData(){
@@ -312,6 +317,7 @@ export class MatchMarketListComponent implements OnInit {
     console.log(marketData['RunnerName'])
     this.marketType = marketType;
     this.betSlipObj = {
+        "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['marketId'],
         "marketName":marketData['marketType'],
@@ -328,7 +334,6 @@ export class MatchMarketListComponent implements OnInit {
         "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "runs":positionObj['runs'],
-        "eventId":marketData['matchId'],
         "booksForMarket":this.booksForMarket,
         "runnerObj":marketData['runners']
     }

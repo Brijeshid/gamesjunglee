@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
@@ -31,6 +31,8 @@ export class SportsMarketListComponent implements OnInit {
   isLoggedIn:boolean = false;
   isBetSlipActive:boolean = false;
   betSlipObj:any = {};
+  booksForMarket:any;
+  placeBetData:any;
 
   allTabState:any={
     liveUpcoming: true,
@@ -40,11 +42,15 @@ export class SportsMarketListComponent implements OnInit {
 
   constructor(
     private _sharedService: SharedService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
     this._route.params.subscribe(routeParams =>{
       this.allTabState={
         liveUpcoming: true,
@@ -55,6 +61,13 @@ export class SportsMarketListComponent implements OnInit {
       this.getSubNavBySportsList();
       this._getWebSocketUrl();
     })
+  }
+
+  ngAfterContentChecked() {
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
+    this._cdref.detectChanges();
   }
 
   onClickTab(activeTab){
@@ -192,7 +205,7 @@ export class SportsMarketListComponent implements OnInit {
       (res: any) => {
         console.log('market',res);
         if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        this._subscribeWebSocket();
+        if(this.realDataWebSocket) this._subscribeWebSocket();
       });
   }
 
@@ -294,6 +307,7 @@ export class SportsMarketListComponent implements OnInit {
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
     this.betSlipObj = {
+        "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],
         "marketName":marketData['marketType'],
@@ -309,13 +323,15 @@ export class SportsMarketListComponent implements OnInit {
         "runs":null,
         "matchTime":marketData['matchTime'],
         "book":marketData['market']['runners'],
-        "isBetSlipActive":positionObj['odds'] > 0 ? true: false
+        "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
+        "booksForMarket":this.booksForMarket,
+        "runnerObj":marketData['market']['runners']
     }
   }
 
   ngOnDestroy(): void {
     this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-    this.realDataWebSocket.complete();
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
@@ -323,7 +339,7 @@ export class SportsMarketListComponent implements OnInit {
   getBooksForMarket(marketList:any){
     let markets= {marketIds : marketList.map(m=>m.market.marketId)}
     this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
-      let booksForMarket = res?.booksForMarket;
+      let booksForMarket = this.booksForMarket = res?.booksForMarket;
       this.inPlayMatchListBySport.map((sportsObj)=>{
         let horseDataByMarketId = _.find(booksForMarket,['marketId',sportsObj['market']['marketId']]);
         return sportsObj['market']['runners'].map((singleRunner)=>{

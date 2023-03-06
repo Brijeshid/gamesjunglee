@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -38,21 +38,33 @@ export class TourMarketListComponent implements OnInit {
 
   isBetSlipActive:boolean = false;
   betSlipObj:any = {};
+  booksForMarket:any;
+  placeBetData:any;
 
   constructor(
     private _sharedService: SharedService,
     private _route: ActivatedRoute,
-    private _location: Location
-
+    private _location: Location,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this._getWebSocketUrl();
     })
+  }
+
+  ngAfterContentChecked() {
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
+    this._cdref.detectChanges();
   }
 
   getInPlayUpcomingData(){
@@ -145,7 +157,7 @@ export class TourMarketListComponent implements OnInit {
       (res: any) => {
         console.log('market',res);
         if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        this._subscribeWebSocket();
+        if(this.realDataWebSocket) this._subscribeWebSocket();
       });
   }
 
@@ -247,6 +259,7 @@ export class TourMarketListComponent implements OnInit {
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
     this.betSlipObj = {
+        "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],
         "marketName":marketData['marketType'],
@@ -262,14 +275,16 @@ export class TourMarketListComponent implements OnInit {
         "runs":null,
         "matchTime":marketData['matchTime'],
         "book":marketData['market']['runners'],
-        "isBetSlipActive":positionObj['odds'] > 0 ? true: false
+        "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
+        "booksForMarket":this.booksForMarket,
+        "runnerObj":marketData['market']['runners']
     }
   }
 
   getBooksForMarket(marketList:any){
     let markets= {marketIds : marketList.map(m=>m.market.marketId)}
     this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
-      let booksForMarket = res?.booksForMarket;
+      let booksForMarket = this.booksForMarket = res?.booksForMarket;
       this.inPlayMatchListBySport.map((sportsObj)=>{
         let horseDataByMarketId = _.find(booksForMarket,['marketId',sportsObj['market']['marketId']]);
         return sportsObj['market']['runners'].map((singleRunner)=>{
@@ -286,7 +301,7 @@ export class TourMarketListComponent implements OnInit {
 
   ngOnDestroy(): void {
     this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-    this.realDataWebSocket.complete();
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
