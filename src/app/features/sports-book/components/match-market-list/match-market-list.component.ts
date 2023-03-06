@@ -313,6 +313,7 @@ export class MatchMarketListComponent implements OnInit {
     console.log(marketData['RunnerName'])
     this.marketType = marketType;
     this.betSlipObj = {
+        "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['marketId'],
         "marketName":marketData['marketType'],
@@ -329,7 +330,6 @@ export class MatchMarketListComponent implements OnInit {
         "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "runs":positionObj['runs'],
-        "eventId":marketData['matchId'],
         "booksForMarket":this.booksForMarket,
         "runnerObj":marketData['runners']
     }

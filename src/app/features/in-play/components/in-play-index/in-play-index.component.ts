@@ -144,9 +144,7 @@ export class InPlayIndexComponent implements OnInit {
                   //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
                   //       runnerRes['suspended'] = false;
                   // }
-                  if(resObj['status']!= '4' && resObj['status'] != undefined){
-                    return runnerRes;
-                  }
+                  return runnerRes;
                 })
               }
           })

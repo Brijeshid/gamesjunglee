@@ -78,7 +78,7 @@
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first = first;">
-                                <tr [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
+                                <tr *ngIf="singleMarket['status'] != '4' && singleMarket['status'] != undefined" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
                                     <td class="text-start ps-2 heading border-top pointer" [ngClass]="{'border-top':!first}"><a ><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
                                     <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"><i class="fa fa-play text-success"></i> </td>
                                     <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"><i class="fas fa-broadcast-tower text-success"></i></td>

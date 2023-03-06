@@ -31,6 +31,8 @@ export class SportsMarketListComponent implements OnInit {
   isLoggedIn:boolean = false;
   isBetSlipActive:boolean = false;
   betSlipObj:any = {};
+  booksForMarket:any;
+  placeBetData:any;
 
   allTabState:any={
     liveUpcoming: true,
@@ -45,6 +47,9 @@ export class SportsMarketListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
     this._route.params.subscribe(routeParams =>{
       this.allTabState={
         liveUpcoming: true,
@@ -294,6 +299,7 @@ export class SportsMarketListComponent implements OnInit {
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
     this.betSlipObj = {
+        "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],
         "marketName":marketData['marketType'],
@@ -309,7 +315,9 @@ export class SportsMarketListComponent implements OnInit {
         "runs":null,
         "matchTime":marketData['matchTime'],
         "book":marketData['market']['runners'],
-        "isBetSlipActive":positionObj['odds'] > 0 ? true: false
+        "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
+        "booksForMarket":this.booksForMarket,
+        "runnerObj":marketData['runners']
     }
   }
 
@@ -323,7 +331,7 @@ export class SportsMarketListComponent implements OnInit {
   getBooksForMarket(marketList:any){
     let markets= {marketIds : marketList.map(m=>m.market.marketId)}
     this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
-      let booksForMarket = res?.booksForMarket;
+      let booksForMarket = this.booksForMarket = res?.booksForMarket;
       this.inPlayMatchListBySport.map((sportsObj)=>{
         let horseDataByMarketId = _.find(booksForMarket,['marketId',sportsObj['market']['marketId']]);
         return sportsObj['market']['runners'].map((singleRunner)=>{

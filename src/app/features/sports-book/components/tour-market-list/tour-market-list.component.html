@@ -78,6 +78,10 @@
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
                                   </a>
+
+                                  <a [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
+                                    <strong>{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                  </a>
                                 </td>
                                 <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                                 <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
