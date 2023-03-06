@@ -2,10 +2,11 @@
     <div class="col-md-12 asidenav disnone">
       <ul class="nav flex-column">
         <li class="nav-item leftuser" *ngIf="isLoggedIn">
-            <span class="leftb-icon float-start"><i class="fa fa-user"></i> </span> <span class="leftuserhead">
+            <span class="leftb-icon float-start fa-2x"><i class="fa fa-user"></i> </span> <span class="leftuserhead ms-1">
             {{userDetails['username'] | titlecase}} </span>
         </li>
-        <div class="dropdown-divider"></div>
+        <hr class="text-pink ms-2 me-2" size="4">
+        <!-- <div class="dropdown-divider"></div> -->
 
         <ng-container *ngIf="!sportsName;else commonNav">
 
@@ -35,7 +36,7 @@
             </div>
         </li>
         <li class="nav-item" *ngIf="mainMenu.length > 0"><a class="nav-link text-white" data-bs-toggle="collapse"
-                href="#multiCollapseExample1"><i class="fas fa-arrow-alt-circle-down me-3"></i> View More</a></li>
+                ><i class="fas fa-arrow-alt-circle-down me-3"></i> View More</a></li>
 
         </ng-container>
 
