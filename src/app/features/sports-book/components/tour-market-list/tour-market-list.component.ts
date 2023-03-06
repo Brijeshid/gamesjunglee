@@ -150,7 +150,7 @@ export class TourMarketListComponent implements OnInit {
       (res: any) => {
         console.log('market',res);
         if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        this._subscribeWebSocket();
+        if(this.realDataWebSocket) this._subscribeWebSocket();
       });
   }
 
@@ -294,7 +294,7 @@ export class TourMarketListComponent implements OnInit {
 
   ngOnDestroy(): void {
     this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-    this.realDataWebSocket.complete();
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }

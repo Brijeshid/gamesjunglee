@@ -101,7 +101,7 @@ export class InPlayIndexComponent implements OnInit {
       (res: any) => {
         console.log('market',res);
         if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        this._subscribeWebSocket();
+        if(this.realDataWebSocket) this._subscribeWebSocket();
       });
   }
 
@@ -206,7 +206,7 @@ export class InPlayIndexComponent implements OnInit {
 
   ngOnDestroy(): void {
     this._setOrUnsetWebSocketData(false,_.merge(this.setOrUnsetWebSocketParamsObj['inplay'],this.setOrUnsetWebSocketParamsObj['upcoming']));
-    this.realDataWebSocket.complete();
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
