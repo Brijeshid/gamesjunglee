@@ -1,4 +1,9 @@
 @charset "UTF-8";
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+}
+
 .browncolor {
   background-color: #202121;
 }
@@ -227,8 +232,11 @@
   color: #000;
   text-decoration: none;
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 13px;
+}
+.gamedetails .table span {
+  font-size: 10px;
 }
 .gamedetails th {
   border-color: inherit;
@@ -932,4 +940,42 @@ input:checked + .slider:before {
     transform: rotate(359deg);
   }
 }
-/*Login / registration loader end*//*# sourceMappingURL=main.css.map */
+/*Login / registration loader end*/
+/**Tooltip start**/
+.tooltipnk {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipnk .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #797979;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 0%;
+  margin-left: -60px;
+  font-size: 14px !important;
+}
+
+.tooltipnk .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #797979 transparent;
+}
+
+.tooltipnk:hover .tooltiptext {
+  visibility: visible;
+}
+
+/**Tooltip end**//*# sourceMappingURL=main.css.map */
