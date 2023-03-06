@@ -16,7 +16,7 @@ export class SharedService {
   private previousUrl: string = '';
   private currentUrl: string = '';
   getUserBalance = new Subject();
-  unmatchedBetsList:any = [];
+  unMatchedBetsList:any = [];
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;

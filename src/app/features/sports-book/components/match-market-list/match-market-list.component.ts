@@ -109,7 +109,8 @@ export class MatchMarketListComponent implements OnInit {
           })
         //merge both centralId
         this.inPlayUpcomingMarket = res['inPlayUpcomingMarket'];
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
+        if(this.realDataWebSocket) this._subscribeWebSocket();
+        // this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
         if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket(this.inPlayUpcomingMarket);
       }
     })
@@ -135,7 +136,8 @@ export class MatchMarketListComponent implements OnInit {
         })
         //merge both centralId
         this.bookMakerMarket = res;
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']});
+        if(this.realDataWebSocket) this._subscribeWebSocket();
+        // this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']});
       }
     })
   }
@@ -157,7 +159,8 @@ export class MatchMarketListComponent implements OnInit {
         })
         //merge both centralId
         this.fancyMarket = res;
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']});
+        if(this.realDataWebSocket) this._subscribeWebSocket();
+        // this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']});
       }
     })
   }
@@ -192,6 +195,8 @@ export class MatchMarketListComponent implements OnInit {
       let webSocketData = parseData['data'];
       if(this.inPlayUpcomingMarket?.matchName){
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', this.inPlayUpcomingMarket['marketId']]);
+            //unmatch
+            // let singleUnMatchMarketData = _.find(this._sharedService.unMatchedBetsList, ['bmi', this.inPlayUpcomingMarket['marketId']]);
             if(singleWebSocketMarketData != undefined){
               this.inPlayUpcomingMarket['status'] = singleWebSocketMarketData['ms'];
               this.inPlayUpcomingMarket['runners'].map((runnerRes) => {
