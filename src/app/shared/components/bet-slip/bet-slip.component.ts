@@ -12,7 +12,7 @@ import * as _ from "lodash";
 })
 export class BetSlipComponent implements OnInit, OnChanges {
 
-  @Input() isBetSlipActive:boolean = false;
+  @Input() isBetSlipActive:any;
   @Input() betSlipParams:any;
   @Input() showMAtchwiseBet = ''
   @Input() marketType:any = EMarketType.MATCH_TYPE;

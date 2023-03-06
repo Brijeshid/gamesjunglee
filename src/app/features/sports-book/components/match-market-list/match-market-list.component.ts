@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -54,7 +54,8 @@ export class MatchMarketListComponent implements OnInit {
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
     private _route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -67,11 +68,15 @@ export class MatchMarketListComponent implements OnInit {
     this._preConfig();
   }
 
-  private _preConfig(){
-    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+  ngAfterContentChecked() {
     this._sharedService.marketBookCalSubject.subscribe(res=>{
       this.placeBetData = res;
     })
+    this._cdref.detectChanges();
+  }
+
+  private _preConfig(){
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
   }
 
   getInPlayUpcomingData(){

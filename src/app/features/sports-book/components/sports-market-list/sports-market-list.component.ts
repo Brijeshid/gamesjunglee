@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
@@ -42,7 +42,8 @@ export class SportsMarketListComponent implements OnInit {
 
   constructor(
     private _sharedService: SharedService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +61,13 @@ export class SportsMarketListComponent implements OnInit {
       this.getSubNavBySportsList();
       this._getWebSocketUrl();
     })
+  }
+
+  ngAfterContentChecked() {
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
+    this._cdref.detectChanges();
   }
 
   onClickTab(activeTab){

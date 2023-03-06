@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -44,8 +44,8 @@ export class TourMarketListComponent implements OnInit {
   constructor(
     private _sharedService: SharedService,
     private _route: ActivatedRoute,
-    private _location: Location
-
+    private _location: Location,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +58,13 @@ export class TourMarketListComponent implements OnInit {
       this.tourId = routeParams.tourId;
       this._getWebSocketUrl();
     })
+  }
+
+  ngAfterContentChecked() {
+    this._sharedService.marketBookCalSubject.subscribe(res=>{
+      this.placeBetData = res;
+    })
+    this._cdref.detectChanges();
   }
 
   getInPlayUpcomingData(){
