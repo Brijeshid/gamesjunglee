@@ -317,7 +317,7 @@ export class SportsMarketListComponent implements OnInit {
         "book":marketData['market']['runners'],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "booksForMarket":this.booksForMarket,
-        "runnerObj":marketData['runners']
+        "runnerObj":marketData['market']['runners']
     }
   }
 

@@ -40,7 +40,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
-      this.stakeVal(this.betSlipForm.controls['stake'].value);
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBack = changes['betSlipParams']['currentValue']['isBack'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
@@ -65,7 +64,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
           odds:this.betSlipParams['runs'],
         })
       }
-
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
       this.marketType = changes['marketType']['currentValue'];
@@ -82,7 +81,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
-      odds:['',Validators.required,Validators],
+      odds:['',[Validators.required,Validators.min(1.01)]],
       stake:['',[Validators.required]]
     })
   }
@@ -214,6 +213,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   upAndDownOddsValue(isUp:boolean){
     this.betSlipForm.controls['odds'].setValue(isUp ? +(this.betSlipForm.controls['odds'].value + 0.01).toFixed(2) : +(this.betSlipForm.controls['odds'].value - 0.01).toFixed(2)) ;
+    this.stakeVal(0);
   }
 
   updateStack(stackVal:any){
