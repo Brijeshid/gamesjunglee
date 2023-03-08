@@ -61,7 +61,7 @@
                                   </a>
 
                                   <a [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
-                                    <strong>{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                    <strong *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']">&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
 
                                 </td>

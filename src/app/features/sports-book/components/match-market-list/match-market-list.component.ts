@@ -77,6 +77,10 @@ export class MatchMarketListComponent implements OnInit {
 
   private _preConfig(){
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this._sharedService.getUserBalance.subscribe(res=>{
+      this.placeBetData = [];
+      if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket(this.inPlayUpcomingMarket);
+    })
   }
 
   getInPlayUpcomingData(){
