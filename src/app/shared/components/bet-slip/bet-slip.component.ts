@@ -29,6 +29,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   count:number;
   isBack:boolean;
   userBalance:any;
+  isSticky: boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -37,10 +38,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
     private _fb: FormBuilder,
     ) { }
 
-    @HostListener('window:scroll', ['$event'])
-    onScrollHandler(event){
-      console.log(event)
-    }
+
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {
+    this.isSticky = window.pageYOffset >= 250;
+  }
+
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
