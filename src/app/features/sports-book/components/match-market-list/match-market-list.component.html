@@ -55,7 +55,7 @@
                           <tbody class="content pointer">
                             <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
-                                  
+                                  <br>
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
                                   </a>
@@ -99,7 +99,7 @@
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
                                   </a>
-                                  
+
                                   <ng-container *ngIf="placeBetData?.[singleBookMaker?.marketId]?.selectionId == runner?.SelectionId; else loss">
                                     <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.profit > 0 ? 'text-success':'text-danger'">
                                       <strong>{{placeBetData?.[singleBookMaker?.marketId]?.profit}}</strong>

@@ -72,14 +72,11 @@
                           <tbody class="content">
                             <ng-container *ngIf="singleInPlay['isExpand']">
                               <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a>
+                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a> <br>
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
-                                  </a><br>
+                                  </a>
                                    <a [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
-                                    <strong>{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                  </a> <
-                                  <a [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
                                     <strong>{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
                                 </td>
