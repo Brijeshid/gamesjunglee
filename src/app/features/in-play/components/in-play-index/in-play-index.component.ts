@@ -77,8 +77,7 @@ export class InPlayIndexComponent implements OnInit {
         console.log('inplay',this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
         // localStorage.setItem('unset',JSON.stringify(this.setOrUnsetWebSocketParamsObj));
         let newParamsObjs = paramsObj['upComing'] ? this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']:this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'];
-        // if(newParamsObjs.length > 0) this._setOrUnsetWebSocketData(true,{'centralIds':newParamsObjs});
-        if(newParamsObjs.length > 0 && this.realDataWebSocket) this._subscribeWebSocket();;
+        if(newParamsObjs.length > 0) this._setOrUnsetWebSocketData(true,{'centralIds':newParamsObjs});
       }
       console.log('data',res['matchDetails']);
       paramsObj['upComing'] ?  this.upComingMatchListBySport = res['matchDetails']: this.inPlayMatchListBySport = res['matchDetails'];
@@ -206,7 +205,7 @@ export class InPlayIndexComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // this._setOrUnsetWebSocketData(false,_.merge(this.setOrUnsetWebSocketParamsObj['inplay'],this.setOrUnsetWebSocketParamsObj['upcoming']));
+    this._setOrUnsetWebSocketData(false,_.merge(this.setOrUnsetWebSocketParamsObj['inplay'],this.setOrUnsetWebSocketParamsObj['upcoming']));
     if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });

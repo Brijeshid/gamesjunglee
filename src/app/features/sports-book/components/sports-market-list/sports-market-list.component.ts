@@ -181,8 +181,8 @@ export class SportsMarketListComponent implements OnInit {
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         console.log(this.inPlayMatchListBySport)
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
-        // this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-        if(this.realDataWebSocket) this._subscribeWebSocket();
+        this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+
         if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
 
       }
@@ -330,7 +330,7 @@ export class SportsMarketListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+    this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
     if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
