@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,6 +37,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
     private _fb: FormBuilder,
     ) { }
 
+    @HostListener('window:scroll', ['$event'])
+    onScrollHandler(event){
+      console.log(event)
+    }
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){

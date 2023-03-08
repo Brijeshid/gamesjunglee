@@ -231,7 +231,7 @@ body {
 .gamedetails .table a {
   color: #000;
   text-decoration: none;
-  display: block;
+  display: inline-block;
   font-size: 12px;
   line-height: 13px;
 }
@@ -941,6 +941,10 @@ input:checked + .slider:before {
   }
 }
 /*Login / registration loader end*/
+.pink:hover {
+  background-color: #ffa7a3;
+}
+
 /**Tooltip start**/
 .tooltipnk {
   position: relative;
@@ -978,4 +982,12 @@ input:checked + .slider:before {
   visibility: visible;
 }
 
-/**Tooltip end**//*# sourceMappingURL=main.css.map */
+/**Tooltip end**/
+.rightboxfix {
+  position: fixed;
+  width: 26%;
+}
+
+.rightboxfix .scroll {
+  margin-top: -160px;
+}/*# sourceMappingURL=main.css.map */
