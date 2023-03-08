@@ -48,9 +48,6 @@ export class SportsMarketListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
-    this._sharedService.marketBookCalSubject.subscribe(res=>{
-      this.placeBetData = res;
-    })
     this._route.params.subscribe(routeParams =>{
       this.allTabState={
         liveUpcoming: true,
@@ -60,6 +57,11 @@ export class SportsMarketListComponent implements OnInit {
       this.sports = routeParams.sports;
       this.getSubNavBySportsList();
       this._getWebSocketUrl();
+    })
+
+    this._sharedService.getUserBalance.subscribe(res=>{
+      this.placeBetData = [];
+      if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
     })
   }
 

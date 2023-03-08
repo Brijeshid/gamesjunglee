@@ -50,13 +50,14 @@ export class TourMarketListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
-    this._sharedService.marketBookCalSubject.subscribe(res=>{
-      this.placeBetData = res;
-    })
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this._getWebSocketUrl();
+    })
+    this._sharedService.getUserBalance.subscribe(res=>{
+      this.placeBetData = [];
+      if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
     })
   }
 
@@ -136,7 +137,6 @@ export class TourMarketListComponent implements OnInit {
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
         this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
         if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
-
       }
     })
   }
