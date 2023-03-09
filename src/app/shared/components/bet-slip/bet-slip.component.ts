@@ -39,11 +39,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
     ) { }
 
 
-  @HostListener('window:scroll', ['$event'])
-  checkScroll() {
-    this.isSticky = window.pageYOffset >= 250;
-  }
-
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
@@ -137,7 +132,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
               this.isBetSlipActive = false;
               this.isBetSlipPlaceCall = false;
               this.isLoaderStart = false;
-              this._SharedService.getUserBalance.next();
+              this._SharedService.getUserBalance.next({'marketType': this.marketType});
             }
       },
       (err)=>{},
@@ -147,7 +142,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
         this.isBetSlipActive = false;
         this.isBetSlipPlaceCall = false;
         this.isLoaderStart = false;
-        this._SharedService.getUserBalance.next();
       });
   }
 
