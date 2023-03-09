@@ -46,7 +46,7 @@
                       <!--Table 1-->
                       <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
                         <ng-container *ngIf="singleInPlay['status'] != '4' && singleInPlay['status'] != undefined">
-                        <span class="badge rounded-pill bg-success midbadge">Live</span>
+                        <span class="badge rounded bg-success midbadge ms-1 py-1 px-3">Live</span>
                         <!-- <span class=" rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover pointer">
                           <thead class="collapsible">
@@ -100,12 +100,12 @@
                                 </td>
                                 <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                                 <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
-                                <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:2,odds:runner['back2']})"><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
-                                <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:1,odds:runner['back1']})"><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
-                                <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:0,odds:runner['back0']})"><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:0,odds:runner['lay0']})"><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
-                                <td class="colpink "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:1,odds:runner['lay1']})"><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                                <td class="colpink " [ngClass]="{'last':last}"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:2,odds:runner['lay2']})"><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a></td>
+                                <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:2,odds:runner['back2']})"><strong>{{runner['back2']}}</strong> <br><span>{{runner['vback2'] | marketRateFormater}}</span></a></td>
+                                <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:1,odds:runner['back1']})"><strong>{{runner['back1']}}</strong> <br><span>{{runner['vback1'] | marketRateFormater}}</span></a></td>
+                                <td class="colblue "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:0,odds:runner['back0']})"><strong>{{runner['back0']}}</strong> <br><span>{{runner['vback0'] | marketRateFormater}}</span></a></td>
+                                <td class="colpink "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:0,odds:runner['lay0']})"><strong>{{runner['lay0']}}</strong> <br><span>{{runner['vlay0'] | marketRateFormater}}</span></a></td>
+                                <td class="colpink "><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:1,odds:runner['lay1']})"><strong>{{runner['lay1']}}</strong> <br><span>{{runner['vlay1'] | marketRateFormater}}</span></a></td>
+                                <td class="colpink " [ngClass]="{'last':last}"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:2,odds:runner['lay2']})"><strong>{{runner['lay2']}}</strong> <br><span>{{runner['vlay2'] | marketRateFormater}}</span></a></td>
                               </tr>
                             </ng-container>
                           </tbody>
@@ -116,7 +116,7 @@
                       <!--Table 2-->
                       <ng-container *ngFor="let singleUpcoming of upComingMatchListBySport">
                         <ng-container *ngIf="singleUpcoming['status'] != '4' && singleUpcoming['status'] != undefined">
-                        <span class="badge rounded-pill bg-primary midbadge">Upcoming</span>
+                        <span class="badge rounded bg-primary midbadge ms-1 py-1 px-3">Upcoming</span>
                         <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover">
                           <thead class="collapsible pointer">
@@ -152,12 +152,12 @@
                                 </td>
                                 <!-- <td class="border-top"></td>
                                 <td class="border-top"></td> -->
-                                <td class="colblue dis"><a ><strong>{{runner['back2']}}</strong> <br>{{runner['vback2'] | marketRateFormater}}</a></td>
-                                <td class="colblue dis"><a ><strong>{{runner['back1']}}</strong> <br>{{runner['vback1'] | marketRateFormater}}</a></td>
-                                <td class="colblue dis"><a ><strong>{{runner['back0']}}</strong> <br>{{runner['vback0'] | marketRateFormater}}</a></td>
-                                <td class="colpink dis"><a ><strong>{{runner['lay0']}}</strong> <br>{{runner['vlay0'] | marketRateFormater}}</a></td>
-                                <td class="colpink dis"><a ><strong>{{runner['lay1']}}</strong> <br>{{runner['vlay1'] | marketRateFormater}}</a></td>
-                                <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br>{{runner['vlay2'] | marketRateFormater}}</a>
+                                <td class="colblue dis"><a ><strong>{{runner['back2']}}</strong> <br><span>{{runner['vback2'] | marketRateFormater}}</span></a></td>
+                                <td class="colblue dis"><a ><strong>{{runner['back1']}}</strong> <br><span>{{runner['vback1'] | marketRateFormater}}</span></a></td>
+                                <td class="colblue dis"><a ><strong>{{runner['back0']}}</strong> <br><span>{{runner['vback0'] | marketRateFormater}}</span></a></td>
+                                <td class="colpink dis"><a ><strong>{{runner['lay0']}}</strong> <br><span>{{runner['vlay0'] | marketRateFormater}}</span></a></td>
+                                <td class="colpink dis"><a ><strong>{{runner['lay1']}}</strong> <br><span>{{runner['vlay1'] | marketRateFormater}}</span></a></td>
+                                <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br><span>{{runner['vlay2'] | marketRateFormater}}</span></a>
                                 <!--online start-->
                                 <!-- <div class="suspendedbm1">
                                   <button type="button" class="suspendedm1 marketlist-on">Suspended</button>
