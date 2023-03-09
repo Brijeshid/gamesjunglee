@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,6 +29,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   count:number;
   isBack:boolean;
   userBalance:any;
+  isSticky: boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -36,6 +37,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
     private _SharedService:SharedService,
     private _fb: FormBuilder,
     ) { }
+
+
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {
+    this.isSticky = window.pageYOffset >= 250;
+  }
 
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
@@ -163,7 +170,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
             this.matchedBets = bet.bets
           }else{
             this.unMatchedBets = bet.bets
-            this._sharedService.unMatchedBetsList = bet.bets;
+            this._sharedService.unmatchedBetsList = bet.bets;
           }
         })
       })

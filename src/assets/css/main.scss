@@ -240,7 +240,7 @@ $border-color_1: inherit;
     a {
       color: $color_3;
       text-decoration: none;
-      display: block;
+      display: inline-block;
       font-size: 12px;
       line-height: 13px;
     }
@@ -887,3 +887,10 @@ color:#626262;
   visibility: visible;
 }
 /**Tooltip end**/
+.rightboxfix{
+  position: fixed;
+width: 26%;
+}
+.rightboxfix .scroll{
+  margin-top: -160px;
+}

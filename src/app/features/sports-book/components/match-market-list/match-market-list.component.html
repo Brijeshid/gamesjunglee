@@ -54,14 +54,20 @@
                           </thead>
                           <tbody class="content">
                             <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
-                                <td width="30%" class="text-start ps-2 heading pointer" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
-                                  
+                                <td width="30%" class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
+                                  <br>
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
                                   </a>
 
+                                  <a>
+                                    <strong *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                    <strong *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                  </a>
+
                                   <a [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
-                                    <strong>{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                    <strong *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
+                                    <strong *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
 
                                 </td>
@@ -96,21 +102,21 @@
                             <tbody class="pointer">
                               <tr *ngFor="let runner of singleBookMaker['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading border-top dis" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
+                                  <br>
                                   <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
                                     <strong>{{runner?.hourseAmt?.amount}}</strong>
                                   </a>
-                                  
-                                  <ng-container *ngIf="placeBetData?.[singleBookMaker?.marketId]?.selectionId == runner?.SelectionId; else loss">
-                                    <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.profit > 0 ? 'text-success':'text-danger'">
-                                      <strong>{{placeBetData?.[singleBookMaker?.marketId]?.profit}}</strong>
-                                    </a>
-                                  </ng-container>
 
-                                  <ng-template #loss>
-                                    <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.loss > 0 ? 'text-success':'text-danger'">
-                                      <strong>{{placeBetData?.[singleBookMaker?.marketId]?.loss}}</strong>
-                                    </a>
-                                  </ng-template>
+                                  <a>
+                                    <strong *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
+                                    <strong *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
+                                  </a>
+
+                                  <a [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount >0 ? 'text-success':'text-danger'">
+                                    <strong *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount">{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
+                                    <strong *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
+                                  </a>
+
                                 </td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
