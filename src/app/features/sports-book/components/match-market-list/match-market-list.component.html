@@ -158,8 +158,12 @@
                           <tbody class="pointer">
                             <ng-container *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" >
                               <tr *ngIf="singleFancyMarket['status'] != '4' && singleFancyMarket['status'] != undefined" [ngClass]="{'border-0':last}">
-                                <td width="30%" class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}}<br> </strong>
-                                  </a></td>
+                                <td width="30%" class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}}<br> </strong></a>
+                                  <br>
+                                  <a [ngClass]="singleFancyMarket?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
+                                    <strong>{{singleFancyMarket?.hourseAmt?.amount}}</strong>
+                                  </a>
+                                </td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>

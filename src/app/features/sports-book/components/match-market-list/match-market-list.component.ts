@@ -72,14 +72,29 @@ export class MatchMarketListComponent implements OnInit {
     this._sharedService.marketBookCalSubject.subscribe(res=>{
       this.placeBetData = res;
     })
+    
     this._cdref.detectChanges();
   }
 
   private _preConfig(){
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
-    this._sharedService.getUserBalance.subscribe(res=>{
-      this.placeBetData = [];
-      if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket(this.inPlayUpcomingMarket);
+    this._sharedService.getUserBalance.subscribe((res:any)=>{
+      switch(res['marketType'] && this.isLoggedIn){
+        case EMarketType.MATCH_TYPE:
+          this.placeBetData = [];
+          if(this.inPlayUpcomingMarket ) this.getBooksForMarket({marketIds : [this.inPlayUpcomingMarket['marketId']]},EMarketType.MATCH_TYPE);
+          break;
+
+        case EMarketType.BOOKMAKER_TYPE:
+          this.placeBetData = [];
+          if(this.bookMakerMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.bookMakerMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.BOOKMAKER_TYPE);
+          break;
+
+        case EMarketType.FANCY_TYPE:
+          if(this.fancyMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.fancyMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.FANCY_TYPE);
+          break;
+      }
+      this._cdref.detectChanges();
     })
   }
 
@@ -114,7 +129,7 @@ export class MatchMarketListComponent implements OnInit {
         //merge both centralId
         this.inPlayUpcomingMarket = res['inPlayUpcomingMarket'];
         this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
-        if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket(this.inPlayUpcomingMarket);
+        if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket({marketIds : [this.inPlayUpcomingMarket['marketId']]},EMarketType.MATCH_TYPE);
       }
     })
   }
@@ -140,6 +155,7 @@ export class MatchMarketListComponent implements OnInit {
         //merge both centralId
         this.bookMakerMarket = res;
         this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']});
+        if(this.bookMakerMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.bookMakerMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.BOOKMAKER_TYPE);
       }
     })
   }
@@ -162,6 +178,7 @@ export class MatchMarketListComponent implements OnInit {
         //merge both centralId
         this.fancyMarket = res;
         this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']});
+        if(this.fancyMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.fancyMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.FANCY_TYPE);
       }
     })
   }
@@ -346,15 +363,51 @@ export class MatchMarketListComponent implements OnInit {
     console.log(this.betSlipObj)
   }
 
-  getBooksForMarket(marketList:any){
-    let markets= {marketIds : [marketList['marketId']]}
-    this._sharedService._getBooksForMarketApi(markets).subscribe((res:any) =>{
-      let booksForMarket =this.booksForMarket = res?.booksForMarket;
-        let horseDataByMarketId = _.find(booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
-        this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
-          singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
-          return singleRunner;
-        })
+  getBooksForMarket(marketIdList:any,marketType){
+    this._sharedService._getBooksForMarketApi(marketIdList).subscribe((res:any) =>{
+      switch(marketType){
+        case EMarketType.MATCH_TYPE:
+          this.booksForMarket = res?.booksForMarket;
+          let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
+          this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
+            singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
+            return singleRunner;
+          })
+          setTimeout(()=>{this.inPlayUpcomingMarket},0);
+        break;
+
+        case EMarketType.BOOKMAKER_TYPE:
+          this.bookMakerMarket.map((singleBookMaker)=>{
+            let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleBookMaker['marketId']]);
+            if(horseDataByMarketId !== undefined){
+              horseDataByMarketId?.horses.map((singleAmount)=>{
+                singleAmount['horse'] = +singleAmount['horse'];
+                return singleAmount;
+              })
+               return singleBookMaker['runners'].map((singleRunner)=>{
+                singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
+                return singleRunner;
+              })
+            }
+          })
+          setTimeout(()=>{this.bookMakerMarket},0);
+        break;
+
+        case EMarketType.FANCY_TYPE:
+          this.fancyMarket.map((singleFancy)=>{
+            let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleFancy['marketId']]);
+            if(horseDataByMarketId !== undefined){
+              horseDataByMarketId?.horses.map((singleAmount)=>{
+                singleAmount['horse'] = +singleAmount['horse'];
+                return singleAmount;
+              })
+              singleFancy['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleFancy['SelectionId']]);
+              return singleFancy;
+            }
+          })
+          setTimeout(()=>{this.fancyMarket},0);
+        break;
+      }
     })
   }
 
