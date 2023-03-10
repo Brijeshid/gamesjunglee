@@ -236,7 +236,7 @@ $border-color_1: inherit;
       text-align: center;border-top: 2px solid #fff;
       font-size: 11px;
       // line-height: 13px;
-      line-height: 6px;
+      line-height: 11px;
     }
     a {
       color: $color_3;
@@ -244,7 +244,7 @@ $border-color_1: inherit;
       display: inline-block;
       font-size: 12px;
       // line-height: 13px;
-      line-height: 6px;
+      line-height: 11px;
     }
     span{
       font-size: 10px;
@@ -309,7 +309,7 @@ tr {
   background-color: $background-color_8 !important;
   font-size: 11px;
   // line-height: 13px;
-  line-height: 6px;
+  line-height: 11px;
 }
 .colgray {
   background-color: $background-color_9 !important;
@@ -319,7 +319,7 @@ tr {
   border-bottom-right-radius: 15px;
   border-right: 0px;
 }
-.colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 50px; height: 40px;}
+.colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 45px; height: 40px;}
 //color box end
 /*Table end*/
 /*login start*/

@@ -123,7 +123,7 @@
                               <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleUpcoming['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleUpcoming['isExpand'] = !singleUpcoming['isExpand']"></i>&nbsp;
                                 <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
                                   {{singleUpcoming['matchName']}} <br>
-                                  <span>{{singleUpcoming['matchTime'] | date: 'EEEE At h:mm a'}}</span>
+                                  <span class="ms-3">{{singleUpcoming['matchTime'] | date: 'EEEE At h:mm a'}}</span>
                                 </span>
                               </th>
                               <!-- <th width="15%" class="coldark"></th>
