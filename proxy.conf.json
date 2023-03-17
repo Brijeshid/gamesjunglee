@@ -1,6 +1,6 @@
 {
   "/apiE/*": {
-    "target": "https://devbetting.azurewebsites.net",
+    "target": "https://sports-zone.azurewebsites.net",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
@@ -8,7 +8,7 @@
   },
 
   "/api/*": {
-    "target": "https://devbetting.azurewebsites.net",
+    "target": "https://sports-zone.azurewebsites.net",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
