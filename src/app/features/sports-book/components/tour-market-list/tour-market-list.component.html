@@ -15,7 +15,7 @@
           <div class="row m-0">
             <div class="col-md-12 pb-2 pt-2">
               <a class="text-pink small text-decoration-none"><i
-                (click)="goBack()" class="fa fa-angle-left text-white"  style="cursor: pointer;"></i> {{tourName | uppercase}} </a>
+                (click)="goBack()" class="fa fa-angle-left text-white" style="cursor: pointer;"></i> {{tourName | uppercase}} </a>
             </div>
             <div class="col-md-12 accordionn p-0">
               <!-- Nav tabs -->
@@ -88,7 +88,7 @@
                                     <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                     <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
-                                  
+
                                 </td>
                                 <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                                 <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
