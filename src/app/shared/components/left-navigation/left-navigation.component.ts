@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-left-navigation',
@@ -23,6 +24,7 @@ export class LeftNavigationComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _sharedService: SharedService,
+    private _location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -104,6 +106,10 @@ export class LeftNavigationComponent implements OnInit {
       this.viewMoreNavList = res['menuList'];
       console.log(res);
     });
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

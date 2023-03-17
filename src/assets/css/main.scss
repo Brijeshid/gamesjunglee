@@ -217,14 +217,14 @@ $border-color_1: inherit;
   display: flex;
   margin-top: 10px;
 }
-.rightb-icon {
-  width: 40px;
-  height: 40px;
+.userb-icon {
+  width: 35px;
+  height: 35px;
   background: #b70800;
   border-radius: 50px;
   text-align: center;
   padding: 1px;
-  font-size: 25px;
+  font-size: 23px;
   float: right;
 }
 
@@ -247,14 +247,16 @@ $border-color_1: inherit;
       padding: 2px 5px;
       text-align: center;border-top: 2px solid #fff;
       font-size: 11px;
-      line-height: 13px;
+      // line-height: 13px;
+      line-height: 11px;
     }
     a {
       color: $color_3;
       text-decoration: none;
       display: inline-block;
       font-size: 12px;
-      line-height: 13px;
+      // line-height: 13px;
+      line-height: 11px;
     }
     span{
       font-size: 10px;
@@ -318,7 +320,8 @@ tr {
 .colpink.dis {
   background-color: $background-color_8 !important;
   font-size: 11px;
-  line-height: 13px;
+  // line-height: 13px;
+  line-height: 11px;
 }
 .colgray {
   background-color: $background-color_9 !important;
