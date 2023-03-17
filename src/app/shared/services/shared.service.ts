@@ -87,6 +87,10 @@ export class SharedService {
     return localStorage.getItem('jwtToken') ? true: false;
   }
 
+  isUserActive(){
+    return this.getUserDetails()['isActive'] =='Active' ? true : false ;
+  }
+
   getJWTToken() {
     return localStorage.getItem('jwtToken');
   }

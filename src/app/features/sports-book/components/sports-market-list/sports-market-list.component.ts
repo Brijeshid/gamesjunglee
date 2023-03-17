@@ -47,7 +47,7 @@ export class SportsMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._route.params.subscribe(routeParams =>{
       this.allTabState={
         liveUpcoming: true,

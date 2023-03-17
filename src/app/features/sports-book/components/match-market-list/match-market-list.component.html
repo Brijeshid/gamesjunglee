@@ -52,7 +52,7 @@
                                 <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
-                          <tbody class="content">
+                          <tbody class="content pointer">
                             <tr *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading" [ngClass]="{'border-top':!first}"><a ><strong>{{runner['RunnerName']}}</strong></a>
                                   <br>
