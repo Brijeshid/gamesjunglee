@@ -118,9 +118,9 @@
                       data-bs-parent="#accordionExample" [ngClass]="unMatchedBets.length > 0 ? 'show': ''">
                       <div class="accordion-body text-white">
                         <div *ngIf="unMatchedBets.length<=0">
-                          <div class="text-center"><i class="fa fa-exclamation-triangle text-pink fa-3x"
+                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-4x"
                               aria-hidden="true"></i>
-                              <p class="text-center text-pink">No Unmatched Bets!</p><br>
+                              <p class="text-center text-pink my-3">No Unmatched Bets!</p><br>
                           </div>                              
                         </div>
                        <div *ngIf="unMatchedBets.length > 0">
@@ -164,9 +164,9 @@
                       data-bs-parent="#accordionExample"   [ngClass]="matchedBets.length > 0 ? 'show': ''" >
                       <div class="accordion-body text-white">
                         <div *ngIf="matchedBets.length<=0">
-                          <div class="text-center"><i class="fa fa-exclamation-triangle text-pink fa-3x"
+                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-4x"
                               aria-hidden="true"></i>
-                              <p class="text-center text-pink">No Matched Bets!</p><br>
+                              <p class="text-center text-pink my-3">No Matched Bets!</p><br>
                           </div>                              
                         </div>
                         <div *ngIf="matchedBets.length > 0">
