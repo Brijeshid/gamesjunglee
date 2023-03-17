@@ -185,8 +185,8 @@ body {
   background: #b70800;
   border-radius: 50px;
   text-align: center;
-  padding: 5px;
-  font-size: 10px;
+  padding: 3px;
+  font-size: 12px;
   float: right;
 }
 
@@ -200,8 +200,20 @@ body {
 
 .leftuserhead {
   padding: 0px 0px 0px 10px;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  margin-top: 10px;
+}
+
+.rightb-icon {
+  width: 40px;
+  height: 40px;
+  background: #b70800;
+  border-radius: 50px;
+  text-align: center;
+  padding: 1px;
+  font-size: 25px;
+  float: right;
 }
 
 /*Table start*/

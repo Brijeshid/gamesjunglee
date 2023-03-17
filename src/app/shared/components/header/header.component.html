@@ -53,7 +53,7 @@
           <button class="btn border-pink me-2 text-nowrap rounded-pill disnone btn-pink headerFont" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
               Bets</button>
               <a class="btn text-white border-pink text-nowrap rounded-pill headerFont"
-               *ngIf="isLoggedIn" (click)="onClickAvailableCredit()">{{userBalance?.availableCredit | number}}
+               *ngIf="isLoggedIn" (click)="onClickAvailableCredit()" (clickOutside)="isShowRightSideBar = false">{{userBalance?.availableCredit | number}}
               <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
               </a>
              </form>

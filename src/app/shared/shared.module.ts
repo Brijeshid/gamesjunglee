@@ -8,6 +8,7 @@ import { LeftNavigationComponent } from './components/left-navigation/left-navig
 import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
 import { MarketRateFormaterPipe } from './pipes/market-rate-formater.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FavouriteComponent,
     LeftNavigationComponent,
     BetSlipComponent,
-    MarketRateFormaterPipe
+    MarketRateFormaterPipe,
+    ClickOutsideDirective
   ],
   imports: [
     CommonModule,
