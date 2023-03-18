@@ -14,16 +14,16 @@
             <a routerLink="/sportsbook/{{singleObj['sportName'] | titlecase}}" class="nav-link"> <img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="20px" class="me-2">  <span> {{singleObj['sportName']}} </span>
                 <span class="leftb-icon">{{singleObj['marketCount']}}</span> </a>
         </li>
-        <li class="nav-item" *ngIf="mainMenu.length > 0">
+        <li class="nav-item pointer" *ngIf="mainMenu.length > 0">
             <a class="nav-link" ><img src="assets/images/live_card.png" width="18px" class="me-2"> Live Card</a>
         </li>
-        <li class="nav-item" *ngIf="mainMenu.length > 0">
+        <li class="nav-item pointer" *ngIf="mainMenu.length > 0">
             <a class="nav-link" ><img src="assets/images/slot_games.png" width="18px" class="me-2"> Slot Games</a>
         </li>
         <li class="nav-item">
             <div class="row">
                 <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="collapse multi-collapse pointer" id="multiCollapseExample1">
                         <ul class="nav flex-column border-0 pt-0">
                             <li class="nav-item" *ngFor="let singleNav of viewMoreNavList">
                                 <a class="nav-link"><img src="{{singleNav?.menuLogo}}" width="18px" class="me-2"> <span>
