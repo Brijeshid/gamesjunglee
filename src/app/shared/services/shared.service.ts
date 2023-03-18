@@ -5,6 +5,8 @@ import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service'
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { HttpContext } from '@angular/common/http';
+import { IGNORED_STATUSES } from '@core/interceptors/http-error.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -173,7 +175,9 @@ export class SharedService {
 
   _postPlaceBetApi(placeBetObjParams:object) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getPlaceBetEndpoint(),placeBetObjParams);
+      .post(this._apiEndpointsService.getPlaceBetEndpoint(),placeBetObjParams,{
+        context: new HttpContext().set(IGNORED_STATUSES, [600]),
+      });
   }
 
   _getUserOpenBetsApi() {
@@ -184,6 +188,10 @@ export class SharedService {
   _getBooksForMarketApi(marketIdListBody: any) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getBooksForMarket(), marketIdListBody);
+  }
+
+  getIPApi() {
+    return this._apiHttpService.get('https://jsonip.com');
   }
 }
 

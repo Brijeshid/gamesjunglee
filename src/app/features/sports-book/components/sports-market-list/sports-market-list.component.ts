@@ -309,6 +309,8 @@ export class SportsMarketListComponent implements OnInit {
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
     this.betSlipObj = {
+        "sportId":marketData['sportId'],
+        "tournamentId":marketData['tournamentId'],
         "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],

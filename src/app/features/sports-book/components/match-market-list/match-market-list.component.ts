@@ -72,30 +72,30 @@ export class MatchMarketListComponent implements OnInit {
     this._sharedService.marketBookCalSubject.subscribe(res=>{
       this.placeBetData = res;
     })
-    
+
     this._cdref.detectChanges();
   }
 
   private _preConfig(){
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._sharedService.getUserBalance.subscribe((res:any)=>{
-      switch(res['marketType'] && this.isLoggedIn){
+      switch(res['marketType']){
         case EMarketType.MATCH_TYPE:
           this.placeBetData = [];
-          if(this.inPlayUpcomingMarket ) this.getBooksForMarket({marketIds : [this.inPlayUpcomingMarket['marketId']]},EMarketType.MATCH_TYPE);
+          if(this.inPlayUpcomingMarket  && this.isLoggedIn) this.getBooksForMarket({marketIds : [this.inPlayUpcomingMarket['marketId']]},EMarketType.MATCH_TYPE);
           break;
-
+  
         case EMarketType.BOOKMAKER_TYPE:
           this.placeBetData = [];
-          if(this.bookMakerMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.bookMakerMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.BOOKMAKER_TYPE);
+          if(this.bookMakerMarket  && this.isLoggedIn) this.getBooksForMarket({marketIds :this.bookMakerMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.BOOKMAKER_TYPE);
           break;
-
+  
         case EMarketType.FANCY_TYPE:
-          if(this.fancyMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.fancyMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.FANCY_TYPE);
+          if(this.fancyMarket  && this.isLoggedIn) this.getBooksForMarket({marketIds :this.fancyMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.FANCY_TYPE);
           break;
       }
+      })
       this._cdref.detectChanges();
-    })
   }
 
   getInPlayUpcomingData(){
@@ -338,6 +338,8 @@ export class MatchMarketListComponent implements OnInit {
     console.log(marketData['RunnerName'])
     this.marketType = marketType;
     this.betSlipObj = {
+        "sportId":marketData['refSportId'],
+        "tournamentId":marketData['refTournamentId'],
         "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['marketId'],

@@ -122,27 +122,31 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this.betSlipParams.odds = this.betSlipParams['odds'];
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }
-
-    this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
-      (betSlipRes: any) => {
-            if(this.count <=0 || betSlipRes){
-              this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
-              this._getUserOpenBet();
-              this.betSlipForm.reset();
-              this.isBetSlipActive = false;
-              this.isBetSlipPlaceCall = false;
-              this.isLoaderStart = false;
-              this._SharedService.getUserBalance.next({'marketType': this.marketType});
-            }
-      },
-      (err)=>{},
-      ()=>{
-        this._getUserOpenBet();
-        this.betSlipForm.reset();
-        this.isBetSlipActive = false;
-        this.isBetSlipPlaceCall = false;
-        this.isLoaderStart = false;
-      });
+    this._sharedService.getIPApi().subscribe(res=>{
+      this.betSlipParams['userIp'] = res['ip'];
+      this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
+        (betSlipRes: any) => {
+              if(this.count <=0 || betSlipRes){
+                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
+                this._getUserOpenBet();
+                this.betSlipForm.reset();
+                this.isBetSlipActive = false;
+                this.isBetSlipPlaceCall = false;
+                this.isLoaderStart = false;
+                this._SharedService.getUserBalance.next({'marketType': this.marketType});
+              }
+        },
+        (err)=>{
+          console.log('eee',err);
+          this._getUserOpenBet();
+          this.betSlipForm.reset();
+          this.isBetSlipActive = false;
+          this.isBetSlipPlaceCall = false;
+          this.isLoaderStart = false;
+          this._SharedService.getUserBalance.next({'marketType': this.marketType});
+        });
+    })
+    
   }
 
   get profit(){
