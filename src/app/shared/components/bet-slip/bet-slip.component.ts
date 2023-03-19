@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -248,6 +248,69 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   getRunnerId(){
     return _.map(this.betSlipParams['runnerObj'],'SelectionId');
+  }
+
+  cancelBet(betListObj:any,marketType:string,cancelBetLevel:any){
+    console.log(betListObj);
+    let betList:any = [];
+    switch(cancelBetLevel){
+      case 1:
+        if(betListObj.length >0 && betListObj[0]['markets'].length >0){
+          betListObj[0]['markets'].map((singleMarket)=>{
+            singleMarket.runners.map((singleRunner) =>{
+              singleRunner.bets.map((singleBet) =>{
+                betList.push(singleBet['betId']);
+              })
+            })
+          })
+        }
+      break;
+
+      case 2:
+        if(betListObj['runners'].length >0){
+          betListObj.runners.map((singleRunner) =>{
+            singleRunner.bets.map((singleBet) =>{
+              betList.push(singleBet['betId']);
+            })
+          })
+        }
+      break;
+
+      case 3:
+        if(betListObj?.betId) betList.push(betListObj.betId);
+      break;
+
+    }
+
+    console.log(betList);
+    
+    let betIdObj = {
+      betIdList: betList
+    }
+    this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
+      marketType = marketType.toUpperCase();
+        switch(marketType){
+          case EMarketName.MATCH_ODDS_UNDERSCORE || EMarketName.MATCH_ODDS_SPACE:
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+          break;
+
+          case EMarketName.BOOKMAKER:
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+          break;
+
+          case EMarketName.FANCY:
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.FANCY_TYPE});
+          break;
+
+          case 'ALL':
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.FANCY_TYPE});
+          break;
+        }
+
+        this._getUserOpenBet();
+    })
   }
 
 }

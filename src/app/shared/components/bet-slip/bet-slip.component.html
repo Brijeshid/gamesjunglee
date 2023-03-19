@@ -112,7 +112,7 @@
                     <h2 class="accordion-header" id="headingSix">
                       <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        Unmatched Bets</button>
+                        Unmatched Bets <a *ngIf="unMatchedBets.length > 0" class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0" (click)="cancelBet(unMatchedBets,'ALL',1)">CANCEL ALL</a></button>
                     </h2>
                     <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
                       data-bs-parent="#accordionExample" [ngClass]="unMatchedBets.length > 0 ? 'show': ''">
@@ -136,6 +136,36 @@
                           <div  *ngFor="let market of bet.markets">
                             <table class="table text-white small" *ngFor="let runner of market.runners">
                               <tr>
+                                <th width="25%" class="ps-0">{{market.name}}</th>
+                                <th width="25%"></th>
+                                <th width="25%"></th>
+                                <th width="25%" class="text-end"> <a
+                                    class="text-danger text-decoration-none pointer" (click)="cancelBet(market,market.name,2)">CANCEL</a></th>
+                              </tr>
+                              <ng-container *ngFor="let b of runner.bets">
+                                <tr>
+                                  <td>{{b.horse | titlecase}}</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                <tr [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                                  <td>Odds<br>
+                                    <p class="bg-white text-dark p-2 mb-0">{{b.odds}}</p>
+                                  </td>
+                                  <td>Stake<br>
+                                    <p class="bg-white text-dark p-2 mb-0">{{b.stake}}</p>
+                                  </td>
+                                  <td>Profit<br>
+                                    <p class="p-2 mb-0">{{b.profitLiability | number : '1.2-2'}}</p>
+                                  </td>
+                                  <td class="text-end"><a class=" btn btn-danger mt-3 mb-0" (click)="cancelBet(b,market.name,3)">X</a></td>
+                                </tr>
+                              </ng-container>
+                              
+                            </table>
+                            <!-- <table class="table text-white small" *ngFor="let runner of market.runners">
+                              <tr>
                                 <th class="ps-0">{{market.name}}</th>
                                 <th>Odds</th>
                                 <th>Stake</th>
@@ -146,8 +176,9 @@
                                 <td><b>{{b.odds}}</b></td>
                                 <td><b>{{b.stake}}</b></td>
                                 <td><b>{{b.profitLiability | number : '1.2-2'}}</b></td>
+                                <td class="text-end"><a  class=" btn btn-danger mt-3 mb-0">X</a></td>
                               </tr>
-                            </table>
+                            </table> -->
                           </div>
                         </div>
                        </div>
@@ -199,7 +230,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item mb-1">
+                  <!-- <div class="accordion-item mb-1">
                     <h2 class="accordion-header" id="headingFive">
                       <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -244,7 +275,7 @@
                         </table>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

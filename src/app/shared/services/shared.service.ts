@@ -193,5 +193,10 @@ export class SharedService {
   getIPApi() {
     return this._apiHttpService.get('https://jsonip.com');
   }
+
+  postCancelBetForMarket(betIdListBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCancelBetForMarket(), betIdListBody);
+  }
 }
 
