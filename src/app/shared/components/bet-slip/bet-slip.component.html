@@ -28,7 +28,8 @@
                     <form [formGroup]="betSlipForm">
                       <div class="row">
                         <div class="col-md-6">
-                          <label class="text-dark">Odds</label>
+                          <label class="text-dark" *ngIf="marketType !== EMarketType.FANCY_TYPE">Odds</label>
+                          <label class="text-dark" *ngIf="marketType == EMarketType.FANCY_TYPE">Runs</label>
                           <div class="number">
                             <ng-container *ngIf="marketType == EMarketType.MATCH_TYPE; else otherMarket">
                               <span class="minus" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
