@@ -345,7 +345,7 @@ export class MatchMarketListComponent implements OnInit {
         "marketId":marketData['marketId'],
         "marketName":marketData['marketType'],
         "sportName":this.sports,
-        "odds": this.marketType == EMarketType.FANCY_TYPE ? positionObj['runs'] :positionObj['odds'],
+        "odds": positionObj['odds'],
         "betPosition":positionObj['index'],
         "profit":0,
         "selectionId":runnerObj ? runnerObj['SelectionId']: marketData['SelectionId'],
@@ -356,7 +356,7 @@ export class MatchMarketListComponent implements OnInit {
         "matchTime":marketData['matchTime'],
         "book":marketData['runners'] || [{"SelectionId":marketData['SelectionId'],"RunnerName":marketData['marketName']}],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
-        "runs":this.marketType == EMarketType.FANCY_TYPE ? positionObj['odds'] : positionObj['runs'],
+        "runs":positionObj['runs'],
         "booksForMarket":this.booksForMarket,
         "runnerObj":marketData['runners']
     }

@@ -49,23 +49,18 @@ export class BetSlipComponent implements OnInit, OnChanges {
       if(!this.isBetSlipActive){
         this.betSlipForm.patchValue({
           odds:0,
+          runs:0,
           stake:0
         })
         this.stakeVal(0);
       }
 
-      if(changes['betSlipParams']['currentValue']['marketName']!= EMarketType.FANCY_TYPE){
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
+          runs:this.betSlipParams['runs'],
         })
-        changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 1;
-      }else{
-        console.log("inside else")
-        this.count = 2;
-        this.betSlipForm.patchValue({
-          odds:this.betSlipParams['runs'],
-        })
-      }
+      changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 2;
+      
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
@@ -84,6 +79,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
       odds:['',[Validators.required,Validators.min(1.01)]],
+      runs:[{value: '', disabled: true},[Validators.required]],
       stake:['',[Validators.required]]
     })
   }
