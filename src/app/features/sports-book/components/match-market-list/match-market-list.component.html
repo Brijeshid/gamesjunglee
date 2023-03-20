@@ -167,8 +167,8 @@
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td width="10%" class="colpink " (click)="onClickLiveMarketRate(null,singleFancyMarket,{isBack:false,index:0,odds:singleFancyMarket['vlay1'],runs:singleFancyMarket['lay1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['lay1']}}</strong> <br><span>{{singleFancyMarket['vlay1'] | marketRateFormater}}</span></td>
-                                <td width="10%" class="colblue " (click)="onClickLiveMarketRate(null,singleFancyMarket,{isBack:true,index:0,odds:singleFancyMarket['vback1'],runs:singleFancyMarket['back1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['back1']}}</strong> <br><span>{{singleFancyMarket['vback1'] | marketRateFormater}}</span></td>
+                                <td width="10%" class="colpink " (click)="onClickLiveMarketRate(null,singleFancyMarket,{isBack:false,index:0,odds:singleFancyMarket['lay1'],runs:singleFancyMarket['vlay1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['lay1']}}</strong> <br><span>{{singleFancyMarket['vlay1'] | marketRateFormater}}</span></td>
+                                <td width="10%" class="colblue " (click)="onClickLiveMarketRate(null,singleFancyMarket,{isBack:true,index:0,odds:singleFancyMarket['back1'],runs:singleFancyMarket['vback1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['back1']}}</strong> <br><span>{{singleFancyMarket['vback1'] | marketRateFormater}}</span></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}">
                                   <div class="suspendedbm1" *ngIf="singleFancyMarket['status']=='3' || singleFancyMarket['status']=='9'">
