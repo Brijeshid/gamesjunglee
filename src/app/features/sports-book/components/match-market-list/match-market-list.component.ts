@@ -370,8 +370,12 @@ export class MatchMarketListComponent implements OnInit {
         case EMarketType.MATCH_TYPE:
           this.booksForMarket = res?.booksForMarket;
           let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
+          horseDataByMarketId?.horses.map((singleAmount)=>{
+            singleAmount['horse'] = +singleAmount['horse'];
+            return singleAmount;
+          })
           this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
-            singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
+            singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
             return singleRunner;
           })
           setTimeout(()=>{this.inPlayUpcomingMarket},0);
@@ -386,7 +390,7 @@ export class MatchMarketListComponent implements OnInit {
                 return singleAmount;
               })
                return singleBookMaker['runners'].map((singleRunner)=>{
-                singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleRunner['SelectionId']]);
+                singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
                 return singleRunner;
               })
             }
@@ -402,7 +406,7 @@ export class MatchMarketListComponent implements OnInit {
                 singleAmount['horse'] = +singleAmount['horse'];
                 return singleAmount;
               })
-              singleFancy['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',singleFancy['SelectionId']]);
+              singleFancy['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleFancy['SelectionId']]);
               return singleFancy;
             }
           })
