@@ -20,6 +20,8 @@
     "@angular/router": "~12.2.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "ngx-daterange": "^1.0.48",
     "ngx-toastr": "^14.3.0",
     "ngx-ui-loader": "^13.0.0",
     "rxjs": "~6.6.0",

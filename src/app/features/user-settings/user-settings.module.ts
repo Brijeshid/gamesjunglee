@@ -15,6 +15,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { SettingsComponent } from './components/settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatchNamePlComponent } from './components/match-name-pl/match-name-pl.component';
+import { NgxDateRangeModule } from 'ngx-daterange';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { MatchNamePlComponent } from './components/match-name-pl/match-name-pl.c
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxDateRangeModule,
 
   ]
 })
