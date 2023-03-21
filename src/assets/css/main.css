@@ -4,6 +4,8 @@ body {
   font-size: 12px;
 }
 
+/*theme one start*/
+/*theme one end*/
 .browncolor {
   background-color: #202121;
 }
@@ -79,6 +81,7 @@ body {
 .header-one {
   border-bottom: 0.8px solid rgba(255, 167, 163, 0.2);
   background-color: #202121;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -144,7 +147,7 @@ body {
 .accordionn .nav-tabs .nav-link.active {
   border: 0;
   border-bottom: 3px solid #ffa7a3;
-  background-color: rgba(32, 33, 33, 0);
+  background-color: #202121;
   color: #ffa7a3;
   border-radius: 0;
 }
@@ -299,7 +302,7 @@ tr {
 }
 
 .colblue.dis {
-  background-color: hsla(205.2, 29%, 58%, 0.86) !important;
+  background-color: hsla(205.2deg, 29%, 58%, 0.86) !important;
 }
 
 .colpink {
@@ -312,7 +315,7 @@ tr {
 }
 
 .colpink.dis {
-  background-color: hsla(3.5, 21.3%, 52.2%, 0.78) !important;
+  background-color: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
   font-size: 11px;
   line-height: 11px;
 }
@@ -369,6 +372,9 @@ tr {
   background-image: none;
 }
 .login .form-control::-moz-placeholder {
+  font-size: 16px;
+}
+.login .form-control:-ms-input-placeholder {
   font-size: 16px;
 }
 .login .form-control::placeholder {
@@ -483,7 +489,7 @@ tr {
 }
 
 .leagues a {
-  background: rgba(0, 0, 0, 0);
+  background: #000;
   color: #fff;
   padding: 10px 10px;
   border-bottom: 1px solid #373737;
@@ -616,7 +622,7 @@ input:checked + .slider:before {
   font-size: 12px;
   background: #fff;
   text-align: center;
-  color: #000000;
+  color: #000;
 }
 
 .suspendedb {
@@ -701,6 +707,7 @@ input:checked + .slider:before {
   border: 8px solid #c0c0c0;
   border-radius: 50%;
   border-top: 8px solid #585858;
+  -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
 
@@ -734,6 +741,15 @@ input:checked + .slider:before {
   top: 47%;
   left: 48%;
 }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -755,10 +771,26 @@ input:checked + .slider:before {
   background-image: linear-gradient(45deg, rgba(255, 192, 230, 0.0705882353) 25%, rgba(0, 0, 0, 0.6) 25%);
   background-size: var(--s) var(--s);
   background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
-  animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
+  -webkit-animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
+          animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
   background-color: #000;
   padding-top: 4%;
   height: 100vh;
+}
+
+@-webkit-keyframes color {
+  0%, 25% {
+    --bg: var(--c3);
+  }
+  26%, 50% {
+    --bg: var(--c1);
+  }
+  51%, 75% {
+    --bg: var(--c3);
+  }
+  76%, 100% {
+    --bg: var(--c2);
+  }
 }
 
 @keyframes color {
@@ -773,6 +805,23 @@ input:checked + .slider:before {
   }
   76%, 100% {
     --bg: var(--c2);
+  }
+}
+@-webkit-keyframes position {
+  0% {
+    background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
+  }
+  25% {
+    background-position: calc(var(--p) * 1) calc(var(--p) * 4), calc(var(--p) * -1) calc(var(--p) * 5), calc(var(--p) * 1) calc(var(--p) * 3), calc(var(--p) * -1) calc(var(--p) * 4);
+  }
+  50% {
+    background-position: calc(var(--p) * 3) calc(var(--p) * 8), calc(var(--p) * -3) calc(var(--p) * 9), calc(var(--p) * 2) calc(var(--p) * 7), calc(var(--p) * -2) calc(var(--p) * 8);
+  }
+  75% {
+    background-position: calc(var(--p) * 3) calc(var(--p) * 12), calc(var(--p) * -3) calc(var(--p) * 13), calc(var(--p) * 2) calc(var(--p) * 11), calc(var(--p) * -2) calc(var(--p) * 12);
+  }
+  100% {
+    background-position: calc(var(--p) * 5) calc(var(--p) * 16), calc(var(--p) * -5) calc(var(--p) * 17), calc(var(--p) * 5) calc(var(--p) * 15), calc(var(--p) * -5) calc(var(--p) * 16);
   }
 }
 @keyframes position {
@@ -794,7 +843,8 @@ input:checked + .slider:before {
 }
 @media (prefers-reduced-motion) {
   body {
-    animation: none;
+    -webkit-animation: none;
+            animation: none;
   }
 }
 /*search start*/
@@ -882,7 +932,8 @@ input:checked + .slider:before {
 
 /*Login / registration loader start*/
 .busy {
-  animation: spin 1s infinite linear;
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
   display: inline-block;
   font-weight: bold;
   font-family: sans-serif;
@@ -953,4 +1004,14 @@ input:checked + .slider:before {
 
 .rightboxfix .scroll {
   margin-top: -160px;
+}
+
+.modalradius {
+  border-radius: 5px 5px 30px 30px;
+}
+
+.laddericon:hover {
+  padding: 10px 14px;
+  border-radius: 25px;
+  background: #d9d9d9;
 }/*# sourceMappingURL=main.css.map */
