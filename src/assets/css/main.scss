@@ -944,3 +944,11 @@ width: 26%;
 .rightboxfix .scroll{
   margin-top: -160px;
 }
+.modalradius{
+  border-radius: 5px 5px 30px 30px;
+}
+.laddericon:hover{
+padding: 10px 14px;
+border-radius: 25px;
+background: $background-color_9;
+}
