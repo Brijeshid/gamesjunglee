@@ -23,12 +23,20 @@
             <div class="col-md-4 mb-2">
                 <div class="wrapper"></div>
                 <!-- <input type="date" class="form-control"  placeholder="Date">  -->
-                <!-- <date-range-picker [options]="options"></date-range-picker> -->
-                <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
-                    data-drops="up">
+                <date-range-picker [instanceId]="'secondDateRange'" [options]="options"
+                        [controlName]="'secondDateRange'" #dateRangePicker (rangeSelected)="rangeSelected($event)">
+                    <div class="form-group">
+                        <div class="input-group">
+                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-pink" type="text" name="dateRange"
+                            [value]="dateRangePicker.range" placeholder="From - To"  />
+                        </div>
+                    </div>
+                    </date-range-picker>
+                <!-- <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
+                    data-drops="up"> -->
             </div>
             <div class="col-md-4 mb-2">
-                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-pink text-white">Search</button>
+                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-pink text-white" (click)="getProfitAndLoss()">Search</button>
             </div>
         </div>
         <div class="innerpagem">
