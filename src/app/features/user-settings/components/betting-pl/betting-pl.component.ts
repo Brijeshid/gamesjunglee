@@ -8,7 +8,24 @@ import { UserSettingsMainService } from '../../services/user-settings-main.servi
 })
 export class BettingPlComponent implements OnInit {
   profitLoss : any[] = [];
-  
+  options:any = {
+    // autoApply?: boolean;
+    // clickOutsideAllowed?: boolean;
+    // displayFormat?: string;
+    // disabled?: boolean;
+    // disableInputDisplay?: boolean;
+    format: 'DD MMM YYYY',
+    // icons?: 'default' | 'material' | 'font-awesome';
+    // labelText?: string;
+    // minDate: new Date().toJSON().slice(0,10).replace(/-/g,'/')
+    // maxDate:;
+    // position?: 'left' | 'right';
+    // preDefinedRanges?: IDefinedDateRange[];
+    // showResetButton?: boolean;
+    singleCalendar : true
+    // validators?: ValidatorFn | ValidatorFn[];
+    // modal?: boolean;
+  };
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
@@ -16,11 +33,16 @@ export class BettingPlComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProfitLoss()
-    }
+    this.getProfitLoss();
+  }
 
   getProfitLoss(){
-    this._userSettingsService._getProfitLossApi().subscribe(
+    let profitLossObj = {
+      fromDate:"2023-02-19",
+      toDate:"2023-03-21",
+      game: null
+    };
+    this._userSettingsService._getProfitLossApi(profitLossObj).subscribe(
       (res:any) => { 
        this.profitLoss = res.profitLoss.reverse();
         console.log("getUser", res);
