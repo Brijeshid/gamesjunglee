@@ -3,9 +3,13 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
 }
+/*theme one start*/
 $color_1: #fff;
 $color_2: #ffa7a3;
 $color_3: #000;
+$color_4: #ffa7a357;
+$color_5:#ffa7a32e;
+$color_6:#0009;
 $background-color_1: #202121;
 $background-color_2: #fff;
 $background-color_3: #6abefa;
@@ -16,15 +20,46 @@ $background-color_7: #ffb9b560;
 $background-color_8: hsla(3.5, 21.3%, 52.2%, 0.78);
 $background-color_9: #d9d9d9;
 $border-color_1: inherit;
+$borderrgb:rgba(255, 167, 163, 0.2);
+$headtwoborder:#3e404000;
+$asideborder:rgba(255, 167, 163);
+$red-bg:#b70800;
+$gamedetails:#3c3e3eb8;
+$coldark:#272727;
+$login:#ffffff52;
+$loginbg:#6c6c6c82;
+$formred:#dc3545;
+$overlay:rgba(2, 2, 2, 0.8);
+$innerpagebg:#1f1f1f;
+$searchinp:#2d2d2d;
+$plusminus:#ddd;
+$leagues:#373737;
+$rightacco:#0f0f0f;
+$accordion-body:#404040;
+$slider:#ccc;
+$inputslide:#2196f3;
+$favselected:#464646;
+$suspended:rgba(38, 38, 38, 0.63);
+$loaderborder:#c0c0c0;
+$loaderbordertop:#585858;
+$searchlist:#626262;
+$searchlisthover:rgba(60, 62, 62, 0.7215686275);
+$searchbg:#343535;
+$searchborder:rgba(0,0,0,.15);
+$searchdd:rgb(83, 83, 83);
+$busy:#555;
+$tooltipnk:#797979;
+$searchddm:#212529;
+/*theme one end*/
 
 .browncolor {
   background-color: $background-color_1;
 }
 .bg-pink {
-  background: #ffa7a3 !important;
+  background: $color_2 !important;
 }
 .border-pink {
-  border: 1px solid #ffa7a3;
+  border: 1px solid $color_2;
 }
 .btn {
   font-size: 12px;
@@ -57,7 +92,7 @@ $border-color_1: inherit;
   border-color: $color_2;
 }
 .btn-outline-pink:hover {
-  color: #000;
+  color: $color_3;
   background-color: $color_2;
   border-color: $color_2;
 }
@@ -70,7 +105,7 @@ $border-color_1: inherit;
   font-size: 0.8rem;
 }
 .header-one {
-  border-bottom: 0.8px solid rgba(255, 167, 163, 0.2);
+  border-bottom: 0.8px solid $borderrgb;
   background-color: $background-color_1;
   position: sticky;
   top: 0;
@@ -79,7 +114,7 @@ $border-color_1: inherit;
 .header-icon {
   width: 35px;
   height: 35px;
-  background: #ffa7a3;
+  background: $color_2;
   border-radius: 50px;
   text-align: center;
   padding: 5px;
@@ -97,7 +132,7 @@ $border-color_1: inherit;
     #151515,
     #000000
   );
-  border-top: 0.8px solid rgba(255, 167, 163, 0.2);
+  border-top: 0.8px solid $borderrgb;
   ul {
     padding: 0;
     margin: 5px 0 0 0;
@@ -112,16 +147,16 @@ $border-color_1: inherit;
       color: $color_1;
       padding: 10px 15px;
       margin: 3px;
-      border: 1px solid #3e404000;
+      border: 1px solid $headtwoborder;
       border-radius: 60px;
       &:hover {
-        border: 1px solid #ffa7a3;
+        border: 1px solid $color_2;
         border-radius: 60px;
         color: $color_2;
       }
     }
     a.active {
-      border: 1px solid #ffa7a3;
+      border: 1px solid $color_2;
       border-radius: 60px;
       color: $color_2;
     }
@@ -134,23 +169,23 @@ $border-color_1: inherit;
 }
 .accordionn {
   ul {
-    border-top: 0.8px solid rgba(255, 167, 163, 0.2);
-    border-bottom: 0.8px solid rgba(255, 167, 163, 0.2) !important;
+    border-top: 0.8px solid $borderrgb;
+    border-bottom: 0.8px solid $borderrgb !important;
   }
   .nav-tabs .nav-link {
-    color: #fff;
+    color: $color_1;
   }
   .nav-tabs .nav-link:hover {
     border: none;
   }
   .nav-tabs .nav-link.active {
     border: 0;
-    border-bottom: 3px solid #ffa7a3;
-    background-color: #20212100;
-    color: #ffa7a3;
+    border-bottom: 3px solid $color_2;
+    background-color: $background-color_1;
+    color: $color_2;
     border-radius: 0;
   }
-  // .nav-tabs .nav-link{color: #fff;}
+  // .nav-tabs .nav-link{color: $color_1;}
 }
 .asidenav {
   // border-right: 1px solid #ffa8a34d;
@@ -165,7 +200,7 @@ $border-color_1: inherit;
   }
   a {
     color: $color_1;
-    border-right: 3px solid #202121;
+    border-right: 3px solid $background-color_1;
     padding-top: 10px;
     padding-bottom: 10px;
     &:visited {
@@ -174,8 +209,8 @@ $border-color_1: inherit;
   }
   li {
     a.active {
-      border-right: 3px solid rgba(255, 167, 163);
-      background: #ffa7a3;
+      border-right: 3px solid $asideborder;
+      background: $color_2;
     }
     a {
       &:hover {
@@ -187,7 +222,7 @@ $border-color_1: inherit;
           #151515,
           #000000
         );
-        border-right: 3px solid rgba(255, 167, 163);
+        border-right: 3px solid $asideborder;
         color: $color_1;
       }
     }
@@ -197,7 +232,7 @@ $border-color_1: inherit;
 .leftb-icon {
   width: 25px;
   height: 25px;
-  background: #b70800;
+  background: $red-bg;
   border-radius: 50px;
   text-align: center;
   padding: 3px;
@@ -205,7 +240,7 @@ $border-color_1: inherit;
   float: right;
 }
 .leftuser {
-  background: #ffa7a3;
+  background: $color_2;
   border-radius: 50px;
   margin: 0 5px;
   padding: 4px 0px 6px 3px;
@@ -220,7 +255,7 @@ $border-color_1: inherit;
 .rightb-icon {
   width: 40px;
   height: 40px;
-  background: #b70800;
+  background: $red-bg;
   border-radius: 50px;
   text-align: center;
   padding: 1px;
@@ -230,13 +265,13 @@ $border-color_1: inherit;
 
 /*Table start*/
 .gamedetails {
-  border: 1px solid #ffa7a357;
+  border: 1px solid $color_4;
   margin-top: 30px;
   border-radius: 30px;
   padding: 15px 15px 0 15px;
   color: $color_1;
   font-size: 12px;
-  background: #3c3e3eb8;
+  background: $gamedetails;
   .table {
     background-color: $background-color_2;
     border-radius: 15px;
@@ -245,7 +280,7 @@ $border-color_1: inherit;
     td {
       vertical-align: middle;
       padding: 2px 5px;
-      text-align: center;border-top: 2px solid #fff;
+      text-align: center;border-top: 2px solid $color_1;
       font-size: 11px;
       line-height: 13px;
     }
@@ -286,21 +321,21 @@ tr {
 .table {
   .tfirstcol {
     border-top-left-radius: 15px;
-    background: #ffa7a3;
+    background: $color_2;
   }
 }
 .tlastcol {
   border-top-right-radius: 15px;
-  background: #ffa7a3;
+  background: $color_2;
 }
 .coldark {
-  background: #272727 !important;
+  background: $coldark !important;
   color: $color_1;
 }
 //color box start
 .colblue {
   background-color: $background-color_3 !important;
-  border-left: 1px solid #fff;
+  border-left: 1px solid $color_1;
 }
 .colblue.light {
   background-color: $background-color_4 !important;
@@ -310,7 +345,7 @@ tr {
 }
 .colpink {
   background-color: $background-color_6 !important;
-  border-left: 1px solid #fff;
+  border-left: 1px solid $color_1;
 }
 .colpink.light {
   background-color: $background-color_7 !important;
@@ -322,7 +357,7 @@ tr {
 }
 .colgray {
   background-color: $background-color_9 !important;
-  border-left: 1px solid #fff;
+  border-left: 1px solid $color_1;
 }
 .colpink.last {
   border-bottom-right-radius: 15px;
@@ -333,16 +368,16 @@ tr {
 /*Table end*/
 /*login start*/
 .login {
-  border: 1px solid #ffffff52;
+  border: 1px solid $login;
   border-radius: 25px;
   padding: 10px 35px;
-  background: #6c6c6c82;
+  background: $loginbg;
   margin-top: 30px;
   a {
     text-decoration: none;color: $color_2;padding: 5px 10px;
   }
   a:hover{
-    background: #ffa7a32e;
+    background: $color_5;
     padding: 5px 10px;
     border-radius: 5px;
     color: $color_2;
@@ -352,7 +387,7 @@ tr {
   }
   .form-control{line-height: 3.5;border-radius: 14px;border: 1px solid $color_2; border-right: none;}
   .form-control.is-invalid, .was-validated .form-control:invalid {
-    border-color: #dc3545;
+    border-color: $formred;
     padding-right: calc(1.5em + .75rem);
     background-image: none;
   }
@@ -377,7 +412,7 @@ tr {
   top: 0px;
   right: 0px;
   bottom: 0px;
-  background: rgba(2, 2, 2, 0.8);
+  background: $overlay;
   z-index: 999;
   backdrop-filter: blur(1px);
 }
@@ -394,15 +429,15 @@ tr {
   top: 0px;
   bottom: 0px;
   z-index: 1000;
-  background: #202121;
-  color: #fff;
+  background: $background-color_1;
+  color: $color_1;
   font-size: 12px;
   overflow-x: hidden;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  box-shadow: 0px 1px 2px #ffa7a3;
+  box-shadow: 0px 1px 2px $color_2;
   a {
     text-decoration: none;
     color: $color_1;
@@ -424,18 +459,18 @@ tr {
 /*Right sidebar end*/
 
 .innerpagem {
-  border: 1px solid #ffa7a357;
+  border: 1px solid $color_4;
   border-radius: 30px;
   padding: 20px 0 0 0;
   color: $color_1;
   font-size: 12px;
-  background: linear-gradient(180deg, #1f1f1f 35%, #000);
+  background: linear-gradient(180deg, $innerpagebg 35%, $color_3);
 }
 .search input,
 .input-group-text {
-  background-color: #2d2d2d;
+  background-color: $searchinp;
   border: none;
-  color: #fff;
+  color: $color_1;
 }
 .midbadge {
   top: 7px;
@@ -452,18 +487,18 @@ font-style: italic;
     height: 33px;
     border-radius: 4px;
     padding: 4px 5px 4px 5px;
-    border: 1px solid #ddd;
+    border: 1px solid $plusminus;
     display: inline-block;
     vertical-align: middle;
     text-align: center;
-    color: #000;
+    color: $color_3;
   }
   input {
     height: 33px;
     width: 71px;
     text-align: center;
     font-size: 18px;
-    border: 1px solid #ddd;
+    border: 1px solid $plusminus;
     border-radius: 4px;
     display: inline-block;
     vertical-align: middle;
@@ -471,38 +506,38 @@ font-style: italic;
 }
 .leagues {
   a {
-    background: #0000;
-    color: #fff;
+    background: $color_3;
+    color: $color_1;
     padding: 10px 10px;
-    border-bottom: 1px solid #373737;
+    border-bottom: 1px solid $leagues;
   }
   a:hover {
     background: rgb(43, 42, 42);
-    color: #fff;
+    color: $color_1;
   }
 }
 .rightacco {
   .accordion-item {
     border-radius: 25px;
     border: none;
-    background-color: #0f0f0f;
-    color: #000 !important;
+    background-color: $rightacco;
+    color: $color_3 !important;
   }
   .accordion-item .accordion-button.collapsed {
     border-radius: 25px;
-    background: #ffa7a3;
-    color: #000;
+    background: $color_2;
+    color: $color_3;
     margin-bottom: 25px;
   }
   .accordion-body {
     padding: 1rem 0.3rem 0rem 0.3rem;
-    border: 1px solid #404040;
+    border: 1px solid $accordion-body;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     margin-bottom: 25px;
   }
   .accordion-button:not(.collapsed) {
-    background-color: #ffa7a3;
+    background-color: $color_2;
   }
   .accordion-body h6{font-size: 14px;}
   .accordion-body p{margin-bottom: 0;}
@@ -528,7 +563,7 @@ font-style: italic;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: $slider;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -546,11 +581,11 @@ font-style: italic;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: $inputslide;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px $inputslide;
 }
 
 input:checked + .slider:before {
@@ -569,10 +604,10 @@ input:checked + .slider:before {
 }
 
 .favselected {
-  background: #464646;
+  background: $favselected;
   margin: 10px 5px;
   padding: 0;
-  color: #fff;
+  color: $color_1;
 }
 .favselected p {
   margin: 0;
@@ -580,18 +615,18 @@ input:checked + .slider:before {
 .favselected a {
   border: 0px;
   display: block;
-  color: #000;
+  color: $color_3;
   text-decoration: none;
 }
 .favselected a:visited {
-  color: #000;
+  color: $color_3;
 }
 .favhead {
-  background: #ffa7a3;
+  background: $color_2;
   border-radius: 10px;
   margin: 15px 0 0 0;
   padding: 4px 0px 6px 3px;
-  color: #fff;
+  color: $color_1;
   position: relative;
   top: -5px;
 }
@@ -599,17 +634,17 @@ input:checked + .slider:before {
   border-radius: 0px;
   padding: 5px;
   font-size: 12px;
-  background: #fff;
+  background: $color_1;
   text-align: center;
-  color: #000000;
+  color: $color_3;
 }
 .suspendedb {
   margin: 1px;
   position: relative;
 }
 .suspended {
-  background: rgba(38, 38, 38, 0.63);
-  color: #fff;
+  background: $suspended;
+  color: $color_1;
   border-radius: 35px;
   padding: 6px;
   position: absolute;
@@ -625,8 +660,8 @@ input:checked + .slider:before {
   top: -25px;
 }
 .suspendedm1 {
-  background: rgba(38, 38, 38, 0.63);
-  color: #fff;
+  background: $suspended;
+  color: $color_1;
   border-radius: 35px;
   padding: 13px 5px;
   position: absolute;
@@ -658,9 +693,9 @@ input:checked + .slider:before {
   width: 80px;
   height: 80px;
   margin: -76px 0 0 -76px;
-  border: 8px solid #c0c0c0;
+  border: 8px solid $loaderborder;
   border-radius: 50%;
-  border-top: 8px solid #585858;
+  border-top: 8px solid $loaderbordertop;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
@@ -684,7 +719,7 @@ height: 45px;
 }
 .loadtime{
   position: absolute;
-color: #000;
+color: $color_3;
 font-size: 18px;
 font-weight: bold;
 top: 47%;
@@ -710,12 +745,12 @@ left: 48%;
 --bg: var(--c3);
 --d: 6000ms;
 --e: cubic-bezier(0.76, 0, 0.24, 1);
-background-image: linear-gradient(45deg, #ffc0e612 25%, #0009 25%);
+background-image: linear-gradient(45deg, #ffc0e612 25%, $color_6 25%);
 background-size: var(--s) var(--s);
 background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1),
 calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
 animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
-background-color: #000;
+background-color: $color_3;
 padding-top: 4%;
 height: 100vh;
 }
@@ -792,13 +827,13 @@ height: 100vh;
   border-left: .3em solid transparent;
   position: absolute;
   top: 12px;
-  right: 10px; color:#626262;
+  right: 10px; color:$searchlist;
 }
 .searchi{
   position: absolute;
 left: 10px;
 top: 8px;
-color:#626262;
+color:$searchlist;
 }
 .searchinput{
   padding:5px 30px;
@@ -806,7 +841,7 @@ color:#626262;
 
 .searchlist .dropdown-menu {
   font-size: 1rem;
-  color: #212529;
+  color: $searchddm;
   text-align: left;
   list-style: none;
   width: 400px;
@@ -816,12 +851,12 @@ color:#626262;
   color: #dee2e6;
   padding:18px 25px;
 }
-.searchlist input{background: #fff; color:#626262; border: 0.8px solid rgba(255, 167, 163, 0.2)}
-.searchlist input:hover{background: #fff; color:rgba(60, 62, 62, 0.7215686275); border: 0.8px solid rgba(255, 167, 163, 0.2)}
+.searchlist input{background: $color_1; color:$searchlist; border: 0.8px solid $borderrgb}
+.searchlist input:hover{background: $color_1; color:$searchlisthover; border: 0.8px solid $borderrgb}
 
 .searchlist .dropdown-menu-dark {
-  background-color: #343535;
-  border-color: rgba(0,0,0,.15);
+  background-color: $searchbg;
+  border-color: $searchborder;
 }
 .search-dd{position: absolute;
   width: 450px;
@@ -829,7 +864,7 @@ color:#626262;
   list-style-type: none;}
   .search-dd li{padding: 10px 15px;
   cursor: pointer;}
-  .search-dd li:hover{background-color: rgb(83, 83, 83);padding:  10px 15px;}
+  .search-dd li:hover{background-color: $searchdd; padding:  10px 15px;}
 
 /*search end*/
 .searchs{display: none;}
@@ -843,7 +878,7 @@ color:#626262;
   font-family: sans-serif;
   font-size: 32px;
   font-style: normal;
-  color: #555;
+  color: $busy;
 }
 
 .busy::before {
@@ -864,7 +899,7 @@ color:#626262;
 
 // hover in header Open Bet
 .pink:hover{
-  background-color: #ffa7a3;
+  background-color: $color_2;
 }
 /**Tooltip start**/
 .tooltipnk {
@@ -874,8 +909,8 @@ color:#626262;
 .tooltipnk .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color: #797979;
-  color: #fff;
+  background-color: $tooltipnk;
+  color: $color_1;
   text-align: center;
   border-radius: 6px;
   padding: 10px;
@@ -893,7 +928,7 @@ color:#626262;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent #797979 transparent;
+  border-color: transparent transparent $tooltipnk transparent;
 }
 .tooltipnk:hover .tooltiptext {
   visibility: visible;

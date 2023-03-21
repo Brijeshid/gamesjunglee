@@ -4,6 +4,8 @@ body {
   font-size: 12px;
 }
 
+/*theme one start*/
+/*theme one end*/
 .browncolor {
   background-color: #202121;
 }
@@ -145,7 +147,7 @@ body {
 .accordionn .nav-tabs .nav-link.active {
   border: 0;
   border-bottom: 3px solid #ffa7a3;
-  background-color: rgba(32, 33, 33, 0);
+  background-color: #202121;
   color: #ffa7a3;
   border-radius: 0;
 }
@@ -487,7 +489,7 @@ tr {
 }
 
 .leagues a {
-  background: rgba(0, 0, 0, 0);
+  background: #000;
   color: #fff;
   padding: 10px 10px;
   border-bottom: 1px solid #373737;
@@ -620,7 +622,7 @@ input:checked + .slider:before {
   font-size: 12px;
   background: #fff;
   text-align: center;
-  color: #000000;
+  color: #000;
 }
 
 .suspendedb {
