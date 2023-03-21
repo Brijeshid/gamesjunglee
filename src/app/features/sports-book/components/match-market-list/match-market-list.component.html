@@ -147,7 +147,7 @@
                           <thead>
                             <tr>
                               <th width="30%" class="tfirstcol"> Fancy </th>
-                              <th width="10%" class="coldark"><img src="/assets/images/fast.png" class="timer"> </th>
+                              <th width="10%" class="coldark"><img src="/assets/images/fast.png" class="timer"></th>
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-end coldark">No</th>
                               <th width="15%" colspan="3" class="text-start coldark tlastcol">Yes</th>
@@ -166,7 +166,11 @@
                                 </td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
-                                <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
+                                <td width="10%" class="border-top" [ngClass]="{'border-top':!first}">
+                                  <a data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="laddericon">
+                                    <img src="/assets/images/ladder-icon.png" width="10px">
+                                  </a>
+                                </td>
                                 <td width="10%" class="colpink " (click)="onClickLiveMarketRate(null,singleFancyMarket,{isBack:false,index:0,odds:singleFancyMarket['vlay1'],runs:singleFancyMarket['lay1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['lay1']}}</strong> <br><span>{{singleFancyMarket['vlay1'] | marketRateFormater}}</span></td>
                                 <td width="10%" class="colblue " (click)="onClickLiveMarketRate(null,singleFancyMarket,{isBack:true,index:0,odds:singleFancyMarket['vback1'],runs:singleFancyMarket['back1']},EMarketType.FANCY_TYPE)"><strong>{{singleFancyMarket['back1']}}</strong> <br><span>{{singleFancyMarket['vback1'] | marketRateFormater}}</span></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
@@ -366,3 +370,50 @@
     <!--Artical end-->
   </div>
   <!--Body end-->
+
+
+<!--modal Start-->
+  <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content modalradius">
+        <!-- <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+        <div class="modal-body text-center p-4 pb-3">
+        <div class="row border-bottom p-2">
+          <div class="col-md-6">Runs</div>
+          <div class="col-md-6">P&L</div>
+        </div>
+        <div class="row border-bottom p-2">
+          <div class="col-md-6">0-56</div>
+          <div class="col-md-6"><span class="text-success">500</span></div>
+        </div>
+        <div class="row border-bottom p-2 bg-light">
+          <div class="col-md-6">+57</div>
+          <div class="col-md-6"><span class="text-danger">-500</span></div>
+        </div>
+        <div class="row">
+          <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">CLOSE</button>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Hide this modal and show the first with the button below.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<!--modal Start-->
