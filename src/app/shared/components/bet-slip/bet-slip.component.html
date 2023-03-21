@@ -28,7 +28,8 @@
                     <form [formGroup]="betSlipForm">
                       <div class="row">
                         <div class="col-md-6">
-                          <label class="text-dark">Odds</label>
+                          <label class="text-dark" *ngIf="marketType !== EMarketType.FANCY_TYPE">Odds</label>
+                          <label class="text-dark" *ngIf="marketType == EMarketType.FANCY_TYPE">Runs</label>
                           <div class="number">
                             <ng-container *ngIf="marketType == EMarketType.MATCH_TYPE; else otherMarket">
                               <span class="minus" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
@@ -40,7 +41,7 @@
                               </ng-container>
                             </ng-container>
                             <ng-template #otherMarket>
-                              <input type="number" class="w-100" formControlName="odds"/>
+                              <input type="number" class="w-100" formControlName="runs" disable/>
                             </ng-template>
                           </div>
                         </div>
@@ -71,7 +72,7 @@
                           </div>
 
                         <div class="col-md-6 p-1 mt-3"><button type="button"
-                            class="btn border-pink w-100 p-2 rounded-pill betbtn" (click)="isBetSlipActive=false">CANCLE</button>
+                            class="btn border-pink w-100 p-2 rounded-pill betbtn" (click)="isBetSlipActive=false">CANCEL</button>
                         </div>
                         <div class="col-md-6 p-1 mt-3">
                            <button type="submit" class="btn w-100 p-1 rounded-pill betbtn" (click)="onClickPlaceBet()"
@@ -112,36 +113,59 @@
                     <h2 class="accordion-header" id="headingSix">
                       <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        Unmatched Bets</button>
+                        Unmatched Bets <a *ngIf="unMatchedBets.length > 0" class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0" (click)="cancelBet(unMatchedBets,'ALL',1)">CANCEL ALL</a></button>
                     </h2>
                     <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
                       data-bs-parent="#accordionExample" [ngClass]="unMatchedBets.length > 0 ? 'show': ''">
                       <div class="accordion-body text-white">
+                        <div *ngIf="unMatchedBets.length<=0">
+                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-4x"
+                              aria-hidden="true"></i>
+                              <p class="text-center text-pink my-3">No Unmatched Bets!</p><br>
+                          </div>                              
+                        </div>
+                       <div *ngIf="unMatchedBets.length > 0">
                         <div class="form-check border-bottom border-secondary mb-2">
                           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                           <label class="form-check-label" for="defaultCheck1">
                             Average Odds
                           </label>
                         </div>
-                        <!-- <p class="mb-1">Auckland v Wellington</p>
-                        <table class="table text-white small">
-                          <tr>
-                            <th class="ps-0">Match Odds</th>
-                            <th>Odds</th>
-                            <th>Stake</th>
-                            <th>Profit/Liability</th>
-                          </tr>
-                          <tr class="colblue">
-                            <td>Wellington</td>
-                            <td>1.62</td>
-                            <td>6,500</td>
-                            <td>4,030</td>
-                          </tr>
-                        </table> -->
+
                         <div  *ngFor = "let bet of unMatchedBets">
                           <p class="mb-1">{{bet.matchName}}</p>
                           <div  *ngFor="let market of bet.markets">
                             <table class="table text-white small" *ngFor="let runner of market.runners">
+                              <tr>
+                                <th width="25%" class="ps-0">{{market.name}}</th>
+                                <th width="25%"></th>
+                                <th width="25%"></th>
+                                <th width="25%" class="text-end"> <a
+                                    class="text-danger text-decoration-none pointer" (click)="cancelBet(market,market.name,2)">CANCEL</a></th>
+                              </tr>
+                              <ng-container *ngFor="let b of runner.bets">
+                                <tr>
+                                  <td>{{b.horse | titlecase}}</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                <tr [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                                  <td>Odds<br>
+                                    <p class="bg-white text-dark p-2 mb-0">{{b.odds}}</p>
+                                  </td>
+                                  <td>Stake<br>
+                                    <p class="bg-white text-dark p-2 mb-0">{{b.stake}}</p>
+                                  </td>
+                                  <td>Profit<br>
+                                    <p class="p-2 mb-0">{{b.profitLiability | number : '1.2-2'}}</p>
+                                  </td>
+                                  <td class="text-end"><a class=" btn btn-danger mt-3 mb-0" (click)="cancelBet(b,market.name,3)">X</a></td>
+                                </tr>
+                              </ng-container>
+                              
+                            </table>
+                            <!-- <table class="table text-white small" *ngFor="let runner of market.runners">
                               <tr>
                                 <th class="ps-0">{{market.name}}</th>
                                 <th>Odds</th>
@@ -153,11 +177,12 @@
                                 <td><b>{{b.odds}}</b></td>
                                 <td><b>{{b.stake}}</b></td>
                                 <td><b>{{b.profitLiability | number : '1.2-2'}}</b></td>
+                                <td class="text-end"><a  class=" btn btn-danger mt-3 mb-0">X</a></td>
                               </tr>
-                            </table>
+                            </table> -->
                           </div>
-
                         </div>
+                       </div>
                       </div>
                     </div>
                   </div>
@@ -168,59 +193,49 @@
                         Matched Bets</button>
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                      data-bs-parent="#accordionExample"  [ngClass]="matchedBets.length > 0 ? 'show': ''">
-                      <div class="accordion-body text-white" >
-                        <div class="form-check border-bottom border-secondary mb-2">
-                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                          <label class="form-check-label" for="defaultCheck1">
-                            Average Odds
-                          </label>
+                      data-bs-parent="#accordionExample"   [ngClass]="matchedBets.length > 0 ? 'show': ''" >
+                      <div class="accordion-body text-white">
+                        <div *ngIf="matchedBets.length<=0">
+                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-4x"
+                              aria-hidden="true"></i>
+                              <p class="text-center text-pink my-3">No Matched Bets!</p><br>
+                          </div>                              
                         </div>
-                        <div  *ngFor = "let bet of matchedBets">
-                          <p class="mb-1">{{bet.matchName}}</p>
-                          <div  *ngFor="let market of bet.markets">
-                            <table class="table text-white small" *ngFor="let runner of market.runners">
-                              <tr>
-                                <th class="ps-0">{{market.name}}</th>
-                                <th>Odds</th>
-                                <th>Stake</th>
-                                <th>Profit/Liability</th>
-                              </tr>
-                              <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
-                                <td><b>{{b.horse}}</b></td>
-                                <td><b>{{b.odds}}</b></td>
-                                <td><b>{{b.stake}}</b></td>
-                                <td><b>{{b.profitLiability | number : '1.2-2'}}</b></td>
-                              </tr>
-                            </table>
+                        <div *ngIf="matchedBets.length > 0">
+                          <div class="form-check border-bottom border-secondary mb-2">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Average Odds
+                            </label>
                           </div>
-
+                          <div  *ngFor = "let bet of matchedBets">
+                            <p class="mb-1">{{bet.matchName}}</p>
+                            <div  *ngFor="let market of bet.markets">
+                              <table class="table text-white small" *ngFor="let runner of market.runners">
+                                <tr>
+                                  <th class="ps-0">{{market.name}}</th>
+                                  <th>Odds</th>
+                                  <th>Stake</th>
+                                  <th>Profit/Liability</th>
+                                </tr>
+                                <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                                  <td><b>{{b.horse}}</b></td>
+                                  <td><b>{{b.odds}}</b></td>
+                                  <td><b>{{b.stake}}</b></td>
+                                  <td><b>{{b.profitLiability | number : '1.2-2'}}</b></td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
                         </div>
-
-
-                        <!-- <p class="mb-1">Auckland v Wellington</p>
-                        <table class="table text-white small">
-                          <tr>
-                            <th class="ps-0">Match Odds</th>
-                            <th>Odds</th>
-                            <th>Stake</th>
-                            <th>Profit/Liability</th>
-                          </tr>
-                          <tr class="colblue">
-                            <td>Wellington</td>
-                            <td>1.62</td>
-                            <td>6,500</td>
-                            <td>4,030</td>
-                          </tr>
-                        </table>-->
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item mb-1">
+                  <!-- <div class="accordion-item mb-1">
                     <h2 class="accordion-header" id="headingFive">
                       <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Premium SportsBook Bets <a class="btn btn-danger btn-sm ms-3">CANCEL </a></button>
+                        Premium SportsBook Bets <a class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0">CANCEL </a></button>
                     </h2>
                     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
                       data-bs-parent="#accordionExample">
@@ -261,7 +276,7 @@
                         </table>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

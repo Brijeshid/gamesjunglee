@@ -207,14 +207,14 @@ body {
   margin-top: 10px;
 }
 
-.rightb-icon {
-  width: 40px;
-  height: 40px;
+.userb-icon {
+  width: 35px;
+  height: 35px;
   background: #b70800;
   border-radius: 50px;
   text-align: center;
   padding: 1px;
-  font-size: 25px;
+  font-size: 23px;
   float: right;
 }
 
@@ -240,14 +240,14 @@ body {
   text-align: center;
   border-top: 2px solid #fff;
   font-size: 11px;
-  line-height: 13px;
+  line-height: 11px;
 }
 .gamedetails .table a {
   color: #000;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  line-height: 13px;
+  line-height: 11px;
 }
 .gamedetails .table span {
   font-size: 10px;
@@ -317,7 +317,7 @@ tr {
 .colpink.dis {
   background-color: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
   font-size: 11px;
-  line-height: 13px;
+  line-height: 11px;
 }
 
 .colgray {

@@ -252,14 +252,14 @@ $searchddm:#212529;
   display: flex;
   margin-top: 10px;
 }
-.rightb-icon {
-  width: 40px;
-  height: 40px;
-  background: $red-bg;
+.userb-icon {
+  width: 35px;
+  height: 35px;
+  background: #b70800;
   border-radius: 50px;
   text-align: center;
   padding: 1px;
-  font-size: 25px;
+  font-size: 23px;
   float: right;
 }
 
@@ -282,14 +282,16 @@ $searchddm:#212529;
       padding: 2px 5px;
       text-align: center;border-top: 2px solid $color_1;
       font-size: 11px;
-      line-height: 13px;
+      // line-height: 13px;
+      line-height: 11px;
     }
     a {
       color: $color_3;
       text-decoration: none;
       display: inline-block;
       font-size: 12px;
-      line-height: 13px;
+      // line-height: 13px;
+      line-height: 11px;
     }
     span{
       font-size: 10px;
@@ -353,7 +355,8 @@ tr {
 .colpink.dis {
   background-color: $background-color_8 !important;
   font-size: 11px;
-  line-height: 13px;
+  // line-height: 13px;
+  line-height: 11px;
 }
 .colgray {
   background-color: $background-color_9 !important;

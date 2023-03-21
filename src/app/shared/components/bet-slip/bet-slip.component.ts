@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -49,23 +49,18 @@ export class BetSlipComponent implements OnInit, OnChanges {
       if(!this.isBetSlipActive){
         this.betSlipForm.patchValue({
           odds:0,
+          runs:0,
           stake:0
         })
         this.stakeVal(0);
       }
 
-      if(changes['betSlipParams']['currentValue']['marketName']!= EMarketType.FANCY_TYPE){
         this.betSlipForm.patchValue({
           odds:this.betSlipParams['odds'],
+          runs:this.betSlipParams['runs'],
         })
-        changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 1;
-      }else{
-        console.log("inside else")
-        this.count = 2;
-        this.betSlipForm.patchValue({
-          odds:this.betSlipParams['runs'],
-        })
-      }
+      changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 2;
+      
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
@@ -84,6 +79,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
       odds:['',[Validators.required,Validators.min(1.01)]],
+      runs:[{value: '', disabled: true},[Validators.required]],
       stake:['',[Validators.required]]
     })
   }
@@ -122,27 +118,31 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this.betSlipParams.odds = this.betSlipParams['odds'];
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }
-
-    this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
-      (betSlipRes: any) => {
-            if(this.count <=0 || betSlipRes){
-              this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
-              this._getUserOpenBet();
-              this.betSlipForm.reset();
-              this.isBetSlipActive = false;
-              this.isBetSlipPlaceCall = false;
-              this.isLoaderStart = false;
-              this._SharedService.getUserBalance.next({'marketType': this.marketType});
-            }
-      },
-      (err)=>{},
-      ()=>{
-        this._getUserOpenBet();
-        this.betSlipForm.reset();
-        this.isBetSlipActive = false;
-        this.isBetSlipPlaceCall = false;
-        this.isLoaderStart = false;
-      });
+    this._sharedService.getIPApi().subscribe(res=>{
+      this.betSlipParams['userIp'] = res['ip'];
+      this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
+        (betSlipRes: any) => {
+              if(this.count <=0 || betSlipRes){
+                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
+                this._getUserOpenBet();
+                this.betSlipForm.reset();
+                this.isBetSlipActive = false;
+                this.isBetSlipPlaceCall = false;
+                this.isLoaderStart = false;
+                this._SharedService.getUserBalance.next({'marketType': this.marketType});
+              }
+        },
+        (err)=>{
+          console.log('eee',err);
+          this._getUserOpenBet();
+          this.betSlipForm.reset();
+          this.isBetSlipActive = false;
+          this.isBetSlipPlaceCall = false;
+          this.isLoaderStart = false;
+          this._SharedService.getUserBalance.next({'marketType': this.marketType});
+        });
+    })
+    
   }
 
   get profit(){
@@ -244,6 +244,69 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   getRunnerId(){
     return _.map(this.betSlipParams['runnerObj'],'SelectionId');
+  }
+
+  cancelBet(betListObj:any,marketType:string,cancelBetLevel:any){
+    console.log(betListObj);
+    let betList:any = [];
+    switch(cancelBetLevel){
+      case 1:
+        if(betListObj.length >0 && betListObj[0]['markets'].length >0){
+          betListObj[0]['markets'].map((singleMarket)=>{
+            singleMarket.runners.map((singleRunner) =>{
+              singleRunner.bets.map((singleBet) =>{
+                betList.push(singleBet['betId']);
+              })
+            })
+          })
+        }
+      break;
+
+      case 2:
+        if(betListObj['runners'].length >0){
+          betListObj.runners.map((singleRunner) =>{
+            singleRunner.bets.map((singleBet) =>{
+              betList.push(singleBet['betId']);
+            })
+          })
+        }
+      break;
+
+      case 3:
+        if(betListObj?.betId) betList.push(betListObj.betId);
+      break;
+
+    }
+
+    console.log(betList);
+    
+    let betIdObj = {
+      betIdList: betList
+    }
+    this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
+      marketType = marketType.toUpperCase();
+        switch(marketType){
+          case EMarketName.MATCH_ODDS_UNDERSCORE || EMarketName.MATCH_ODDS_SPACE:
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+          break;
+
+          case EMarketName.BOOKMAKER:
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+          break;
+
+          case EMarketName.FANCY:
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.FANCY_TYPE});
+          break;
+
+          case 'ALL':
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+            this._SharedService.getUserBalance.next({'marketType': EMarketType.FANCY_TYPE});
+          break;
+        }
+
+        this._getUserOpenBet();
+    })
   }
 
 }

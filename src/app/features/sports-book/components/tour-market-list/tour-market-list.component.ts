@@ -49,7 +49,7 @@ export class TourMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn();
+    this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
@@ -259,6 +259,8 @@ export class TourMarketListComponent implements OnInit {
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any){
     console.log(runnerObj,marketData);
     this.betSlipObj = {
+        "sportId":marketData['sportId'],
+        "tournamentId":marketData['tournamentId'],
         "eventId":marketData['matchId'],
         "event":marketData['matchName'],
         "marketId":marketData['market']['marketId'],
