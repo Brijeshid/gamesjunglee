@@ -42,9 +42,9 @@ export class UserSettingsMainService {
       .get(this._apiEndpointsService.getUserBets());
   }
 
-  _getProfitLossApi() {
+  _getProfitLossApi(profitLossObj) {
     return this._apiHttpService
-      .get(this._apiEndpointsService.getProfitLoss());
+      .post(this._apiEndpointsService.getProfitLoss(),profitLossObj);
   }
 
   getPlBets(){
