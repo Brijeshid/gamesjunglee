@@ -378,7 +378,6 @@ export class MatchMarketListComponent implements OnInit {
             singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
             return singleRunner;
           })
-          setTimeout(()=>{this.inPlayUpcomingMarket},0);
         break;
 
         case EMarketType.BOOKMAKER_TYPE:
@@ -395,7 +394,6 @@ export class MatchMarketListComponent implements OnInit {
               })
             }
           })
-          setTimeout(()=>{this.bookMakerMarket},0);
         break;
 
         case EMarketType.FANCY_TYPE:
@@ -410,7 +408,6 @@ export class MatchMarketListComponent implements OnInit {
               return singleFancy;
             }
           })
-          setTimeout(()=>{this.fancyMarket},0);
         break;
       }
     })
