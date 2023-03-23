@@ -292,6 +292,11 @@ tr {
   color: #fff;
 }
 
+.tstartcol {
+  border-top-left-radius: 15px;
+  background: #ffa7a3;
+}
+
 .colblue {
   background-color: #6abefa !important;
   border-left: 1px solid #fff;
@@ -328,6 +333,16 @@ tr {
 .colpink.last {
   border-bottom-right-radius: 15px;
   border-right: 0px;
+}
+
+.colblue.last {
+  border-bottom-right-radius: 15px;
+  border-right: 0px;
+}
+
+.colblue.start {
+  border-bottom-left-radius: 15px;
+  border-left: 0px;
 }
 
 .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last {

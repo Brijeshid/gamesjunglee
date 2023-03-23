@@ -334,6 +334,10 @@ tr {
   background: $coldark !important;
   color: $color_1;
 }
+.tstartcol {
+  border-top-left-radius: 15px;
+  background: $color_2;
+}
 //color box start
 .colblue {
   background-color: $background-color_3 !important;
@@ -365,6 +369,14 @@ tr {
 .colpink.last {
   border-bottom-right-radius: 15px;
   border-right: 0px;
+}
+.colblue.last {
+  border-bottom-right-radius: 15px;
+  border-right: 0px;
+}
+.colblue.start {
+  border-bottom-left-radius: 15px;
+  border-left: 0px;
 }
 .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 45px; height: 40px;}
 //color box end

@@ -16,6 +16,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatchNamePlComponent } from './components/match-name-pl/match-name-pl.component';
 import { NgxDateRangeModule } from 'ngx-daterange';
+import { AccountStatementComponent } from './components/account-statement/account-statement.component';
+import { BetHistoryComponent } from './components/bet-history/bet-history.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { NgxDateRangeModule } from 'ngx-daterange';
     TimeSettingsComponent,
     ChangePasswordComponent,
     SettingsComponent,
-    MatchNamePlComponent
+    MatchNamePlComponent,
+    AccountStatementComponent,
+    BetHistoryComponent
   ],
   imports: [
     CommonModule,
