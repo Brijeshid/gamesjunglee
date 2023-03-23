@@ -338,4 +338,8 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_CANCEL_BET)
   }
 
+  public getAccountStatement():string{
+    return this.createUrl(this._constants.API_URL_ACCOUNT_STATEMENT)
+  }
+
 }

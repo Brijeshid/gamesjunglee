@@ -55,4 +55,9 @@ export class UserSettingsMainService {
       this.currentBet =currentBet;
   }
 
+  _getAccountStatementApi(acctObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getAccountStatement(),acctObj);
+  }
+
 }
