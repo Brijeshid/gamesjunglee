@@ -16,8 +16,8 @@ export class UserSettingsMainService {
   _getTermCondApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getTermCondEndPoint());
-  } 
-  
+  }
+
   _postChangePasswordApi(ChangePasswordBody: object){
     return this._apiHttpService
     .post(this._apiEndpointsService.getChangePasswordEndpoin(),ChangePasswordBody);
@@ -45,6 +45,11 @@ export class UserSettingsMainService {
   _getProfitLossApi(profitLossObj) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getProfitLoss(),profitLossObj);
+  }
+
+  _getBetHistoryForUserApi(betHistoryObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService._getBetHistoryForUserEndpoint(),betHistoryObj);
   }
 
   getPlBets(){

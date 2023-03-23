@@ -55,7 +55,7 @@ export class Constants {
     public readonly API_URL_LIST_ALL_MENU:string = 'api/getAllMenu';
     public readonly API_URL_LIST_SPORTS_BY_TOUR:string = 'api/getTournamentBySportId';
     public readonly API_URL_LIST_DATA_BY_SEARCH:string = 'api/searchEvent';
-    public readonly API_URL_GET_BALANCE_INFO:string = 'api/getBalanceInformation';                                    
+    public readonly API_URL_GET_BALANCE_INFO:string = 'api/getBalanceInformation';
     public readonly API_URL_GET_IN_PLAY_UPCOMING:string = 'api/getInPlayData';
     public readonly API_URL_GET_BOOKMAKER_MARKET:string = 'api/getBookMakerMarket';
     public readonly API_URL_GET_FANCY_MARKET:string = 'api/getFancyMarket';
@@ -66,6 +66,7 @@ export class Constants {
     public readonly API_URL_USER_OPEN_BETS:string = 'api/getUserBets';
     public readonly API_URL_OPEN_BETS:string = 'api/getOpenBets';
     public readonly API_URL_PROFIT_LOSS:string = 'api/getProfitAndLoss';
+    public readonly API_URL_GET_BET_HISTORY_FOR_USER:string = 'api/getBetHistoryForUser';
     public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
     public readonly API_URL_CANCEL_BET:string = 'api/deleteBet';
     public readonly API_URL_ACCOUNT_STATEMENT:string = 'api/getUserAccountStatement';

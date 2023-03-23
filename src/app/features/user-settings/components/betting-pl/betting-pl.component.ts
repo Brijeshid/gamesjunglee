@@ -44,7 +44,7 @@ export class BettingPlComponent implements OnInit {
       game: null
     };
     this._userSettingsService._getProfitLossApi(profitLossObj).subscribe(
-      (res:any) => { 
+      (res:any) => {
        this.profitLoss = res.profitLoss.reverse();
         console.log("getUser", res);
       }

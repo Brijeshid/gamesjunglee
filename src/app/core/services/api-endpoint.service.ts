@@ -330,6 +330,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_PROFIT_LOSS)
   }
 
+  public _getBetHistoryForUserEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_BET_HISTORY_FOR_USER)
+  }
+
   public getBooksForMarket():string{
     return this.createUrl(this._constants.API_URL_BOOKS_MARKET)
   }
