@@ -18,7 +18,7 @@ export class BetHistoryComponent implements OnInit {
   betHistoryForm: FormGroup;
   isMatched:Boolean = true;
   isDeleted:Boolean = false;
-  betHistoryList:any;
+  betHistoryList:any = {};
   options: any = {
     autoApply: false,
     clickOutsideAllowed: false,
