@@ -12,6 +12,7 @@ import * as moment from 'moment';
 export class BetHistoryComponent implements OnInit {
 
   allSports: any;
+  searchTerm: string = '';
   limit:number = 25;
   betHistoryStatus:string = 'Matched';
   isLoading = false;
@@ -89,13 +90,18 @@ export class BetHistoryComponent implements OnInit {
       "isMatched": this.isMatched,
       "isDeleted": this.isDeleted,
       "pageNo": this.currentPage,
-      "limit": this.limit
+      "limit": this.limit,
+      "searchName": this.searchTerm
     };
     this._userSettingsService._getBetHistoryForUserApi(body).subscribe((res: any) => {
       this.betHistoryList = res.betHistoryList;
       this.isLoading = false;
       this.totalPages = Math.ceil(this.betHistoryList.length / this.pageSize);
     });
+  }
+
+  search(): void {
+    this.getBetHistoryForUser();
   }
 
   updateLimit(event){
@@ -105,7 +111,8 @@ export class BetHistoryComponent implements OnInit {
   createBetHistoryForm() {
     this.betHistoryForm = this._fb.group({
       sportId: [4, [Validators.required]],
-      status: ['Matched', [Validators.required]]
+      status: ['Matched', [Validators.required]],
+      search:''
     })
   }
 

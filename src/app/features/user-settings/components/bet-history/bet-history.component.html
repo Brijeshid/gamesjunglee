@@ -84,8 +84,11 @@
           <span class="pt-2">Search : </span>
           <input
             type="text"
+            formControlName="search"
             placeholder="Search"
             class="ms-2 form-control-sm rounded-pill border-pink bg-transparent text-white"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="search()"
           />
         </div>
         <div class="col-md-12 mt-3 mb-3">
