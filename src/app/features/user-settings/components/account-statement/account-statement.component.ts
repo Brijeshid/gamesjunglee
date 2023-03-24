@@ -12,13 +12,14 @@ import { UserSettingsMainService } from '../../services/user-settings-main.servi
 })
 export class AccountStatementComponent implements OnInit {
   allSports: any;
-  accountStatement:any[] = [];
+  limit:number = 25;
+  searchTerm: string = '';
+  accountStatement:any = {};
   filterForm:FormGroup;
+  isLoading = false;
   currentPage: number = 1;
+  pageSize: number = 25;
   totalPages: number = 0;
-  pageSize:number = 10;
-  display = '';
-  language = "en";
   sportslist :any[]=[];
   options:any = {
     autoApply:false,
@@ -45,28 +46,16 @@ export class AccountStatementComponent implements OnInit {
     private _sharedservice: SharedService,
     private _fb: FormBuilder
 
-  ) {
-    this.filterForm =  this._fb.group({
-      // fromDate:new FormControl(this.formatFormDate(new Date())),
-      // toDate:new FormControl(this.formatFormDate(new Date())),
-      // sportsId:new FormControl(null),
-      sportId: [4, [Validators.required]],
-   })
-
-  }
-
-  // formatFormDate(date: Date) {
-  //   return formatDate(date, this.dateFormat,this.language);
-  // }
-
+  ) {}
 
   ngOnInit(): void {
     this._preConfig();
   }
 
   _preConfig() {
-    this.getAccountStatement();
     this.getSports();
+    this.createAccountStatementForm();
+    this.getAccountStatement();
   }
 
   rangeSelected(event) {
@@ -79,44 +68,42 @@ export class AccountStatementComponent implements OnInit {
       this.allSports = res;
     });
   }
-  
-
 
   getAccountStatement(){
-    // let fromDate = new Date(this.filterForm.value.fromDate);
-    // fromDate.setHours(0)
-    // fromDate.setMinutes(0);
-    // fromDate.setSeconds(0);
-
-    // let toDate = new Date(this.filterForm.value.toDate);
-    // toDate.setHours(23)
-    // toDate.setMinutes(59);
-    // toDate.setSeconds(59);
+    this.isLoading = true;
     const payload = {
-      // fromDate : "Sun Jan 01 2023 00:00:00 GMT+0530 (India Standard Time)",
-      // toDate : "Sun Mar 31 2023 00:00:00 GMT+0530 (India Standard Time)",
-      // sportId : '4'
       "fromDate":moment(this.fromDate).format("YYYY-MM-DD"),
       "toDate":moment(this.toDate).format("YYYY-MM-DD"),
       "sportId": parseInt(this.filterForm.value.sportId),
       "pageNo": this.currentPage,
-      "limit": 50
-    }
+      "limit": this.limit,
+      "searchName": this.searchTerm
+    };
     this._userSettingsService._getAccountStatementApi(payload).subscribe(
       (res:any)=>{
-        this.accountStatement = res.accountStatement
+        this.accountStatement = res.accountStatement;
+        this.isLoading = false;
+        this.totalPages = Math.ceil(this.accountStatement.length / this.pageSize);
         console.log(res);
       }
     );
   }
 
-  // _getgameBySportId(){
-  //   this._sharedservice._getSportsListApi().subscribe(
-  //     (res:any)=>{
-  //       this.sportslist = res;
-  //       console.log(res);
-  //     })
-  // }
+  search(): void {
+    this.getAccountStatement();
+  }
+
+  updateLimit(event){
+    this.limit = parseInt(event.target.value);
+    this.getAccountStatement();
+  }
+
+  createAccountStatementForm() {
+    this.filterForm = this._fb.group({
+      sportId: [4, [Validators.required]],
+      search:''
+    })
+  }
 
   next(): void {
     this.currentPage++;
