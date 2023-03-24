@@ -12,8 +12,12 @@ import * as moment from 'moment';
 export class BetHistoryComponent implements OnInit {
 
   allSports: any;
+  limit:number = 25;
+  betHistoryStatus:string = 'Matched';
   isLoading = false;
   currentPage: number = 1;
+  pageSize: number = 25;
+  totalPages: number = 0;
   betHistory: any;
   betHistoryForm: FormGroup;
   isMatched:Boolean = true;
@@ -68,6 +72,7 @@ export class BetHistoryComponent implements OnInit {
 
   getBetHistoryForUser() {
     this.isLoading = true;
+    this.betHistoryStatus = this.betHistoryForm.value.status;
     var userDetails = this._sharedService.getUserDetails();
     if(this.betHistoryForm.value.status == 'Matched'){
       this.isMatched = true;
@@ -84,19 +89,36 @@ export class BetHistoryComponent implements OnInit {
       "isMatched": this.isMatched,
       "isDeleted": this.isDeleted,
       "pageNo": this.currentPage,
-      "limit": 50
+      "limit": this.limit
     };
     this._userSettingsService._getBetHistoryForUserApi(body).subscribe((res: any) => {
       this.betHistoryList = res.betHistoryList;
       this.isLoading = false;
+      this.totalPages = Math.ceil(this.betHistoryList.length / this.pageSize);
     });
   }
 
+  updateLimit(event){
+    this.limit = parseInt(event.target.value);
+    this.getBetHistoryForUser();
+  }
   createBetHistoryForm() {
     this.betHistoryForm = this._fb.group({
       sportId: [4, [Validators.required]],
       status: ['Matched', [Validators.required]]
     })
   }
+
+
+  next(): void {
+    this.currentPage++;
+    this.getBetHistoryForUser();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getBetHistoryForUser();
+  }
+
 
 }
