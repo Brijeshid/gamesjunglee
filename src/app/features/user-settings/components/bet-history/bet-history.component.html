@@ -118,6 +118,9 @@
                 >
                   Profit/Loss
                 </th>
+                <th *ngIf="betHistoryStatus !== 'Matched'" class="pe-0 coldark">
+                  Remarks
+                </th>
                 <th class="text-center pe-0 coldark">Place Date</th>
                 <th class="text-center coldark tlastcol">Match Date</th>
               </tr>
@@ -128,37 +131,36 @@
                   *ngIf="betHistory.betType == 'BACK'"
                   class="colblue p-3 border-start-0"
                 >
-                {{ betHistory.eventName }}
-              </td>
+                  {{ betHistory.eventName }}
+                </td>
                 <td
                   *ngIf="betHistory.betType !== 'BACK'"
                   class="colpink p-3 border-start-0"
                 >
                   {{ betHistory.eventName }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">{{ betHistory.selection }}
+                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                  {{ betHistory.selection }}
                 </td>
                 <td *ngIf="betHistory.betType != 'BACK'" class="colpink">
                   {{ betHistory.selection }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">{{ betHistory.betType }}
+                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                  {{ betHistory.betType }}
                 </td>
                 <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
                   {{ betHistory.betType }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">{{ betHistory.odds }}
+                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                  {{ betHistory.odds }}
                 </td>
                 <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
                   {{ betHistory.odds }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue text-end"><span *ngIf="betHistory.amount < 0" class="text-danger">{{
-                  betHistory.amount
-                }}</span>
-                <span *ngIf="betHistory.amount >= 0" class="text-success">{{
-                  betHistory.amount
-                }}</span>
-              </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="colpink text-end">
+                <td
+                  *ngIf="betHistory.betType == 'BACK'"
+                  class="colblue text-end"
+                >
                   <span *ngIf="betHistory.amount < 0" class="text-danger">{{
                     betHistory.amount
                   }}</span>
@@ -166,24 +168,67 @@
                     betHistory.amount
                   }}</span>
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK' && betHistoryStatus == 'Matched'" class="colblue text-end">
-
+                <td
+                  *ngIf="betHistory.betType !== 'BACK'"
+                  class="colpink text-end"
+                >
+                  <span *ngIf="betHistory.amount < 0" class="text-danger">{{
+                    betHistory.amount
+                  }}</span>
+                  <span *ngIf="betHistory.amount >= 0" class="text-success">{{
+                    betHistory.amount
+                  }}</span>
+                </td>
+                <td
+                  *ngIf="
+                    betHistory.betType == 'BACK' &&
+                    betHistoryStatus == 'Matched'
+                  "
+                  class="colblue text-end"
+                >
                   {{ betHistory.profitLoss }}
                 </td>
 
-                <td *ngIf="betHistory.betType !== 'BACK' && betHistoryStatus == 'Matched'" class="colpink text-end">
-
+                <td
+                  *ngIf="
+                    betHistory.betType !== 'BACK' &&
+                    betHistoryStatus == 'Matched'
+                  "
+                  class="colpink text-end"
+                >
                   {{ betHistory.profitLoss }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">{{ betHistory.placedTime }}
+
+                <td
+                  *ngIf="
+                    betHistory.betType == 'BACK' &&
+                    betHistoryStatus !== 'Matched'
+                  "
+                  class="colblue"
+                >
+                  {{ betHistory.remarks }}
+                </td>
+                <td
+                  *ngIf="
+                    betHistory.betType !== 'BACK' &&
+                    betHistoryStatus !== 'Matched'
+                  "
+                  class="colpink"
+                >
+                  {{ betHistory.remarks }}
+                </td>
+
+                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                  {{ betHistory.placedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
                 <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
-                  {{ betHistory.placedTime }}
+                  {{ betHistory.placedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">{{ betHistory.matchedTime }}
+                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                  {{ betHistory.matchedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
                 <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
-                  {{ betHistory.matchedTime }}
+                  {{ betHistory.matchedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
               </tr>
             </tbody>
