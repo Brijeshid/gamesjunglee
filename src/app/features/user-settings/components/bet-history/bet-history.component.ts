@@ -94,7 +94,7 @@ export class BetHistoryComponent implements OnInit {
       "searchName": this.searchTerm
     };
     this._userSettingsService._getBetHistoryForUserApi(body).subscribe((res: any) => {
-      this.betHistoryList = res.betHistoryList;
+      this.betHistoryList = res.betHistoryList.betHistory;
       this.isLoading = false;
       this.totalPages = Math.ceil(this.betHistoryList.length / this.pageSize);
     });
