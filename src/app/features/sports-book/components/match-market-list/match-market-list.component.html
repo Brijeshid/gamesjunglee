@@ -167,7 +167,8 @@
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}">
-                                  <a data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="laddericon">
+                                  <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="laddericon"> -->
+                                    <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon">
                                     <img src="/assets/images/ladder-icon.png" width="10px">
                                   </a>
                                 </td>
