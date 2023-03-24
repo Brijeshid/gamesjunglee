@@ -80,7 +80,7 @@ export class BetHistoryComponent implements OnInit {
       "userId": userDetails.userId,
       "fromDate":moment(this.fromDate).format("YYYY-MM-DD"),
       "toDate":moment(this.toDate).format("YYYY-MM-DD"),
-      "sportId": this.betHistoryForm.value.sportId,
+      "sportId": parseInt(this.betHistoryForm.value.sportId),
       "isMatched": this.isMatched,
       "isDeleted": this.isDeleted,
       "pageNo": this.currentPage,
@@ -94,7 +94,7 @@ export class BetHistoryComponent implements OnInit {
 
   createBetHistoryForm() {
     this.betHistoryForm = this._fb.group({
-      sportId: ['4', [Validators.required]],
+      sportId: [4, [Validators.required]],
       status: ['Matched', [Validators.required]]
     })
   }
