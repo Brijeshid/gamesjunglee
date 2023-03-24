@@ -286,7 +286,8 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
       marketType = marketType.toUpperCase();
         switch(marketType){
-          case EMarketName.MATCH_ODDS_UNDERSCORE || EMarketName.MATCH_ODDS_SPACE:
+          case EMarketName.MATCH_ODDS_UNDERSCORE:
+          case EMarketName.MATCH_ODDS_SPACE:
             this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
           break;
 
