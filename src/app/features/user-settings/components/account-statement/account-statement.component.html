@@ -112,17 +112,21 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-end">
             <li class="page-item">
-              <a class="page-link text-dark" href="#">First</a>
+              <a class="page-link text-dark">First</a>
             </li>
             <li class="page-item">
-              <a class="page-link text-dark" href="#">Previous</a>
+              <a class="page-link text-dark">Previous</a>
+              [disabled]="currentPage === 1"
+              (click)="prev()"
             </li>
-            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+            <li class="page-item"><a class="page-link text-dark">1</a></li>
             <li class="page-item">
-              <a class="page-link text-dark" href="#">Next</a>
+              <a class="page-link text-dark">Next</a>
+              [disabled]="currentPage === totalPages"
+              (click)="next()"
             </li>
             <li class="page-item">
-              <a class="page-link text-dark" href="#">Last</a>
+              <a class="page-link text-dark">Last</a>
             </li>
           </ul>
         </nav>

@@ -99,6 +99,8 @@ export class AccountStatementComponent implements OnInit {
       "fromDate":moment(this.fromDate).format("YYYY-MM-DD"),
       "toDate":moment(this.toDate).format("YYYY-MM-DD"),
       "sportId": parseInt(this.filterForm.value.sportId),
+      "pageNo": this.currentPage,
+      "limit": 50
     }
     this._userSettingsService._getAccountStatementApi(payload).subscribe(
       (res:any)=>{
