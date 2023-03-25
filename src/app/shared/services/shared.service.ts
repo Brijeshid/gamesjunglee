@@ -198,5 +198,10 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getCancelBetForMarket(), betIdListBody);
   }
+
+  postLiveStreamForMarket(liveStreamMatchObj: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getLiveStreamMatch(), liveStreamMatchObj);
+  }
 }
 

@@ -71,4 +71,5 @@ export class Constants {
     public readonly API_URL_CANCEL_BET:string = 'api/deleteBet';
     public readonly API_URL_ACCOUNT_STATEMENT:string = 'api/getUserAccountStatement';
     public readonly API_URL_LADDER:string = 'api/getLadder';
+    public readonly API_URL_LIVE_STREAM_MATCH:string = 'api/getStreamingUrl';
 }

@@ -4,6 +4,8 @@ import { UserSettingsMainService } from 'src/app/features/user-settings/services
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EMarketName, EMarketType } from '@shared/models/shared';
 import * as _ from "lodash";
+import { ActivatedRoute } from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser'
 
 @Component({
   selector: 'app-bet-slip',
@@ -16,6 +18,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   @Input() betSlipParams:any;
   @Input() showMAtchwiseBet = ''
   @Input() marketType:any = EMarketType.MATCH_TYPE;
+  @Input() isTVEnable:boolean;
 
   EMarketType:typeof EMarketType = EMarketType;
   odds:number;
@@ -30,12 +33,16 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isBack:boolean;
   userBalance:any;
   isSticky: boolean = false;
+  matchId:number;
+  liveStreamingTVUrl:any;
 
   constructor(
     private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
     private _SharedService:SharedService,
     private _fb: FormBuilder,
+    private _route: ActivatedRoute,
+    public sanitizer: DomSanitizer
     ) { }
 
 
@@ -68,8 +75,21 @@ export class BetSlipComponent implements OnInit, OnChanges {
       if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
+
+    if(changes['isTVEnable'] && !changes['isTVEnable'].isFirstChange()){
+      this.isTVEnable =  changes['isTVEnable']['currentValue'];
+      if(this.isTVEnable){
+        this.startStreamingLiveTV();
+      }else{
+        this.liveStreamingTVUrl = undefined;
+      }
+    }
   }
   ngOnInit(): void {
+    this._route.params.subscribe(routeParams =>{
+      this.matchId = routeParams.matchId;
+    });
+
     this.isBack = this.betSlipParams?.isBack;
     this._createBetSlipForm();
     this.getUserBalance();
@@ -307,6 +327,13 @@ export class BetSlipComponent implements OnInit, OnChanges {
         }
 
         this._getUserOpenBet();
+    })
+  }
+
+  startStreamingLiveTV(){
+    this._sharedService.postLiveStreamForMarket({matchId:this.matchId}).subscribe((res:any)=>{
+      this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
+      console.log("tv",res);
     })
   }
 

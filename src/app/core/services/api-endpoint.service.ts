@@ -350,4 +350,8 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_LADDER)
   }
 
+  public getLiveStreamMatch():string{
+    return this.createUrl(this._constants.API_URL_LIVE_STREAM_MATCH)
+  }
+
 }

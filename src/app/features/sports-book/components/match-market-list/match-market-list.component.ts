@@ -50,6 +50,9 @@ export class MatchMarketListComponent implements OnInit {
   placeBetData:any;
   booksForMarket:any;
   ladderObj:any = {};
+  isTVEnable:boolean = false;
+  isMatchLive:number =0;
+
 
   constructor(
     private _sharedService: SharedService,
@@ -103,6 +106,7 @@ export class MatchMarketListComponent implements OnInit {
     this._sharedService._postInPlayUpcomingApi({matchId:this.matchId}).subscribe((res:any)=>{
       if(res?.inPlayUpcomingMarket && res['inPlayUpcomingMarket']?.matchName){
           this.matchName =  res['inPlayUpcomingMarket']['matchName'];
+          this.isMatchLive = res['inPlayUpcomingMarket']['inPlayStatus'];
           res['inPlayUpcomingMarket']['status'] = 1;
           this.setOrUnsetWebSocketParamsObj['match']['centralIds'].push(res['inPlayUpcomingMarket']['centralId']);
           res['inPlayUpcomingMarket']['runners'].map(runnerRes=>{
@@ -419,6 +423,10 @@ export class MatchMarketListComponent implements OnInit {
       this.ladderObj = res?.ladderDetails;
       console.log(this.ladderObj,res);
     })
+  }
+
+  hideShowTV(){
+    this.isTVEnable = !this.isTVEnable;
   }
 
   goBack(){

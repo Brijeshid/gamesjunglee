@@ -1,8 +1,12 @@
 <app-header></app-header>
 <!--body start-->
 <div class="row m-0">
-    <div class="col-md-12 pb-2 pt-2">
+    <div class="col-md-6 pb-2 pt-2">
       <a class="text-pink small text-decoration-none pointer"><i (click)="goBack()" class="fa fa-angle-left text-white"></i> {{matchName | uppercase}}</a>
+    </div>
+    <div class="col-md-6 text-end pb-2 pt-2">
+      <button class="btn btn-sm badge bg-success me-1" (click)="hideShowTV()" *ngIf="isMatchLive !== 0">
+        <i [ngClass]="isTVEnable ? 'fa fa-xmark':'fa fa-play' "></i>&nbsp;{{isTVEnable ? 'HIDE': 'WATCH'}}</button>
     </div>
     <hr class="text-pink">
     <!--Aside start-->
@@ -363,6 +367,7 @@
               [betSlipParams]="betSlipObj"
               [showMAtchwiseBet] = "matchName"
               [marketType]="marketType"
+              [isTVEnable]="isTVEnable"
             ></app-bet-slip>
         </div>
         <!--Aside right end-->
