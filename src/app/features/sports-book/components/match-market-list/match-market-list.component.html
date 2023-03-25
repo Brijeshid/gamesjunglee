@@ -167,8 +167,8 @@
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"></td>
                                 <td width="10%" class="border-top" [ngClass]="{'border-top':!first}">
-                                  <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="laddericon"> -->
-                                    <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon">
+                                  <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="laddericon" (click)="getLadderDataByMarket(singleFancyMarket['marketId'])">
+                                    <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon" > -->
                                     <img src="/assets/images/ladder-icon.png" width="10px">
                                   </a>
                                 </td>
@@ -385,14 +385,22 @@
           <div class="col-md-6">Runs</div>
           <div class="col-md-6">P&L</div>
         </div>
-        <div class="row border-bottom p-2">
-          <div class="col-md-6">0-56</div>
-          <div class="col-md-6"><span class="text-success">500</span></div>
-        </div>
-        <div class="row border-bottom p-2 bg-light">
-          <div class="col-md-6">+57</div>
-          <div class="col-md-6"><span class="text-danger">-500</span></div>
-        </div>
+        <ng-container *ngIf="ladderObj && ladderObj.length >0">
+          <div class="row border-bottom p-2">
+            <div class="col-md-6">{{ladderObj[0]?.startScore}}-{{ladderObj[0]?.endScore}}</div>
+            <div class="col-md-6"><span [ngClass]="ladderObj[0]?.amount >= 0 ? 'text-success':'text-danger'">{{ladderObj[0]?.amount}}</span></div>
+          </div>
+          <div class="row border-bottom p-2 bg-light">
+            <ng-container *ngIf="ladderObj[1]?.endScore=='Infinite' ; else nonInfinte">
+              <div class="col-md-6">+{{ladderObj[1]?.startScore}}</div>
+            </ng-container>
+            <ng-template #nonInfinte>
+              <div class="col-md-6">{{ladderObj[1]?.startScore}}-{{ladderObj[1]?.endScore}}</div>
+            </ng-template>
+            
+            <div class="col-md-6"><span [ngClass]="ladderObj[1]?.amount >= 0 ? 'text-success':'text-danger'">{{ladderObj[1]?.amount}}</span></div>
+          </div>
+        </ng-container>
         <div class="row">
           <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">CLOSE</button>
         </div>

@@ -346,4 +346,8 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ACCOUNT_STATEMENT)
   }
 
+  public getLadderDataByMarket():string{
+    return this.createUrl(this._constants.API_URL_LADDER)
+  }
+
 }

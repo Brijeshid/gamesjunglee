@@ -49,6 +49,7 @@ export class MatchMarketListComponent implements OnInit {
   marketType = EMarketType.MATCH_TYPE;
   placeBetData:any;
   booksForMarket:any;
+  ladderObj:any = {};
 
   constructor(
     private _sharedService: SharedService,
@@ -410,6 +411,13 @@ export class MatchMarketListComponent implements OnInit {
           })
         break;
       }
+    })
+  }
+
+  getLadderDataByMarket(marketId:any){
+    this._sportsBookService._postLadderDataByMarketApi({marketId:marketId}).subscribe((res:any)=>{
+      this.ladderObj = res?.ladderDetails;
+      console.log(this.ladderObj,res);
     })
   }
 

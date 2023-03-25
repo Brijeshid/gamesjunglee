@@ -70,4 +70,5 @@ export class Constants {
     public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
     public readonly API_URL_CANCEL_BET:string = 'api/deleteBet';
     public readonly API_URL_ACCOUNT_STATEMENT:string = 'api/getUserAccountStatement';
+    public readonly API_URL_LADDER:string = 'api/getLadder';
 }
