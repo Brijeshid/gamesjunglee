@@ -56,7 +56,14 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/in-play'])
           console.log("hello",res);
         },
-        () => this.isLoading=false,
+        (err) => {
+          this.isLoading=false
+          if(err['error'] !== null){
+            this._sharedService.getToastPopup(err['error']['message'],err['statusText'],'error');
+          }else{
+            this._sharedService.getToastPopup(err['message'],err['statusText'],'error');
+          }
+        },
         () => this.isLoading=false
         )
     },
