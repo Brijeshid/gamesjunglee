@@ -45,7 +45,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if(err['status'] === 401){
           this._sharedService.removeJWTToken();
           this._router.navigate(['/home']);
-          return throwError(() => err);
+          return throwError(err);
         }
         if(err['error'] !== null){
           this._sharedService.getToastPopup(err['error']['message'],err['statusText'],'error');
@@ -54,7 +54,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         // return EMPTY;
-        return throwError(() => err);
+        return throwError(err);
       }),
       // finalize(()=>{
       //   this.isLoaderActivate(request) ? this._ngxLoader.stop() :this._ngxLoader.stop();
