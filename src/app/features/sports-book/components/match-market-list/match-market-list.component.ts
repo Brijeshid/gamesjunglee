@@ -370,52 +370,54 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   getBooksForMarket(marketIdList:any,marketType){
-    this._sharedService._getBooksForMarketApi(marketIdList).subscribe((res:any) =>{
-      switch(marketType){
-        case EMarketType.MATCH_TYPE:
-          this.booksForMarket = res?.booksForMarket;
-          let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
-          horseDataByMarketId?.horses.map((singleAmount)=>{
-            singleAmount['horse'] = +singleAmount['horse'];
-            return singleAmount;
-          })
-          this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
-            singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
-            return singleRunner;
-          })
-        break;
-
-        case EMarketType.BOOKMAKER_TYPE:
-          this.bookMakerMarket.map((singleBookMaker)=>{
-            let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleBookMaker['marketId']]);
-            if(horseDataByMarketId !== undefined){
-              horseDataByMarketId?.horses.map((singleAmount)=>{
-                singleAmount['horse'] = +singleAmount['horse'];
-                return singleAmount;
-              })
-               return singleBookMaker['runners'].map((singleRunner)=>{
-                singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
-                return singleRunner;
-              })
-            }
-          })
-        break;
-
-        case EMarketType.FANCY_TYPE:
-          this.fancyMarket.map((singleFancy)=>{
-            let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleFancy['marketId']]);
-            if(horseDataByMarketId !== undefined){
-              horseDataByMarketId?.horses.map((singleAmount)=>{
-                singleAmount['horse'] = +singleAmount['horse'];
-                return singleAmount;
-              })
-              singleFancy['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleFancy['SelectionId']]);
-              return singleFancy;
-            }
-          })
-        break;
-      }
-    })
+    if(marketIdList?.marketIds?.length > 0 ){
+      this._sharedService._getBooksForMarketApi(marketIdList).subscribe((res:any) =>{
+        switch(marketType){
+          case EMarketType.MATCH_TYPE:
+            this.booksForMarket = res?.booksForMarket;
+            let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',this.inPlayUpcomingMarket['marketId']]);
+            horseDataByMarketId?.horses.map((singleAmount)=>{
+              singleAmount['horse'] = +singleAmount['horse'];
+              return singleAmount;
+            })
+            this.inPlayUpcomingMarket['runners'].map((singleRunner)=>{
+              singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
+              return singleRunner;
+            })
+          break;
+  
+          case EMarketType.BOOKMAKER_TYPE:
+            this.bookMakerMarket.map((singleBookMaker)=>{
+              let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleBookMaker['marketId']]);
+              if(horseDataByMarketId !== undefined){
+                horseDataByMarketId?.horses.map((singleAmount)=>{
+                  singleAmount['horse'] = +singleAmount['horse'];
+                  return singleAmount;
+                })
+                 return singleBookMaker['runners'].map((singleRunner)=>{
+                  singleRunner['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleRunner['SelectionId']]);
+                  return singleRunner;
+                })
+              }
+            })
+          break;
+  
+          case EMarketType.FANCY_TYPE:
+            this.fancyMarket.map((singleFancy)=>{
+              let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleFancy['marketId']]);
+              if(horseDataByMarketId !== undefined){
+                horseDataByMarketId?.horses.map((singleAmount)=>{
+                  singleAmount['horse'] = +singleAmount['horse'];
+                  return singleAmount;
+                })
+                singleFancy['hourseAmt']= _.find(horseDataByMarketId?.horses,['horse',+singleFancy['SelectionId']]);
+                return singleFancy;
+              }
+            })
+          break;
+        }
+      })
+    }
   }
 
   getLadderDataByMarket(marketId:any){

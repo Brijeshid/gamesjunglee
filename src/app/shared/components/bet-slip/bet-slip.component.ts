@@ -143,23 +143,23 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
         (betSlipRes: any) => {
               if(this.count <=0 || betSlipRes){
-                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
-                this._getUserOpenBet();
-                this.betSlipForm.reset();
                 this.isBetSlipActive = false;
                 this.isBetSlipPlaceCall = false;
                 this.isLoaderStart = false;
                 this._SharedService.getUserBalance.next({'marketType': this.marketType});
+                this.betSlipForm.reset();
+                this._getUserOpenBet();
+                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
               }
         },
         (err)=>{
           console.log('eee',err);
-          this._getUserOpenBet();
-          this.betSlipForm.reset();
           this.isBetSlipActive = false;
           this.isBetSlipPlaceCall = false;
           this.isLoaderStart = false;
           this._SharedService.getUserBalance.next({'marketType': this.marketType});
+          this.betSlipForm.reset();
+          this._getUserOpenBet();
         });
     })
     
