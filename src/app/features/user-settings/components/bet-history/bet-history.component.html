@@ -121,8 +121,8 @@
                 <th *ngIf="betHistoryStatus !== 'Matched'" class="pe-0 coldark">
                   Remarks
                 </th>
-                <th class="text-center pe-0 coldark">Place Date</th>
-                <th class="text-center coldark tlastcol">Match Date</th>
+                <th class="text-center pe-0 coldark">Placed Date</th>
+                <th class="text-center coldark tlastcol">Matched Date</th>
               </tr>
             </thead>
             <tbody>
@@ -161,23 +161,13 @@
                   *ngIf="betHistory.betType == 'BACK'"
                   class="colblue text-end"
                 >
-                  <span *ngIf="betHistory.amount < 0" class="text-danger">{{
-                    betHistory.amount
-                  }}</span>
-                  <span *ngIf="betHistory.amount >= 0" class="text-success">{{
-                    betHistory.amount
-                  }}</span>
+                  <span>{{betHistory.amount}}</span>
                 </td>
                 <td
                   *ngIf="betHistory.betType !== 'BACK'"
                   class="colpink text-end"
                 >
-                  <span *ngIf="betHistory.amount < 0" class="text-danger">{{
-                    betHistory.amount
-                  }}</span>
-                  <span *ngIf="betHistory.amount >= 0" class="text-success">{{
-                    betHistory.amount
-                  }}</span>
+                  <span>{{betHistory.amount }}</span>
                 </td>
                 <td
                   *ngIf="
@@ -186,7 +176,12 @@
                   "
                   class="colblue text-end"
                 >
+                <span *ngIf="betHistory.profitLoss >= 0" class="text-success text-center">
                   {{ betHistory.profitLoss }}
+                </span>
+                <span *ngIf="betHistory.profitLoss < 0" class="text-danger">
+                  {{ betHistory.profitLoss }}
+                </span>
                 </td>
 
                 <td
@@ -196,7 +191,12 @@
                   "
                   class="colpink text-end"
                 >
+                <span *ngIf="betHistory.profitLoss >= 0" class="text-success">
                   {{ betHistory.profitLoss }}
+                </span>
+                <span *ngIf="betHistory.profitLoss < 0" class="text-danger">
+                  {{ betHistory.profitLoss }}
+                </span>
                 </td>
 
                 <td
