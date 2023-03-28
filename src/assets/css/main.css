@@ -1029,4 +1029,15 @@ input:checked + .slider:before {
   padding: 10px 14px;
   border-radius: 25px;
   background: #d9d9d9;
+}
+
+.tabetails .table td {
+  font-size: 14px;
+}
+.tabetails .table span {
+  font-size: 14px;
+}
+.tabetails th {
+  border-width: 0;
+  font-size: 14px;
 }/*# sourceMappingURL=main.css.map */

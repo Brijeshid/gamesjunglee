@@ -51,12 +51,12 @@
         <button class="btn border-pink w-100 rounded-pill btn-pink" (click)="getAccountStatement()">Submit</button>
       </div>
     </div>
-    <div class="row gamedetails mb-5">
+    <div class="row gamedetails tabetails mb-5">
       <div class="col-md-9">
         Show
         <select
           (change)="updateLimit($event)"
-          class="form-select-sm border-pink bg-transparent text-white p-2 rounded-3 ms-2 me-2"
+          class="form-select-sm border-pink bg-dark text-white p-2 rounded-3 ms-2 me-2"
         >
           <option>25</option>
           <option>50</option>
@@ -97,11 +97,11 @@
               <td class="text-center">{{i+1}}</td>
               <td class="p-3 text-center">{{acctstatement.date |  date :'MMM d, y, h:mm:ss a'}}</td>
               <td class="text-center">
-                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit}}</span>
+                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit | number}}</span>
                 <span  *ngIf= "acctstatement.credit == 0 "><strong>-</strong></span>
               </td>
               <td class="text-center">
-                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit}}</span>
+                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit | number}}</span>
                 <span  *ngIf= "acctstatement.debit == 0 "><strong>-</strong></span>
               </td>
               <td class="text-center">{{acctstatement.balance | number}}</td>
