@@ -67,7 +67,7 @@ export class MatchMarketListComponent implements OnInit {
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
-      this._getWebSocketUrl();
+      this.initConfig();
     });
     this._preConfig();
   }
@@ -102,6 +102,17 @@ export class MatchMarketListComponent implements OnInit {
       this._cdref.detectChanges();
   }
 
+  initConfig(){
+    (sessionStorage.getItem('deviceId') === null) ? this._getUniqueDeviceKeyApi(): this._getWebSocketUrl();
+  }
+
+  _getUniqueDeviceKeyApi(){
+    this._sharedService._getUniqueDeviceKeyApi().subscribe((res:any)=>{
+      sessionStorage.setItem('deviceId',res?.deviceId);
+      this._getWebSocketUrl();
+    })
+  }
+
   getInPlayUpcomingData(){
     this._sharedService._postInPlayUpcomingApi({matchId:this.matchId}).subscribe((res:any)=>{
       if(res?.inPlayUpcomingMarket && res['inPlayUpcomingMarket']?.matchName){
@@ -133,7 +144,13 @@ export class MatchMarketListComponent implements OnInit {
           })
         //merge both centralId
         this.inPlayUpcomingMarket = res['inPlayUpcomingMarket'];
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['match']['centralIds']});
+        let setObj = {
+          set:{
+            deviceId:sessionStorage.getItem('deviceId'),
+            centralIdList:this.setOrUnsetWebSocketParamsObj['match']['centralIds']          
+            }
+          }
+        this._setOrUnsetWebSocketData(setObj);
         if(this.inPlayUpcomingMarket && this.isLoggedIn) this.getBooksForMarket({marketIds : [this.inPlayUpcomingMarket['marketId']]},EMarketType.MATCH_TYPE);
       }
     })
@@ -159,7 +176,13 @@ export class MatchMarketListComponent implements OnInit {
         })
         //merge both centralId
         this.bookMakerMarket = res;
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']});
+        let setObj = {
+          set:{
+            deviceId:sessionStorage.getItem('deviceId'),
+            centralIdList:this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']          
+            }
+          }
+        this._setOrUnsetWebSocketData(setObj);
         if(this.bookMakerMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.bookMakerMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.BOOKMAKER_TYPE);
       }
     })
@@ -182,31 +205,32 @@ export class MatchMarketListComponent implements OnInit {
         })
         //merge both centralId
         this.fancyMarket = res;
-        this._setOrUnsetWebSocketData(true,{'centralIds':this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']});
+        let setObj = {
+          set:{
+            deviceId:sessionStorage.getItem('deviceId'),
+            centralIdList:this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']         
+            }
+          }
+        this._setOrUnsetWebSocketData(setObj);
         if(this.fancyMarket && this.isLoggedIn) this.getBooksForMarket({marketIds :this.fancyMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.FANCY_TYPE);
       }
     })
   }
 
   _getWebSocketUrl(){
-    this._sharedService.getWebSocketURLApi().subscribe(
-      (res: any) => {
-        console.log('url',res);
-        if(res){
-          this.realDataWebSocket = webSocket(res['url']);
-          this.getInPlayUpcomingData(); //in-play
-          this.getBookMakerData() //bookmaker
-          this.getFancyData() //fancy
-        }
-      });
+    this.getInPlayUpcomingData(); //in-play
+    this.getBookMakerData() //bookmaker
+    this.getFancyData() //fancy
   }
 
-  _setOrUnsetWebSocketData(isSet:boolean,setOrUnsetWebSocketParamsObj){
-    this._sharedService.postSetOrUnsetWebSocketDataApi(isSet,setOrUnsetWebSocketParamsObj).subscribe(
+  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
+    this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
       (res: any) => {
         console.log('market',res);
-        if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        this._subscribeWebSocket();
+        if(res?.token?.url){
+          this.realDataWebSocket = webSocket(res?.token?.url);
+          this._subscribeWebSocket()
+        } 
       });
   }
 
