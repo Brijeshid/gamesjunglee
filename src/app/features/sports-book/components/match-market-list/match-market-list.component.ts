@@ -459,4 +459,17 @@ export class MatchMarketListComponent implements OnInit {
     this._location.back();
   }
 
+  ngOnDestroy(): void {
+    let unSetObj = {
+      unset:{
+        deviceId:sessionStorage.getItem('deviceId'),
+        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['match']['centralIds'],
+        this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'],this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'] 
+         )        
+        }
+    }
+    this._setOrUnsetWebSocketData(unSetObj);
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+  }
+
 }
