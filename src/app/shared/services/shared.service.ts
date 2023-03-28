@@ -203,5 +203,15 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getLiveStreamMatch(), liveStreamMatchObj);
   }
+
+  _getUniqueDeviceKeyApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUniqueDeviceKey());
+  }
+
+  _getWebSocketURLByDeviceApi(liveStreamMatchObj: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketURLByDevice(), liveStreamMatchObj);
+  }
 }
 
