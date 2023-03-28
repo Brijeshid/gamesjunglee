@@ -97,11 +97,11 @@
               <td class="text-center">{{i+1}}</td>
               <td class="p-3 text-center">{{acctstatement.date |  date :'MMM d, y, h:mm:ss a'}}</td>
               <td class="text-center">
-                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit}}</span>
+                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit | number}}</span>
                 <span  *ngIf= "acctstatement.credit == 0 "><strong>-</strong></span>
               </td>
               <td class="text-center">
-                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit}}</span>
+                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit | number}}</span>
                 <span  *ngIf= "acctstatement.debit == 0 "><strong>-</strong></span>
               </td>
               <td class="text-center">{{acctstatement.balance | number}}</td>
