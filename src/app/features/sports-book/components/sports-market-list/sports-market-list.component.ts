@@ -56,7 +56,7 @@ export class SportsMarketListComponent implements OnInit {
       };
       this.sports = routeParams.sports;
       this.getSubNavBySportsList();
-      this._getWebSocketUrl();
+      this.initConfig();
     })
 
     this._sharedService.getUserBalance.subscribe(res=>{
@@ -70,6 +70,17 @@ export class SportsMarketListComponent implements OnInit {
       this.placeBetData = res;
     })
     this._cdref.detectChanges();
+  }
+
+  initConfig(){
+    (sessionStorage.getItem('deviceId') === null) ? this._getUniqueDeviceKeyApi(): this._getWebSocketUrl();
+  }
+
+  _getUniqueDeviceKeyApi(){
+    this._sharedService._getUniqueDeviceKeyApi().subscribe((res:any)=>{
+      sessionStorage.setItem('deviceId',res?.deviceId);
+      this._getWebSocketUrl();
+    })
   }
 
   onClickTab(activeTab){
@@ -183,8 +194,13 @@ export class SportsMarketListComponent implements OnInit {
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         console.log(this.inPlayMatchListBySport)
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
-        this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
-
+        let setObj = {
+          set:{
+            deviceId:sessionStorage.getItem('deviceId'),
+            centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
+            }
+          }
+        this._setOrUnsetWebSocketData(setObj);
         if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
 
       }
@@ -192,24 +208,19 @@ export class SportsMarketListComponent implements OnInit {
   }
 
   _getWebSocketUrl(){
-    this._sharedService.getWebSocketURLApi().subscribe(
-      (res: any) => {
-        console.log('url',res);
-        if(res){
-          this.realDataWebSocket = webSocket(res['url']);
-          this.getInPlayUpcomingData(); //in-play //upcoming
-        }
-      });
+    this.getInPlayUpcomingData(); //in-play //upcoming
   }
 
-  _setOrUnsetWebSocketData(isSet:boolean,setOrUnsetWebSocketParamsObj){
-    this._sharedService.postSetOrUnsetWebSocketDataApi(isSet,setOrUnsetWebSocketParamsObj).subscribe(
+  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
+    this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
       (res: any) => {
         console.log('market',res);
-        if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        if(this.realDataWebSocket) this._subscribeWebSocket();
+        if(res?.token?.url){
+          this.realDataWebSocket = webSocket(res?.token?.url);
+          this._subscribeWebSocket()
+        } 
       });
-  }
+}
 
 
   private _updateMarketData(data: any) {
@@ -334,7 +345,13 @@ export class SportsMarketListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+    let unSetObj = {
+      unset:{
+        deviceId:sessionStorage.getItem('deviceId'),
+        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
+        }
+    }
+    this._setOrUnsetWebSocketData(unSetObj);
     if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
