@@ -281,9 +281,8 @@ $searchddm:#212529;
       vertical-align: middle;
       padding: 2px 5px;
       text-align: center;border-top: 2px solid $color_1;
-      font-size: 11px;
       // line-height: 13px;
-      line-height: 11px;
+      line-height: 12px;
     }
     a {
       color: $color_3;
@@ -291,7 +290,7 @@ $searchddm:#212529;
       display: inline-block;
       font-size: 12px;
       // line-height: 13px;
-      line-height: 11px;
+      line-height: 12px;
     }
     span{
       font-size: 10px;
@@ -301,9 +300,9 @@ $searchddm:#212529;
   th {
     border-color: $border-color_1;
     border-style: none;
-    border-width: 0; font-size: 11px;
+    border-width: 0; font-size: .8rem;
     height: 50px;
-    vertical-align: middle;
+    vertical-align: middle; font-weight: normal;
   }
   .heading{
     font-size: 10px;

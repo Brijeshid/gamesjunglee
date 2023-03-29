@@ -1,7 +1,7 @@
 <!--Header 1 start-->
 <div class="container-fluid">
   <div class="row">
-<nav class="navbar navbar-expand-lg navbar-light header-one">
+<nav class="navbar navbar-expand-lg navbar-light header-one animate__animated animate__fadeInDown">
         <div class="col-md-1">
 <button class="navbar-toggler bg-pink" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -14,17 +14,17 @@
 </div>&nbsp;&nbsp;
 <div class="col-md-2">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
-          <li class="nav-item header-icon">
+          <li class="nav-item header-icon pt-2">
               <a [routerLink]="['/news']">
                 <!--Tooltip start-->
                 <div class="tooltipnk">
-                  <i class="fas fa-newspaper"></i>
+                  <i class="fas fa-newspaper text-dark"></i>
                   <span class="tooltiptext">Latest News</span>
                 </div>
                 <!--Tooltip end-->
               </a>
           </li>&nbsp;&nbsp;
-          <li class="nav-item header-icon">
+          <li class="nav-item header-icon pt-2">
               <a >
                  <!--Tooltip start-->
                  <div class="tooltipnk">
@@ -69,7 +69,7 @@
 
 <!--Header 2 start--->
 <div class="header-tow">
-    <ul class="nav justify-content-center">
+    <ul class="nav justify-content-center animate__animated animate__flipInX">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img src="assets/images/soccer.png"> INPLAY</a>
         </li>
