@@ -334,6 +334,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this.stakeVal(0);
     this.betSlipForm.controls['stake'].setValue("");
     this.isBetSlipActive=false;
+    this.betSlipParams['isBack'] = false;
   }
 
   startStreamingLiveTV(){
