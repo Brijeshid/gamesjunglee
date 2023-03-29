@@ -121,23 +121,23 @@ export class MatchMarketListComponent implements OnInit {
           res['inPlayUpcomingMarket']['status'] = 1;
           this.setOrUnsetWebSocketParamsObj['match']['centralIds'].push(res['inPlayUpcomingMarket']['centralId']);
           res['inPlayUpcomingMarket']['runners'].map(runnerRes=>{
-                runnerRes['back0'] = '';
-                runnerRes['vback0'] = '';
+            runnerRes['back0'] = runnerRes['batb'][0]['odds'];
+            runnerRes['vback0'] = runnerRes['batb'][0]['tv'];
 
-                runnerRes['back1'] = '';
-                runnerRes['vback1'] = '';
+            runnerRes['back1'] = runnerRes['batb'][1]['odds'];
+            runnerRes['vback1'] = runnerRes['batb'][1]['tv'];
 
-                runnerRes['back2'] = '';
-                runnerRes['vback2'] = '';
+            runnerRes['back2'] = runnerRes['batb'][2]['odds'];
+            runnerRes['vback2'] = runnerRes['batb'][2]['tv'];
 
-                runnerRes['lay0'] = '';
-                runnerRes['vlay0'] = '';
+            runnerRes['lay0'] = runnerRes['batl'][0]['odds'];
+            runnerRes['vlay0'] = runnerRes['batl'][0]['tv'];
 
-                runnerRes['lay1'] = '';
-                runnerRes['vlay1'] = '';
+            runnerRes['lay1'] = runnerRes['batl'][1]['odds'];
+            runnerRes['vlay1'] = runnerRes['batl'][1]['tv'];
 
-                runnerRes['lay2'] = '';
-                runnerRes['vlay2'] = '';
+            runnerRes['lay2'] = runnerRes['batl'][2]['odds'];
+            runnerRes['vlay2'] = runnerRes['batl'][2]['tv'];
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -164,11 +164,11 @@ export class MatchMarketListComponent implements OnInit {
           this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'].push(sportsObj['centralId']);
           return sportsObj['runners'].map(runnerRes=>{
 
-                runnerRes['back0'] = '';
-                runnerRes['vback0'] = '';
+            runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+            runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
-                runnerRes['lay0'] = '';
-                runnerRes['vlay0'] = '';
+            runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+            runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -195,11 +195,11 @@ export class MatchMarketListComponent implements OnInit {
         res.map(sportsObj =>{
           sportsObj['status'] = 1;
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
-                sportsObj['back1'] = '';
-                sportsObj['vback1'] = '';
+                sportsObj['back1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['odds']: '';
+                sportsObj['vback1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['tv']:'';
 
-                sportsObj['lay1'] = '';
-                sportsObj['vlay1'] = '';
+                sportsObj['lay1'] = sportsObj['batl'][1] !== undefined ? sportsObj['batl'][1]['odds']: '';
+                sportsObj['vlay1'] = sportsObj['batl'][1] !== undefined ? sportsObj['batl'][1]['tv']:'';
 
                 sportsObj['suspended'] = true;
         })
@@ -457,6 +457,19 @@ export class MatchMarketListComponent implements OnInit {
 
   goBack(){
     this._location.back();
+  }
+
+  ngOnDestroy(): void {
+    let unSetObj = {
+      unset:{
+        deviceId:sessionStorage.getItem('deviceId'),
+        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['match']['centralIds'],
+        this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'],this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'] 
+         )        
+        }
+    }
+    this._setOrUnsetWebSocketData(unSetObj);
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
   }
 
 }
