@@ -197,7 +197,7 @@ export class SportsMarketListComponent implements OnInit {
         let setObj = {
           set:{
             deviceId:sessionStorage.getItem('deviceId'),
-            centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
+            centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
             }
           }
         this._setOrUnsetWebSocketData(setObj);
@@ -348,7 +348,7 @@ export class SportsMarketListComponent implements OnInit {
     let unSetObj = {
       unset:{
         deviceId:sessionStorage.getItem('deviceId'),
-        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
+        centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);

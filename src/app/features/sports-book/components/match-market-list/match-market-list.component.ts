@@ -463,7 +463,7 @@ export class MatchMarketListComponent implements OnInit {
     let unSetObj = {
       unset:{
         deviceId:sessionStorage.getItem('deviceId'),
-        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['match']['centralIds'],
+        centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['match']['centralIds'],
         this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'],this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'] 
          )        
         }

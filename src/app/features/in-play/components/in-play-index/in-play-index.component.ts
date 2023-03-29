@@ -58,8 +58,8 @@ export class InPlayIndexComponent implements OnInit {
          res['matchDetails'][0]['sports'].map(sportsObj =>{
 
           paramsObj['upComing'] ?
-          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'] = _.merge(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']):
-          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.merge(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
+          this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'] = _.concat(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds']):
+          this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.concat(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
           
           return sportsObj['markets'].map(marketObj=>{
             marketObj['status'] = 1;
@@ -226,7 +226,7 @@ export class InPlayIndexComponent implements OnInit {
     let unSetObj = {
       unset:{
         deviceId:sessionStorage.getItem('deviceId'),
-        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
+        centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
