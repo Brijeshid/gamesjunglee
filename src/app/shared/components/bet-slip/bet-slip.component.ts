@@ -192,7 +192,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   stakeVal(val:any){
     //calculate profit and loss with marketID
-    if(this.betSlipForm.controls['stake'].valid){
+    if(this.betSlipForm.controls['stake'].valid && val!==0){
       let marketObj = {};
       let calCulatedAmount = 0;
       if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
@@ -328,6 +328,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
         this._getUserOpenBet();
     })
+  }
+
+  cancelBetSlip(){
+    this.stakeVal(0);
+    this.betSlipForm.controls['stake'].setValue("");
+    this.isBetSlipActive=false;
   }
 
   startStreamingLiveTV(){
