@@ -119,7 +119,7 @@ export class TourMarketListComponent implements OnInit {
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
-            runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+                runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
                 runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
