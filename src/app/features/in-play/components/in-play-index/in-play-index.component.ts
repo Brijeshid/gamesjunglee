@@ -226,7 +226,7 @@ export class InPlayIndexComponent implements OnInit {
     let unSetObj = {
       unset:{
         deviceId:sessionStorage.getItem('deviceId'),
-        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay'],this.setOrUnsetWebSocketParamsObj['upcoming'])          
+        centralIdList:_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
