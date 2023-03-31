@@ -96,17 +96,17 @@
                                       </div>
                                       <!--Tooltip end-->
                                     </td>
-                                    <td class="colblue pointer"><a><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br><span>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</span></a></td>
-                                    <td class="colpink pointer"><a><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br><span>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</span></a></td>
+                                    <td class="colblue pointer" [boxHighlight]="singleMarket['market']['runners'][0]['back2']" [boxHighlight]="singleMarket['market']['runners'][0]['vback2']"><a><strong>{{singleMarket['market']['runners'][0]['back2']}}</strong> <br><span>{{singleMarket['market']['runners'][0]['vback2'] | marketRateFormater}}</span></a></td>
+                                    <td class="colpink pointer" [boxHighlight]="singleMarket['market']['runners'][0]['lay0']" [boxHighlight]="singleMarket['market']['runners'][0]['vlay0']"><a><strong>{{singleMarket['market']['runners'][0]['lay0']}}</strong> <br><span>{{singleMarket['market']['runners'][0]['vlay0'] | marketRateFormater}}</span></a></td>
 
                                     <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                     <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
 
-                                    <td class="colblue pointer" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br><span>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</span></td>
-                                    <td class="colpink pointer" *ngIf="singleMarket?.market?.runners[2]"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br><span>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</span></td>
+                                    <td class="colblue pointer" *ngIf="singleMarket?.market?.runners[2]" [boxHighlight]="singleMarket['market']['runners'][2]['back2']" [boxHighlight]="singleMarket['market']['runners'][2]['vback2']"><strong>{{singleMarket['market']['runners'][2]['back2']}}</strong> <br><span>{{singleMarket['market']['runners'][2]['vback2'] | marketRateFormater}}</span></td>
+                                    <td class="colpink pointer" *ngIf="singleMarket?.market?.runners[2]" [boxHighlight]="singleMarket['market']['runners'][2]['lay0']" [boxHighlight]="singleMarket['market']['runners'][2]['vlay0']"><strong>{{singleMarket['market']['runners'][2]['lay0']}}</strong> <br><span>{{singleMarket['market']['runners'][2]['vlay0'] | marketRateFormater}}</span></td>
 
-                                    <td class="colblue pointer"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br><span>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</span></td>
-                                    <td class="colpink pointer" [ngClass]="{'last':last}"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br><span>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</span></td>
+                                    <td class="colblue pointer" [boxHighlight]="singleMarket['market']['runners'][1]['back2']" [boxHighlight]="singleMarket['market']['runners'][1]['vback2']"><strong>{{singleMarket['market']['runners'][1]['back2']}}</strong> <br><span>{{singleMarket['market']['runners'][1]['vback2'] | marketRateFormater}}</span></td>
+                                    <td class="colpink pointer" [ngClass]="{'last':last}" [boxHighlight]="singleMarket['market']['runners'][1]['lay0']" [boxHighlight]="singleMarket['market']['runners'][1]['vlay0']"><strong>{{singleMarket['market']['runners'][1]['lay0']}}</strong> <br><span>{{singleMarket['market']['runners'][1]['vlay0'] | marketRateFormater}}</span></td>
                                 </tr>
                             </ng-container>
                         </tbody>

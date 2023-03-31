@@ -9,6 +9,7 @@ import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
 import { MarketRateFormaterPipe } from './pipes/market-rate-formater.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { BoxHighlightDirective } from './directives/box-highlight.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     LeftNavigationComponent,
     BetSlipComponent,
     MarketRateFormaterPipe,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    BoxHighlightDirective
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     FavouriteComponent,
     LeftNavigationComponent,
     BetSlipComponent,
-    MarketRateFormaterPipe
+    MarketRateFormaterPipe,
+    BoxHighlightDirective
   ]
 })
 export class SharedModule { }
