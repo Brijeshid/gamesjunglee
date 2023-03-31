@@ -20,6 +20,8 @@
   .innerpagem {
     border: 0;
   }
+  .sidebarhd{display: none;}
+  .sidebarhide{ display: block;}
  }
 
 

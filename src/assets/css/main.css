@@ -1098,7 +1098,10 @@ input:checked + .slider:before {
   padding: 0 10px;
   top: 0px;
   bottom: auto;
-  height: 700px;
+}
+
+.sidebarhide {
+  display: none;
 }
 
 /********** Bet Slip end ************//*# sourceMappingURL=main.css.map */
