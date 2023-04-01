@@ -45,7 +45,7 @@
                     <div class="mt-0 innerpagem gamedetails ps-3 pe-3">
                       <!--Table 1-->
                       <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
-                        <ng-container *ngIf="singleInPlay['status'] != '4' && singleInPlay['status'] != undefined">
+                        <ng-container *ngIf="singleInPlay['market']['appMarketStatus'] != '4'">
                         <span class="badge rounded bg-success midbadge ms-1 py-1 px-3">Live</span>
                         <!-- <span class=" rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover pointer">
@@ -114,7 +114,7 @@
 
                       <!--Table 2-->
                       <ng-container *ngFor="let singleUpcoming of upComingMatchListBySport">
-                        <ng-container *ngIf="singleUpcoming['status'] != '4' && singleUpcoming['status'] != undefined">
+                        <ng-container *ngIf="singleUpcoming['market']['appMarketStatus'] != '4'">
                         <span class="badge rounded bg-primary midbadge ms-1 py-1 px-3">Upcoming</span>
                         <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}}</span> -->
                         <table class="table table-hover">

@@ -62,7 +62,6 @@ export class InPlayIndexComponent implements OnInit {
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'] = _.concat(_.map(sportsObj['markets'], 'market.centralId'),this.setOrUnsetWebSocketParamsObj['inplay']['centralIds']);
           
           return sportsObj['markets'].map(marketObj=>{
-            marketObj['status'] = 1;
               return marketObj['market']['runners'].map((runnerRes) => {
                 console.log('runnerRes',runnerRes);
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
@@ -134,7 +133,7 @@ export class InPlayIndexComponent implements OnInit {
           return sportsObj['markets'].map(resObj=>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
               if(singleWebSocketMarketData != undefined){
-                resObj['status'] = singleWebSocketMarketData['ms'];
+                resObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
                 return resObj['market']['runners'].map((runnerRes) => {
                   let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                   for (let singleWebsocketRunner of webSocketRunners) {
@@ -174,7 +173,7 @@ export class InPlayIndexComponent implements OnInit {
           return sportsObj['markets'].map(resObj=>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
               if(singleWebSocketMarketData != undefined){
-                resObj['status'] = singleWebSocketMarketData['ms'];
+                resObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
                 return resObj['market']['runners'].map((runnerRes) => {
                   let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                   for (let singleWebsocketRunner of webSocketRunners) {

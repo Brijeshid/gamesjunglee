@@ -86,7 +86,6 @@ export class TourMarketListComponent implements OnInit {
 
          res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
           sportsObj['isExpand'] = true;
-          sportsObj['status'] = 1;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
@@ -115,7 +114,6 @@ export class TourMarketListComponent implements OnInit {
 
         res['inPlayUpcomingMarket']['upComingMarkets'].map(sportsObj =>{
           sportsObj['isExpand'] = true;
-          sportsObj['status'] = 1;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
@@ -182,7 +180,7 @@ export class TourMarketListComponent implements OnInit {
         this.inPlayMatchListBySport.map(sportsObj =>{
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
             if(singleWebSocketMarketData != undefined){
-              sportsObj['status'] = singleWebSocketMarketData['ms'];
+              sportsObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
               return sportsObj['market']['runners'].map((runnerRes) => {
                 let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                 for (let singleWebsocketRunner of webSocketRunners) {
@@ -220,7 +218,7 @@ export class TourMarketListComponent implements OnInit {
         this.upComingMatchListBySport.map(sportsObj =>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
               if(singleWebSocketMarketData != undefined){
-                sportsObj['status'] = singleWebSocketMarketData['ms'];
+                sportsObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
                 return sportsObj['market']['runners'].map((runnerRes) => {
                   let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                   for (let singleWebsocketRunner of webSocketRunners) {
