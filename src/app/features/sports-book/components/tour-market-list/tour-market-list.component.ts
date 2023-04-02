@@ -147,7 +147,7 @@ export class TourMarketListComponent implements OnInit {
         let setObj = {
           set:{
             deviceId:sessionStorage.getItem('deviceId'),
-            centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])          
+            centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])
             }
           }
         this._setOrUnsetWebSocketData(setObj);
@@ -167,7 +167,7 @@ export class TourMarketListComponent implements OnInit {
         if(res?.token?.url){
           this.realDataWebSocket = webSocket(res?.token?.url);
           this._subscribeWebSocket()
-        } 
+        }
       });
   }
 
@@ -288,7 +288,8 @@ export class TourMarketListComponent implements OnInit {
         "book":marketData['market']['runners'],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "booksForMarket":this.booksForMarket,
-        "runnerObj":marketData['market']['runners']
+        "runnerObj":marketData['market']['runners'],
+        "marketTypeName":marketData['market']['marketName']
     }
   }
 
@@ -314,7 +315,7 @@ export class TourMarketListComponent implements OnInit {
     let unSetObj = {
       unset:{
         deviceId:sessionStorage.getItem('deviceId'),
-        centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])        
+        centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
