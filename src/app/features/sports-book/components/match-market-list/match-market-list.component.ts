@@ -192,7 +192,7 @@ export class MatchMarketListComponent implements OnInit {
       console.log('res',res);
       if(res.length > 0){
         res.map(sportsObj =>{
-          if(sportsObj['appMarketStatus'] !=4) this.isFancyCardShow = true;
+          if(sportsObj['appMarketStatus'] !=4 || sportsObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
                 sportsObj['back1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['odds']: '';
                 sportsObj['vback1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['tv']:'';
@@ -317,7 +317,7 @@ export class MatchMarketListComponent implements OnInit {
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               if(singleWebSocketMarketDataBook != undefined){
                 fancyMarketObj['appMarketStatus'] = singleWebSocketMarketDataBook['ms'];
-                if(fancyMarketObj['appMarketStatus'] !=4) this.isFancyCardShow = true;
+                if(fancyMarketObj['appMarketStatus'] !=4 || fancyMarketObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
                 fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId'].toString();
                 let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
                 for (let singleWebsocketRunnerBook of webSocketRunnersBook) {

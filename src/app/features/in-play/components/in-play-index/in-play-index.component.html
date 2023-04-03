@@ -79,7 +79,7 @@
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first = first;">
-                                <tr *ngIf="singleMarket['market']['appMarketStatus'] != '4'" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
+                                <tr *ngIf="singleMarket['market']['appMarketStatus'] != '4' || singleMarket['market']['appMarketStatus'] != '2'" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
                                     <td class="text-start ps-2 heading border-top pointer" [ngClass]="{'border-top':!first}"><a ><strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br> {{singleMarket['market']['runners'][1]['RunnerName']}}</strong></a></td>
                                     <td class="border-top disnone" [ngClass]="{'border-top':!first}">
                                       <!--Tooltip start-->
@@ -138,7 +138,7 @@
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let singleMarket of singleMatchBySports?.markets; let last = last; let first=first" >
-                                <tr *ngIf="singleMarket['market']['appMarketStatus'] != '4'" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
+                                <tr *ngIf="singleMarket['market']['appMarketStatus'] != '4' || singleMarket['market']['appMarketStatus'] != '2'" [ngClass]="{'border-0':last}" routerLink="/sportsbook/{{singleMatchBySports?.sportName | titlecase}}/{{singleMarket['tournamentId']}}/{{singleMarket['matchId']}}">
                                     <td class="text-start ps-2 heading border-top pointer"><a > <span class="text-danger">{{singleMarket['matchTime'] | date: 'EEEE At h:mm a'}}</span><br> <strong>{{singleMarket['market']['runners'][0]['RunnerName']}} <br>{{singleMarket['market']['runners'][1]['RunnerName']}}</strong>
                                         </a></td>
                                     <td class="border-top disnone pointer" [ngClass]="{'border-top':!first}"></td>

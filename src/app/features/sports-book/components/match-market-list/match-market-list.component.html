@@ -55,7 +55,7 @@
                     <div class="col-md-12">
                       <div class="mt-3 innerpagem gamedetails ps-3 pe-3 overflow-auto">
                         <!--Table 1-->
-                        <table class="table table-hover" *ngIf="inPlayUpcomingMarket?.runners && inPlayUpcomingMarket['appMarketStatus'] != '4'">
+                        <table class="table table-hover" *ngIf="inPlayUpcomingMarket?.runners && (inPlayUpcomingMarket['appMarketStatus'] != '4' || inPlayUpcomingMarket['appMarketStatus'] != '2')">
                           <thead class="collapsible">
                             <tr>
                               <th width="30%" class="tfirstcol"> Match Odds</th>
@@ -99,7 +99,7 @@
 
                         <!--Table 2-->
                         <ng-container *ngFor="let singleBookMaker of bookMakerMarket">
-                          <table class="table table-hover" *ngIf="singleBookMaker['appMarketStatus'] != '4'">
+                          <table class="table table-hover" *ngIf="singleBookMaker['appMarketStatus'] != '4' || singleBookMaker['appMarketStatus'] != '2'">
                             <thead>
                               <tr>
                                 <th colspan="10" class="h-100">Bookmaker (0% Commission & Instant Bet)</th>
@@ -172,7 +172,7 @@
                           </thead>
                           <tbody class="pointer">
                             <ng-container *ngFor="let singleFancyMarket of fancyMarket; let last=last; let first=first;" >
-                              <tr *ngIf="singleFancyMarket['appMarketStatus'] != '4'" [ngClass]="{'border-0':last}">
+                              <tr *ngIf="singleFancyMarket['appMarketStatus'] != '4' || singleFancyMarket['appMarketStatus'] != '2'" [ngClass]="{'border-0':last}">
                                 <td width="30%" class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}"><a ><strong>{{singleFancyMarket['marketName']}}<br> </strong></a>
                                   <br>
                                   <a [ngClass]="singleFancyMarket?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
