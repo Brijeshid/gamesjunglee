@@ -58,10 +58,12 @@ export class LoginComponent implements OnInit {
         },
         (err) => {
           this.isLoading=false
-          if(err['error'] !== null){
-            this._sharedService.getToastPopup(err['error']['message'],err['statusText'],'error');
-          }else{
-            this._sharedService.getToastPopup(err['message'],err['statusText'],'error');
+          if(err['status'] === 401){
+            if(err['error'] !== null){
+              this._sharedService.getToastPopup(err['error']['message'],err['statusText'],'error');
+            }else{
+              this._sharedService.getToastPopup(err['message'],err['statusText'],'error');
+            }
           }
         },
         () => this.isLoading=false

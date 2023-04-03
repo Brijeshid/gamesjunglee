@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpContext } from '@angular/common/http';
 import { IGNORED_STATUSES } from '@core/interceptors/http-error.interceptor';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,8 @@ export class SharedService {
     private _apiHttpService: ApiHttpService,
     private _apiEndpointsService: ApiEndpointsService,
     private _router:Router,
-    private _location:Location
+    private _location:Location,
+    private _deviceService: DeviceDetectorService
   ) {
     // this.currentUrl = this._route.url;
     // _route.events.subscribe(event => {
@@ -38,6 +40,20 @@ export class SharedService {
     // });
 
     // this._location.back();
+  }
+
+   setDeviceDetails(){
+    console.log(this._deviceService.getDeviceInfo())
+    let deviceInfo = {
+      isMobile: this._deviceService.isMobile(),
+      isTablet: this._deviceService.isTablet(),
+      isDesktop:this._deviceService.isDesktop()
+    }
+    localStorage.setItem('deviceInfo',JSON.stringify(deviceInfo))
+   }
+
+   getDeviceDetails() {
+    return JSON.parse(localStorage.getItem('deviceInfo') || '{}');
   }
 
    public getPreviousUrl(){

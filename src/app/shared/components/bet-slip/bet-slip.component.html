@@ -1,10 +1,10 @@
-<div class="row  sidebar flex-shrink-0 fixed-sidebar">
+<div class="row  sidebar flex-shrink-0 fixed-sidebar" >
     <div class="col-md-12 accordionn">
-      <div *ngIf="liveStreamingTVUrl" id="videoplayer">
+      <div *ngIf="liveStreamingTVUrl && !deviceDetails['isMobile']" id="videoplayer">
         <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(liveStreamingTVUrl)" scrolling="no"></iframe>
       </div>
       <div class="innerpagem">
-        <ul class="nav nav-tabs justify-content-center border-0" id="myTab" role="tablist">
+        <ul class="nav nav-tabs justify-content-center border-0" id="myTab" role="tablist" *ngIf="!deviceDetails['isMobile']">
           <li class="nav-item" role="presentation">
             <button class="nav-link pointer" [ngClass]="{'active':isBetSlipActive}" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
               type="button" role="tab" aria-controls="betslip" aria-selected="true" [disabled]="!isBetSlipActive"  [ngStyle]="{'color':betSlipParams['isBack'] === true ? '#6abefa' : '#ffb9b5','border-bottom':betSlipParams['isBack'] === true && isBetSlipActive? '3px solid #6abefa': (isBetSlipActive? '3px solid #ffb9b5':'')}">BETSLIP</button>
@@ -288,4 +288,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div>

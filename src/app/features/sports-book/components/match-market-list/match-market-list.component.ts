@@ -53,6 +53,7 @@ export class MatchMarketListComponent implements OnInit {
   isTVEnable:boolean = false;
   isMatchLive:number =0;
   isFancyCardShow:boolean = false;
+  deviceDetails:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -104,6 +105,7 @@ export class MatchMarketListComponent implements OnInit {
 
   initConfig(){
     (sessionStorage.getItem('deviceId') === null) ? this._getUniqueDeviceKeyApi(): this._getWebSocketUrl();
+    this.deviceDetails = this._sharedService.getDeviceDetails();
   }
 
   _getUniqueDeviceKeyApi(){

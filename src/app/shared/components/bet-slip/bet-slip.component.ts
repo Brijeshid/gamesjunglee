@@ -35,6 +35,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isSticky: boolean = false;
   matchId:number;
   liveStreamingTVUrl:any;
+  deviceDetails:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -91,10 +92,12 @@ export class BetSlipComponent implements OnInit, OnChanges {
     });
 
     this.isBack = this.betSlipParams?.isBack;
+    this.deviceDetails = this._sharedService.getDeviceDetails();
     this._createBetSlipForm();
     this.getUserBalance();
     this._getUserOpenBet();
     this.getUserConfig();
+    this.setInitValue();
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
@@ -102,6 +105,35 @@ export class BetSlipComponent implements OnInit, OnChanges {
       runs:[{value: '', disabled: true},[Validators.required]],
       stake:['',[Validators.required]]
     })
+  }
+
+  setInitValue(){
+    if(this.betSlipParams){
+      this.betSlipParams =  this.betSlipParams;
+      this.isBack = this.betSlipParams?.isBack;
+      this.isBetSlipActive = this.betSlipParams?.isBetSlipActive;
+
+      if(!this.isBetSlipActive){
+        this.betSlipForm.patchValue({
+          odds:0,
+          runs:0,
+          stake:0
+        })
+        this.stakeVal(0);
+      }
+      this.betSlipForm.patchValue({
+        odds:this.betSlipParams['odds'],
+        runs:this.betSlipParams['runs'],
+      })
+      
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
+    }
+
+    if(this.marketType){
+      if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
+    }
+    
   }
 
   onClickPlaceBet(){

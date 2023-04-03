@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { SharedService } from '@shared/services/shared.service';
 export class AppComponent  implements OnInit {
   title = 'gamesjunglee';
   isblur:any = false;
+  deviceInfo:any;
 
   constructor(
     private _sharedService: SharedService
@@ -19,7 +21,7 @@ export class AppComponent  implements OnInit {
        this.isblur=res['isShowRightSideBar'];
        console.log(res['isShowRightSideBar'])
     })
-
+    this._sharedService.setDeviceDetails();
   }
 
 }
