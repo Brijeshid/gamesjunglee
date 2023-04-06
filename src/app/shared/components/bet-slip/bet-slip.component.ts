@@ -98,6 +98,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._getUserOpenBet();
     this.getUserConfig();
     this.setInitValue();
+    this._sharedService.unMatchSubjectListSubject.subscribe(()=>{
+      this._getUserOpenBet();
+      this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+    })
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({

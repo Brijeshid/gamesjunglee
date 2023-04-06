@@ -40,6 +40,9 @@ export class TourMarketListComponent implements OnInit {
   betSlipObj:any = {};
   booksForMarket:any;
   placeBetData:any;
+  
+  unMatchBackList = [];
+  unMatchLayList = [];
 
   constructor(
     private _sharedService: SharedService,
@@ -83,7 +86,8 @@ export class TourMarketListComponent implements OnInit {
     this._sharedService._postInPlayUpcomingApi({tournamentId:this.tourId}).subscribe((res:any)=>{
       if(res?.inPlayUpcomingMarket && (res['inPlayUpcomingMarket']['inPlayMarkets'].length > 0
         || res['inPlayUpcomingMarket']['upComingMarkets'].length > 0)){
-
+        
+          
          res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
           sportsObj['isExpand'] = true;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
@@ -171,11 +175,28 @@ export class TourMarketListComponent implements OnInit {
       });
   }
 
+  setUnMatchConfig(){
+    if(this._sharedService.unmatchedBetsList.length >0){
+      let unMatchList = this._sharedService.unmatchedBetsList[0]['markets'][0]['runners'];
+      this.unMatchBackList = [];
+      this.unMatchLayList = [];
+      unMatchList.map((singleRunner)=>{
+        singleRunner['bets'].map(singleBet =>{
+          singleBet['runnerId'] = singleRunner['runnerId'];
+          return singleBet;
+        })
+        this.unMatchBackList = _.concat(this.unMatchBackList,_.filter(singleRunner['bets'], ['type', 'BACK']));
+        this.unMatchLayList = _.concat(this.unMatchLayList,_.filter(singleRunner['bets'], ['type', 'LAY']));
+      })
+    }
+  }
+
   private _updateMarketData(data: any) {
     let parseData = JSON.parse(data);
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       console.log('data', JSON.parse(data));
       let webSocketData = parseData['data'];
+      this.setUnMatchConfig();
       if(this.inPlayMatchListBySport.length >0){
         this.inPlayMatchListBySport.map(sportsObj =>{
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
@@ -193,6 +214,15 @@ export class TourMarketListComponent implements OnInit {
                     //Volume from Betfair
                     runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
 
+                    if(singleWebsocketRunner['pr'] == 0 && this.unMatchBackList.length >0){
+                      this.unMatchBackList.map((singleUnMatchBack:any)=>{
+                        if((singleWebsocketRunner['rt'] >= singleUnMatchBack?.betRate) 
+                          && (singleUnMatchBack.runnerId == singleWebsocketRunner['ri'])) 
+                        this._sharedService.unMatchSubjectListSubject.next(true);  
+                        
+                      })
+                    }
+
                   } else {
                     //lay
 
@@ -201,6 +231,14 @@ export class TourMarketListComponent implements OnInit {
 
                     //Volume from Betfair
                     runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                    if(singleWebsocketRunner['pr'] == 0 && this.unMatchLayList.length >0){
+                      this.unMatchLayList.map((singleUnMatchLay:any)=>{
+                        if((singleWebsocketRunner['rt'] >= singleUnMatchLay?.betRate) 
+                          && (singleUnMatchLay.runnerId == singleWebsocketRunner['ri'])) 
+                        this._sharedService.unMatchSubjectListSubject.next(true);  
+                      })
+                    }
 
                   }
                 }
@@ -231,6 +269,15 @@ export class TourMarketListComponent implements OnInit {
                       //Volume from Betfair
                       runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
 
+                      if(singleWebsocketRunner['pr'] == 0 && this.unMatchBackList.length >0){
+                        this.unMatchBackList.map((singleUnMatchBack:any)=>{
+                          if((singleWebsocketRunner['rt'] >= singleUnMatchBack?.betRate) 
+                            && (singleUnMatchBack.runnerId == singleWebsocketRunner['ri'])) 
+                          this._sharedService.unMatchSubjectListSubject.next(true);  
+                          
+                        })
+                      }
+
                     } else {
                       //lay
 
@@ -239,6 +286,14 @@ export class TourMarketListComponent implements OnInit {
 
                       //Volume from Betfair
                       runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                      if(singleWebsocketRunner['pr'] == 0 && this.unMatchLayList.length >0){
+                        this.unMatchLayList.map((singleUnMatchLay:any)=>{
+                          if((singleWebsocketRunner['rt'] >= singleUnMatchLay?.betRate) 
+                            && (singleUnMatchLay.runnerId == singleWebsocketRunner['ri'])) 
+                          this._sharedService.unMatchSubjectListSubject.next(true);  
+                        })
+                      }
 
                     }
                   }
