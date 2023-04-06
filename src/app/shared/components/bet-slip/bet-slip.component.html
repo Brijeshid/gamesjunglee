@@ -82,7 +82,7 @@
                           [disabled]="betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall" [ngClass]="(betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall) ? 'disabled bg-secondary' : 'bg-success text-white'">
                               <span class="d-block">PLACE BET</span>
                              <ng-container *ngIf="!betSlipForm.controls['stake'].invalid">
-                              <span class="d-block small prof">{{betSlipParams['isBack'] ? 'PROFIT':'LIABILITY'}}: {{profit}}</span>
+                              <span class="d-block  prof">{{betSlipParams['isBack'] ? 'PROFIT':'LIABILITY'}}: {{profit}}</span>
                               <div class="sec-text">
                                   <span>{{marketType == EMarketType.MATCH_TYPE ? '5s':marketType == EMarketType.FANCY_TYPE ? '2s':'1s'}}</span>
                               </div>
@@ -128,17 +128,17 @@
                           </div>
                         </div>
                        <div *ngIf="unMatchedBets.length > 0">
-                        <div class="form-check border-bottom border-secondary mb-2">
+                        <!-- <div class="form-check border-bottom border-secondary mb-2">
                           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                           <label class="form-check-label" for="defaultCheck1">
                             Average Odds
                           </label>
-                        </div>
+                        </div> -->
 
                         <div  *ngFor = "let bet of unMatchedBets">
                           <p class="mb-1">{{bet.matchName}}</p>
                           <div  *ngFor="let market of bet.markets">
-                            <table class="table text-white small" *ngFor="let runner of market.runners">
+                            <table class="table text-white text-center" *ngFor="let runner of market.runners">
                               <tr>
                                 <th width="25%" class="ps-0">{{market.name}}</th>
                                 <th width="25%"></th>
@@ -151,14 +151,13 @@
                                   <td>{{b.horse | titlecase}}</td>
                                   <td></td>
                                   <td></td>
-                                  <td></td>
                                 </tr>
-                                <tr [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                                <tr class="text-dark " [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
                                   <td>Odds<br>
-                                    <p class="bg-white text-dark p-2 mb-0">{{b.odds}}</p>
+                                    <p class="bg-white text-dark p-1 mb-0">{{b.odds}}</p>
                                   </td>
                                   <td>Stake<br>
-                                    <p class="bg-white text-dark p-2 mb-0">{{b.stake}}</p>
+                                    <p class="bg-white text-dark p-1 mb-0">{{b.stake}}</p>
                                   </td>
                                   <td>Profit<br>
                                     <p class="p-2 mb-0">{{b.profitLiability | number : '1.2-2'}}</p>
@@ -168,7 +167,7 @@
                               </ng-container>
 
                             </table>
-                            <!-- <table class="table text-white small" *ngFor="let runner of market.runners">
+                            <!-- <table class="table text-white " *ngFor="let runner of market.runners">
                               <tr>
                                 <th class="ps-0">{{market.name}}</th>
                                 <th>Odds</th>
@@ -176,10 +175,10 @@
                                 <th>Profit/Liability</th>
                               </tr>
                               <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
-                                <td><b>{{b.horse}}</b></td>
-                                <td><b>{{b.odds}}</b></td>
-                                <td><b>{{b.stake}}</b></td>
-                                <td><b>{{b.profitLiability | number : '1.2-2'}}</b></td>
+                                <td>{{b.horse}}</td>
+                                <td>{{b.odds}}</td>
+                                <td>{{b.stake}}</td>
+                                <td>{{b.profitLiability | number : '1.2-2'}}</td>
                                 <td class="text-end"><a  class=" btn btn-danger mt-3 mb-0">X</a></td>
                               </tr>
                             </table> -->
@@ -205,16 +204,16 @@
                           </div>
                         </div>
                         <div *ngIf="matchedBets.length > 0">
-                          <div class="form-check border-bottom border-secondary mb-2">
+                          <!-- <div class="form-check border-bottom border-secondary mb-2">
                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                             <label class="form-check-label" for="defaultCheck1">
                               Average Odds
                             </label>
-                          </div>
+                          </div> -->
                           <div  *ngFor = "let bet of matchedBets">
                             <p class="mb-1">{{bet.matchName}}</p>
                             <div  *ngFor="let market of bet.markets">
-                              <table class="table text-white small" *ngFor="let runner of market.runners">
+                              <table class="table text-white" *ngFor="let runner of market.runners">
                                 <tr>
                                   <th class="ps-0">{{market.name}}</th>
                                   <th>Odds</th>
@@ -222,10 +221,10 @@
                                   <th>Profit/Liability</th>
                                 </tr>
                                 <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
-                                  <td><b>{{b.horse}}</b></td>
-                                  <td><b>{{b.odds}}</b></td>
-                                  <td><b>{{b.stake}}</b></td>
-                                  <td><b>{{b.profitLiability | number : '1.2-2'}}</b></td>
+                                  <td>{{b.horse}}</td>
+                                  <td>{{b.odds}}</td>
+                                  <td>{{b.stake}}</td>
+                                  <td>{{b.profitLiability | number : '1.2-2'}}</td>
                                 </tr>
                               </table>
                             </div>
@@ -250,7 +249,7 @@
                           </label>
                         </div>
                         <p class="mb-1">Auckland v Wellington</p>
-                        <table class="table text-white small">
+                        <table class="table text-white ">
                           <tr>
                             <th width="25%" class="ps-0">Match Odds</th>
                             <th width="25%"></th>

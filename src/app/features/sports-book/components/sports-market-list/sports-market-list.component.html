@@ -12,8 +12,8 @@
         <button class="btn nav-link" [class.active]="allTabState['leagues']" id="leagues-tab" data-bs-toggle="tab" data-bs-target="#leagues" type="button"
           role="tab" aria-controls="leagues" [attr.aria-selected]="allTabState['leagues']" (click)="onClickTab('leagues')">Leagues</button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button class="btn nav-link" [class.active]="allTabState['results']" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button"
+      <li class="nav-item disabled" role="presentation">
+        <button class="btn nav-link disabled" [class.active]="allTabState['results']" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button"
           role="tab" aria-controls="results" [attr.aria-selected]="allTabState['results']" (click)="onClickTab('results')">Results</button>
       </li>
     </ul>
@@ -201,7 +201,7 @@
               </div>
               <!--leagues end-->
               <!--results start-->
-              <div class="tab-pane" id="results" role="tabpanel" aria-labelledby="messages-tab" [class.active]="allTabState['results']">
+              <div class="tab-pane disabled" id="results" role="tabpanel" aria-labelledby="messages-tab" [class.active]="allTabState['results']">
                 <app-results></app-results>
               </div>
               <!--results end-->

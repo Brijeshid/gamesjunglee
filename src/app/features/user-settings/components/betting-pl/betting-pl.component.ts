@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 import * as moment from 'moment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-betting-pl',
@@ -30,7 +31,8 @@ export class BettingPlComponent implements OnInit {
   toDate = moment().format("YYYY-MM-DD");
 
   constructor(
-    private _userSettingsService: UserSettingsMainService
+    private _userSettingsService: UserSettingsMainService,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +66,10 @@ export class BettingPlComponent implements OnInit {
 
   getProfitAndLoss(){
     this.getProfitLoss(this.fromDate,this.toDate);
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

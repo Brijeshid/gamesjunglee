@@ -1,7 +1,7 @@
 <!--body start-->
 <div class="row m-0">
     <div class="col-md-12 pb-2 pt-2">
-        <a class="text-pink small text-decoration-none"><i class="fa fa-angle-left text-white"></i>
+        <a class="text-pink small text-decoration-none"><i class="fa fa-angle-left text-white pointer" (click)="goBack()"></i>&nbsp;&nbsp;
             OPEN BETS </a>
     </div>
     <hr class="text-pink">
@@ -15,7 +15,7 @@
                         type="button" role="tab" aria-controls="openbets" aria-selected="false">Open Bets</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
+                    <button class="nav-link disabled" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
                         type="button" role="tab" aria-controls="betslip" aria-selected="true">My Markets</button>
                 </li>
             </ul>
@@ -32,32 +32,34 @@
                                             aria-expanded="false" aria-controls="collapseSix">
                                             Unmatched Bets</button>
                                     </h2>
-                                    <div id="collapseSix" class="accordion-collapse collapse"
+                                    <div *ngIf="unMatchedBets.length<=0">
+                                        <div id="collapseSix" class="accordion-collapse collapse"
                                         aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body text-white">
-                                            <div *ngIf="unMatchedBets.length<=0">
+                                            <div class="accordion-body text-white">
                                                 <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-3x"
                                                     aria-hidden="true"></i>
                                                     <p class="text-center text-pink my-3">No Unmatched Bets!</p><br>
                                                 </div>                              
                                             </div>
-                                            <div *ngIf="unMatchedBets.length>0">
-                                                <div class="row ps-2 pe-2 mb-2" *ngFor="let bet of unMatchedBets">
-                                                    <p class="mb-1">{{bet.matchName}}</p>
-                                                    <div *ngFor="let market of bet.markets">
-                                                        <p class="mb-1">{{market.name}}</p>
+                                        </div> 
+                                    </div>
+                                    
+                                    <div *ngIf="unMatchedBets.length>0">
+                                        <div id="collapseSix" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                            <div class="row ps-2 pe-2 mb-2  text-white" *ngFor="let bet of unMatchedBets">
+                                                <p class="mb-1">{{bet.matchName}}</p>
+                                                <div *ngFor="let market of bet.markets">
+                                                    <p class="mb-1">{{market.name}}</p>
 
-                                                        <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
-                                                            <p><strong>{{b.heading}}</strong></p>
-                                                            <small>{{b.market}}</small><br>
-                                                            <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>
-                                                        </div>
-
+                                                    <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
+                                                        <p><strong>{{b.heading}}</strong></p>
+                                                        <small>{{b.market}}</small><br>
+                                                        <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>
                                                     </div>
-
                                                 </div>
-                                            </div> 
-                                        </div>
+                                            </div>
+                                        </div> 
                                     </div>
                                 </div>
                                 <div class="accordion-item mb-1">
@@ -67,33 +69,37 @@
                                             aria-expanded="false" aria-controls="collapseFour">
                                             Matched Bets</button>
                                     </h2>
-                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                    <div *ngIf="matchedBets.length<=0">
+                                        <div id="collapseFour" class="accordion-collapse collapse"
                                         aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body text-white">
-                                            <div *ngIf="matchedBets.length<=0">
+                                            <div class="accordion-body text-white">
                                                 <div class="text-center  mt-3"><i class="fa fa-exclamation-triangle text-pink fa-3x"
                                                     aria-hidden="true"></i>
                                                     <p class="text-center text-pink my-3">No Matched Bets!</p><br>
-                                                </div>                              
-                                            </div>
-                                            <div *ngIf="matchedBets.length>0">
-                                                <div class="row ps-2 pe-2 mb-2" *ngFor="let bet of matchedBets">
-                                                    <p class="mb-1">{{bet.matchName}}</p>
-                                                    <div *ngFor="let market of bet.markets">
-                                                        <p class="mb-1">{{market.name}}</p>
-    
-                                                        <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
-                                                            <p><strong>{{b.heading}}</strong></p>
-                                                            <small>{{b.market}}</small><br>
-                                                            <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>
-                                                        </div>
+                                                </div>  
+                                            </div>                        
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="matchedBets.length>0">
+                                        <div id="collapseFour" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                            <div class="row ps-2 pe-2 mb-2 text-white" *ngFor="let bet of matchedBets">
+                                                <p class="mb-1">{{bet.matchName}}</p>
+                                                <div *ngFor="let market of bet.markets">
+                                                    <p class="mb-1">{{market.name}}</p>
+
+                                                    <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
+                                                        <p><strong>{{b.heading}}</strong></p>
+                                                        <small>{{b.market}}</small><br>
+                                                        <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item mb-1">
+                                <!-- <div class="accordion-item mb-1">
                                     <h2 class="accordion-header" id="headingFive">
                                         <button class="accordion-button collapsed text-white bg-dark border-pink" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseFive"
@@ -142,14 +148,14 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--Open bet end-->
                 <!--My Markets start-->
-                <div class="tab-pane fade" id="betslip" role="tabpanel" aria-labelledby="betslip-tab">
+                <div class="tab-pane fade" id="betslip" role="tabpanel" aria-labelledby="betslip-tab" >
                     <div class="row">
                         <div class="col-md-12 p-5">
                             <div class="text-center"><i class="fa fa-exclamation-triangle text-pink fa-3x"

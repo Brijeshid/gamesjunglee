@@ -3,6 +3,7 @@ import { UserSettingsMainService } from '../../services/user-settings-main.servi
 import { SharedService } from '@shared/services/shared.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-bet-history',
@@ -47,7 +48,8 @@ export class BetHistoryComponent implements OnInit {
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _sharedService: SharedService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -126,6 +128,8 @@ export class BetHistoryComponent implements OnInit {
     this.currentPage--;
     this.getBetHistoryForUser();
   }
-
-
+  
+  goBack(){
+    this._location.back();
+  }
 }

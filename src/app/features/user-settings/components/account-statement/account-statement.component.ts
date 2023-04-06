@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { SharedService } from '@shared/services/shared.service';
 import * as moment from 'moment';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-account-statement',
@@ -44,8 +45,8 @@ export class AccountStatementComponent implements OnInit {
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _sharedservice: SharedService,
-    private _fb: FormBuilder
-
+    private _fb: FormBuilder,
+    private _location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -114,5 +115,10 @@ export class AccountStatementComponent implements OnInit {
     this.currentPage--;
     this.getAccountStatement();
   }
+
+  goBack(){
+    this._location.back();
+  }
+
 
 }
