@@ -89,12 +89,12 @@ export class MatchMarketListComponent implements OnInit {
           this.placeBetData = [];
           if(this.inPlayUpcomingMarket  && this.isLoggedIn) this.getBooksForMarket({marketIds : [this.inPlayUpcomingMarket['marketId']]},EMarketType.MATCH_TYPE);
           break;
-  
+
         case EMarketType.BOOKMAKER_TYPE:
           this.placeBetData = [];
           if(this.bookMakerMarket  && this.isLoggedIn) this.getBooksForMarket({marketIds :this.bookMakerMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.BOOKMAKER_TYPE);
           break;
-  
+
         case EMarketType.FANCY_TYPE:
           if(this.fancyMarket  && this.isLoggedIn) this.getBooksForMarket({marketIds :this.fancyMarket.map(singleMarket=>singleMarket.marketId)},EMarketType.FANCY_TYPE);
           break;
@@ -122,7 +122,7 @@ export class MatchMarketListComponent implements OnInit {
           this.isMatchLive = res['inPlayUpcomingMarket']['inPlayStatus'];
           this.setOrUnsetWebSocketParamsObj['match']['centralIds'].push(res['inPlayUpcomingMarket']['centralId']);
           res['inPlayUpcomingMarket']['runners'].map(runnerRes=>{
-            
+
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
@@ -149,7 +149,7 @@ export class MatchMarketListComponent implements OnInit {
         let setObj = {
           set:{
             deviceId:sessionStorage.getItem('deviceId'),
-            centralIdList:this.setOrUnsetWebSocketParamsObj['match']['centralIds']          
+            centralIdList:this.setOrUnsetWebSocketParamsObj['match']['centralIds']
             }
           }
         this._setOrUnsetWebSocketData(setObj);
@@ -180,7 +180,7 @@ export class MatchMarketListComponent implements OnInit {
         let setObj = {
           set:{
             deviceId:sessionStorage.getItem('deviceId'),
-            centralIdList:this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']          
+            centralIdList:this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds']
             }
           }
         this._setOrUnsetWebSocketData(setObj);
@@ -194,7 +194,7 @@ export class MatchMarketListComponent implements OnInit {
       console.log('res',res);
       if(res.length > 0){
         res.map(sportsObj =>{
-          if(sportsObj['appMarketStatus'] !=4) this.isFancyCardShow = true;
+          if(sportsObj['appMarketStatus'] !=4 || sportsObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
                 sportsObj['back1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['odds']: '';
                 sportsObj['vback1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['tv']:'';
@@ -209,7 +209,7 @@ export class MatchMarketListComponent implements OnInit {
         let setObj = {
           set:{
             deviceId:sessionStorage.getItem('deviceId'),
-            centralIdList:this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']         
+            centralIdList:this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']
             }
           }
         this._setOrUnsetWebSocketData(setObj);
@@ -231,7 +231,7 @@ export class MatchMarketListComponent implements OnInit {
         if(res?.token?.url){
           this.realDataWebSocket = webSocket(res?.token?.url);
           this._subscribeWebSocket()
-        } 
+        }
       });
   }
 
@@ -292,7 +292,7 @@ export class MatchMarketListComponent implements OnInit {
 
                   //Live Rate
                   runnerRes['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt']>1?+((singleWebsocketRunnerBook['rt']-1)*100).toFixed(0):+((1-singleWebsocketRunnerBook['rt'])*100).toFixed(0);
-              
+
 
                   //Volume from Betfair
                   runnerRes['vback' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['bv'];
@@ -319,7 +319,7 @@ export class MatchMarketListComponent implements OnInit {
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               if(singleWebSocketMarketDataBook != undefined){
                 fancyMarketObj['appMarketStatus'] = singleWebSocketMarketDataBook['ms'];
-                if(fancyMarketObj['appMarketStatus'] !=4) this.isFancyCardShow = true;
+                if(fancyMarketObj['appMarketStatus'] !=4 || fancyMarketObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
                 fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId'].toString();
                 let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
                 for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
@@ -389,7 +389,8 @@ export class MatchMarketListComponent implements OnInit {
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "runs":positionObj['runs'],
         "booksForMarket":this.booksForMarket,
-        "runnerObj":marketData['runners']
+        "runnerObj":marketData['runners'],
+        "marketTypeName":marketData['marketName']
     }
 
     console.log(this.betSlipObj)
@@ -411,7 +412,7 @@ export class MatchMarketListComponent implements OnInit {
               return singleRunner;
             })
           break;
-  
+
           case EMarketType.BOOKMAKER_TYPE:
             this.bookMakerMarket.map((singleBookMaker)=>{
               let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleBookMaker['marketId']]);
@@ -427,7 +428,7 @@ export class MatchMarketListComponent implements OnInit {
               }
             })
           break;
-  
+
           case EMarketType.FANCY_TYPE:
             this.fancyMarket.map((singleFancy)=>{
               let horseDataByMarketId = _.find(res?.booksForMarket,['marketId',singleFancy['marketId']]);
@@ -466,8 +467,8 @@ export class MatchMarketListComponent implements OnInit {
       unset:{
         deviceId:sessionStorage.getItem('deviceId'),
         centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['match']['centralIds'],
-        this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'],this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'] 
-         )        
+        this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'],this.setOrUnsetWebSocketParamsObj['fancy']['centralIds']
+         )
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
