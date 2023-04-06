@@ -1104,4 +1104,8 @@ input:checked + .slider:before {
   display: none;
 }
 
+
+.small, small {
+  font-size: .875rem;
+}
 /********** Bet Slip end ************//*# sourceMappingURL=main.css.map */
