@@ -35,6 +35,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isSticky: boolean = false;
   matchId:number;
   liveStreamingTVUrl:any;
+  exposure:number =0;
 
   constructor(
     private _sharedService: SharedService,
@@ -140,6 +141,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
     this._sharedService.getIPApi().subscribe(res=>{
       this.betSlipParams['userIp'] = res['ip'];
+      this.betSlipParams['exposure'] = this.exposure;
       this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
         (betSlipRes: any) => {
               if(this.count <=0 || betSlipRes){
@@ -225,6 +227,9 @@ export class BetSlipComponent implements OnInit, OnChanges {
           }
         }
       })
+
+      let netExposure = Object.values(marketObj[marketId])
+      this.exposure = Math.min(...netExposure.map((horse:any) => horse.amount));
       this._sharedService.marketBookCalSubject.next(marketObj);
     }else{
       this._sharedService.marketBookCalSubject.next({});

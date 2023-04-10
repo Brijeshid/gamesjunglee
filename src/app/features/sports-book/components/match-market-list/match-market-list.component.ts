@@ -194,11 +194,19 @@ export class MatchMarketListComponent implements OnInit {
         res.map(sportsObj =>{
           if(sportsObj['appMarketStatus'] !=4 && sportsObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
           this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
-                sportsObj['back1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['odds']: '';
-                sportsObj['vback1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['tv']:'';
+                if((sportsObj['batb'] == undefined) || (sportsObj['batl'] == undefined)){
+                  sportsObj['back1'] = '';
+                  sportsObj['vback1'] = '';
 
-                sportsObj['lay1'] = sportsObj['batl'][1] !== undefined ? sportsObj['batl'][1]['odds']: '';
-                sportsObj['vlay1'] = sportsObj['batl'][1] !== undefined ? sportsObj['batl'][1]['tv']:'';
+                  sportsObj['lay1'] = '';
+                  sportsObj['vlay1'] = '';
+                }else{
+                  sportsObj['back1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['odds']: '';
+                  sportsObj['vback1'] = sportsObj['batb'][1] !== undefined ? sportsObj['batb'][1]['tv']:'';
+
+                  sportsObj['lay1'] = sportsObj['batl'][1] !== undefined ? sportsObj['batl'][1]['odds']: '';
+                  sportsObj['vlay1'] = sportsObj['batl'][1] !== undefined ? sportsObj['batl'][1]['tv']:'';
+                }
 
                 sportsObj['suspended'] = true;
         })

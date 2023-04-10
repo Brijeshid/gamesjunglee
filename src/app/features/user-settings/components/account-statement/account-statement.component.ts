@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import * as moment from 'moment';
@@ -39,18 +39,29 @@ export class AccountStatementComponent implements OnInit {
     // validators?: ValidatorFn | ValidatorFn[];
     // modal?: boolean;
   };
-  fromDate = moment().format("YYYY-MM-DD");
+  fromDate = moment().subtract(1, 'months').format("YYYY-MM-DD");
   toDate = moment().format("YYYY-MM-DD");
+
+  toDateInit = moment().format("DD MMM YYYY")
+  fromDateInit = moment(this.toDateInit).subtract(1, 'months').format("DD MMM YYYY")
+  @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
+  preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _sharedservice: SharedService,
     private _fb: FormBuilder,
     private _location: Location,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this._preConfig();
+  }
+
+  ngAfterViewInit(){
+    this.dateRangePicker['range'] = this.preDefineDateRange  //"13 Apr 2023 - 17 Apr 2023"
+    this.cdr.detectChanges();
   }
 
   _preConfig() {
@@ -73,8 +84,8 @@ export class AccountStatementComponent implements OnInit {
   getAccountStatement(){
     this.isLoading = true;
     const payload = {
-      "fromDate":moment(this.fromDate).format("YYYY-MM-DD"),
-      "toDate":moment(this.toDate).format("YYYY-MM-DD"),
+      fromDate:moment(this.fromDate).format("YYYY-MM-DD HH:mm:ss"),
+      toDate:moment(this.toDate).set({hour:23,minute:59,second:59}).format("YYYY-MM-DD HH:mm:ss"),
       "sportId": parseInt(this.filterForm.value.sportId),
       "pageNo": this.currentPage,
       "limit": this.limit,
