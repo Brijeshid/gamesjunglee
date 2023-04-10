@@ -228,10 +228,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
         }
       })
 
-        var result = [marketObj[marketId]].reduce(function(res, obj) {
-          return (obj.amount < res.amount) ? obj : res;
-      });
-
       let netExposure = Object.values(marketObj[marketId])
       this.exposure = Math.min(...netExposure.map((horse:any) => horse.amount));
       this._sharedService.marketBookCalSubject.next(marketObj);
