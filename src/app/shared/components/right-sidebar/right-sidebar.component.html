@@ -1,5 +1,5 @@
 <div id="sidebar-wrapper" class="opensidebar">
-    <div class="row p-3 bg-pink" id="menu-toggle">
+    <div class="row p-3 bg-color" id="menu-toggle">
         <div class="col-md-6 col-10">
             <h5>{{userDetails['username'] | titlecase}}</h5>
         </div>
@@ -39,12 +39,12 @@
                 <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/transfer-statements']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-invoice me-1"></i>&nbsp; &nbsp; <span>Transfer Statements</span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/time-settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-calendar-days me-1"></i>&nbsp; &nbsp;<span>Time Settings</span></a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link " [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-lines me-1"></i> &nbsp; &nbsp;<span>News</span></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/change-password']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-lock"></i>&nbsp; &nbsp; <span>Change Password</span></a>
                 </li>
@@ -66,7 +66,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-light bg-pink" (click)="onLogout()">LOGOUT</button>
+            <button type="button" class="btn btn-light bg-color text-white" (click)="onLogout()">LOGOUT</button>
         </div>
     </div>
 </div>
