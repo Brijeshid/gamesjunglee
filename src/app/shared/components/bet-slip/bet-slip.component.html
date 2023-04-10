@@ -7,7 +7,7 @@
         <ul class="nav nav-tabs justify-content-center border-0" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link pointer" [ngClass]="{'active':isBetSlipActive}" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
-              type="button" role="tab" aria-controls="betslip" aria-selected="true" [disabled]="!isBetSlipActive"  [ngStyle]="{'color':betSlipParams['isBack'] === true ? '#6abefa' : '#ffb9b5','border-bottom':betSlipParams['isBack'] === true && isBetSlipActive? '3px solid #6abefa': (isBetSlipActive? '3px solid #ffb9b5':'')}">BETSLIP</button>
+              type="button" role="tab" aria-controls="betslip" aria-selected="true" [disabled]="!isBetSlipActive"  [ngStyle]="{'color':betSlipParams['isBack'] === true ? '#6abefa' : '#d35862','border-bottom':betSlipParams['isBack'] === true && isBetSlipActive? '3px solid #6abefa': (isBetSlipActive? '3px solid #ffb9b5':'')}">BETSLIP</button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" [ngClass]="{'active':!isBetSlipActive}" id="openbets-tab" data-bs-toggle="tab" data-bs-target="#openbets"
@@ -114,7 +114,7 @@
                 <div class="accordion rightacco" id="accordionExample">
                   <div class="accordion-item mb-1 ">
                     <h2 class="accordion-header" id="headingSix">
-                      <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                         Unmatched Bets <a *ngIf="unMatchedBets.length > 0" class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0" (click)="cancelBet(unMatchedBets,'ALL',1)">CANCEL ALL</a></button>
                     </h2>
@@ -190,7 +190,7 @@
                   </div>
                   <div class="accordion-item mb-1">
                     <h2 class="accordion-header" id="headingFour">
-                      <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         Matched Bets</button>
                     </h2>
