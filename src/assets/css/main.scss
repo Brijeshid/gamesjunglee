@@ -1161,3 +1161,7 @@ small {
 .bg-color{
   background: linear-gradient(0deg, $gradient1 0, $gradient2);
 }
+
+.text-color {
+  color: linear-gradient(90deg, #cd212f 0, #e76f26);
+}

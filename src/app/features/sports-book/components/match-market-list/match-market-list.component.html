@@ -2,13 +2,13 @@
 <!--body start-->
 <div class="row m-0">
     <div class="col-md-6 col-6 pb-2 pt-2">
-      <a class="text-pink small text-decoration-none pointer"><i (click)="goBack()" class="fa fa-angle-left text-white"></i> {{matchName | uppercase}}</a>
+      <a class="text-color small text-decoration-none pointer"><i (click)="goBack()" class="fa fa-angle-left text-white"></i> {{matchName | uppercase}}</a>
     </div>
     <div class="col-md-6 col-6 text-end pb-2 pt-2">
       <button class="btn btn-sm badge bg-success me-1" (click)="hideShowTV()" *ngIf="isMatchLive !== 0">
         <i [ngClass]="isTVEnable ? 'fa fa-xmark':'fa fa-play' "></i>&nbsp;{{isTVEnable ? 'HIDE': 'WATCH'}}</button>
     </div>
-    <hr class="text-pink">
+    <hr class="text-color">
     <!--Aside start-->
     <div class="col-md-2 asidenav">
         <app-left-navigation></app-left-navigation>
@@ -21,8 +21,8 @@
           <!-- Nav tabs -->
           <!--Header 3 start-->
           <div class="row m-0">
-            <div class="col-md-6 col-6">
-              <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3 me-2"> Markets</button>
+            <div class="col-md-6 col-6 ps-0">
+              <button class="bg-dark text-white float-start border-colour rounded-pill ps-3 pe-3 me-3"> Markets</button>
               <!-- <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3"> Open Bets</button> -->
             </div>
             <div class="col-md-6 col-6 text-end">
@@ -63,8 +63,8 @@
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-end coldark">Back</th>
                               <th width="15%" colspan="3" class="text-start coldark tlastcol">Lay</th>
-                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-pink fa-regular fa-star"></i> -->
-                                <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
+                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
+                                <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody class="content pointer">
@@ -110,8 +110,8 @@
                                 <!-- <th width="10%" class="coldark"></th> -->
                                 <th width="15%" colspan="3" class="text-end coldark">Back</th>
                                 <th width="15%" colspan="3" class="text-start coldark tlastcol">Lay</th>
-                                <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i> -->
-                                  <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
+                                <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
+                                  <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                               </tr>
                             </thead>
                             <tbody class="pointer">
@@ -166,8 +166,8 @@
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th width="15%" colspan="3" class="text-end coldark">No</th>
                               <th width="15%" colspan="3" class="text-start coldark tlastcol">Yes</th>
-                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i> -->
-                                <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i></th> -->
+                              <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
+                                <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody class="pointer">

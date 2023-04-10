@@ -163,12 +163,14 @@ body {
   border-radius: 60px;
 }
 .header-tow li a:hover {
-  border: 1px solid #ffa7a3;
+  /* border: 1px solid #ffa7a3; */
+  border: 1px solid #e76f26;
   border-radius: 60px;
-  color: #ffa7a3;
+  color: #e76f26;
 }
 .header-tow li a.active {
-  border: 1px solid #ffa7a3;
+  /* border: 1px solid #ffa7a3; */
+  border: 1px solid#e76f26;
   border-radius: 60px;
   /* color: #ffa7a3; */
   color: #fff;
@@ -202,7 +204,8 @@ body {
   padding-top: 8px;
 }
 .asidenav ul {
-  border: 1px solid #ffa7a3;
+  /* border: 1px solid #ffa7a3; */
+  border: 1px solid rgba(231, 111, 38, 1);
   border-radius: 15px;
   font-size: 14px;
   padding-top: 10px;
@@ -218,7 +221,8 @@ body {
   color: #fff;
 }
 .asidenav li a.active {
-  border-right: 3px solid rgb(255, 167, 163);
+  /* border-right: 3px solid rgb(255, 167, 163); */
+  border-right:3px solid rgb(231, 111, 38);
   /* background: #ffa7a3; */
   background-color: #dc3545;
 }
@@ -231,7 +235,8 @@ body {
     #151515,
     #000000
   );
-  border-right: 3px solid rgb(255, 167, 163);
+  /* border-right: 3px solid rgb(255, 167, 163); */
+  border-right:3px solid rgb(231, 111, 38);
   color: #fff;
 }
 
@@ -554,7 +559,8 @@ tr {
 
 /*Right sidebar end*/
 .innerpagem {
-  border: 1px solid rgba(255, 167, 163, 0.3411764706);
+  /* border: 1px solid rgba(255, 167, 163, 0.3411764706); */
+  border: 1px solid rgba(231, 111, 38, 1);
   border-radius: 30px;
   padding: 20px 0 0 0;
   color: #fff;
@@ -853,8 +859,8 @@ input:checked + .slider:before {
   color: #000;
   font-size: 18px;
   font-weight: bold;
-  top: 47%;
-  left: 48%;
+  top: 50%;
+  left:47%;
 }
 
 @-webkit-keyframes spin {
@@ -1230,6 +1236,29 @@ small {
 }
 
 .text-color {
-  color: linear-gradient(90deg, #cd212f 0, #e76f26);
+  /* color: #e76f26 !important; */
+  /* background-image: linear-gradient(90deg, #cd212f 0, #e76f26);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text; */
+  color:#e76f26 !important;
+}
+
+.border-colour {
+  /* border-image: linear-gradient(90deg, #cd212f 0, #e76f26);
+  border-image-slice: 1;
+  border-radius: 500px; */
+  border: 1px solid #eb5527 ;
+}
+
+.btn-outline-color {
+  color: #e76f26;
+  border-color: #e76f26;
+}
+
+.btn-outline-color:hover {
+  color: #000;
+  background-color: #e76f26;
+  border-color: #e76f26;
 }
 
