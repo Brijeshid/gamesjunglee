@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +21,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _formBuilder: FormBuilder,
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
+    private _location: Location,
 
     ) { }
     
@@ -71,5 +74,9 @@ export class SettingsComponent implements OnInit {
       });
       this._sharedService.getToastPopup("User Settings saved sucessfully",'Settings','success');
 
+    }
+    
+    goBack(){
+      this._location.back();
     }
 }

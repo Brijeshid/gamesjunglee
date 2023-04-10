@@ -75,7 +75,7 @@
                           </div>
 
                         <div class="col-md-6 col-6 p-1 mt-3"><button type="button"
-                            class="btn border-pink w-100 p-2 rounded-pill betbtn" (click)="cancelBetSlip()">CANCEL</button>
+                            class="btn border-colour w-100 p-2 rounded-pill betbtn" (click)="cancelBetSlip()">CANCEL</button>
                         </div>
                         <div class="col-md-6 col-6 p-1 mt-3">
                            <button type="submit" class="btn w-100 p-1 rounded-pill betbtn" (click)="onClickPlaceBet()"
@@ -114,7 +114,7 @@
                 <div class="accordion rightacco" id="accordionExample">
                   <div class="accordion-item mb-1 ">
                     <h2 class="accordion-header" id="headingSix">
-                      <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                         Unmatched Bets <a *ngIf="unMatchedBets.length > 0" class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0" (click)="cancelBet(unMatchedBets,'ALL',1)">CANCEL ALL</a></button>
                     </h2>
@@ -122,9 +122,9 @@
                       data-bs-parent="#accordionExample" [ngClass]="unMatchedBets.length > 0 ? 'show': ''">
                       <div class="accordion-body text-white">
                         <div *ngIf="unMatchedBets.length<=0">
-                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-4x"
+                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-color fa-4x"
                               aria-hidden="true"></i>
-                              <p class="text-center text-pink my-3">No Unmatched Bets!</p><br>
+                              <p class="text-center text-color my-3">No Unmatched Bets!</p><br>
                           </div>
                         </div>
                        <div *ngIf="unMatchedBets.length > 0">
@@ -190,7 +190,7 @@
                   </div>
                   <div class="accordion-item mb-1">
                     <h2 class="accordion-header" id="headingFour">
-                      <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         Matched Bets</button>
                     </h2>
@@ -198,9 +198,9 @@
                       data-bs-parent="#accordionExample"   [ngClass]="matchedBets.length > 0 ? 'show': ''" >
                       <div class="accordion-body text-white">
                         <div *ngIf="matchedBets.length<=0">
-                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-pink fa-4x"
+                          <div class="text-center mt-3"><i class="fa fa-exclamation-triangle text-color fa-4x"
                               aria-hidden="true"></i>
-                              <p class="text-center text-pink my-3">No Matched Bets!</p><br>
+                              <p class="text-center text-color my-3">No Matched Bets!</p><br>
                           </div>
                         </div>
                         <div *ngIf="matchedBets.length > 0">

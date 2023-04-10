@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 import * as moment from 'moment';
+import {Location} from '@angular/common';
+
 @Component({
   selector: 'app-transfer-statement',
   templateUrl: './transfer-statement.component.html',
@@ -8,6 +10,7 @@ import * as moment from 'moment';
 })
 export class TransferStatementComponent implements OnInit {
   tranState: any;
+  isLoading = false;
   options:any = {
     autoApply:false,
     clickOutsideAllowed:false,
@@ -32,10 +35,11 @@ export class TransferStatementComponent implements OnInit {
   fromDateInit = moment(this.toDateInit).subtract(1, 'months').format("DD MMM YYYY")
   @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
   preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
- 
+
   constructor(
     private _userSettingsService: UserSettingsMainService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private _location: Location,
   ) { }
 
   ngAfterViewInit(){
@@ -48,6 +52,7 @@ export class TransferStatementComponent implements OnInit {
   }
 
   getTransferStatement(fromDate,toDate) {
+    this.isLoading = true;
     let transStateObj = {
       fromDate:moment(fromDate).format("YYYY-MM-DD HH:mm:ss"),
       toDate:moment(toDate).set({hour:23,minute:59,second:59}).format("YYYY-MM-DD HH:mm:ss"),
@@ -55,9 +60,10 @@ export class TransferStatementComponent implements OnInit {
     this._userSettingsService._getTransferStatementApi(transStateObj).subscribe(
       (res) => {
         this.tranState = res;
+        this.isLoading = false;
         console.log("transfer", this.tranState);
       }
-    );
+    )
   }
 
   rangeSelected(event){
@@ -67,5 +73,9 @@ export class TransferStatementComponent implements OnInit {
 
   getTransferStatment(){
     this.getTransferStatement(this.fromDate,this.toDate);
+  }
+
+  goBack(){
+    this._location.back();
   }
 }

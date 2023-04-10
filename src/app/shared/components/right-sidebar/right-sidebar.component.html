@@ -1,12 +1,12 @@
 <div id="sidebar-wrapper" class="opensidebar">
-    <div class="row p-3 bg-pink" id="menu-toggle">
+    <div class="row p-3 bg-color" id="menu-toggle">
         <div class="col-md-6 col-10">
             <h5>{{userDetails['username'] | titlecase}}</h5>
         </div>
         <div class="col-md-6 col-2 text-end"> <a class="anchorTag" (click)="onClose()">X</a> </div>
     </div>
     <div class="row ps-4 pe-2">
-        <div class="col-md-12 text-center p-3"><i class="fa fa-landmark text-pink me-2"></i> <strong>Balance Information</strong></div>
+        <div class="col-md-12 text-center p-3"><i class="fa fa-landmark text-color me-2"></i> <strong>Balance Information</strong></div>
         <div class="col-md-6 col-6 p-2 text-muted ">Available Credit</div>
         <div class="col-md-6 col-6 p-2 "> {{userBalance?.availableCredit | number}} </div>
         <div class="col-md-6 col-6 p-2 text-muted ">Credit Limit</div>
@@ -39,12 +39,12 @@
                 <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/transfer-statements']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-invoice me-1"></i>&nbsp; &nbsp; <span>Transfer Statements</span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/time-settings']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-calendar-days me-1"></i>&nbsp; &nbsp;<span>Time Settings</span></a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link " [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-file-lines me-1"></i> &nbsp; &nbsp;<span>News</span></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/change-password']" [routerLinkActive]="'active'" (click)="onClose()"><i class="fa fa-lock"></i>&nbsp; &nbsp; <span>Change Password</span></a>
                 </li>
@@ -65,8 +65,8 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-light bg-pink" (click)="onLogout()">LOGOUT</button>
+        <div class="col-md-12 text-center mb-3">
+            <button type="button" class="btn btn-light bg-color text-white" (click)="onLogout()">LOGOUT</button>
         </div>
     </div>
 </div>

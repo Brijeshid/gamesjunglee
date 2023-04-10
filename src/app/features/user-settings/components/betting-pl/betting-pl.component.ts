@@ -10,6 +10,7 @@ import {Location} from '@angular/common';
 })
 export class BettingPlComponent implements OnInit, AfterViewInit {
   profitLoss : any[] = [];
+  isLoading = false;
   options:any = {
     autoApply:false,
     clickOutsideAllowed:false,
@@ -51,6 +52,7 @@ export class BettingPlComponent implements OnInit, AfterViewInit {
   }
 
   getProfitLoss(fromDate,toDate){
+    this.isLoading = true;
     let profitLossObj = {
       fromDate:moment(fromDate).format("YYYY-MM-DD HH:mm:ss"),
       toDate:moment(toDate).set({hour:23,minute:59,second:59}).format("YYYY-MM-DD HH:mm:ss"),
@@ -59,6 +61,7 @@ export class BettingPlComponent implements OnInit, AfterViewInit {
     this._userSettingsService._getProfitLossApi(profitLossObj).subscribe(
       (res:any) => {
        this.profitLoss = res.profitLoss.reverse();
+       this.isLoading = false;
         console.log("getUser", res);
       }
     );

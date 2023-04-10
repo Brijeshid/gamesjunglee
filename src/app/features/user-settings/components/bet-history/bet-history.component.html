@@ -1,10 +1,10 @@
 <div class="row m-0">
   <div class="col-md-12 pb-2 pt-2">
-    <a class="text-pink small text-decoration-none h6"
+    <a class="text-color small text-decoration-none h6"
       ><i class="fa fa-angle-left text-white"  (click)="goBack()"></i>&nbsp;&nbsp; Bet History</a
     >
   </div>
-  <hr class="text-pink" />
+  <hr class="text-color" />
   <!--Artical Start-->
 
   <form [formGroup]="betHistoryForm">
@@ -15,7 +15,7 @@
             formControlName="sportId"
             name="game"
             id="casinogame"
-            class="w-100 rounded-pill btn btn-md bg-dark text-white border-pink"
+            class="w-100 rounded-pill btn btn-md bg-dark text-white border-colour"
           >
             <option *ngFor="let sport of allSports" value="{{ sport.sportId }}">
               {{ sport.sportName }}
@@ -27,7 +27,7 @@
             formControlName="status"
             name="game"
             id="casinogame"
-            class="w-100 rounded-pill btn btn-md bg-dark text-white border-pink"
+            class="w-100 rounded-pill btn btn-md bg-dark text-white border-colour"
           >
             <option value="Matched">Matched</option>
             <option value="Deleted">Deleted</option>
@@ -47,7 +47,7 @@
               <div class="input-group">
                 <input
                   id="secondDateRange"
-                  class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-pink"
+                  class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour"
                   type="text"
                   name="dateRange"
                   [value]="dateRangePicker.range"
@@ -59,19 +59,19 @@
         </div>
         <div class="col-md-2 mb-2">
           <button
-            class="btn border-pink w-100 rounded-pill btn-pink"
+            class="btn border-colour w-100 rounded-pill btn-pink"
             (click)="getBetHistoryForUser()"
           >
             Submit
           </button>
         </div>
       </div>
-      <div class="row gamedetails tabetails mb-5">
+      <div class="row gamedetails tabetails mb-5 ms-1">
         <div class="col-md-9">
           Show
           <select
             (change)="updateLimit($event)"
-            class="form-select-sm border-pink bg-dark text-white p-2 rounded-3 ms-2 me-2"
+            class="form-select-sm border-colour bg-dark text-white p-2 rounded-3 ms-2 me-2"
           >
             <option>25</option>
             <option>50</option>
@@ -86,7 +86,7 @@
             type="text"
             formControlName="search"
             placeholder="Search"
-            class="ms-2 form-control-sm rounded-pill border-pink bg-transparent text-white"
+            class="ms-2 form-control-sm rounded-pill border-colour bg-transparent text-white"
             [(ngModel)]="searchTerm"
             (ngModelChange)="search()"
           />
@@ -94,7 +94,7 @@
         <div class="col-md-12 mt-3 mb-3">
           <div
             *ngIf="betHistoryList.length == 0"
-            class="border text-center p-5"
+            class="text-center p-5"
           >
             <h4 *ngIf="betHistoryList.length == 0 && !isLoading">
               No data found

@@ -6,7 +6,7 @@
     >
       <div class="col-md-1">
         <button
-          class="navbar-toggler bg-pink"
+          class="navbar-toggler bg-color"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -112,7 +112,7 @@
             Login
           </button>
           <button
-            class="btn border-pink me-2 text-nowrap rounded-pill disnone btn-pink headerFont"
+            class="btn border-colour me-2 text-nowrap rounded-pill disnone btn-pink headerFont"
             type="button"
             *ngIf="isLoggedIn"
             [routerLink]="['/bets']"
@@ -121,12 +121,12 @@
             Open Bets
           </button>
           <a
-            class="btn text-white border-pink text-nowrap rounded-pill headerFont"
+            class="btn text-white border-colour text-nowrap rounded-pill headerFont"
             *ngIf="isLoggedIn"
             (click)="onClickAvailableCredit()"
             (clickOutside)="isShowRightSideBar = false"
             >{{ userBalance?.availableCredit | number }}
-            <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
+            <i class="fa fa-user bg-color rounded-circle small p-1"></i>
           </a>
         </form>
       </div>
@@ -282,7 +282,7 @@
       <div class="modal-footer border-top-0 justify-content-start">
         <a
           href=""
-          class="text-pink text-decoration-none"
+          class="text-color text-decoration-none"
           data-bs-dismiss="modal"
           >Close</a
         >
