@@ -9,6 +9,8 @@ import {Location} from '@angular/common';
 })
 export class TransferStatementComponent implements OnInit {
   tranState: any;
+  isLoading = false;
+
  
   constructor(
     private _userSettingsService: UserSettingsMainService,
@@ -21,10 +23,11 @@ export class TransferStatementComponent implements OnInit {
 
 
   getTransferStatement() {
+    this.isLoading = true;
     this._userSettingsService._getTransferStatementApi().subscribe(
       (res) => {
         this.tranState = res;
-       
+        this.isLoading = false;
         console.log("transfer", this.tranState);
       }
     );
