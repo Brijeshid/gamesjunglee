@@ -23,9 +23,9 @@ export class UserSettingsMainService {
     .post(this._apiEndpointsService.getChangePasswordEndpoin(),ChangePasswordBody);
   }
 
-  _getTransferStatementApi() {
+  _getTransferStatementApi(trasnStatObj) {
     return this._apiHttpService
-      .get(this._apiEndpointsService.getTransferStatementEndPoint());
+      .post(this._apiEndpointsService.getTransferStatementEndPoint(),trasnStatObj);
   }
   _getUserConfigApi() {
     return this._apiHttpService
