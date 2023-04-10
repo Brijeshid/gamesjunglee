@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-transfer-statement',
@@ -10,8 +11,8 @@ export class TransferStatementComponent implements OnInit {
   tranState: any;
  
   constructor(
-    private _userSettingsService: UserSettingsMainService
-
+    private _userSettingsService: UserSettingsMainService,
+    private _location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -27,5 +28,9 @@ export class TransferStatementComponent implements OnInit {
         console.log("transfer", this.tranState);
       }
     );
+  }
+  
+  goBack(){
+    this._location.back();
   }
 }
