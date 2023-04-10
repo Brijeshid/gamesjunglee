@@ -13,11 +13,11 @@ body {
 }
 
 .bg-pink {
-  background: #ffa7a3 !important;
+  background: #d35862 !important;
 }
 
 .border-pink {
-  border: 1px solid #ffa7a3;
+  border: 1px solid #d35862;
 }
 
 .btn {
@@ -31,7 +31,7 @@ body {
 .btn-pink:hover {
   background: #ffa7a3;
   color: #000;
-  
+
 } */
 
 .btn-pink {
@@ -206,6 +206,7 @@ body {
 .asidenav ul {
   /* border: 1px solid #ffa7a3; */
   border: 1px solid rgba(231, 111, 38, 1);
+  /*border: 1px solid #d35862;*/
   border-radius: 15px;
   font-size: 14px;
   padding-top: 10px;
@@ -252,7 +253,7 @@ body {
 }
 
 .leftuser {
-  background: #ffa7a3;
+  background: #d35862;
   border-radius: 50px;
   margin: 0 5px;
   padding: 4px 0px 6px 3px;
@@ -279,7 +280,7 @@ body {
 
 /*Table start*/
 .gamedetails {
-  border: 1px solid rgba(255, 167, 163, 0.3411764706);
+  border: 1px solid #d35862;
   margin-top: 30px;
   border-radius: 30px;
   padding: 15px 15px 0 15px;
@@ -373,7 +374,7 @@ tr {
 }
 
 .colpink {
-  background-color: #ffb9b5 !important;
+  background-color: #f9c9d4 !important;
   border-left: 1px solid #fff;
 }
 
@@ -628,6 +629,7 @@ tr {
   border-radius: 25px;
   /* background: #ffa7a3; */
   background-image: linear-gradient(90deg, #cd212f 0, #e76f26);
+  /*background: #d35862;*/
   color: #000;
   margin-bottom: 25px;
 }
@@ -641,6 +643,7 @@ tr {
 .rightacco .accordion-button:not(.collapsed) {
   /* background-color: #ffa7a3; */
   background-image: linear-gradient(90deg, #cd212f 0, #e76f26);
+  /*background-color: #d35862;*/
 }
 .rightacco .accordion-body h6 {
   font-size: 14px;

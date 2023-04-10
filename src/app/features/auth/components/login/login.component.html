@@ -1,8 +1,9 @@
 <!--Login start-->
 <div class="w-30 m-auto">
     <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
-        <div class="text-center"><img src="assets/images/logo-login.png" width="60%"></div>
-        <div class="row login pb-4 pt-5">
+        <div class="text-center"><img src="assets/images/logo.png" width="30%"></div>
+        <div class="row login pb-4 ">
+            <h3 class="py-3">User Login</h3>
             <div class="input-group p-0">
                 <input type="text" class="form-control" placeholder="Enter User Name" formControlName="username">
                 <span class="input-group-text bg-white">
@@ -17,7 +18,7 @@
                 </span>
             </div>
             <div class="input-group p-0">
-                <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100"
+                <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100 text-white"
                     [disabled]="signInForm.invalid" [ngClass]="isLoading ? 'p-1': 'pt-3 pb-3'">
                     <i class="busy" *ngIf="isLoading"></i>
                    <span *ngIf="!isLoading">LOGIN</span>
