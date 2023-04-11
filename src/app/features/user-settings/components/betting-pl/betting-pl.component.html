@@ -35,8 +35,11 @@
                 <!-- <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
                     data-drops="up"> -->
             </div>
-            <div class="col-md-4 mb-2">
-                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-color text-white" (click)="getProfitAndLoss()">Search</button>
+            <div class="col-md-2 mb-2">
+                <button type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white" (click)="getProfitAndLoss()">Search</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button *ngIf ="profitLoss.length >0 " type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white" (click)="exportExcel()">Export</button>
             </div>
         </div>
         <div class="innerpagem ms-2">
