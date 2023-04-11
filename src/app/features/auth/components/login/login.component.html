@@ -1,20 +1,20 @@
 <!--Login start-->
 <div class="w-30 m-auto">
     <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
-        <div class="text-center"><img src="assets/images/logo.png" width="30%"></div>
+        <div class="text-center"><img src="assets/images/logo.png" width="150px" ></div>
         <div class="row login pb-4 ">
-            <h3 class="py-3">User Login</h3>
+            <h3 class="py-3 text-center">User Login</h3>
             <div class="input-group p-0">
-                <input type="text" class="form-control" placeholder="Enter User Name" formControlName="username">
-                <span class="input-group-text bg-white">
-                    <span class="fa fa-user text-dark"></span>
+                <input type="text" class="form-control bg-transparent text-white" placeholder="Enter User Name" formControlName="username" autocomplete="off">
+                <span class="input-group-text bg-transparent">
+                    <span class="fa fa-user "></span>
                 </span>
             </div>
             <div class="input-group p-0 mt-4">
-                <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Enter Password"
-                    formControlName="password">
-                <span class="input-group-text bg-white" (click)="show=!show">
-                    <span class="fa text-dark" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                <input [type]="show ? 'text' : 'password'" class="form-control bg-transparent text-white" placeholder="Enter Password"
+                    formControlName="password" autocomplete="off">
+                <span class="input-group-text bg-transparent" (click)="show=!show">
+                    <span class="fa " [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
                 </span>
             </div>
             <div class="input-group p-0">
