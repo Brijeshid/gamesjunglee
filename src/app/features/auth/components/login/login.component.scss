@@ -5,3 +5,26 @@
   .bg-pink{
     background: linear-gradient(0deg, #cd212f 0, #e76f26) !important;
   }
+
+  .login .form-control {
+    line-height: 1;
+    border-radius: 14px;
+    border-bottom: 1px solid #ffa7a3;
+    border-right: none;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+}
+.login .input-group-text {
+  border-bottom: 1px solid #ffa7a3;
+  border-top: 0;
+    border-left: 0;
+    border-right: 0;
+   border-radius: 0; 
+}
+
+input:-internal-autofill-selected {
+background-color: transparent;
+color: #fff;
+}

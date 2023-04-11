@@ -1,5 +1,66 @@
 <div class="row">
-    <div class="col-md-12 asidenav disnone">
+    <div class="col-md-12 asidenav mobileTableHide">
+      <ul class="nav flex-column">
+        <li class="nav-item leftuser animate__animated animate__flipInX bg-color" *ngIf="isLoggedIn">
+            <span class="userb-icon float-start"><i class="fa fa-user"></i> </span> <span class="leftuserhead mt-2">
+            {{userDetails['username'] | titlecase}} </span>
+        </li>
+        <hr class="text-color ms-2 me-2" *ngIf="isLoggedIn">
+        <!-- <div class="dropdown-divider"></div> -->
+
+        <ng-container *ngIf="!sportsName;else commonNav">
+
+        <li class="nav-item animate__animated animate__backInLeft" *ngFor="let singleObj of mainMenu">
+            <a routerLink="/sportsbook/{{singleObj['sportName'] | titlecase}}" class="nav-link"> <img src="assets/images/{{singleObj['sportName'] | lowercase }}.png" width="20px" class="me-2">  <span> {{singleObj['sportName']}} </span>
+                <span class="leftb-icon">{{singleObj['marketCount']}}</span> </a>
+        </li>
+        <li class="nav-item pointer animate__animated animate__backInLeft" *ngIf="mainMenu.length > 0">
+            <a class="nav-link" ><img src="assets/images/live_card.png" width="18px" class="me-2"> Live Card</a>
+        </li>
+        <li class="nav-item pointer animate__animated animate__backInLeft" *ngIf="mainMenu.length > 0">
+            <a class="nav-link" ><img src="assets/images/slot_games.png" width="18px" class="me-2"> Slot Games</a>
+        </li>
+        <li class="nav-item animate__animated animate__backInLeft">
+            <div class="row">
+                <div class="col">
+                    <div class="collapse multi-collapse pointer" id="multiCollapseExample1">
+                        <ul class="nav flex-column border-0 pt-0">
+                            <li class="nav-item" *ngFor="let singleNav of viewMoreNavList">
+                                <a class="nav-link"><img src="{{singleNav?.menuLogo}}" width="18px" class="me-2"> <span>
+                                        {{singleNav?.menuName}} </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item animate__animated animate__backInLeft" *ngIf="mainMenu.length > 0"><a class="nav-link text-white" data-bs-toggle="collapse"
+          aria-controls="multiCollapseExample1" aria-expanded="false"  href="#multiCollapseExample1"><i class="fas fa-arrow-alt-circle-down me-3"></i> View More</a></li>
+
+        </ng-container>
+
+        <ng-template #commonNav>
+          <li class="nav-item animate__animated animate__backInLeft">
+            <a routerLink="/in-play" class="nav-link"><i class="fa fa-home me-4 ms-1"></i><span><strong>Sports</strong> </span></a>
+          </li>
+          <li class="nav-item animate__animated animate__backInLeft">
+            <a routerLink="/sportsbook/{{sportsName}}" class="nav-link active"><img src="assets/images/{{sportsName | lowercase}}.png" width="20px" class="me-2"> <span class="ms-2"> {{sportsName | titlecase}}
+              </span>
+            </a>
+          </li>
+          <li class="nav-item animate__animated animate__backInLeft">
+            <a class="nav-link pointer" (click)="goBack()"><i class="fa fa-angle-left me-2 ms-2"></i> <span class="ms-3">Previous</span></a>
+          </li>
+          <li class="nav-item animate__animated animate__backInLeft" *ngFor="let singleMenu of menuList">
+            <a *ngIf="!singleMenu?.refTournamentId" routerLink="/sportsbook/{{sportsName}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>
+            <a *ngIf="singleMenu?.refTournamentId" routerLink="/sportsbook/{{sportsName}}/{{singleMenu['refTournamentId']}}/{{singleMenu['id']}}" class="nav-link"> <span> {{singleMenu['name']}} </span> </a>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+
+    <div class="col-md-12 asidenav mobileTableShow">
       <ul class="nav flex-column">
         <li class="nav-item leftuser animate__animated animate__flipInX bg-color" *ngIf="isLoggedIn">
             <span class="userb-icon float-start"><i class="fa fa-user"></i> </span> <span class="leftuserhead mt-2">
