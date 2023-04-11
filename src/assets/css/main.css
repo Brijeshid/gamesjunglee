@@ -1265,3 +1265,17 @@ small {
   border-color: #e76f26;
 }
 
+.loader1 {
+  position: absolute;
+  left: 70%;
+  top:65%;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  margin: -76px 0 0 -76px;
+  /* // border: 8px solid $loaderborder;
+  // border-radius: 50%;
+  // border-top: 8px solid $loaderbordertop;
+  // -webkit-animation: spin 2s linear infinite;
+  // animation: spin 2s linear infinite; */
+}
