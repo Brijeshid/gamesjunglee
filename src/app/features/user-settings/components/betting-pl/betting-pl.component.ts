@@ -1,7 +1,8 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-betting-pl',
@@ -36,7 +37,10 @@ export class BettingPlComponent implements OnInit, AfterViewInit {
   @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
   preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
 
+  fileName= 'BettingPL.xlsx';
+
   constructor(
+    private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
     private _location: Location,
     private cdr: ChangeDetectorRef
@@ -49,6 +53,10 @@ export class BettingPlComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getProfitLoss(this.fromDate,this.toDate);
+  }
+
+  exportExcel(){
+     this._sharedService.exportExcel(this.profitLoss,this.fileName);
   }
 
   getProfitLoss(fromDate,toDate){
