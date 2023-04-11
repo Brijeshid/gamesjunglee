@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { filter } from 'rxjs/operators';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-rules-regulations',
@@ -16,7 +17,8 @@ export class RulesRegulationsComponent implements OnInit {
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
-    private _sharedservice: SharedService
+    private _sharedservice: SharedService,    
+    private _location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class RulesRegulationsComponent implements OnInit {
     // if(previous != undefined)
     //   this._sharedservice.router.navigateByUrl(previous);
 
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

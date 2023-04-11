@@ -346,4 +346,20 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ACCOUNT_STATEMENT)
   }
 
+  public getLadderDataByMarket():string{
+    return this.createUrl(this._constants.API_URL_LADDER)
+  }
+
+  public getLiveStreamMatch():string{
+    return this.createUrl(this._constants.API_URL_LIVE_STREAM_MATCH)
+  }
+
+  public getUniqueDeviceKey():string{
+    return this.createUrl(this._constants.API_URL_UNIQUE_DEVICE_KEY)
+  }
+
+  public getWebSocketURLByDevice():string{
+    return this.createUrl(this._constants.API_URL_GET_WEBSOCKET_URL_BY_DEVICE)
+  }
+
 }

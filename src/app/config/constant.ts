@@ -70,4 +70,8 @@ export class Constants {
     public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
     public readonly API_URL_CANCEL_BET:string = 'api/deleteBet';
     public readonly API_URL_ACCOUNT_STATEMENT:string = 'api/getUserAccountStatement';
+    public readonly API_URL_LADDER:string = 'api/getLadder';
+    public readonly API_URL_LIVE_STREAM_MATCH:string = 'api/getStreamingUrl';
+    public readonly API_URL_UNIQUE_DEVICE_KEY:string = 'api/getUniquDeviceId';
+    public readonly API_URL_GET_WEBSOCKET_URL_BY_DEVICE:string = 'api/registerDeviceToGetOddsData';
 }

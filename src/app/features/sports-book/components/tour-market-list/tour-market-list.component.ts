@@ -53,7 +53,7 @@ export class TourMarketListComponent implements OnInit {
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
-      this._getWebSocketUrl();
+      this.initConfig();
     })
     this._sharedService.getUserBalance.subscribe(res=>{
       this.placeBetData = [];
@@ -68,6 +68,17 @@ export class TourMarketListComponent implements OnInit {
     this._cdref.detectChanges();
   }
 
+  initConfig(){
+    (sessionStorage.getItem('deviceId') === null) ? this._getUniqueDeviceKeyApi(): this._getWebSocketUrl();
+  }
+
+  _getUniqueDeviceKeyApi(){
+    this._sharedService._getUniqueDeviceKeyApi().subscribe((res:any)=>{
+      sessionStorage.setItem('deviceId',res?.deviceId);
+      this._getWebSocketUrl();
+    })
+  }
+
   getInPlayUpcomingData(){
     this._sharedService._postInPlayUpcomingApi({tournamentId:this.tourId}).subscribe((res:any)=>{
       if(res?.inPlayUpcomingMarket && (res['inPlayUpcomingMarket']['inPlayMarkets'].length > 0
@@ -75,27 +86,26 @@ export class TourMarketListComponent implements OnInit {
 
          res['inPlayUpcomingMarket']['inPlayMarkets'].map(sportsObj =>{
           sportsObj['isExpand'] = true;
-          sportsObj['status'] = 1;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
-                runnerRes['back0'] = '';
-                runnerRes['vback0'] = '';
+                runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+                runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
-                runnerRes['back1'] = '';
-                runnerRes['vback1'] = '';
+                runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
+                runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
 
-                runnerRes['back2'] = '';
-                runnerRes['vback2'] = '';
+                runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
+                runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
 
-                runnerRes['lay0'] = '';
-                runnerRes['vlay0'] = '';
+                runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+                runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
 
-                runnerRes['lay1'] = '';
-                runnerRes['vlay1'] = '';
+                runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
+                runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
 
-                runnerRes['lay2'] = '';
-                runnerRes['vlay2'] = '';
+                runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
+                runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -104,27 +114,26 @@ export class TourMarketListComponent implements OnInit {
 
         res['inPlayUpcomingMarket']['upComingMarkets'].map(sportsObj =>{
           sportsObj['isExpand'] = true;
-          sportsObj['status'] = 1;
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
-                runnerRes['back0'] = '';
-                runnerRes['vback0'] = '';
+                runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+                runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
-                runnerRes['back1'] = '';
-                runnerRes['vback1'] = '';
+                runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
+                runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
 
-                runnerRes['back2'] = '';
-                runnerRes['vback2'] = '';
+                runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
+                runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
 
-                runnerRes['lay0'] = '';
-                runnerRes['vlay0'] = '';
+                runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+                runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
 
-                runnerRes['lay1'] = '';
-                runnerRes['vlay1'] = '';
+                runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
+                runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
 
-                runnerRes['lay2'] = '';
-                runnerRes['vlay2'] = '';
+                runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
+                runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -135,32 +144,32 @@ export class TourMarketListComponent implements OnInit {
         console.log('data',res['matchDetails']);
         this.inPlayMatchListBySport = res['inPlayUpcomingMarket']['inPlayMarkets'];
         this.upComingMatchListBySport = res['inPlayUpcomingMarket']['upComingMarkets'];
-        this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+        let setObj = {
+          set:{
+            deviceId:sessionStorage.getItem('deviceId'),
+            centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])
+            }
+          }
+        this._setOrUnsetWebSocketData(setObj);
         if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
       }
     })
   }
 
   _getWebSocketUrl(){
-    this._sharedService.getWebSocketURLApi().subscribe(
+      this.getInPlayUpcomingData(); //in-play //upcoming
+  }
+
+  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
+    this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
       (res: any) => {
-        console.log('url',res);
-        if(res){
-          this.realDataWebSocket = webSocket(res['url']);
-          this.getInPlayUpcomingData(); //in-play //upcoming
+        console.log('market',res);
+        if(res?.token?.url){
+          this.realDataWebSocket = webSocket(res?.token?.url);
+          this._subscribeWebSocket()
         }
       });
   }
-
-  _setOrUnsetWebSocketData(isSet:boolean,setOrUnsetWebSocketParamsObj){
-    this._sharedService.postSetOrUnsetWebSocketDataApi(isSet,setOrUnsetWebSocketParamsObj).subscribe(
-      (res: any) => {
-        console.log('market',res);
-        if(res?.marketCentralData) this.setResponse = res?.marketCentralData;
-        if(this.realDataWebSocket) this._subscribeWebSocket();
-      });
-  }
-
 
   private _updateMarketData(data: any) {
     let parseData = JSON.parse(data);
@@ -171,7 +180,7 @@ export class TourMarketListComponent implements OnInit {
         this.inPlayMatchListBySport.map(sportsObj =>{
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
             if(singleWebSocketMarketData != undefined){
-              sportsObj['status'] = singleWebSocketMarketData['ms'];
+              sportsObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
               return sportsObj['market']['runners'].map((runnerRes) => {
                 let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                 for (let singleWebsocketRunner of webSocketRunners) {
@@ -209,7 +218,7 @@ export class TourMarketListComponent implements OnInit {
         this.upComingMatchListBySport.map(sportsObj =>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', sportsObj['market']['marketId']]);
               if(singleWebSocketMarketData != undefined){
-                sportsObj['status'] = singleWebSocketMarketData['ms'];
+                sportsObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
                 return sportsObj['market']['runners'].map((runnerRes) => {
                   let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                   for (let singleWebsocketRunner of webSocketRunners) {
@@ -279,7 +288,8 @@ export class TourMarketListComponent implements OnInit {
         "book":marketData['market']['runners'],
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "booksForMarket":this.booksForMarket,
-        "runnerObj":marketData['market']['runners']
+        "runnerObj":marketData['market']['runners'],
+        "marketTypeName":marketData['market']['marketName']
     }
   }
 
@@ -302,10 +312,14 @@ export class TourMarketListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this._setOrUnsetWebSocketData(true,{'centralIds':_.merge(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])});
+    let unSetObj = {
+      unset:{
+        deviceId:sessionStorage.getItem('deviceId'),
+        centralIdList:_.concat(this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'],this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'])
+        }
+    }
+    this._setOrUnsetWebSocketData(unSetObj);
     if(this.realDataWebSocket) this.realDataWebSocket.complete();
-    // console.log('unset_destroy', this.centralIds);
-    // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
 
 

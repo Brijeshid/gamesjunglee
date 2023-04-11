@@ -22,4 +22,9 @@ export class SportsBookService {
       .post(this._apiEndpointsService.getFancyMarketEndPoint(), inPlayUpcomingBody);
   }
 
+  _postLadderDataByMarketApi(ladderBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getLadderDataByMarket(), ladderBody);
+  }
+
 }

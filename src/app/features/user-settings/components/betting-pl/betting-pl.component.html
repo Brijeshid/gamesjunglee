@@ -1,17 +1,17 @@
 <!--body start-->
 <div class="row m-0">
     <div class="col-md-12 pb-2 pt-2">
-        <a class="text-pink small text-decoration-none"><i class="fa fa-angle-left text-white"></i> Betting
+        <a class="text-color small text-decoration-none h6"><i class="fa fa-angle-left text-white" (click)="goBack()"></i>&nbsp;&nbsp; Betting
             P&L</a>
     </div>
-    <hr class="text-pink">
+    <hr class="text-color">
     <!--Artical Start-->
     <div class="col-md-12 ps-5 pe-5 accordionn">
-        <div class="row mb-4">
+        <div class="row mb-4 ps-0">
             <div class="col-md-4 mb-2">
                 <!-- <label class="text-white" for="games">Games </label> -->
                 <select name="game" id="casinogame"
-                    class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-pink">
+                    class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour">
                     <option value="all">All</option>
                     <option value="LiveCasino">LiveCasino</option>
                     <option value="CardGame">CardGame</option>
@@ -27,7 +27,7 @@
                         [controlName]="'secondDateRange'" #dateRangePicker (rangeSelected)="rangeSelected($event)">
                     <div class="form-group">
                         <div class="input-group">
-                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-pink" type="text" name="dateRange"
+                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour" type="text" name="dateRange"
                             [value]="dateRangePicker.range" placeholder="From - To"  />
                         </div>
                     </div>
@@ -36,25 +36,29 @@
                     data-drops="up"> -->
             </div>
             <div class="col-md-4 mb-2">
-                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-pink text-white" (click)="getProfitAndLoss()">Search</button>
+                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-color text-white" (click)="getProfitAndLoss()">Search</button>
             </div>
         </div>
-        <div class="innerpagem">
+        <div class="innerpagem ms-2">
             <!--Betting P&L start-->
             <div class="row p-0 mb-1">
+                <div *ngIf="profitLoss.length == 0" class="text-center p-5">
+                    <h4 *ngIf="profitLoss.length == 0 && !isLoading">No data found</h4>
+                    <h4 *ngIf="isLoading">Loading...</h4>
+                  </div>
                 <!-- accordin -->
                 <div class="col-md-12 pb-0 ps-4 pe-4" *ngFor="let pl of profitLoss;let i= index;">
                     <div class="accordion rightacco" id="accordionExample">
                         <div class="accordion-item mb-1 ">
                             <h2 class="accordion-header" id="heading_one">
-                                <button class="accordion-button collapsed text-dark" type="button"
+                                <button class="accordion-button collapsed text-white" type="button"
                                     data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_one'+ i" aria-expanded="false"
                                     aria-controls="collapse_one">
                                     {{pl.settledDate |  date :'MMM d, y, h:mm:ss a'}}</button>
                             </h2>
                             <div id="collapse_one{{i}}" class="accordion-collapse collapse show" aria-labelledby="collapse_one"
                                 data-bs-parent="#accordionExample">
-                                <div class="accordion-body ps-3 pe-3 text-dark bg-white">
+                                <div class="accordion-body ps-3 pe-3 text-white bg-white">
                                     <div class="row">
                                         <div class="col-md-6 pe-5">
                                             <h6>SportBook</h6>

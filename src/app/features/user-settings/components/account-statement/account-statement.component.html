@@ -1,17 +1,17 @@
 <div class="row m-0">
   <div class="col-md-12 pb-2 pt-2">
-    <a class="text-pink small text-decoration-none"><i class="fa fa-angle-left text-white"></i>
+    <a class="text-color small text-decoration-none h6"><i class="fa fa-angle-left text-white pointer"  (click)="goBack()"></i>&nbsp;&nbsp;
       Account Statement</a>
   </div>
-  <hr class="text-pink">
+  <hr class="text-color">
   <!--Artical Start-->
   <div class="col-md-12 ps-5 pe-5" [formGroup]="filterForm">
-    <div class="row mb-4">
+    <div class="row mb-4 ps-0">
       <!-- <div class="col-md-3 mb-2">
-        <input type="date" class="form-control rounded-pill bg-transparent text-white border-pink" formControlName="fromDate">
+        <input type="date" class="form-control rounded-pill bg-transparent text-white border-colour" formControlName="fromDate">
       </div>
       <div class="col-md-3 mb-2">
-        <input type="date" class="form-control rounded-pill bg-transparent text-white border-pink" formControlName="toDate">
+        <input type="date" class="form-control rounded-pill bg-transparent text-white border-colour" formControlName="toDate">
       </div> -->
       <div class="col-md-4 mb-2">
         <div class="wrapper"></div>
@@ -27,7 +27,7 @@
             <div class="input-group">
               <input
                 id="secondDateRange"
-                class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-pink"
+                class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour"
                 type="text"
                 name="dateRange"
                 [value]="dateRangePicker.range"
@@ -39,7 +39,7 @@
       </div>
       <div class="col-md-4 mb-2">
         <!-- <label class="text-white" for="games">Games </label> -->
-        <select name="game" id="casinogame" class="w-100 rounded-pill btn btn-md bg-dark text-white border-pink" formControlName="sportId">
+        <select name="game" id="casinogame" class="w-100 rounded-pill btn btn-md bg-dark text-white border-colour" formControlName="sportId">
           <!-- <option value="all">All</option> -->
           <option *ngFor="let sport of allSports" value="{{ sport.sportId }}">
             {{ sport.sportName }}
@@ -48,15 +48,15 @@
         </select>
       </div>
       <div class="col-md-4 mb-2">
-        <button class="btn border-pink w-100 rounded-pill btn-pink" (click)="getAccountStatement()">Submit</button>
+        <button class="btn-sm border-colour w-100 rounded-pill btn-pink" (click)="getAccountStatement()">Submit</button>
       </div>
     </div>
-    <div class="row gamedetails mb-5">
+    <div class="row gamedetails tabetails mb-5 ms-2">
       <div class="col-md-9">
         Show
         <select
           (change)="updateLimit($event)"
-          class="form-select-sm border-pink bg-transparent text-white p-2 rounded-3 ms-2 me-2"
+          class="form-select-sm border-colour bg-dark text-white p-2 rounded-3 ms-2 me-2"
         >
           <option>25</option>
           <option>50</option>
@@ -71,13 +71,13 @@
             type="text"
             formControlName="search"
             placeholder="Search"
-            class="ms-2 form-control-sm rounded-pill border-pink bg-transparent text-white"
+            class="ms-2 form-control-sm rounded-pill border-colour bg-transparent text-white"
             [(ngModel)]="searchTerm"
             (ngModelChange)="search()"
           />
       </div>
-      <div class="col-md-12 mt-3">
-        <div *ngIf="accountStatement.length == 0" class="border text-center p-5">
+      <div class="col-md-12 mt-3 ms-2">
+        <div *ngIf="accountStatement.length == 0" class="text-center p-5">
           <h4 *ngIf="accountStatement.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
@@ -97,11 +97,11 @@
               <td class="text-center">{{i+1}}</td>
               <td class="p-3 text-center">{{acctstatement.date |  date :'MMM d, y, h:mm:ss a'}}</td>
               <td class="text-center">
-                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit}}</span>
+                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit | number}}</span>
                 <span  *ngIf= "acctstatement.credit == 0 "><strong>-</strong></span>
               </td>
               <td class="text-center">
-                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit}}</span>
+                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit | number}}</span>
                 <span  *ngIf= "acctstatement.debit == 0 "><strong>-</strong></span>
               </td>
               <td class="text-center">{{acctstatement.balance | number}}</td>

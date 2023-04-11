@@ -9,7 +9,7 @@ import { SharedModule } from '@shared/shared.module';
 @NgModule({
   declarations: [
     InPlayMainComponent,
-    InPlayIndexComponent,
+    InPlayIndexComponent
   ],
   imports: [
     CommonModule,

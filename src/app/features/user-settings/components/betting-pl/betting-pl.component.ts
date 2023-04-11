@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 import * as moment from 'moment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-betting-pl',
   templateUrl: './betting-pl.component.html',
   styleUrls: ['./betting-pl.component.scss']
 })
-export class BettingPlComponent implements OnInit {
+export class BettingPlComponent implements OnInit, AfterViewInit {
   profitLoss : any[] = [];
+  isLoading = false;
   options:any = {
     autoApply:false,
     clickOutsideAllowed:false,
@@ -26,26 +28,40 @@ export class BettingPlComponent implements OnInit {
     // validators?: ValidatorFn | ValidatorFn[];
     // modal?: boolean;
   };
-  fromDate = moment().format("YYYY-MM-DD");
+  fromDate = moment().subtract(1, 'months').format("YYYY-MM-DD");
   toDate = moment().format("YYYY-MM-DD");
 
+  toDateInit = moment().format("DD MMM YYYY")
+  fromDateInit = moment(this.toDateInit).subtract(1, 'months').format("DD MMM YYYY")
+  @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
+  preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
+
   constructor(
-    private _userSettingsService: UserSettingsMainService
+    private _userSettingsService: UserSettingsMainService,
+    private _location: Location,
+    private cdr: ChangeDetectorRef
   ) { }
+
+  ngAfterViewInit(){
+    this.dateRangePicker['range'] = this.preDefineDateRange  //"13 Apr 2023 - 17 Apr 2023"
+    this.cdr.detectChanges();
+  }
 
   ngOnInit(): void {
     this.getProfitLoss(this.fromDate,this.toDate);
   }
 
   getProfitLoss(fromDate,toDate){
+    this.isLoading = true;
     let profitLossObj = {
-      fromDate:moment(fromDate).format("YYYY-MM-DD"),
-      toDate:moment(toDate).format("YYYY-MM-DD"),
+      fromDate:moment(fromDate).format("YYYY-MM-DD HH:mm:ss"),
+      toDate:moment(toDate).set({hour:23,minute:59,second:59}).format("YYYY-MM-DD HH:mm:ss"),
       game: null
     };
     this._userSettingsService._getProfitLossApi(profitLossObj).subscribe(
       (res:any) => {
        this.profitLoss = res.profitLoss.reverse();
+       this.isLoading = false;
         console.log("getUser", res);
       }
     );
@@ -64,6 +80,10 @@ export class BettingPlComponent implements OnInit {
 
   getProfitAndLoss(){
     this.getProfitLoss(this.fromDate,this.toDate);
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 }

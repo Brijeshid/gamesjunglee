@@ -4,6 +4,8 @@ import { UserSettingsMainService } from 'src/app/features/user-settings/services
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EMarketName, EMarketType } from '@shared/models/shared';
 import * as _ from "lodash";
+import { ActivatedRoute } from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser'
 
 @Component({
   selector: 'app-bet-slip',
@@ -16,6 +18,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   @Input() betSlipParams:any;
   @Input() showMAtchwiseBet = ''
   @Input() marketType:any = EMarketType.MATCH_TYPE;
+  @Input() isTVEnable:boolean;
 
   EMarketType:typeof EMarketType = EMarketType;
   odds:number;
@@ -30,12 +33,17 @@ export class BetSlipComponent implements OnInit, OnChanges {
   isBack:boolean;
   userBalance:any;
   isSticky: boolean = false;
+  matchId:number;
+  liveStreamingTVUrl:any;
+  exposure:number =0;
 
   constructor(
     private _sharedService: SharedService,
     private _userSettingsService: UserSettingsMainService,
     private _SharedService:SharedService,
     private _fb: FormBuilder,
+    private _route: ActivatedRoute,
+    public sanitizer: DomSanitizer
     ) { }
 
 
@@ -68,8 +76,21 @@ export class BetSlipComponent implements OnInit, OnChanges {
       if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
+
+    if(changes['isTVEnable'] && !changes['isTVEnable'].isFirstChange()){
+      this.isTVEnable =  changes['isTVEnable']['currentValue'];
+      if(this.isTVEnable){
+        this.startStreamingLiveTV();
+      }else{
+        this.liveStreamingTVUrl = undefined;
+      }
+    }
   }
   ngOnInit(): void {
+    this._route.params.subscribe(routeParams =>{
+      this.matchId = routeParams.matchId;
+    });
+
     this.isBack = this.betSlipParams?.isBack;
     this._createBetSlipForm();
     this.getUserBalance();
@@ -120,26 +141,27 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
     this._sharedService.getIPApi().subscribe(res=>{
       this.betSlipParams['userIp'] = res['ip'];
+      this.betSlipParams['exposure'] = this.exposure;
       this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
         (betSlipRes: any) => {
               if(this.count <=0 || betSlipRes){
-                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
-                this._getUserOpenBet();
-                this.betSlipForm.reset();
                 this.isBetSlipActive = false;
                 this.isBetSlipPlaceCall = false;
                 this.isLoaderStart = false;
                 this._SharedService.getUserBalance.next({'marketType': this.marketType});
+                this.betSlipForm.reset();
+                this._getUserOpenBet();
+                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
               }
         },
         (err)=>{
           console.log('eee',err);
-          this._getUserOpenBet();
-          this.betSlipForm.reset();
           this.isBetSlipActive = false;
           this.isBetSlipPlaceCall = false;
           this.isLoaderStart = false;
           this._SharedService.getUserBalance.next({'marketType': this.marketType});
+          this.betSlipForm.reset();
+          this._getUserOpenBet();
         });
     })
     
@@ -172,7 +194,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   stakeVal(val:any){
     //calculate profit and loss with marketID
-    if(this.betSlipForm.controls['stake'].valid){
+    if(this.betSlipForm.controls['stake'].valid && val!==0){
       let marketObj = {};
       let calCulatedAmount = 0;
       if(this.betSlipParams.marketName == 'MATCH ODDS' || this.betSlipParams.marketName == "MATCH_ODDS"){
@@ -205,6 +227,9 @@ export class BetSlipComponent implements OnInit, OnChanges {
           }
         }
       })
+
+      let netExposure = Object.values(marketObj[marketId])
+      this.exposure = Math.min(...netExposure.map((horse:any) => horse.amount));
       this._sharedService.marketBookCalSubject.next(marketObj);
     }else{
       this._sharedService.marketBookCalSubject.next({});
@@ -307,6 +332,20 @@ export class BetSlipComponent implements OnInit, OnChanges {
         }
 
         this._getUserOpenBet();
+    })
+  }
+
+  cancelBetSlip(){
+    this.stakeVal(0);
+    this.betSlipForm.controls['stake'].setValue("");
+    this.isBetSlipActive=false;
+    this.betSlipParams['isBack'] = false;
+  }
+
+  startStreamingLiveTV(){
+    this._sharedService.postLiveStreamForMarket({matchId:this.matchId}).subscribe((res:any)=>{
+      this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
+      console.log("tv",res);
     })
   }
 

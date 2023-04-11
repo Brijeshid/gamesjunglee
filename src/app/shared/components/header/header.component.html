@@ -1,107 +1,216 @@
 <!--Header 1 start-->
 <div class="container-fluid">
   <div class="row">
-<nav class="navbar navbar-expand-lg navbar-light header-one">
-        <div class="col-md-1">
-<button class="navbar-toggler bg-pink" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <!-- <span class="navbar-toggler-icon"></span> -->
-            <i class="fa fa-bars-staggered"></i>
-           <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light header-one animate__animated animate__fadeInDown p-1"
+    >
+      <div class="col-md-1 text-center">
+        <button
+          class="navbar-toggler bg-color text-white"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <i class="fa fa-bars-staggered"></i>
+          <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
         </button>
-        <a class="navbar-brand" [routerLink]="['/in-play']"><img src="assets/images/logo.png" width="100px"></a>
-</div>&nbsp;&nbsp;
-<div class="col-md-2">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone">
-          <li class="nav-item header-icon">
-              <a [routerLink]="['/news']">
-                <!--Tooltip start-->
-                <div class="tooltipnk">
-                  <i class="fas fa-newspaper"></i>
-                  <span class="tooltiptext">Latest News</span>
-                </div>
-                <!--Tooltip end-->
-              </a>
-          </li>&nbsp;&nbsp;
-          <li class="nav-item header-icon">
-              <a >
-                 <!--Tooltip start-->
-                 <div class="tooltipnk">
-                  <i (click)="refreshPage()" class="fas fa-rotate-right pointer"></i>
-                  <span class="tooltiptext">Refresh</span>
-                </div>
-                <!--Tooltip end-->
-              </a>
+        <a class="navbar-brand" [routerLink]="['/in-play']"
+          ><img src="assets/images/logo.png" width="100px" height="100px"
+        /></a>
+      </div>
+      &nbsp;&nbsp;
+      <div class="col-md-2">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone ms-5">
+          <li class="nav-item header-icon pointer pt-2">
+            <a>
+              <!--Tooltip start-->
+              <div class="tooltipnk">
+                <i class="fas fa-newspaper text-dark fa-lg text-white"></i>
+                <span class="tooltiptext">Latest News</span>
+              </div>
+              <!--Tooltip end-->
+            </a>
           </li>
-      </ul>
-    </div>
-    <div class="col-md-9">
-      <form class="d-flex float-end">
-        <div class="searchs"><a  class="text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-search bg-pink rounded-circle p-2 me-2"></i></a></div>
-        <div class="searchs"><a  class="text-dark"><i class="fa fa-bars bg-pink rounded-circle p-2 me-2"></i></a></div>
-        <div class="dropdown me-4 searchlist mt-1 disnone">
-        <div class="dropdown-toggle">
-          <i class="fa fa-search searchi"></i>
-          <input type="text" class="form-control searchinput" aria-label="" #inputRef (keypress)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
-        </div>
-          <ul *ngIf="searchList.length >0" class="dropdown-menu-dark search-dd">
-          <li *ngFor="let singleObj of searchList" routerLink="/sportsbook/{{singleObj['sportType']['sportName'] | titlecase}}/{{singleObj['tournament']['tournamentId']}}/{{singleObj['matchId']}}"> <a><img src="assets/images/{{singleObj['sportType']['sportName'] | lowercase}}.png" width="45px" class="pe-4"> {{singleObj['matchName']}}<br> <span class="ps-5">{{singleObj['openDate']| date :'d/MM/yy, h:mm a'}}</span> </a></li>
-          </ul>
+          &nbsp;&nbsp;
+          <li class="nav-item header-icon pt-2 pointer" (click)="refreshPage()">
+            <a>
+              <!--Tooltip start-->
+              <div class="tooltipnk">
+                <i class="fas fa-rotate-right pointer fa-lg text-white"></i>
+                <span class="tooltiptext">Refresh</span>
+              </div>
+              <!--Tooltip end-->
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <form class="d-flex float-end">
+          <div class="searchs">
+            <a
+              class="text-white"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              ><i class="fa fa-search bg-pink rounded-circle p-2 me-2"></i
+            ></a>
           </div>
-          <button class="btn btn-light bg-pink border me-2 rounded-pill" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-          <button class="btn border-pink me-2 text-nowrap rounded-pill disnone btn-pink headerFont" type="button" *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">Open
-              Bets</button>
-              <a class="btn text-white border-pink text-nowrap rounded-pill headerFont"
-               *ngIf="isLoggedIn" (click)="onClickAvailableCredit()" (clickOutside)="isShowRightSideBar = false">{{userBalance?.availableCredit | number}}
-              <i class="fa fa-user bg-pink rounded-circle small p-1"></i>
-              </a>
-             </form>
+          <div class="searchs">
+            <a class="text-white"
+              ><i class="fa fa-bars bg-pink rounded-circle p-2 me-2"></i
+            ></a>
+          </div>
+          <div class="dropdown me-4 searchlist mt-1 disnone">
+            <div class="dropdown-toggle">
+              <i class="fa fa-search searchi"></i>
+              <input
+                type="text"
+                class="form-control searchinput"
+                aria-label=""
+                #inputRef
+                (keypress)="postSearchList(inputRef.value)"
+                placeholder="Search for a Sport, Game or Team"
+              />
             </div>
+            <ul
+              *ngIf="searchList.length > 0"
+              class="dropdown-menu-dark search-dd"
+            >
+              <li
+                *ngFor="let singleObj of searchList"
+                routerLink="/sportsbook/{{
+                  singleObj['sportType']['sportName'] | titlecase
+                }}/{{ singleObj['tournament']['tournamentId'] }}/{{
+                  singleObj['matchId']
+                }}"
+              >
+                <a
+                  ><img
+                    src="assets/images/{{
+                      singleObj['sportType']['sportName'] | lowercase
+                    }}.png"
+                    width="45px"
+                    class="pe-4"
+                  />
+                  {{ singleObj["matchName"] }}<br />
+                  <span class="ps-5">{{
+                    singleObj["openDate"] | date : "d/MM/yy, h:mm a"
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <button
+            class="btn btn-light btn-pink me-2 rounded-pill"
+            type="button"
+            *ngIf="!isLoggedIn"
+            routerLink="/login"
+          >
+            Login
+          </button>
+          <button
+            class="btn border-colour me-2 text-nowrap rounded-pill disnone btn-pink headerFont"
+            type="button"
+            *ngIf="isLoggedIn"
+            [routerLink]="['/bets']"
+            [routerLinkActive]="'active'"
+          >
+            Open Bets
+          </button>
+          <a
+            class="btn text-white border-colour text-nowrap rounded-pill headerFont"
+            *ngIf="isLoggedIn"
+            (click)="onClickAvailableCredit()"
+            (clickOutside)="isShowRightSideBar = false"
+            >{{ userBalance?.availableCredit | number }}
+            <i class="fa fa-user bg-color rounded-circle small p-1"></i>
+          </a>
+        </form>
+      </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-   <app-left-navigation></app-left-navigation>
-        </div>
-</nav>
-</div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <app-left-navigation></app-left-navigation>
+      </div>
+    </nav>
+  </div>
 </div>
 <!--Header 1 end-->
 
 <!--Header 2 start--->
 <div class="header-tow">
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img src="assets/images/soccer.png"> INPLAY</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/Cricket']" [routerLinkActive]="'active'"><img src="assets/images/cricket.png"> CRICKET</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/Soccer']" [routerLinkActive]="'active'"><img src="assets/images/soccer.png"> SOCCER</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/Tennis']" [routerLinkActive]="'active'"><img src="assets/images/tennis.png"> TENNIS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pointer" ><img src="assets/images/casino.png"> CASINO</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pointer" ><img src="assets/images/premium_sportbook.png"> PREMIUM-SPORTBOOK</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pointer" ><img src="assets/images/live_card.png"> LIVE CARD</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pointer" ><img src="assets/images/slot_games.png"> SLOT GAMES</a>
-        </li>
-    </ul>
+  <ul class="nav justify-content-center animate__animated animate__flipInX">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        aria-current="page"
+        [routerLink]="['/in-play']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/soccer.png" /> INPLAY</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Cricket']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/cricket.png" /> CRICKET</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Soccer']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/soccer.png" /> SOCCER</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Tennis']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/tennis.png" /> TENNIS</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/casino.png" /> CASINO</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/premium_sportbook.png" /> PREMIUM-SPORTBOOK</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/live_card.png" /> LIVE CARD</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/slot_games.png" /> SLOT GAMES</a
+      >
+    </li>
+  </ul>
 </div>
 <!---Header 2 end-->
 <!--Right sidebar start-->
-<div id="overlay" *ngIf="isShowRightSideBar" [ngClass]="{'toggled':isShowRightSideBar}" [style.display]="isShowRightSideBar ? 'block':'none'">
-<div id="rightslider">
-    <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)" [userBalance]="userBalance"></app-right-sidebar>
-</div>
+<div
+  id="overlay"
+  *ngIf="isShowRightSideBar"
+  [ngClass]="{ toggled: isShowRightSideBar }"
+  [style.display]="isShowRightSideBar ? 'block' : 'none'"
+>
+  <div id="rightslider">
+    <app-right-sidebar
+      (rightSidebarEvent)="getRightSidebarEvent($event)"
+      [userBalance]="userBalance"
+    ></app-right-sidebar>
+  </div>
 </div>
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -109,7 +218,15 @@
 </button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header border-bottom-0">
@@ -117,23 +234,62 @@
       </div>
       <div class="modal-body">
         <div class="dropdown me-4 searchlist mt-1 w-100">
-          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             <i class="fa fa-search searchi"></i>
-            <input type="text" class="form-control searchinput" aria-label="" #inputRef (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team">
+            <input
+              type="text"
+              class="form-control searchinput"
+              aria-label=""
+              #inputRef
+              (input)="postSearchList(inputRef.value)"
+              placeholder="Search for a Sport, Game or Team"
+            />
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-            <li> <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Football</a></li>
-            <li><a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4"> Cricket</a></li>
+          <ul
+            class="dropdown-menu dropdown-menu-dark"
+            aria-labelledby="dropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" href="#"
+                ><img
+                  src="assets/images/soccer.png"
+                  width="40px"
+                  class="pe-4"
+                />
+                Football</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#"
+                ><img
+                  src="assets/images/soccer.png"
+                  width="40px"
+                  class="pe-4"
+                />
+                Cricket</a
+              >
+            </li>
           </ul>
         </div>
       </div>
       <div class="modal-footer border-top-0 justify-content-start">
-        <a href="" class="text-pink text-decoration-none" data-bs-dismiss="modal">Close</a>
+        <a
+          href=""
+          class="text-color text-decoration-none"
+          data-bs-dismiss="modal"
+          >Close</a
+        >
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- <div id="overlay" [ngClass]="{'toggled':isShowRightSideBar}" *ngIf="isShowRightSideBar">
   <div id="rightslider">

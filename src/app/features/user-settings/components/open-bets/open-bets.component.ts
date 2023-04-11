@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-open-bets',
@@ -12,6 +13,7 @@ export class OpenBetsComponent implements OnInit {
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,9 @@ export class OpenBetsComponent implements OnInit {
         }
         console.log(res)
       });
+  }
+  goBack(){
+    this._location.back();
   }
 
 }
