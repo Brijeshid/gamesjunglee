@@ -22,12 +22,24 @@
   }
   .sidebarhd{display: none;}
   .sidebarhide{ display: block;}
+  .gamedetails{
+    padding: 0 !important;
+   }
+  
  }
 
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
  @media only screen and (min-width: 600px) {}
 
+ @media only screen and (max-width: 767px) {
+ .mobileTableHide{display: none;}
+ .mobileTableShow{display: block;}
+
+ .gamedetails .mobileTableShow .table td{
+  padding: 10px 5px;
+}
+}
  /* Medium devices (landscape tablets, 768px and up) */
  @media only screen and (min-width: 768px) {}
 
