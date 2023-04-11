@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpContext } from '@angular/common/http';
 import { IGNORED_STATUSES } from '@core/interceptors/http-error.interceptor';
+import * as XLSX from 'xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,18 @@ export class SharedService {
     // });
 
     // this._location.back();
+  }
+
+  public exportExcel(fileData,fileName){
+    /* pass here the table id */
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(fileData);
+  
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, fileName);
   }
 
    public getPreviousUrl(){
