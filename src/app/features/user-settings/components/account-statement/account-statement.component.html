@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="row gamedetails tabetails mb-5 ms-2">
-      <div class="col-md-9">
+      <div class="col-md-6">
         Show
         <select
           (change)="updateLimit($event)"
@@ -65,7 +65,7 @@
         </select>
         Entries
       </div>
-      <div class="col-md-3 d-flex justify-content-end">
+      <div class="col-md-4 d-flex justify-content-end">
         <span class="pt-2">Search : </span>
           <input
             type="text"
@@ -75,6 +75,9 @@
             [(ngModel)]="searchTerm"
             (ngModelChange)="search()"
           />
+      </div>
+      <div class="col-md-2">
+        <button *ngIf ="accountStatement.length >0 " type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white mt-2" (click)="exportExcel()">Export</button>
       </div>
       <div class="col-md-12 mt-3 ms-2">
         <div *ngIf="accountStatement.length == 0" class="text-center p-5">

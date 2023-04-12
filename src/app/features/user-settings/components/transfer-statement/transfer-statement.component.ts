@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@an
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-transfer-statement',
@@ -36,10 +37,13 @@ export class TransferStatementComponent implements OnInit {
   @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
   preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
 
+  fileName= 'TransferStatement.xlsx';
+
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private cdr: ChangeDetectorRef,
     private _location: Location,
+    private _sharedService: SharedService,
   ) { }
 
   ngAfterViewInit(){
@@ -78,4 +82,8 @@ export class TransferStatementComponent implements OnInit {
   goBack(){
     this._location.back();
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.tranState,this.fileName);
+ }
 }
