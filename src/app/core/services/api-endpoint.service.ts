@@ -362,4 +362,8 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_WEBSOCKET_URL_BY_DEVICE)
   }
 
+  public getUserAdminPubSubEndPoint(){
+    return this.createUrl(this._constants.API_URL_GET_USER_ADMIN_PUB_SUB)
+  }
+
 }

@@ -68,7 +68,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
           runs:this.betSlipParams['runs'],
         })
       changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE;
-      
+
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
@@ -166,7 +166,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
           this._getUserOpenBet();
         });
     })
-    
+
   }
 
   get profit(){
@@ -306,7 +306,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
 
     console.log(betList);
-    
+
     let betIdObj = {
       betIdList: betList
     }

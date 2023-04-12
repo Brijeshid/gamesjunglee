@@ -44,18 +44,18 @@ export class SharedService {
   public exportExcel(fileData,fileName){
     /* pass here the table id */
     const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(fileData);
-  
+
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
-    /* save to file */  
+
+    /* save to file */
     XLSX.writeFile(wb, fileName);
   }
 
    public getPreviousUrl(){
     return this._location.back();
-  }    
+  }
 
   _getUserDetailsApi() {
     return this._apiHttpService
@@ -226,5 +226,11 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getWebSocketURLByDevice(), liveStreamMatchObj);
   }
+
+  getUserAdminPubSubApi(){
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
+  }
+
 }
 
