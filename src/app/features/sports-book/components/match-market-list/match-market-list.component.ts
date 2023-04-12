@@ -67,7 +67,8 @@ export class MatchMarketListComponent implements OnInit {
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
       this.matchId = routeParams.matchId;
-      this.initConfig();
+      // this.initConfig();
+      this._getWebSocketUrl();
     });
     this._preConfig();
   }
@@ -224,25 +225,36 @@ export class MatchMarketListComponent implements OnInit {
     })
   }
 
-  _getWebSocketUrl(){
-    this.getInPlayUpcomingData(); //in-play
-    this.getBookMakerData() //bookmaker
-    this.getFancyData() //fancy
-  }
-
-  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
-    this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
+  _getWebSocketUrl(isComplete = false){
+    this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
-        console.log('market',res);
-        if(res?.token?.url){
-          this.realDataWebSocket = webSocket(res?.token?.url);
+        console.log('url',res);
+        if(res){
+          this.realDataWebSocket = webSocket(res['url']);
+          if(!isComplete){
+            this.getInPlayUpcomingData(); //in-play
+            this.getBookMakerData() //bookmaker
+            this.getFancyData() //fancy
+          }
           this._subscribeWebSocket()
         }
       });
   }
 
+  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
+    // this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
+    //   (res: any) => {
+    //     console.log('market',res);
+    //     if(res?.token?.url){
+    //       this.realDataWebSocket = webSocket(res?.token?.url);
+    //       this._subscribeWebSocket()
+    //     }
+    //   });
+  }
+
 
   private _updateMarketData(data: any) {
+    // console.log('real',this.realDataWebSocket)
     let parseData = JSON.parse(data);
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       // console.log('data', JSON.parse(data));
@@ -364,8 +376,14 @@ export class MatchMarketListComponent implements OnInit {
         if(typeof data == 'string') this._updateMarketData(data);
         // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
+      err => {
+        this._getWebSocketUrl(true);
+        console.log(err)
+      }, // Called if at any point WebSocket API signals some kind of error.
+      () => {
+        this._getWebSocketUrl(true);
+        console.log('complete')
+      } // Called when connection is closed (for whatever reason).
     );
   }
 
@@ -478,7 +496,7 @@ export class MatchMarketListComponent implements OnInit {
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
-    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    // if(this.realDataWebSocket) this.realDataWebSocket.complete();
   }
 
 }

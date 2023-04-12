@@ -56,7 +56,8 @@ export class SportsMarketListComponent implements OnInit {
       };
       this.sports = routeParams.sports;
       this.getSubNavBySportsList();
-      this.initConfig();
+      // this.initConfig();
+      this._getWebSocketUrl();
     })
 
     this._sharedService.getUserBalance.subscribe(res=>{
@@ -205,19 +206,27 @@ export class SportsMarketListComponent implements OnInit {
     })
   }
 
-  _getWebSocketUrl(){
-    this.getInPlayUpcomingData(); //in-play //upcoming
-  }
-
-  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
-    this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
+  _getWebSocketUrl(isComplete = false){
+    this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
-        console.log('market',res);
-        if(res?.token?.url){
-          this.realDataWebSocket = webSocket(res?.token?.url);
+        console.log('url',res);
+        if(res){
+          this.realDataWebSocket = webSocket(res['url']);
+          if(!isComplete)this.getInPlayUpcomingData(); //in-play //upcoming
           this._subscribeWebSocket()
         }
       });
+  }
+
+  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
+    // this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
+    //   (res: any) => {
+    //     console.log('market',res);
+    //     if(res?.token?.url){
+    //       this.realDataWebSocket = webSocket(res?.token?.url);
+    //       this._subscribeWebSocket()
+    //     }
+    //   });
 }
 
 
@@ -310,8 +319,14 @@ export class SportsMarketListComponent implements OnInit {
         if(typeof data == 'string') this._updateMarketData(data);
         // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
+      err => {
+        this._getWebSocketUrl(true);
+        console.log(err)
+      }, // Called if at any point WebSocket API signals some kind of error.
+      () => {
+        this._getWebSocketUrl(true);
+        console.log('complete')
+      } // Called when connection is closed (for whatever reason).
     );
   }
 
@@ -351,7 +366,7 @@ export class SportsMarketListComponent implements OnInit {
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
-    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    // if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
   }
