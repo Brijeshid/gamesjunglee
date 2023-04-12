@@ -37,7 +37,8 @@ export class InPlayIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
-    this.initConfig();
+    // this.initConfig();
+    this._getWebSocketUrl();
   }
 
   initConfig(){
@@ -107,20 +108,31 @@ export class InPlayIndexComponent implements OnInit {
     })
   }
 
-  _getWebSocketUrl(){
-    this.getInPlayUpcomingData({upComing:false}); //in-play
-    this.getInPlayUpcomingData({upComing:true});  //upcoming
+  _getWebSocketUrl(isComplete = false){
+    this._sharedService.getWebSocketURLApi().subscribe(
+      (res: any) => {
+        console.log('url',res);
+        if(res){
+          this.realDataWebSocket = webSocket(res['url']);
+          if(!isComplete){
+            this.getInPlayUpcomingData({upComing:false}); //in-play
+            this.getInPlayUpcomingData({upComing:true});  //upcoming
+          }
+          this._subscribeWebSocket()
+        }
+      });
+    
   }
 
   _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
-      this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
-        (res: any) => {
-          //console.log('market',res);
-          if(res?.token?.url){
-            this.realDataWebSocket = webSocket(res?.token?.url);
-            this._subscribeWebSocket()
-          }
-        });
+      // this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
+      //   (res: any) => {
+      //     console.log('market',res);
+      //     if(res?.token?.url){
+      //       this.realDataWebSocket = webSocket(res?.token?.url);
+      //       this._subscribeWebSocket()
+      //     } 
+      //   });
   }
 
 
@@ -128,7 +140,7 @@ export class InPlayIndexComponent implements OnInit {
     let parseData = JSON.parse(data);
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       let webSocketData = parseData['data'];
-      if(this.inPlayMatchListBySport[0]['sports'].length >0){
+      if(this.inPlayMatchListBySport.length > 0 && this.inPlayMatchListBySport[0]['sports'].length >0){
         this.inPlayMatchListBySport[0]['sports'].map(sportsObj =>{
           return sportsObj['markets'].map(resObj=>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
@@ -168,8 +180,8 @@ export class InPlayIndexComponent implements OnInit {
           })
         })
       }
-
-      if(this.upComingMatchListBySport[0]['sports'].length >0){
+      
+      if(this.upComingMatchListBySport.length > 0 &&this.upComingMatchListBySport[0]['sports'].length >0){
         this.upComingMatchListBySport[0]['sports'].map(sportsObj =>{
           return sportsObj['markets'].map(resObj=>{
               let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
@@ -218,8 +230,14 @@ export class InPlayIndexComponent implements OnInit {
         if(typeof data == 'string') this._updateMarketData(data);
         // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
+      err => {
+        this._getWebSocketUrl(true);
+        console.log(err)
+      }, // Called if at any point WebSocket API signals some kind of error.
+      () => {
+        this._getWebSocketUrl(true);
+        console.log('complete')
+      } // Called when connection is closed (for whatever reason).
     );
   }
 
@@ -231,6 +249,6 @@ export class InPlayIndexComponent implements OnInit {
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
-    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    // if(this.realDataWebSocket) this.realDataWebSocket.complete();
   }
 }
