@@ -473,9 +473,9 @@ tr {
   color: #d35862;
 }
 .login .btn {
-  font-size: 14px;
+  font-size: 16px;
   padding: 12px 10px;
-  border-radius: 14px;
+  border-radius: 50rem;
 }
 .login .form-control {
   line-height: 3.5;
@@ -907,7 +907,7 @@ input:checked + .slider:before {
   animation: color var(--d) var(--e) infinite,
     position var(--d) var(--e) infinite;
   background-color: #000;
-  padding-top: 4%;
+  padding-top: 2%;
   height: 100vh;
 }
 

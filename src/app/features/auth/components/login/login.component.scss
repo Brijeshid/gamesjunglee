@@ -15,6 +15,7 @@
     border-left: 0;
     border-right: 0;
     border-radius: 0;
+    font-size: 1rem;
 }
 .login .input-group-text {
   border-bottom: 1px solid #ffa7a3;
@@ -27,4 +28,8 @@
 input:-internal-autofill-selected {
 background-color: transparent;
 color: #fff;
+}
+
+.input-group{
+  margin: 10px 0;
 }
