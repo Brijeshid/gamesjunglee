@@ -19,8 +19,8 @@
           <div class="tab-pane fade" [ngClass]="{'show active':isBetSlipActive}" id="betslip" role="tabpanel" aria-labelledby="betslip-tab">
             <div class="card">
               <ng-container *ngIf="isLoaderStart">
-                <span class="loadtime">{{count}}</span>
-                <div class="loader"> </div>
+                <!-- <span class="loadtime">{{count}}</span> -->
+                <div class="loader1"><img src="assets/images/Loader.gif" width="40" height="40"></div>
               </ng-container>
               <p class="card-header text-dark">{{betSlipParams['event']}} <br>
                 {{betSlipParams['selectionName']}}
@@ -36,7 +36,7 @@
                           <div class="number">
                             <ng-container *ngIf="marketType == EMarketType.MATCH_TYPE || marketType == EMarketType.BOOKMAKER_TYPE ; else otherMarket">
                               <span class="minus" (click)="betSlipParams['odds'] > 0 && upAndDownOddsValue(false)">-</span>
-                              <input type="number" formControlName="odds"/>
+                              <input min="1.01" #bet_odds step=".01" type="number" formControlName="odds"/>
                               <span class="plus" (click)="upAndDownOddsValue(true)">+</span>
                               <ng-container *ngIf="(betSlipForm.controls['odds'].touched || betSlipForm.controls['odds'].dirty)  && betSlipForm.controls['odds'].invalid">
                                 <span class="text-danger p-3" *ngIf="betSlipForm.controls['odds'].errors?.required">Odds is required</span>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-md-6 col-6 p-1 mt-3">
                            <button type="submit" class="btn w-100 p-1 rounded-pill betbtn" (click)="onClickPlaceBet()"
-                          [disabled]="betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall" [ngClass]="(betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall) ? 'disabled bg-secondary' : 'bg-success text-white'">
+                          [disabled]="betSlipForm.controls['stake'].invalid || betSlipForm.controls['odds'].invalid || isBetSlipPlaceCall" [ngClass]="(betSlipForm.controls['stake'].invalid || isBetSlipPlaceCall) ? 'disabled bg-secondary' : 'bg-success text-white'">
                               <span class="d-block">PLACE BET</span>
                              <ng-container *ngIf="!betSlipForm.controls['stake'].invalid">
                               <span class="d-block  prof">{{betSlipParams['isBack'] ? 'PROFIT':'LIABILITY'}}: {{profit}}</span>

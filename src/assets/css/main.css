@@ -463,14 +463,14 @@ tr {
 }
 .login a {
   text-decoration: none;
-  color: #ffa7a3;
+  color: #d35862;
   padding: 5px 10px;
 }
 .login a:hover {
   background: rgba(255, 167, 163, 0.1803921569);
   padding: 5px 10px;
   border-radius: 5px;
-  color: #ffa7a3;
+  color: #d35862;
 }
 .login .btn {
   font-size: 14px;
@@ -1263,5 +1263,26 @@ small {
   color: #000;
   background-color: #e76f26;
   border-color: #e76f26;
+}
+
+.loader1 {
+  position: absolute;
+  left: 70%;
+  top:65%;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  margin: -76px 0 0 -76px;
+  /* // border: 8px solid $loaderborder;
+  // border-radius: 50%;
+  // border-top: 8px solid $loaderbordertop;
+  // -webkit-animation: spin 2s linear infinite;
+  // animation: spin 2s linear infinite; */
+}
+.mobileTableHide{display: block;}
+.mobileTableShow{display: none;}
+
+.mobileTableShow table tbody tr td{
+  border-radius: 1rem;
 }
 

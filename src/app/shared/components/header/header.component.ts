@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
   getUserBalance(){
     this._sharedService._getBalanceInfoApi().subscribe((res)=>{
       this.userBalance = res;
-      console.log('res_data',res);
+      //console.log('res_data',res);
     })
   }
 
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     this._sharedService._postSearchListApi({"searchText":searchText})
     .subscribe((res)=>{
       this.searchList = res;
-      console.log('res_data',res);
+      //console.log('res_data',res);
     })
   }
 

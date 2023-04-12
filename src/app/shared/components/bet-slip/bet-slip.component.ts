@@ -29,7 +29,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   betSlipForm:FormGroup;
   isBetSlipPlaceCall:boolean = false
   isLoaderStart:boolean = false;
-  count:number;
+  // count:number;
   isBack:boolean;
   userBalance:any;
   isSticky: boolean = false;
@@ -67,8 +67,8 @@ export class BetSlipComponent implements OnInit, OnChanges {
           odds:this.betSlipParams['odds'],
           runs:this.betSlipParams['runs'],
         })
-      changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE ? this.count =5 : this.count= 2;
-      
+      changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE;
+
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
@@ -107,23 +107,25 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   onClickPlaceBet(){
     this.isBetSlipPlaceCall = true;
-    if(this.marketType == EMarketType.MATCH_TYPE){
-      this.count = 5;
-    }else if(this.marketType == EMarketType.FANCY_TYPE){
-      this.count = 2;
-    }else{
-      this.count = 1;
-    }
+
+    // if(this.marketType == EMarketType.MATCH_TYPE){
+    //   this.count = 5;
+    // }else if(this.marketType == EMarketType.FANCY_TYPE){
+    //   this.count = 2;
+    // }else{
+    //   this.count = 1;
+    // }
 
     this.isLoaderStart = true;
-    let internvalCount = setInterval(()=>{
-      this.count--;
-      if(this.count <= 0){
-        clearInterval(internvalCount);
-      }
-    },1000);
+    // let internvalCount = setInterval(()=>{
+    //   // this.count--;
+    //   if(this.count <= 0){
+    //     clearInterval(internvalCount);
+    //   }
+    // },1000);
     this._placeBetCall();
   }
+
 
   private _placeBetCall(){
     if(this.betSlipParams.marketName == EMarketName.MATCH_ODDS_SPACE || this.betSlipParams.marketName == EMarketName.MATCH_ODDS_UNDERSCORE){
@@ -144,7 +146,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this.betSlipParams['exposure'] = this.exposure;
       this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
         (betSlipRes: any) => {
-              if(this.count <=0 || betSlipRes){
+              if( betSlipRes){
                 this.isBetSlipActive = false;
                 this.isBetSlipPlaceCall = false;
                 this.isLoaderStart = false;
@@ -164,7 +166,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
           this._getUserOpenBet();
         });
     })
-    
+
   }
 
   get profit(){
@@ -304,7 +306,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
 
     console.log(betList);
-    
+
     let betIdObj = {
       betIdList: betList
     }
