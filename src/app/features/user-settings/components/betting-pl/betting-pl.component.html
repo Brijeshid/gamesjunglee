@@ -81,7 +81,7 @@
                                             <p><strong>Net Win :</strong></p>
                                         </div>
                                         <div class="col-md-3">
-                                            <p class="float-end" [ngClass]="pl.netAmt>=0?'text-success':'text-danger'">{{pl.netAmt}}</p>
+                                            <p class="float-end" [ngClass]="pl.netAmt>=0?'text-success':'text-danger'">{{pl.netAmt | number}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
