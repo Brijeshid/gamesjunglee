@@ -97,14 +97,14 @@ export class LeftNavigationComponent implements OnInit {
 
   getNavList(){
     this._sharedService._getSportsListApi().subscribe((res)=>{
-      console.log('sportslist',res);
+      //console.log('sportslist',res);
       this.mainMenu = res;
     });
   }
   getSubNavList(){
     this._sharedService._getAllNavListApi().subscribe((res)=>{
       this.viewMoreNavList = res['menuList'];
-      console.log(res);
+      //console.log(res);
     });
   }
 
