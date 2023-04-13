@@ -7,7 +7,7 @@
         <ul class="nav nav-tabs justify-content-center border-0" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link pointer" [ngClass]="{'active':isBetSlipActive}" id="betslip-tab" data-bs-toggle="tab" data-bs-target="#betslip"
-              type="button" role="tab" aria-controls="betslip" aria-selected="true" [disabled]="!isBetSlipActive"  [ngStyle]="{'color':betSlipParams['isBack'] === true ? '#6abefa' : '#d35862','border-bottom':betSlipParams['isBack'] === true && isBetSlipActive? '3px solid #6abefa': (isBetSlipActive? '3px solid #ffb9b5':'')}">BETSLIP</button>
+              type="button" role="tab" aria-controls="betslip" aria-selected="true"   [ngStyle]="{'color':betSlipParams['isBack'] === true ? '#6abefa' : '#d35862','border-bottom':betSlipParams['isBack'] === true && isBetSlipActive? '3px solid #6abefa': (isBetSlipActive? '3px solid #ffb9b5':'')}">BETSLIP</button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" [ngClass]="{'active':!isBetSlipActive}" id="openbets-tab" data-bs-toggle="tab" data-bs-target="#openbets"
