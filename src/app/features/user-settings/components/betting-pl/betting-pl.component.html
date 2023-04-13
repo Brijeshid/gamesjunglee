@@ -61,7 +61,7 @@
                             </h2>
                             <div id="collapse_one{{i}}" class="accordion-collapse collapse show" aria-labelledby="collapse_one"
                                 data-bs-parent="#accordionExample">
-                                <div class="accordion-body ps-3 pe-3 text-white bg-white">
+                                <div class="accordion-body ps-3 pe-3 text-white">
                                     <div class="row">
                                         <div class="col-md-6 pe-5">
                                             <h6>SportBook</h6>
@@ -81,7 +81,7 @@
                                             <p><strong>Net Win :</strong></p>
                                         </div>
                                         <div class="col-md-3">
-                                            <p class="float-end" [ngClass]="pl.netAmt>=0?'text-success':'text-danger'">{{pl.netAmt}}</p>
+                                            <p class="float-end" [ngClass]="pl.netAmt>=0?'text-success':'text-danger'">{{pl.netAmt | number}}</p>
                                         </div>
                                     </div>
                                     <div class="row">

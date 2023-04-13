@@ -28,20 +28,22 @@ export class AppComponent  implements OnInit {
       (res: any) => {
         var currentUserDetails:any;
         currentUserDetails = this._sharedService.getUserDetails();
-        currentUserDetails.isActive = "Inactive";
-        console.log('user',currentUserDetails);
-        console.log('getUserAdminPubSubApi', res);
-        console.log('localstorage',localStorage.getItem('userDetails'));
         if (res) {
           this.realDataWebSocket = webSocket(res['url']);
           this.realDataWebSocket.subscribe(
             data => {
               console.log('realDataWebSocket',data);
               if(data.message == "STATUS_CHANGED" && currentUserDetails.userId == data.userId){
-                if(data.status == 'Inactive'){
+                if(data.status == 'Active'){
+                  currentUserDetails.isActive = "Active";
                   localStorage.setItem('userDetails',JSON.stringify(currentUserDetails));
                   currentUserDetails = this._sharedService.getUserDetails();
-                  console.log('updated_user',currentUserDetails);
+                  window.location.reload();
+                }
+                if(data.status == 'Inactive'){
+                  currentUserDetails.isActive = "Inactive";
+                  localStorage.setItem('userDetails',JSON.stringify(currentUserDetails));
+                  currentUserDetails = this._sharedService.getUserDetails();
                   window.location.reload();
                 }
                 if(data.status == 'Closed'){
@@ -49,6 +51,11 @@ export class AppComponent  implements OnInit {
                   this._sharedService.removeUserDetails();
                   this._router.navigate(['/login']);
                 }
+              }
+              if(data.message == "PASSWORD_CHANGED" && currentUserDetails.userId == data.userId){
+                this._sharedService.removeJWTToken();
+                this._sharedService.removeUserDetails();
+                this._router.navigate(['/login']);
               }
             }, // Called whenever there is a message from the server.
             err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
