@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { UserSettingsMainService } from '../../services/user-settings-main.service';
 import { SharedService } from '@shared/services/shared.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -42,18 +42,33 @@ export class BetHistoryComponent implements OnInit {
     // validators?: ValidatorFn | ValidatorFn[];
     // modal?: boolean;
   };
-  fromDate = moment().format("YYYY-MM-DD");
+  // fromDate = moment().format("YYYY-MM-DD");
+  // toDate = moment().format("YYYY-MM-DD");
+  fromDate = moment().subtract(1, 'months').format("YYYY-MM-DD");
   toDate = moment().format("YYYY-MM-DD");
+
+  toDateInit = moment().format("DD MMM YYYY")
+  fromDateInit = moment(this.toDateInit).subtract(1, 'months').format("DD MMM YYYY")
+  @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
+  preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
+
+  fileName= 'BetHistoryList.xlsx';
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _sharedService: SharedService,
     private _fb: FormBuilder,
     private _location: Location,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this._preConfig();
+  }
+
+  ngAfterViewInit(){
+    this.dateRangePicker['range'] = this.preDefineDateRange  //"13 Apr 2023 - 17 Apr 2023"
+    this.cdr.detectChanges();
   }
 
   _preConfig() {
@@ -132,4 +147,8 @@ export class BetHistoryComponent implements OnInit {
   goBack(){
     this._location.back();
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.betHistoryList,this.fileName);
+ }
 }

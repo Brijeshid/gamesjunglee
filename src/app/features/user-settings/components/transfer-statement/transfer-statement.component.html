@@ -24,7 +24,10 @@
                     data-drops="up"> -->
             </div>
             <div class="col-md-4 mb-2">
-                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-pink text-white" (click)="getTransferStatment()">Search</button>
+                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-color text-white" (click)="getTransferStatment()">Search</button>
+            </div>
+            <div class="col-md-2">
+                <button *ngIf ="tranState.length >0 " type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white" (click)="exportExcel()">Export</button>
             </div>
         </div>
 
@@ -37,10 +40,10 @@
                   </div>
                 <table *ngIf="tranState.length !== 0" class="table table-hover">
                     <thead>
-                        <tr>
-                            <th width="30%" class="tfirstcol bg-color">Date</th>
-                            <th width="15%" class="bg-color">Description</th>
-                            <th width="10%" class="text-center tlastcol bg-color">Amount</th>
+                        <tr class="bg-color text-white">
+                            <th width="30%" class="tfirstcol">Date</th>
+                            <th width="15%" >Description</th>
+                            <th width="10%" class="text-center tlastcol">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +52,7 @@
                             <td>{{item?.transferTypeDescription}}</td>
                             <td class="text-center"
                                 [ngClass]="item.transferTypeDescription =='Transfer Out'?'text-danger':'text-success'"><span *ngIf="item.transferTypeDescription =='Transfer Out'">-</span>
-                                {{item?.amount}}</td>
+                                {{item?.amount | number}}</td>
                         </tr>
 
                     </tbody>

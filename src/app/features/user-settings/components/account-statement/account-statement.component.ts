@@ -47,6 +47,8 @@ export class AccountStatementComponent implements OnInit {
   @ViewChild('dateRangePicker') dateRangePicker:ElementRef;
   preDefineDateRange = this.fromDateInit +' - '+ this.toDateInit;
 
+  fileName= 'AccountStatement.xlsx';
+
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _sharedservice: SharedService,
@@ -130,6 +132,10 @@ export class AccountStatementComponent implements OnInit {
   goBack(){
     this._location.back();
   }
+
+  exportExcel(){
+    this._sharedservice.exportExcel(this.accountStatement,this.fileName);
+ }
 
 
 }
