@@ -1,36 +1,53 @@
 <!--Login start-->
 <div class="w-30 m-auto">
-    <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
-        <div class="text-center"><img src="assets/images/logo.png" width="150px" ></div>
-        <div class="row login  ">
-            <h3 class="text-center">User Login</h3>
-            <div class="input-group">
-                <input type="text" class="form-control bg-transparent text-white p-0" placeholder="Enter User Name" formControlName="username" autocomplete="off">
-                <span class="input-group-text bg-transparent">
-                    <span class="fa fa-user "></span>
-                </span>
-            </div>
-            <div class="input-group ">
-                <input [type]="show ? 'text' : 'password'" class="form-control bg-transparent text-white p-0" placeholder="Enter Password"
-                    formControlName="password" autocomplete="off">
-                <span class="input-group-text bg-transparent" (click)="show=!show">
-                    <span class="fa " [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
-                </span>
-            </div>
-            <div class="input-group">
-                <button type="submit" class="btn btn-light bg-pink border-0 mt-4 w-100 text-white p-0"
-                    [disabled]="signInForm.invalid" [ngClass]="isLoading ? 'p-1': 'pt-2 pb-2'">
-                    <i class="busy" *ngIf="isLoading"></i>
-                   <span *ngIf="!isLoading">LOGIN</span>
-                </button>
-            </div>
-            <div class="col mt-4 text-center text-white">
-                <span class="small me-2"> Not a member?</span>
-                <a routerLink="/registration">JOIN NOW</a><br>
-                <span class="small pt-3"> Powered by </span><br>
-                <img src="assets/images/betfair_logo.png" width="150px">
-            </div>
-        </div>
-    </form>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
+    <div class="text-center">
+      <img src="assets/images/logo.svg" class="col-6" />
+    </div>
+    <div class="row login">
+      <h3 class="text-center">User Login</h3>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control bg-transparent text-white p-0"
+          placeholder="Enter User Name"
+          formControlName="username"
+          autocomplete="off"
+        />
+        <span class="input-group-text bg-transparent">
+          <span class="fa fa-user"></span>
+        </span>
+      </div>
+      <div class="input-group">
+        <input
+          [type]="show ? 'text' : 'password'"
+          class="form-control bg-transparent text-white p-0"
+          placeholder="Enter Password"
+          formControlName="password"
+          autocomplete="off"
+        />
+        <span class="input-group-text bg-transparent" (click)="show = !show">
+          <span class="fa" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+        </span>
+      </div>
+      <div class="input-group">
+        <button
+          type="submit"
+          class="btn btn-light bg-pink border-0 mt-4 w-100 text-white p-0"
+          [disabled]="signInForm.invalid"
+          [ngClass]="isLoading ? 'p-1' : 'pt-2 pb-2'"
+        >
+          <i class="busy" *ngIf="isLoading"></i>
+          <span *ngIf="!isLoading">LOGIN</span>
+        </button>
+      </div>
+      <div class="col mt-4 text-center text-white">
+        <span class="small me-2"> Not a member?</span>
+        <a routerLink="/registration">JOIN NOW</a><br />
+        <span class="small pt-3"> Powered by </span><br />
+        <img src="assets/images/betfair_logo.png" width="150px" />
+      </div>
+    </div>
+  </form>
 </div>
 <!--Login end-->

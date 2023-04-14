@@ -2,9 +2,9 @@
 <div class="container-fluid">
   <div class="row">
     <nav
-      class="navbar navbar-expand-lg navbar-light header-one animate__animated animate__fadeInDown p-1"
+      class="navbar navbar-expand-lg navbar-light header-one animate__animated animate__fadeInDown p-1 align-items-center d-flex"
     >
-      <div class="col-md-1 text-center">
+      <div class="col-md-1 col-5">
         <button
           class="navbar-toggler bg-color text-white"
           type="button"
@@ -19,12 +19,11 @@
           <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
         </button>
         <a class="navbar-brand" [routerLink]="['/in-play']"
-          ><img src="assets/images/logo.png" width="90px" height="100px"
+          ><img src="assets/images/logo.svg" class="col-6 col-md-12"
         /></a>
       </div>
-      &nbsp;&nbsp;
-      <div class="col-md-2">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 disnone ms-5">
+      <div class="col-md-2 disnone">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
           <li class="nav-item header-icon pointer pt-2">
             <a>
               <!--Tooltip start-->
@@ -48,7 +47,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9 col-7">
         <form class="d-flex float-end align-items-center">
           <div class="searchs">
             <a
@@ -59,7 +58,14 @@
             ></a>
           </div>
           <div class="searchs">
-            <a class="text-white"
+            <a
+              class="text-white"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent2"
+              aria-controls="navbarSupportedContent2"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
               ><i class="fa fa-bars bg-color rounded-circle p-2 me-2"></i
             ></a>
           </div>
@@ -140,7 +146,65 @@
 <!--Header 1 end-->
 
 <!--Header 2 start--->
-<div class="header-tow">
+<div class="header-tow mobileTableHide">
+  <ul class="nav justify-content-center animate__animated animate__flipInX">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        aria-current="page"
+        [routerLink]="['/in-play']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/soccer.png" /> INPLAY</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Cricket']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/cricket.png" /> CRICKET</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Soccer']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/soccer.png" /> SOCCER</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Tennis']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/tennis.png" /> TENNIS</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/casino.png" /> CASINO</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/premium_sportbook.png" /> PREMIUM-SPORTBOOK</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/live_card.png" /> LIVE CARD</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pointer"
+        ><img src="assets/images/slot_games.png" /> SLOT GAMES</a
+      >
+    </li>
+  </ul>
+</div>
+
+<div class="header-tow mobileTableShow collapse" id="navbarSupportedContent2">
   <ul class="nav justify-content-center animate__animated animate__flipInX">
     <li class="nav-item">
       <a

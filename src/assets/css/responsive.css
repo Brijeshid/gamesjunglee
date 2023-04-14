@@ -1,12 +1,16 @@
- /* Extra small devices (phones, 600px and down) */
- @media only screen and (max-width: 600px) {
-   .w-30 {
-     width: 85%;
-   }
-   .searchs{display: block;}
-   .disnone{display: none;}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .w-30 {
+    width: 85%;
+  }
+  .searchs {
+    display: block;
+  }
+  .disnone {
+    display: none;
+  }
 
-   .gamedetails {
+  .gamedetails {
     border: none;
     margin-top: 30px;
     border-radius: 30px;
@@ -15,41 +19,88 @@
     font-size: 12px;
     background: none;
   }
-  .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 40px; height: auto;}
-  .mpse{padding-left: 0px !important; padding-right: 0px !important;}
+  .colblue,
+  .colblue.light,
+  .colblue.dis,
+  .colpink,
+  .colpink.light,
+  .colpink.dis,
+  .colgray,
+  .colpink.last {
+    min-width: 40px;
+    height: auto;
+  }
+  .mpse {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
   .innerpagem {
     border: 0;
   }
-  .sidebarhd{display: none;}
-  .sidebarhide{ display: block;}
-  .gamedetails{
+  .sidebarhd {
+    display: none;
+  }
+  .sidebarhide {
+    display: block;
+  }
+  .gamedetails {
     padding: 0 !important;
-   }
-  
- }
+  }
 
-
- /* Small devices (portrait tablets and large phones, 600px and up) */
- @media only screen and (min-width: 600px) {}
-
- @media only screen and (max-width: 767px) {
- .mobileTableHide{display: none;}
- .mobileTableShow{display: block;}
-
- .gamedetails .mobileTableShow .table td{
-  padding: 10px 5px;
+  .head_logo {
+    width: 5rem !important;
+  }
 }
-}
- /* Medium devices (landscape tablets, 768px and up) */
- @media only screen and (min-width: 768px) {}
 
- /* Large devices (laptops/desktops, 992px and up) */
- @media only screen and (min-width: 992px) {
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+@media only screen and (max-width: 767px) {
+  .mobileTableHide {
+    display: none;
+  }
+  .mobileTableShow {
+    display: block;
+  }
+
+  .gamedetails .mobileTableShow .table td {
+    padding: 10px 5px;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
     display: none !important;
     flex-basis: auto;
   }
- }
+}
 
- /* Extra large devices (large laptops and desktops, 1200px and up) */
- @media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1024px) {
+  .header-tow {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .head_logo {
+    width: 7rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1201px) {
+  .head_logo {
+    width: 9rem;
+  }
+}
