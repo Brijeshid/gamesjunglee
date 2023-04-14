@@ -37,7 +37,7 @@
                                 <td>{{data.type}}</td>
                                 <td>{{data.odds}}</td>
                                 <td>{{data.stake}}</td>
-                                <td [ngClass]="data.status == 'WON'?'text-success':'text-danger' ">{{data?.winAmount}}</td>
+                                <td [ngClass]="data.status == 'WON'?'text-success':'text-danger' ">{{data?.winAmount | number}}</td>
                                 <td [ngClass]="data.status == 'WON'?'text-success':'text-danger' ">{{data?.status}}</td>
                             </tr>
 
@@ -58,8 +58,8 @@
                             <small>Back subtotal:</small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end me-1" *ngIf="(currentBet.backSubTotal !=0)" [ngClass]="(currentBet.backSubTotal >0) ?'text-success':'text-danger'" >{{currentBet.backSubTotal}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.backSubTotal ==0)">{{currentBet.backSubTotal}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.backSubTotal !=0)" [ngClass]="(currentBet.backSubTotal >0) ?'text-success':'text-danger'" >{{currentBet.backSubTotal | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.backSubTotal ==0)">{{currentBet.backSubTotal | number}}</small>
                         </div>
                     </div>
                     <div class="row">
@@ -67,8 +67,8 @@
                             <small>Lay subtotal:</small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end  me-1" *ngIf="(currentBet.laySubTotal !=0)"[ngClass]="currentBet.laySubTotal >0 ?'text-success':'text-danger'">{{currentBet.laySubTotal}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.laySubTotal ==0)">{{currentBet.laySubTotal}}</small>
+                            <small class="float-end  me-1" *ngIf="(currentBet.laySubTotal !=0)"[ngClass]="currentBet.laySubTotal >0 ?'text-success':'text-danger'">{{currentBet.laySubTotal | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.laySubTotal ==0)">{{currentBet.laySubTotal | number}}</small>
 
                         </div>
                     </div><div class="row">
@@ -76,8 +76,8 @@
                             <small>Turnover:</small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end  me-1" *ngIf="(currentBet.turnOver  !=0)"[ngClass]="currentBet.turnOver >0 ?'text-success':'text-danger'">{{currentBet.turnOver}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.turnOver ==0)">{{currentBet.turnOver}}</small>
+                            <small class="float-end  me-1" *ngIf="(currentBet.turnOver  !=0)"[ngClass]="currentBet.turnOver >0 ?'text-success':'text-danger'">{{currentBet.turnOver | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.turnOver ==0)">{{currentBet.turnOver | number}}</small>
 
                         </div>
                     </div>
@@ -86,8 +86,8 @@
                             <small><strong>Market subtotal:</strong></small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end  me-1" *ngIf="(currentBet.marketSubTotal !=0)"[ngClass]="currentBet.marketSubTotal >0 ?'text-success':'text-danger'">{{currentBet.marketSubTotal}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.marketSubTotal ==0)">{{currentBet.marketSubTotal}}</small>
+                            <small class="float-end  me-1" *ngIf="(currentBet.marketSubTotal !=0)"[ngClass]="currentBet.marketSubTotal >0 ?'text-success':'text-danger'">{{currentBet.marketSubTotal | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.marketSubTotal ==0)">{{currentBet.marketSubTotal | number}}</small>
 
                         </div>
                     </div>
@@ -96,8 +96,8 @@
                             <small>Commission:</small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end  me-1" *ngIf="(currentBet.commission !=0)"[ngClass]="currentBet.commission >0 ?'text-success':'text-danger'">{{currentBet.commission}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.commission ==0)">{{currentBet.commission}}</small>
+                            <small class="float-end  me-1" *ngIf="(currentBet.commission !=0)"[ngClass]="currentBet.commission >0 ?'text-success':'text-danger'">{{currentBet.commission | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.commission ==0)">{{currentBet.commission | number}}</small>
                         </div>
                     </div>
                     <div class="row">
@@ -105,8 +105,8 @@
                             <small>Bookmaker Result Commission:</small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end  me-1" *ngIf="(currentBet.bookmakerResultCommission !=0)"[ngClass]="currentBet.bookmakerResultCommission >0 ?'text-success':'text-danger'">{{currentBet.bookmakerResultCommission}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.bookmakerResultCommission ==0)">{{currentBet.bookmakerResultCommission}}</small>
+                            <small class="float-end  me-1" *ngIf="(currentBet.bookmakerResultCommission !=0)"[ngClass]="currentBet.bookmakerResultCommission >0 ?'text-success':'text-danger'">{{currentBet.bookmakerResultCommission | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.bookmakerResultCommission ==0)">{{currentBet.bookmakerResultCommission | number}}</small>
 
                         </div>
                     </div>
@@ -115,8 +115,8 @@
                             <small><strong>Net Market Total:</strong></small>
                         </div>
                         <div class="col-md-6">
-                            <small class="float-end  me-1" *ngIf="(currentBet.netMarketTotal !=0)" [ngClass]="currentBet.netMarketTotal >0 ?'text-success':'text-danger'">{{currentBet.netMarketTotal}}</small>
-                            <small class="float-end me-1" *ngIf="(currentBet.netMarketTotal ==0)">{{currentBet.netMarketTotal}}</small>
+                            <small class="float-end  me-1" *ngIf="(currentBet.netMarketTotal !=0)" [ngClass]="currentBet.netMarketTotal >0 ?'text-success':'text-danger'">{{currentBet.netMarketTotal | number}}</small>
+                            <small class="float-end me-1" *ngIf="(currentBet.netMarketTotal ==0)">{{currentBet.netMarketTotal | number}}</small>
 
                         </div>
                     </div>
