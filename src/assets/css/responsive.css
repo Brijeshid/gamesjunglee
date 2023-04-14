@@ -25,6 +25,10 @@
   .gamedetails{
     padding: 0 !important;
    }
+
+   .head_logo{
+    width: 5rem !important;
+   }
   
  }
 
@@ -51,5 +55,28 @@
   }
  }
 
+ @media only screen and (min-width: 1024px) {
+ .header-tow {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}}
+
+ @media only screen and (max-width: 1024px) {
+  .head_logo{
+    width: 7rem;
+  }
+ }
+
+
+
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {}
+
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1201px) {
+ .head_logo{
+  width: 9rem;
+ }
+}
