@@ -1,421 +1,1055 @@
 <app-header></app-header>
 <!--body start-->
 <div class="row m-0">
-    <!--Aside start-->
-    <div class="col-md-2 asidenav">
-        <app-left-navigation></app-left-navigation>
-    </div>
-    <!--Aside end-->
-    <!--Artical Start-->
-    <div class="col-md-10 p-0 m-0">
-      <div class="row m-0">
-        <div [ngClass]="isBetSlipShow ? 'col-md-8' :'col-md-12'">
-          <!-- Nav tabs -->
-          <!--Header 3 start-->
-          <div class="row m-0">
-            <div class="col-md-12 pb-2 pt-2">
-              <a class="text-color small text-decoration-none"><i
-                (click)="goBack()" class="fa fa-angle-left text-white" style="cursor: pointer;"></i> {{tourName | uppercase}} </a>
-            </div>
-            <div class="col-md-12 accordionn p-0">
-              <!-- Nav tabs -->
-              <ul class="nav justify-content-center nav-tabs w-100 m-auto border-bottom-0 pt-2" id="myTab"
-                role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="btn nav-link active" id="liveupcoming-tab" data-bs-toggle="tab"
-                    data-bs-target="#liveupcoming" type="button" role="tab" aria-controls="liveupcoming"
-                    aria-selected="true">Live & Upcoming</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="btn nav-link disabled" id="results-tab" data-bs-toggle="tab" data-bs-target="#results"
-                    type="button" role="tab" aria-controls="results" aria-selected="false">Results</button>
-                </li>
-              </ul>
-            </div>
-            <!-- Tab panes -->
+  <!--Aside start-->
+  <div class="col-md-2 asidenav">
+    <app-left-navigation></app-left-navigation>
+  </div>
+  <!--Aside end-->
+  <!--Artical Start-->
+  <div class="col-md-10 p-0 m-0">
+    <div class="row m-0">
+      <div [ngClass]="isBetSlipShow ? 'col-md-8' : 'col-md-12'">
+        <!-- Nav tabs -->
+        <!--Header 3 start-->
+        <div class="row m-0">
+          <div class="col-md-12 pb-2 pt-2">
+            <a class="text-color small text-decoration-none"
+              ><i
+                (click)="goBack()"
+                class="fa fa-angle-left text-white"
+                style="cursor: pointer"
+              ></i>
+              {{ tourName | uppercase }}
+            </a>
           </div>
-          <!--Header 3 end-->
-
+          <div class="col-md-12 accordionn p-0">
+            <!-- Nav tabs -->
+            <ul
+              class="nav justify-content-center nav-tabs w-100 m-auto border-bottom-0 pt-2"
+              id="myTab"
+              role="tablist"
+            >
+              <li class="nav-item" role="presentation">
+                <button
+                  class="btn nav-link active"
+                  id="liveupcoming-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#liveupcoming"
+                  type="button"
+                  role="tab"
+                  aria-controls="liveupcoming"
+                  aria-selected="true"
+                >
+                  Live & Upcoming
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="btn nav-link disabled"
+                  id="results-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#results"
+                  type="button"
+                  role="tab"
+                  aria-controls="results"
+                  aria-selected="false"
+                >
+                  Results
+                </button>
+              </li>
+            </ul>
+          </div>
           <!-- Tab panes -->
+        </div>
+        <!--Header 3 end-->
 
-          <!--center content start-->
-          <div class="row">
-            <div class="col-md-12 p-0">
-              <div class="tab-content  text-white">
-                <!--liveupcoming start-->
-                <div class="tab-pane active" id="liveupcoming" role="tabpanel" aria-labelledby="home-tab">
-                  <!--Game details info start-->
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="mt-3 innerpagem gamedetails ps-3 pe-3">
-                        <!--Table 1-->
-                      <ng-container *ngFor="let singleInPlay of inPlayMatchListBySport">
-                        <ng-container *ngIf="singleInPlay['market']['appMarketStatus'] != '4' && singleInPlay['market']['appMarketStatus'] != '2'">
-                        <span class="badge rounded bg-success midbadge ms-1 py-1 px-3">Live</span>
-                        <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleInPlay['marketType'] | titlecase}}</span> -->
-                        <div class="mobileTableHide">
-                        <table class="table table-hover pointer">
-                          <thead class="collapsible" (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']">
-                            <tr valign="middle">
-                              <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleInPlay['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']"></i>&nbsp;
-                                <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}">
-                                  {{singleInPlay['matchName']}}
-                                </span>
-                              </th>
-                              <!-- <th width="15%" class="coldark"></th>
+        <!-- Tab panes -->
+
+        <!--center content start-->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tab-content text-white">
+              <!--liveupcoming start-->
+              <div
+                class="tab-pane active"
+                id="liveupcoming"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <!--Game details info start-->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mt-3 innerpagem gamedetails ps-3 pe-3">
+                      <!--Table 1-->
+                      <ng-container
+                        *ngFor="let singleInPlay of inPlayMatchListBySport"
+                      >
+                        <ng-container
+                          *ngIf="
+                            singleInPlay['market']['appMarketStatus'] != '4' &&
+                            singleInPlay['market']['appMarketStatus'] != '2'
+                          "
+                        >
+                          <span
+                            class="badge rounded bg-success midbadge ms-1 py-1 px-3"
+                            >Live</span
+                          >
+                          <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleInPlay['marketType'] | titlecase}}</span> -->
+                          <div class="mobileTableHide">
+                            <table class="table table-hover pointer">
+                              <thead
+                                class="collapsible"
+                                (click)="
+                                  singleInPlay['isExpand'] =
+                                    !singleInPlay['isExpand']
+                                "
+                              >
+                                <tr valign="middle">
+                                  <th width="30%" class="tfirstcol">
+                                    <i
+                                      class="fa-solid"
+                                      [ngClass]="
+                                        singleInPlay['isExpand']
+                                          ? 'fa-minus'
+                                          : 'fa-plus'
+                                      "
+                                      (click)="
+                                        singleInPlay['isExpand'] =
+                                          !singleInPlay['isExpand']
+                                      "
+                                    ></i
+                                    >&nbsp;
+                                    <span
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
+                                    >
+                                      {{ singleInPlay["matchName"] }}
+                                    </span>
+                                  </th>
+                                  <!-- <th width="15%" class="coldark"></th>
                               <th width="15%" class="coldark"></th> -->
-                              <th width="15%" colspan="3" class="text-center coldark">Back</th>
-                              <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                              <th width="5%" colspan="1" class="text-center tlastcol coldark">
-                                <i class="fa fa-caret-right fa-2x"></i>
-                                <!--Tooltip starts-->
-                                <div class="tooltipnk">
-                                  <i *ngIf="isLoggedIn" class="fa ms-4 text-color fa-regular fa-star fa-2x"></i>
-                                  <span class="tooltiptext">Add to Favorite</span>
-                                </div>
-                                <!--Tooltip end-->
-                                  <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i> -->
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody class="content">
-                            <ng-container *ngIf="singleInPlay['isExpand']">
-                              <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                                <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a>
-                                  <br>
-                                  <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
-                                    <strong>{{runner?.hourseAmt?.amount}}</strong>
-                                  </a>
-
-                                  <a>
-                                    <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                    <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                  </a>
-
-                                  <a [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
-                                    <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                    <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                  </a>
-
-                                </td>
-                                <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
-                                <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
-                                <td class="colblue " [boxHighlight]="runner['back2']" [boxHighlight]="runner['vback2']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:2,odds:runner['back2']})"><strong>{{runner['back2']}}</strong> <br><span>{{runner['vback2'] | marketRateFormater}}</span></a></td>
-                                <td class="colblue " [boxHighlight]="runner['back1']" [boxHighlight]="runner['vback1']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:1,odds:runner['back1']})"><strong>{{runner['back1']}}</strong> <br><span>{{runner['vback1'] | marketRateFormater}}</span></a></td>
-                                <td class="colblue " [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:0,odds:runner['back0']})"><strong>{{runner['back0']}}</strong> <br><span>{{runner['vback0'] | marketRateFormater}}</span></a></td>
-                                <td class="colpink " [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:0,odds:runner['lay0']})"><strong>{{runner['lay0']}}</strong> <br><span>{{runner['vlay0'] | marketRateFormater}}</span></a></td>
-                                <td class="colpink " [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:1,odds:runner['lay1']})"><strong>{{runner['lay1']}}</strong> <br><span>{{runner['vlay1'] | marketRateFormater}}</span></a></td>
-                                <td class="colpink " [ngClass]="{'last':last}" [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:2,odds:runner['lay2']})"><strong>{{runner['lay2']}}</strong> <br><span>{{runner['vlay2'] | marketRateFormater}}</span></a></td>
-                              </tr>
-                            </ng-container>
-                          </tbody>
-                        </table></div>
-
-                        <div class="mobileTableHide">
-                          <table class="table table-hover pointer">
-                            <thead class="collapsible" (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']">
-                              <tr valign="middle">
-                                <th width="30%" class="tfirstcol"><i class="fa-solid" [ngClass]="singleInPlay['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleInPlay['isExpand'] = !singleInPlay['isExpand']"></i>&nbsp;
-                                  <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}">
-                                    {{singleInPlay['matchName']}}
-                                  </span>
-                                </th>
-                                <!-- <th width="15%" class="coldark"></th>
-                                <th width="15%" class="coldark"></th> -->
-                                <th width="15%" colspan="3" class="text-center coldark">Back</th>
-                                <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                                <th width="5%" colspan="1" class="text-center tlastcol coldark">
-                                  <i class="fa fa-caret-right fa-2x"></i>
-                                  <!--Tooltip starts-->
-                                  <div class="tooltipnk">
-                                    <i *ngIf="isLoggedIn" class="fa ms-4 text-color fa-regular fa-star fa-2x"></i>
-                                    <span class="tooltiptext">Add to Favorite</span>
-                                  </div>
-                                  <!--Tooltip end-->
+                                  <th
+                                    width="15%"
+                                    colspan="3"
+                                    class="text-center coldark"
+                                  >
+                                    Back
+                                  </th>
+                                  <th
+                                    width="10%"
+                                    colspan="2"
+                                    class="text-center coldark"
+                                  >
+                                    Lay
+                                  </th>
+                                  <th
+                                    width="5%"
+                                    colspan="1"
+                                    class="text-center tlastcol coldark"
+                                  >
+                                    <i class="fa fa-caret-right fa-2x"></i>
+                                    <!--Tooltip starts-->
+                                    <div class="tooltipnk">
+                                      <i
+                                        *ngIf="isLoggedIn"
+                                        class="fa ms-4 text-color fa-regular fa-star fa-2x"
+                                      ></i>
+                                      <span class="tooltiptext"
+                                        >Add to Favorite</span
+                                      >
+                                    </div>
+                                    <!--Tooltip end-->
                                     <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i> -->
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody class="content">
-                              <ng-container *ngIf="singleInPlay['isExpand']">
-                                <tr *ngFor="let runner of singleInPlay['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                                  <td class="text-start ps-2 heading border-top" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleInPlay['tournamentId']}}/{{singleInPlay['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a>
-                                    <br>
-                                    <a [ngClass]="runner?.hourseAmt?.amount > 0 ? 'text-success':'text-danger'">
-                                      <strong>{{runner?.hourseAmt?.amount}}</strong>
-                                    </a>
-  
-                                    <a>
-                                      <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                      <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                    </a>
-  
-                                    <a [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
-                                      <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                      <strong *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                    </a>
-  
-                                  </td>
-                                  <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
-                                  <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
-                                  <td class="colblue " [boxHighlight]="runner['back2']" [boxHighlight]="runner['vback2']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:2,odds:runner['back2']})"><strong>{{runner['back2']}}</strong> <br><span>{{runner['vback2'] | marketRateFormater}}</span></a></td>
-                                  <td class="colblue " [boxHighlight]="runner['back1']" [boxHighlight]="runner['vback1']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:1,odds:runner['back1']})"><strong>{{runner['back1']}}</strong> <br><span>{{runner['vback1'] | marketRateFormater}}</span></a></td>
-                                  <td class="colblue " [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:true,index:0,odds:runner['back0']})"><strong>{{runner['back0']}}</strong> <br><span>{{runner['vback0'] | marketRateFormater}}</span></a></td>
-                                  <td class="colpink " [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:0,odds:runner['lay0']})"><strong>{{runner['lay0']}}</strong> <br><span>{{runner['vlay0'] | marketRateFormater}}</span></a></td>
-                                  <td class="colpink " [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:1,odds:runner['lay1']})"><strong>{{runner['lay1']}}</strong> <br><span>{{runner['vlay1'] | marketRateFormater}}</span></a></td>
-                                  <td class="colpink " [ngClass]="{'last':last}" [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']"><a (click)="onClickLiveMarketRate(runner,singleInPlay,{isBack:false,index:2,odds:runner['lay2']})"><strong>{{runner['lay2']}}</strong> <br><span>{{runner['vlay2'] | marketRateFormater}}</span></a></td>
+                                  </th>
                                 </tr>
-                              </ng-container>
-                            </tbody>
-                          </table></div>
+                              </thead>
+                              <tbody class="content">
+                                <ng-container *ngIf="singleInPlay['isExpand']">
+                                  <tr
+                                    *ngFor="
+                                      let runner of singleInPlay['market'][
+                                        'runners'
+                                      ];
+                                      let last = last;
+                                      let first = first
+                                    "
+                                    [ngClass]="{ 'border-0': last }"
+                                  >
+                                    <td
+                                      class="text-start ps-2 heading border-top"
+                                      [ngClass]="{ 'border-top': !first }"
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
+                                    >
+                                      <a
+                                        ><strong>{{
+                                          runner["RunnerName"]
+                                        }}</strong></a
+                                      >
+                                      <br />
+                                      <a
+                                        [ngClass]="
+                                          runner?.hourseAmt?.amount > 0
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        "
+                                      >
+                                        <strong>{{
+                                          runner?.hourseAmt?.amount
+                                        }}</strong>
+                                      </a>
+
+                                      <a>
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+
+                                      <a
+                                        [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                      >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+                                    </td>
+                                    <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
+                                <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back2']"
+                                      [boxHighlight]="runner['vback2']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: true,
+                                              index: 2,
+                                              odds: runner['back2']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["back2"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback2"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back1']"
+                                      [boxHighlight]="runner['vback1']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: true,
+                                              index: 1,
+                                              odds: runner['back1']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["back1"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback1"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back0']"
+                                      [boxHighlight]="runner['vback0']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: true,
+                                              index: 0,
+                                              odds: runner['back0']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["back0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colpink"
+                                      [boxHighlight]="runner['lay0']"
+                                      [boxHighlight]="runner['vlay0']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: false,
+                                              index: 0,
+                                              odds: runner['lay0']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["lay0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colpink"
+                                      [boxHighlight]="runner['lay1']"
+                                      [boxHighlight]="runner['vlay1']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: false,
+                                              index: 1,
+                                              odds: runner['lay1']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["lay1"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay1"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colpink"
+                                      [ngClass]="{ last: last }"
+                                      [boxHighlight]="runner['lay2']"
+                                      [boxHighlight]="runner['vlay2']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: false,
+                                              index: 2,
+                                              odds: runner['lay2']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["lay2"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay2"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div class="mobileTableShow">
+                            <table class="table table-hover pointer">
+                              <thead
+                                class="collapsible"
+                                (click)="
+                                  singleInPlay['isExpand'] =
+                                    !singleInPlay['isExpand']
+                                "
+                              >
+                                <tr valign="middle">
+                                  <th class="tfirstcol">
+                                    <i
+                                      class="fa-solid"
+                                      [ngClass]="
+                                        singleInPlay['isExpand']
+                                          ? 'fa-minus'
+                                          : 'fa-plus'
+                                      "
+                                      (click)="
+                                        singleInPlay['isExpand'] =
+                                          !singleInPlay['isExpand']
+                                      "
+                                    ></i
+                                    >&nbsp;
+                                    <span
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
+                                    >
+                                      {{ singleInPlay["matchName"] }}
+                                    </span>
+                                  </th>
+
+                                  <th colspan="1" class="text-center coldark">
+                                    Back
+                                  </th>
+                                  <th colspan="1" class="text-center coldark">
+                                    Lay
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody class="content">
+                                <ng-container *ngIf="singleInPlay['isExpand']">
+                                  <tr
+                                    *ngFor="
+                                      let runner of singleInPlay['market'][
+                                        'runners'
+                                      ];
+                                      let last = last;
+                                      let first = first
+                                    "
+                                    [ngClass]="{ 'border-0': last }"
+                                  >
+                                    <td
+                                      class="text-start ps-2 heading border-top"
+                                      [ngClass]="{ 'border-top': !first }"
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
+                                    >
+                                      <a
+                                        ><strong>{{
+                                          runner["RunnerName"]
+                                        }}</strong></a
+                                      >
+                                      <br />
+                                      <a
+                                        [ngClass]="
+                                          runner?.hourseAmt?.amount > 0
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        "
+                                      >
+                                        <strong>{{
+                                          runner?.hourseAmt?.amount
+                                        }}</strong>
+                                      </a>
+
+                                      <a>
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+
+                                      <a
+                                        [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                      >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+                                    </td>
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back2']"
+                                      [boxHighlight]="runner['vback2']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: true,
+                                              index: 2,
+                                              odds: runner['back2']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["back2"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback2"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+
+                                    <td
+                                      class="colpink"
+                                      [boxHighlight]="runner['lay0']"
+                                      [boxHighlight]="runner['vlay0']"
+                                    >
+                                      <a
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: false,
+                                              index: 0,
+                                              odds: runner['lay0']
+                                            }
+                                          )
+                                        "
+                                        ><strong>{{ runner["lay0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="3" class="border-0 pt-0">
+                                      <div
+                                        class="col-md-4 mobileTableShow"
+                                        *ngIf="isBetSlipShow"
+                                      >
+                                        <app-bet-slip
+                                          [isBetSlipActive]="isBetSlipActive"
+                                          [betSlipParams]="betSlipObj"
+                                        ></app-bet-slip>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table>
+                          </div>
                         </ng-container>
                       </ng-container>
 
                       <!--Table 2-->
-                      <ng-container *ngFor="let singleUpcoming of upComingMatchListBySport">
-                        <ng-container *ngIf="singleUpcoming['market']['appMarketStatus'] != '4' && singleUpcoming['market']['appMarketStatus'] != '2'">
-                        <span class="badge rounded bg-primary midbadge ms-1 py-1 px-3">Upcoming</span>
-                        <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}} -->
-                        <!-- </span> -->
-                        <table class="table table-hover">
-                          <thead class="collapsible pointer" (click)="singleUpcoming['isExpand'] = !singleUpcoming['isExpand']">
-                            <tr valign="middle">
-                              <th width="30%" class="tfirstcol" ><i class="fa-solid" [ngClass]="singleUpcoming['isExpand'] ? 'fa-minus' : 'fa-plus' " (click)="singleUpcoming['isExpand'] = !singleUpcoming['isExpand']"></i>&nbsp;
-                                <span routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}">
-                                  {{singleUpcoming['matchName']}}<br>
-                                  <span class="ms-3">{{singleUpcoming['matchTime'] | date: 'EEEE At h:mm a'}}</span>
-                                </span>
-                              </th>
-                              <!-- <th width="15%" class="coldark"></th>
+                      <ng-container
+                        *ngFor="let singleUpcoming of upComingMatchListBySport"
+                      >
+                        <ng-container
+                          *ngIf="
+                            singleUpcoming['market']['appMarketStatus'] !=
+                              '4' &&
+                            singleUpcoming['market']['appMarketStatus'] != '2'
+                          "
+                        >
+                          <span
+                            class="badge rounded bg-primary midbadge ms-1 py-1 px-3"
+                            >Upcoming</span
+                          >
+                          <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}} -->
+                          <!-- </span> -->
+                          <table class="table table-hover">
+                            <thead
+                              class="collapsible pointer"
+                              (click)="
+                                singleUpcoming['isExpand'] =
+                                  !singleUpcoming['isExpand']
+                              "
+                            >
+                              <tr valign="middle">
+                                <th width="30%" class="tfirstcol">
+                                  <i
+                                    class="fa-solid"
+                                    [ngClass]="
+                                      singleUpcoming['isExpand']
+                                        ? 'fa-minus'
+                                        : 'fa-plus'
+                                    "
+                                    (click)="
+                                      singleUpcoming['isExpand'] =
+                                        !singleUpcoming['isExpand']
+                                    "
+                                  ></i
+                                  >&nbsp;
+                                  <span
+                                    routerLink="/sportsbook/{{
+                                      sports | titlecase
+                                    }}/{{ singleUpcoming['tournamentId'] }}/{{
+                                      singleUpcoming['matchId']
+                                    }}"
+                                  >
+                                    {{ singleUpcoming["matchName"] }}<br />
+                                    <span class="ms-3">{{
+                                      singleUpcoming["matchTime"]
+                                        | date : "EEEE At h:mm a"
+                                    }}</span>
+                                  </span>
+                                </th>
+                                <!-- <th width="15%" class="coldark"></th>
                               <th width="15%" class="coldark"></th> -->
-                              <th width="15%" colspan="3" class="text-center coldark">Back</th>
-                              <th width="10%" colspan="2" class="text-center coldark">Lay</th>
-                              <th width="5%" colspan="1" class="text-center tlastcol coldark">
-                                <!--Tooltip starts-->
-                                <div class="tooltipnk">
-                                  <i *ngIf="isLoggedIn" class="fa ms-4 text-color fa-regular fa-star fa-2x"></i>
-                                  <span class="tooltiptext">Add to Favorite</span>
-                                </div>
-                                <!--Tooltip end-->
+                                <th
+                                  width="15%"
+                                  colspan="3"
+                                  class="text-center coldark"
+                                >
+                                  Back
+                                </th>
+                                <th
+                                  width="10%"
+                                  colspan="2"
+                                  class="text-center coldark"
+                                >
+                                  Lay
+                                </th>
+                                <th
+                                  width="5%"
+                                  colspan="1"
+                                  class="text-center tlastcol coldark"
+                                >
+                                  <!--Tooltip starts-->
+                                  <div class="tooltipnk">
+                                    <i
+                                      *ngIf="isLoggedIn"
+                                      class="fa ms-4 text-color fa-regular fa-star fa-2x"
+                                    ></i>
+                                    <span class="tooltiptext"
+                                      >Add to Favorite</span
+                                    >
+                                  </div>
+                                  <!--Tooltip end-->
                                   <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i> -->
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody class="content">
-                            <ng-container *ngIf="singleUpcoming['isExpand']">
-                              <tr *ngFor="let runner of singleUpcoming['market']['runners']; let last=last; let first=first;" [ngClass]="{'border-0':last}" >
-                                <td class="text-start ps-2 heading border-top pointer" [ngClass]="{'border-top':!first}" routerLink="/sportsbook/{{sports | titlecase}}/{{singleUpcoming['tournamentId']}}/{{singleUpcoming['matchId']}}"><a ><strong>{{runner['RunnerName']}}</strong></a></td>
-                                <!-- <td class="border-top"></td>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="content">
+                              <ng-container *ngIf="singleUpcoming['isExpand']">
+                                <tr
+                                  *ngFor="
+                                    let runner of singleUpcoming['market'][
+                                      'runners'
+                                    ];
+                                    let last = last;
+                                    let first = first
+                                  "
+                                  [ngClass]="{ 'border-0': last }"
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top pointer"
+                                    [ngClass]="{ 'border-top': !first }"
+                                    routerLink="/sportsbook/{{
+                                      sports | titlecase
+                                    }}/{{ singleUpcoming['tournamentId'] }}/{{
+                                      singleUpcoming['matchId']
+                                    }}"
+                                  >
+                                    <a
+                                      ><strong>{{
+                                        runner["RunnerName"]
+                                      }}</strong></a
+                                    >
+                                  </td>
+                                  <!-- <td class="border-top"></td>
                                 <td class="border-top"></td> -->
-                                <td class="colblue dis"><a ><strong>{{runner['back2']}}</strong> <br><span>{{runner['vback2'] | marketRateFormater}}</span></a></td>
-                                <td class="colblue dis"><a ><strong>{{runner['back1']}}</strong> <br><span>{{runner['vback1'] | marketRateFormater}}</span></a></td>
-                                <td class="colblue dis"><a ><strong>{{runner['back0']}}</strong> <br><span>{{runner['vback0'] | marketRateFormater}}</span></a></td>
-                                <td class="colpink dis"><a ><strong>{{runner['lay0']}}</strong> <br><span>{{runner['vlay0'] | marketRateFormater}}</span></a></td>
-                                <td class="colpink dis"><a ><strong>{{runner['lay1']}}</strong> <br><span>{{runner['vlay1'] | marketRateFormater}}</span></a></td>
-                                <td class="colpink dis" [ngClass]="{'last':last}"><a ><strong>{{runner['lay2']}}</strong> <br><span>{{runner['vlay2'] | marketRateFormater}}</span></a>
-                                <!--Online start-->
-                                <!-- <div class="suspendedbm1">
+                                  <td class="colblue dis">
+                                    <a
+                                      ><strong>{{ runner["back2"] }}</strong>
+                                      <br /><span>{{
+                                        runner["vback2"] | marketRateFormater
+                                      }}</span></a
+                                    >
+                                  </td>
+                                  <td class="colblue dis">
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
+                                      <br /><span>{{
+                                        runner["vback1"] | marketRateFormater
+                                      }}</span></a
+                                    >
+                                  </td>
+                                  <td class="colblue dis">
+                                    <a
+                                      ><strong>{{ runner["back0"] }}</strong>
+                                      <br /><span>{{
+                                        runner["vback0"] | marketRateFormater
+                                      }}</span></a
+                                    >
+                                  </td>
+                                  <td class="colpink dis">
+                                    <a
+                                      ><strong>{{ runner["lay0"] }}</strong>
+                                      <br /><span>{{
+                                        runner["vlay0"] | marketRateFormater
+                                      }}</span></a
+                                    >
+                                  </td>
+                                  <td class="colpink dis">
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
+                                      <br /><span>{{
+                                        runner["vlay1"] | marketRateFormater
+                                      }}</span></a
+                                    >
+                                  </td>
+                                  <td
+                                    class="colpink dis"
+                                    [ngClass]="{ last: last }"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay2"] }}</strong>
+                                      <br /><span>{{
+                                        runner["vlay2"] | marketRateFormater
+                                      }}</span></a
+                                    >
+                                    <!--Online start-->
+                                    <!-- <div class="suspendedbm1">
                                   <button type="button" class="suspendedm1 tourmarketlist-on">Suspended</button>
                                 </div> -->
-                                <!--Online end-->
-                                <!--Offline start-->
-                                <!-- <div class="suspendedbm1">
+                                    <!--Online end-->
+                                    <!--Offline start-->
+                                    <!-- <div class="suspendedbm1">
                                   <button type="button" class="suspendedm1 tourmarketlist-off">Suspended</button>
                                 </div> -->
-                                <!--Offline end-->
-                                </td>
-                              </tr>
-                            </ng-container>
-                          </tbody>
-                        </table>
+                                    <!--Offline end-->
+                                  </td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
                         </ng-container>
                       </ng-container>
 
-                        <!--Adv. start-->
-                        <div class="row ">
-                          <div class="col-sm-6 my-3">
-                            <a href="https://playexch.co/_nuxt/img/live-cards-banner.106754f.webp">
-                              <img src="https://playexch.co/_nuxt/img/live-cards-banner.106754f.webp" width="100%">
-                            </a>
-                          </div>
-                          <div class="col-sm-6 my-3">
-                            <a href="https://playexch.co/_nuxt/img/live-casino-banner.e7a3ccc.webp">
-                              <img src="https://playexch.co/_nuxt/img/live-casino-banner.e7a3ccc.webp" width="100%">
-                            </a>
-                          </div>
-                        </div>
-                        <!--Adv. end-->
-                      </div>
-                    </div>
-                  </div>
-                  <!--Game details info end-->
-                </div>
-                <!--liveupcoming end-->
-                <!--leagues start-->
-                <div class="tab-pane" id="leagues" role="tabpanel" aria-labelledby="profile-tab">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="innerpagem">
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            The current link item
+                      <!--Adv. start-->
+                      <div class="row">
+                        <div class="col-sm-6 my-3">
+                          <a
+                            href="https://playexch.co/_nuxt/img/live-cards-banner.106754f.webp"
+                          >
+                            <img
+                              src="https://playexch.co/_nuxt/img/live-cards-banner.106754f.webp"
+                              width="100%"
+                            />
                           </a>
-                          <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                          <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                          <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                          <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
-                            aria-disabled="true">A disabled link item</a>
+                        </div>
+                        <div class="col-sm-6 my-3">
+                          <a
+                            href="https://playexch.co/_nuxt/img/live-casino-banner.e7a3ccc.webp"
+                          >
+                            <img
+                              src="https://playexch.co/_nuxt/img/live-casino-banner.e7a3ccc.webp"
+                              width="100%"
+                            />
+                          </a>
                         </div>
                       </div>
+                      <!--Adv. end-->
                     </div>
                   </div>
                 </div>
-                <!--leagues end-->
-                <!--results start-->
-                <div class="tab-pane disabled" id="results" role="tabpanel" aria-labelledby="messages-tab">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="innerpagem ps-3 pe-3 pb-3">
-                        <div class="accordion" id="accordionExample">
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                              <button class="accordion-button bg-transparent bg-pink text-dark" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                                aria-controls="collapseOne">
-                                Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
-                              </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show"
-                              aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                              <div class="accordion-body text-center">
-                                <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                  enable-background="new 0 0 24 24">
-                                  <path
-                                    d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
-                                  </path>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                              <button class="accordion-button collapsed bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                aria-expanded="false" aria-controls="collapseTwo">
-                                Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
-                              </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                              data-bs-parent="#accordionExample">
-                              <div class="accordion-body text-center">
-                                <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                  enable-background="new 0 0 24 24">
-                                  <path
-                                    d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
-                                  </path>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                              <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
-                                Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
-                              </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                              data-bs-parent="#accordionExample">
-                              <div class="accordion-body text-center">
-                                <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                  enable-background="new 0 0 24 24">
-                                  <path
-                                    d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
-                                  </path>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                              <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                aria-expanded="false" aria-controls="collapseThree">
-                                Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
-                              </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                              data-bs-parent="#accordionExample">
-                              <div class="accordion-body text-center">
-                                <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                  enable-background="new 0 0 24 24">
-                                  <path
-                                    d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
-                                  </path>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                              <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                aria-expanded="false" aria-controls="collapseThree">
-                                Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
-                              </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                              data-bs-parent="#accordionExample">
-                              <div class="accordion-body text-center">
-                                <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                  enable-background="new 0 0 24 24">
-                                  <path
-                                    d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
-                                  </path>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSix">
-                              <button class="accordion-button collapsed  bg-transparent bg-pink text-dark"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
-                                aria-expanded="false" aria-controls="collapseThree">
-                                Auckland Women v Wellington Women <br>Fri, Jan 20, 2023 5:00 AM
-                              </button>
-                            </h2>
-                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                              data-bs-parent="#accordionExample">
-                              <div class="accordion-body text-center">
-                                <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                  enable-background="new 0 0 24 24">
-                                  <path
-                                    d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
-                                  </path>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--results end-->
+                <!--Game details info end-->
               </div>
+              <!--liveupcoming end-->
+              <!--leagues start-->
+              <div
+                class="tab-pane"
+                id="leagues"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="innerpagem">
+                      <div class="list-group">
+                        <a
+                          href="#"
+                          class="list-group-item list-group-item-action"
+                          aria-current="true"
+                        >
+                          The current link item
+                        </a>
+                        <a
+                          href="#"
+                          class="list-group-item list-group-item-action"
+                          >A second link item</a
+                        >
+                        <a
+                          href="#"
+                          class="list-group-item list-group-item-action"
+                          >A third link item</a
+                        >
+                        <a
+                          href="#"
+                          class="list-group-item list-group-item-action"
+                          >A fourth link item</a
+                        >
+                        <a
+                          href="#"
+                          class="list-group-item list-group-item-action disabled"
+                          tabindex="-1"
+                          aria-disabled="true"
+                          >A disabled link item</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--leagues end-->
+              <!--results start-->
+              <div
+                class="tab-pane disabled"
+                id="results"
+                role="tabpanel"
+                aria-labelledby="messages-tab"
+              >
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="innerpagem ps-3 pe-3 pb-3">
+                      <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button
+                              class="accordion-button bg-transparent bg-pink text-dark"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseOne"
+                              aria-expanded="true"
+                              aria-controls="collapseOne"
+                            >
+                              Auckland Women v Wellington Women <br />Fri, Jan
+                              20, 2023 5:00 AM
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseOne"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div class="accordion-body text-center">
+                              <svg
+                                class="w-25"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24"
+                              >
+                                <path
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button
+                              class="accordion-button collapsed bg-transparent bg-pink text-dark"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseTwo"
+                              aria-expanded="false"
+                              aria-controls="collapseTwo"
+                            >
+                              Auckland Women v Wellington Women <br />Fri, Jan
+                              20, 2023 5:00 AM
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseTwo"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div class="accordion-body text-center">
+                              <svg
+                                class="w-25"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24"
+                              >
+                                <path
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingThree">
+                            <button
+                              class="accordion-button collapsed bg-transparent bg-pink text-dark"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseThree"
+                              aria-expanded="false"
+                              aria-controls="collapseThree"
+                            >
+                              Auckland Women v Wellington Women <br />Fri, Jan
+                              20, 2023 5:00 AM
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseThree"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div class="accordion-body text-center">
+                              <svg
+                                class="w-25"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24"
+                              >
+                                <path
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingFour">
+                            <button
+                              class="accordion-button collapsed bg-transparent bg-pink text-dark"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseFour"
+                              aria-expanded="false"
+                              aria-controls="collapseThree"
+                            >
+                              Auckland Women v Wellington Women <br />Fri, Jan
+                              20, 2023 5:00 AM
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseFour"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div class="accordion-body text-center">
+                              <svg
+                                class="w-25"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24"
+                              >
+                                <path
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingFive">
+                            <button
+                              class="accordion-button collapsed bg-transparent bg-pink text-dark"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseFive"
+                              aria-expanded="false"
+                              aria-controls="collapseThree"
+                            >
+                              Auckland Women v Wellington Women <br />Fri, Jan
+                              20, 2023 5:00 AM
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseFive"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingFive"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div class="accordion-body text-center">
+                              <svg
+                                class="w-25"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24"
+                              >
+                                <path
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingSix">
+                            <button
+                              class="accordion-button collapsed bg-transparent bg-pink text-dark"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseSix"
+                              aria-expanded="false"
+                              aria-controls="collapseThree"
+                            >
+                              Auckland Women v Wellington Women <br />Fri, Jan
+                              20, 2023 5:00 AM
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseSix"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingSix"
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div class="accordion-body text-center">
+                              <svg
+                                class="w-25"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24"
+                              >
+                                <path
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--results end-->
             </div>
           </div>
-          <!--Center content end-->
-
         </div>
-        <!--Aside right start-->
-        <div class="col-md-4 mt-3" *ngIf="isBetSlipShow">
-            <app-bet-slip [isBetSlipActive] ="isBetSlipActive" [betSlipParams]="betSlipObj"></app-bet-slip>
-        </div>
-        <!--Aside right end-->
+        <!--Center content end-->
       </div>
+      <!--Aside right start-->
+      <div class="col-md-4 mt-3 mobileTableHide" *ngIf="isBetSlipShow">
+        <app-bet-slip
+          [isBetSlipActive]="isBetSlipActive"
+          [betSlipParams]="betSlipObj"
+        ></app-bet-slip>
+      </div>
+      <!--Aside right end-->
     </div>
-    <!--Artical end-->
   </div>
-  <!--Body end-->
+  <!--Artical end-->
+</div>
+<!--Body end-->
