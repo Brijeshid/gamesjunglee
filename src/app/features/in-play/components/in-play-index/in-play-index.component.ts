@@ -121,7 +121,7 @@ export class InPlayIndexComponent implements OnInit {
           this._subscribeWebSocket()
         }
       });
-    
+
   }
 
   _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
@@ -131,7 +131,7 @@ export class InPlayIndexComponent implements OnInit {
       //     if(res?.token?.url){
       //       this.realDataWebSocket = webSocket(res?.token?.url);
       //       this._subscribeWebSocket()
-      //     } 
+      //     }
       //   });
   }
 
@@ -180,7 +180,7 @@ export class InPlayIndexComponent implements OnInit {
           })
         })
       }
-      
+
       if(this.upComingMatchListBySport.length > 0 &&this.upComingMatchListBySport[0]['sports'].length >0){
         this.upComingMatchListBySport[0]['sports'].map(sportsObj =>{
           return sportsObj['markets'].map(resObj=>{
