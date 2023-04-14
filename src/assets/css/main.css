@@ -459,7 +459,8 @@ tr {
   border: 1px solid rgba(255, 255, 255, 0.3215686275);
   border-radius: 25px;
   padding: 10px 35px;
-  background: rgba(108, 108, 108, 0.5098039216);
+  /*background: rgba(108, 108, 108, 0.5098039216);*/
+  background: rgb(0 0 0 / 8%);
   margin-top: 30px;
 }
 .login a {
