@@ -57,6 +57,10 @@ export class AppComponent  implements OnInit {
                 this._sharedService.removeUserDetails();
                 this._router.navigate(['/login']);
               }
+              if(data.message == "BET_MATCHED" && currentUserDetails.userId == data.userId){
+                this._sharedService.unMatchSubjectListSubject.next(true);
+                this._sharedService.getToastPopup('Successfully Bet Matched','Bet Matched','success');
+              }
             }, // Called whenever there is a message from the server.
             err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
             () => console.log('complete') // Called when connection is closed (for whatever reason).
