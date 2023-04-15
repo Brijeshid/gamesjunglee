@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
   userBalance:any;
   realDataWebSocket: any;
 
+
+
   constructor(
     private _sharedService: SharedService
   ) { }
@@ -75,6 +77,10 @@ export class HeaderComponent implements OnInit {
       this.searchList = res;
       //console.log('res_data',res);
     })
+  }
+  emptySearchList(event){
+    this.searchList = [];
+    event.target.value = ""
   }
 
   // Refresh

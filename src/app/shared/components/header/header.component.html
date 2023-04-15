@@ -78,6 +78,7 @@
                 aria-label=""
                 #inputRef
                 (keypress)="postSearchList(inputRef.value)"
+                (blur)="emptySearchList($event)"
                 placeholder="Search for a Sport, Game or Team"
               />
             </div>
