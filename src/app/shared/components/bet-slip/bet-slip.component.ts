@@ -251,7 +251,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
   upAndDownOddsValue(isUp:boolean){
     this.betSlipForm.controls['odds'].setValue(isUp ? +(this.betSlipForm.controls['odds'].value + 0.01).toFixed(2) : +(this.betSlipForm.controls['odds'].value - 0.01).toFixed(2)) ;
-    this.stakeVal(0);
+    this.stakeVal(this.betSlipForm.controls['stake'].value);
   }
 
   updateStack(stackVal:any){
