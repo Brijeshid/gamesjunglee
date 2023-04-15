@@ -91,6 +91,11 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this.matchId = routeParams.matchId;
     });
 
+    this._sharedService.unMatchSubjectListSubject.subscribe(()=>{
+      this._getUserOpenBet();
+      this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+    })
+
     this.isBack = this.betSlipParams?.isBack;
     this._createBetSlipForm();
     this.getUserBalance();

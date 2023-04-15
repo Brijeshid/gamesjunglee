@@ -21,6 +21,7 @@ export class SharedService {
   getUserBalance = new Subject();
   unmatchedBetsList:any = [];
   userIp:any;
+  unMatchSubjectListSubject=new Subject();
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
