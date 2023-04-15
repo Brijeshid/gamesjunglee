@@ -20,6 +20,7 @@ export class SharedService {
   private currentUrl: string = '';
   getUserBalance = new Subject();
   unmatchedBetsList:any = [];
+  userIp:any;
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
