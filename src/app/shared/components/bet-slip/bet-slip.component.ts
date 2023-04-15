@@ -91,11 +91,23 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this.matchId = routeParams.matchId;
     });
 
+    this._sharedService.unMatchSubjectListSubject.subscribe(()=>{
+      this._getUserOpenBet();
+      this._SharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+    })
+
     this.isBack = this.betSlipParams?.isBack;
     this._createBetSlipForm();
     this.getUserBalance();
     this._getUserOpenBet();
     this.getUserConfig();
+    this._setUserIp();
+  }
+
+  private _setUserIp(){
+    this._sharedService.getIPApi().subscribe(res=>{
+      this._sharedService.userIp = res['ip'];
+    })
   }
   _createBetSlipForm(){
     this.betSlipForm = this._fb.group({
@@ -141,31 +153,29 @@ export class BetSlipComponent implements OnInit, OnChanges {
       this.betSlipParams.odds = this.betSlipParams['odds'];
       this.betSlipParams.stake = this.betSlipForm.controls['stake'].value;
     }
-    this._sharedService.getIPApi().subscribe(res=>{
-      this.betSlipParams['userIp'] = res['ip'];
-      this.betSlipParams['exposure'] = this.exposure;
-      this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
-        (betSlipRes: any) => {
-              if( betSlipRes){
-                this.isBetSlipActive = false;
-                this.isBetSlipPlaceCall = false;
-                this.isLoaderStart = false;
-                this._SharedService.getUserBalance.next({'marketType': this.marketType});
-                this.betSlipForm.reset();
-                this._getUserOpenBet();
-                this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
-              }
-        },
-        (err)=>{
-          console.log('eee',err);
-          this.isBetSlipActive = false;
-          this.isBetSlipPlaceCall = false;
-          this.isLoaderStart = false;
-          this._SharedService.getUserBalance.next({'marketType': this.marketType});
-          this.betSlipForm.reset();
-          this._getUserOpenBet();
-        });
-    })
+    this.betSlipParams['userIp'] = this._sharedService.userIp;
+    this.betSlipParams['exposure'] = this.exposure;
+    this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
+      (betSlipRes: any) => {
+            if( betSlipRes){
+              this.isBetSlipActive = false;
+              this.isBetSlipPlaceCall = false;
+              this.isLoaderStart = false;
+              this._SharedService.getUserBalance.next({'marketType': this.marketType});
+              this.betSlipForm.reset();
+              this._getUserOpenBet();
+              this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
+            }
+      },
+      (err)=>{
+        console.log('eee',err);
+        this.isBetSlipActive = false;
+        this.isBetSlipPlaceCall = false;
+        this.isLoaderStart = false;
+        this._SharedService.getUserBalance.next({'marketType': this.marketType});
+        this.betSlipForm.reset();
+        this._getUserOpenBet();
+      });
 
   }
 
@@ -311,6 +321,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
       betIdList: betList
     }
     this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
+      this._sharedService.getToastPopup('Successfully Bet Cancelled','Bet Cancelled','success');
       marketType = marketType.toUpperCase();
         switch(marketType){
           case EMarketName.MATCH_ODDS_UNDERSCORE:
