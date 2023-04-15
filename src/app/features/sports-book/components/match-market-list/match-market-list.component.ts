@@ -54,9 +54,6 @@ export class MatchMarketListComponent implements OnInit {
   isMatchLive:number =0;
   isFancyCardShow:boolean = false;
 
-  unMatchBackList = [];
-  unMatchLayList = [];
-
   constructor(
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
@@ -255,21 +252,6 @@ export class MatchMarketListComponent implements OnInit {
     //   });
   }
 
-  setUnMatchConfig(){
-    if(this._sharedService.unmatchedBetsList.length >0){
-      let unMatchList = this._sharedService.unmatchedBetsList[0]['markets'][0]['runners'];
-      this.unMatchBackList = [];
-      this.unMatchLayList = [];
-      unMatchList.map((singleRunner)=>{
-        singleRunner['bets'].map(singleBet =>{
-          singleBet['runnerId'] = singleRunner['runnerId'];
-          return singleBet;
-        })
-        this.unMatchBackList = _.concat(this.unMatchBackList,_.filter(singleRunner['bets'], ['type', 'BACK']));
-        this.unMatchLayList = _.concat(this.unMatchLayList,_.filter(singleRunner['bets'], ['type', 'LAY']));
-      })
-    }
-  }
 
   private _updateMarketData(data: any) {
     // console.log('real',this.realDataWebSocket)
@@ -278,7 +260,6 @@ export class MatchMarketListComponent implements OnInit {
       // console.log('data', JSON.parse(data));
       let webSocketData = parseData['data'];
       if(this.inPlayUpcomingMarket?.matchName){
-            this.setUnMatchConfig();
             let singleWebSocketMarketData = _.find(webSocketData, ['bmi', this.inPlayUpcomingMarket['marketId']]);
             if(singleWebSocketMarketData != undefined){
               this.inPlayUpcomingMarket['appMarketStatus'] = singleWebSocketMarketData['ms'];
@@ -294,15 +275,6 @@ export class MatchMarketListComponent implements OnInit {
                     //Volume from Betfair
                     runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
 
-                    if(singleWebsocketRunner['pr'] == 0 && this.unMatchBackList.length >0){
-                      this.unMatchBackList.map((singleUnMatchBack:any)=>{
-                        if((singleWebsocketRunner['rt'] >= singleUnMatchBack?.betRate) 
-                          && (singleUnMatchBack.runnerId == singleWebsocketRunner['ri'])) 
-                        this._sharedService.unMatchSubjectListSubject.next(true);  
-                        
-                      })
-                    }
-
                   } else {
                     //lay
 
@@ -312,13 +284,6 @@ export class MatchMarketListComponent implements OnInit {
                     //Volume from Betfair
                     runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
 
-                    if(singleWebsocketRunner['pr'] == 0 && this.unMatchLayList.length >0){
-                      this.unMatchLayList.map((singleUnMatchLay:any)=>{
-                        if((singleWebsocketRunner['rt'] >= singleUnMatchLay?.betRate) 
-                          && (singleUnMatchLay.runnerId == singleWebsocketRunner['ri'])) 
-                        this._sharedService.unMatchSubjectListSubject.next(true);  
-                      })
-                    }
                   }
                 }
                 // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
