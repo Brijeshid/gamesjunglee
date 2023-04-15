@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
     this._sharedService.getUserAdminPubSubApi().subscribe(
       (res: any) => {
+        var messages = ["WINNINGS_ADJUSTED","EDIT_USER","BET_DELETED_BY_ADMIN","RESULT_OUT"];
         var currentUserDetails:any;
         currentUserDetails = this._sharedService.getUserDetails();
         if (res) {
@@ -37,7 +38,7 @@ export class HeaderComponent implements OnInit {
           this.realDataWebSocket.subscribe(
             data => {
               console.log('realDataWebSocket',data);
-              if(data.message == "WINNINGS_ADJUSTED" && currentUserDetails.userId == data.userId){
+              if(messages.indexOf(data.message) !== -1 && currentUserDetails.userId == data.userId){
                 this.getUserBalance();
               }
             }, // Called whenever there is a message from the server.
