@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   signInForm: FormGroup;
   show: boolean = false;
   isLoading:boolean = false;
+  button = 'LOGIN';
+
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
