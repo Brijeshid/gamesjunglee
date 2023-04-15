@@ -23,6 +23,7 @@
 
               <div class="innerpagem pt-0" >
                 <div class="row m-0 p-2 pb-3">
+                  <span *ngIf="isLoading">Loading...</span>
                   <ng-container *ngIf="!isEditMode">
                     <div  class="p-2 col-md-4 col-4"  *ngFor="let item of userConfig?.userConfig?.editOneClickStakeBtn">
                       <button type="button" class="btn bg-light w-100 active" aria-pressed="true" [ngClass]="item==userConfig.userConfig.editOneClickStakeActiveBtn?'bg-color':'bg-light'">+{{item | number}}</button>
@@ -61,6 +62,7 @@
 
             <div class="innerpagem pt-0" >
               <div class="row m-0 p-2 pb-3">
+                <span *ngIf="isLoading">Loading...</span>
                 <ng-container *ngIf="!isEditMode1">
                   <div  class="p-2 col-md-4 col-4"  *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
                     <button type="button" class="btn bg-light w-100 active" aria-pressed="true">+{{item | number}}</button>

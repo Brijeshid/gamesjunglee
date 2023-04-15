@@ -48,7 +48,6 @@ export class BetSlipComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges){
-    console.log(changes)
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBack = changes['betSlipParams']['currentValue']['isBack'];

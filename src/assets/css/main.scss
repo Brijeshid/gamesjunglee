@@ -1183,3 +1183,26 @@ small {
   // -webkit-animation: spin 2s linear infinite;
   // animation: spin 2s linear infinite;
 }
+
+
+.form-signin .form-floating > .form-control, .form-floating > .form-select {
+  background: rgba(60, 62, 62, 0);
+  color: #fff;
+  border-bottom: 1px solid #fff !important;
+  border: 0px;
+  border-radius: 0;
+  padding: 30px 0px 15px 0px;
+  outline: none !important;
+}
+
+.login .form-control {
+  line-height: 2.5;
+  height: 35px;
+}
+
+.form-signin .form-floating span {
+  margin-top: -30px;
+  position: absolute;
+  right: 13px;
+  cursor: pointer;
+}
