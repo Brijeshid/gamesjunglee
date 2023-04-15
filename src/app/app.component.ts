@@ -59,6 +59,7 @@ export class AppComponent  implements OnInit {
               }
               if(data.message == "BET_MATCHED" && currentUserDetails.userId == data.userId){
                 this._sharedService.unMatchSubjectListSubject.next(true);
+                this._sharedService.getToastPopup('Successfully Bet Matched','Bet Matched','success');
               }
             }, // Called whenever there is a message from the server.
             err => console.log(err), // Called if at any point WebSocket API signals some kind of error.

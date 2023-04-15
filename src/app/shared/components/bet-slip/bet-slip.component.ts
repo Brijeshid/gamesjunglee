@@ -321,6 +321,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
       betIdList: betList
     }
     this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
+      this._sharedService.getToastPopup('Successfully Bet Cancelled','Bet Cancelled','success');
       marketType = marketType.toUpperCase();
         switch(marketType){
           case EMarketName.MATCH_ODDS_UNDERSCORE:
