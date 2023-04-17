@@ -27,9 +27,9 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     if(this.isLoggedIn){
       this.getUserBalance();
-      this._sharedService.getUserBalance.subscribe(res =>{
-        this.getUserBalance();
-      });
+      // this._sharedService.getUserBalance.subscribe(res =>{
+      //   this.getUserBalance();
+      // });
       
       this._sharedService.getUserAdminPubSubApi().subscribe(
         (res: any) => {
@@ -51,7 +51,6 @@ export class HeaderComponent implements OnInit {
           }
       });
     }
-
   }
 
   getRightSidebarEvent(eventObj){
@@ -89,5 +88,13 @@ export class HeaderComponent implements OnInit {
 
   refreshPage(){
     window.location.reload();
+  }
+
+  ngOnDestroy(): void {
+    //if (this.realDataWebSocket) this.realDataWebSocket.complete();
+    //clearInterval(this.resetTimerInterval)
+    if(this.realDataWebSocket){
+      this.realDataWebSocket.unsubscribe();
+    }
   }
 }

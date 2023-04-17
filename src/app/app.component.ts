@@ -72,5 +72,12 @@ export class AppComponent  implements OnInit {
 
   }
 
+
+  ngOnDestroy(): void {
+    if(this.realDataWebSocket){
+      this.realDataWebSocket.unsubscribe();
+    }
+  }
+
 }
 
