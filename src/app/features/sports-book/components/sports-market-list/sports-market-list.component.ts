@@ -366,6 +366,7 @@ export class SportsMarketListComponent implements OnInit {
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
+    if(this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
     // if(this.realDataWebSocket) this.realDataWebSocket.complete();
     // console.log('unset_destroy', this.centralIds);
     // this.realDataWebSocket.next({ "action": "unset", "markets": this.centralIds });
