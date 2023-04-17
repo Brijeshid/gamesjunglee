@@ -67,6 +67,7 @@ export class Constants {
     public readonly API_URL_OPEN_BETS:string = 'api/getOpenBets';
     public readonly API_URL_PROFIT_LOSS:string = 'api/getProfitAndLoss';
     public readonly API_URL_GET_BET_HISTORY_FOR_USER:string = 'api/getBetHistoryForUser';
+    public readonly API_URL_GET_BET_HISTORY_FOR_ACCOUNT_STATEMENT:string = 'api/getBetHistoryForUserAccountStatement';
     public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
     public readonly API_URL_CANCEL_BET:string = 'api/deleteBet';
     public readonly API_URL_ACCOUNT_STATEMENT:string = 'api/getUserAccountStatement';

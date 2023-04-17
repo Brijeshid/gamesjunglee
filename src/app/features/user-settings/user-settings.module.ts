@@ -18,6 +18,7 @@ import { MatchNamePlComponent } from './components/match-name-pl/match-name-pl.c
 import { NgxDateRangeModule } from 'ngx-daterange';
 import { AccountStatementComponent } from './components/account-statement/account-statement.component';
 import { BetHistoryComponent } from './components/bet-history/bet-history.component';
+import { ProfitLossComponent } from './components/profit-loss/profit-loss.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { BetHistoryComponent } from './components/bet-history/bet-history.compon
     SettingsComponent,
     MatchNamePlComponent,
     AccountStatementComponent,
-    BetHistoryComponent
+    BetHistoryComponent,
+    ProfitLossComponent
   ],
   imports: [
     CommonModule,

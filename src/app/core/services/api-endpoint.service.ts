@@ -334,6 +334,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_BET_HISTORY_FOR_USER)
   }
 
+  public _getBetHistoryForUserAccountStatementEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_BET_HISTORY_FOR_ACCOUNT_STATEMENT)
+  }
   public getBooksForMarket():string{
     return this.createUrl(this._constants.API_URL_BOOKS_MARKET)
   }
