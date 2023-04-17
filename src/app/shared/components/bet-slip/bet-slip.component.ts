@@ -355,7 +355,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   startStreamingLiveTV(){
-    this._sharedService.postLiveStreamForMarket({matchId:this.matchId}).subscribe((res:any)=>{
+    this._sharedService.postLiveStreamForMarket({domain:window.location.hostname,matchId:this.matchId}).subscribe((res:any)=>{
       this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
       console.log("tv",res);
     })

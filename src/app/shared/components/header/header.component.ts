@@ -25,30 +25,32 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
-    if(this.isLoggedIn)this.getUserBalance();
-    this._sharedService.getUserBalance.subscribe(res =>{
+    if(this.isLoggedIn){
       this.getUserBalance();
-    });
-
-    this._sharedService.getUserAdminPubSubApi().subscribe(
-      (res: any) => {
-        var messages = ["WINNINGS_ADJUSTED","EDIT_USER","BET_DELETED_BY_ADMIN","RESULT_OUT"];
-        var currentUserDetails:any;
-        currentUserDetails = this._sharedService.getUserDetails();
-        if (res) {
-          this.realDataWebSocket = webSocket(res['url']);
-          this.realDataWebSocket.subscribe(
-            data => {
-              console.log('realDataWebSocket',data);
-              if(messages.indexOf(data.message) !== -1 && currentUserDetails.userId == data.userId){
-                this.getUserBalance();
-              }
-            }, // Called whenever there is a message from the server.
-            err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-            () => console.log('complete') // Called when connection is closed (for whatever reason).
-          );
-        }
-    });
+      this._sharedService.getUserBalance.subscribe(res =>{
+        this.getUserBalance();
+      });
+      
+      this._sharedService.getUserAdminPubSubApi().subscribe(
+        (res: any) => {
+          var messages = ["WINNINGS_ADJUSTED","EDIT_USER","BET_DELETED_BY_ADMIN","RESULT_OUT"];
+          var currentUserDetails:any;
+          currentUserDetails = this._sharedService.getUserDetails();
+          if (res) {
+            this.realDataWebSocket = webSocket(res['url']);
+            this.realDataWebSocket.subscribe(
+              data => {
+                console.log('realDataWebSocket',data);
+                if(messages.indexOf(data.message) !== -1 && currentUserDetails.userId == data.userId){
+                  this.getUserBalance();
+                }
+              }, // Called whenever there is a message from the server.
+              err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
+              () => console.log('complete') // Called when connection is closed (for whatever reason).
+            );
+          }
+      });
+    }
 
   }
 

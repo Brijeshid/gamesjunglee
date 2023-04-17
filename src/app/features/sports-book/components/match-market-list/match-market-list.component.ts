@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -53,6 +53,17 @@ export class MatchMarketListComponent implements OnInit {
   isTVEnable:boolean = false;
   isMatchLive:number =0;
   isFancyCardShow:boolean = false;
+  isMobileView:boolean;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if(window.innerWidth <= 600){
+      this.isMobileView = true;
+    }else{
+      this.isMobileView = false;
+    }
+    console.log(window.innerWidth);
+  }
 
   constructor(
     private _sharedService: SharedService,
@@ -63,6 +74,7 @@ export class MatchMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(window.innerWidth);
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
       this.tourId = routeParams.tourId;
@@ -82,6 +94,11 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   private _preConfig(){
+    if(window.innerWidth <= 600){
+      this.isMobileView = true;
+    }else{
+      this.isMobileView = false;
+    }
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._sharedService.getUserBalance.subscribe((res:any)=>{
       switch(res['marketType']){
