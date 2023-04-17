@@ -783,18 +783,18 @@
                                     "
                                   >
                                     <strong>{{
-                                      runner?.hourseAmt?.amount
+                                      runner?.hourseAmt?.amount | number
                                     }}</strong>
                                   </a>
 
                                   <a>
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                   </a>
 
@@ -803,11 +803,11 @@
                                   >
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                   </a>
                                 </td>
@@ -829,8 +829,8 @@
                                 <td
                                   width="10%"
                                   class="colblue"
-                                  [boxHighlight]="runner['back0']"
-                                  [boxHighlight]="runner['vback0']"
+                                  [boxHighlight]="runner['back0'] | number"
+                                  [boxHighlight]="runner['vback0'] | number"
                                   (click)="
                                     onClickLiveMarketRate(
                                       runner,
@@ -854,8 +854,8 @@
                                 <td
                                   width="10%"
                                   class="colpink"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
+                                  [boxHighlight]="runner['lay0'] | number"
+                                  [boxHighlight]="runner['vlay0'] | number"
                                 >
                                   <a
                                     (click)="

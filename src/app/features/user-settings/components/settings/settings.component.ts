@@ -19,6 +19,8 @@ export class SettingsComponent implements OnInit {
   isEditMode = false;
   isEditMode1 = false;
   isLoading = false;
+  editOneClickStakeActiveBtn : any;
+
   constructor(
     private _userSettingsService: UserSettingsMainService,
     private _formBuilder: FormBuilder,
@@ -42,6 +44,7 @@ export class SettingsComponent implements OnInit {
           this.editBetting=new FormArray(res['userConfig']['editOneClickStakeBtn'].map(_singleValue=>new FormControl(_singleValue)));
           this.editBettingEditStake=new FormArray(res['userConfig']['EditStakesBtn'].map(_singleValue1=>new FormControl(_singleValue1)));
           this.isLoading = false;
+          this.editOneClickStakeActiveBtn = res.userConfig.editOneClickStakeActiveBtn;
         }
       });
   }
@@ -56,8 +59,10 @@ export class SettingsComponent implements OnInit {
 
   getUserConfig() {
     this._userSettingsService._getUserConfigApi().subscribe(
-      (res) => {
+      (res:any) => {
         this.userConfig = res  ;
+        this.editOneClickStakeActiveBtn = res.userConfig.editOneClickStakeActiveBtn;
+        console.log(res)
       });
   }
 
@@ -68,12 +73,13 @@ export class SettingsComponent implements OnInit {
         EditStakesBtn:[...this.editBettingEditStake.value],
         onClickBettingStatus:true,
         editOneClickStakeBtn:[...this.editBetting.value],
-        editOneClickStakeActiveBtn:49996
+        editOneClickStakeActiveBtn:this.editOneClickStakeActiveBtn
       }
     }
     this._userSettingsService._getSaveUserConfigApi(saveUser).subscribe(
       (res) => {
         this.userConfig = res  ;
+        this.getUserConfig();
       });
       this._sharedService.getToastPopup("User Settings saved sucessfully",'Settings','success');
 
@@ -81,5 +87,11 @@ export class SettingsComponent implements OnInit {
 
     goBack(){
       this._location.back();
+    }
+
+    setOneClickActiveBtn(activeBtn){
+      console.log(activeBtn)
+      this.editOneClickStakeActiveBtn = activeBtn;
+      this.onSubmitSave();
     }
 }
