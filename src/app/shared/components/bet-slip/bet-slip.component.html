@@ -70,8 +70,8 @@
             </ng-container>
             <div [ngClass]="betSlipParams['isBack'] === true ? 'bg-blue':'bg-peach'">
               <p class="card-header text-dark">
-                <small><strong>{{ betSlipParams["event"] }}</strong></small> <br />
-                <small><strong>{{ betSlipParams["selectionName"] }}</strong></small>
+                <small>{{ betSlipParams["event"] }}</small> <br />
+                <small>{{ betSlipParams["selectionName"] }}</small>
               </p>
             </div>
             <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
@@ -588,10 +588,10 @@
               <img src="assets/images/Loader.gif" width="40" height="40" />
             </div>
           </ng-container>
-          <p class="card-header text-dark">
-            <!-- {{ betSlipParams["event"] }} <br />
-            {{ betSlipParams["selectionName"] }} -->
-            team name vs team name
+          <p class="card-header text-dark" [ngClass]="betSlipParams['isBack'] === true ? 'bg-blue':'bg-peach'">
+            {{ betSlipParams["event"] }} <br />
+            {{ betSlipParams["selectionName"] }}
+            
           </p>
           <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
             <div class="row">
