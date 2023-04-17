@@ -52,7 +52,7 @@
                                                 <div *ngFor="let market of bet.markets">
                                                     <p class="mb-1">{{market.name}}</p>
 
-                                                    <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
+                                                    <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#6abefa' : '#f9c9d4' }">
                                                         <p><strong>{{b.heading}}</strong></p>
                                                         <small>{{b.market}}</small><br>
                                                         <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>
@@ -89,7 +89,7 @@
                                                 <div *ngFor="let market of bet.markets">
                                                     <p class="mb-1">{{market.name}}</p>
 
-                                                    <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#a5d9fe' : '#f8d0ce' }">
+                                                    <div class="text-dark p-2" *ngFor="let b of market.bets"  [ngStyle]="{'background-color':b.isBack  === true ? '#6abefa' : '#f9c9d4' }">
                                                         <p><strong>{{b.heading}}</strong></p>
                                                         <small>{{b.market}}</small><br>
                                                         <small>Placed {{b.dateTime | date :'d/MM/yy, h:mm a'}} </small>

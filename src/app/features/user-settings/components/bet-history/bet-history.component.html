@@ -109,66 +109,67 @@
             class="table table-striped table-hover border-0"
           >
             <thead>
-              <tr>
-                <th class="text-center coldark tstartcol">Event Name</th>
-                <th class="text-center pe-0 coldark">Selection</th>
-                <th class="text-center pe-0 coldark">Bet Type</th>
-                <th class="text-center pe-0 coldark">User Rate</th>
-                <th class="text-end pe-0 coldark">Amount</th>
+              <tr class="text-white" style="background: linear-gradient(90deg, #cd212f 0, #e76f26)">
+                <th class="text-center  tstartcol" >Event Name</th>
+                <th class="text-center pe-0 ">Selection</th>
+                <th class="text-center pe-0 ">Bet Type</th>
+                <th class="text-center pe-0 ">User Rate</th>
+                <th class="text-end pe-0 ">Amount</th>
                 <th
                   *ngIf="betHistoryStatus == 'Matched'"
-                  class="text-end pe-0 coldark"
+                  class="text-end pe-0 "
+                  
                 >
                   Profit/Loss
                 </th>
-                <th *ngIf="betHistoryStatus !== 'Matched'" class="pe-0 coldark">
+                <th *ngIf="betHistoryStatus !== 'Matched'" class="pe-0 " >
                   Remarks
                 </th>
-                <th class="text-center pe-0 coldark">Placed Date</th>
-                <th class="text-center coldark tlastcol">Matched Date</th>
+                <th class="text-center pe-0 " >Placed Date</th>
+                <th class="text-center  tlastcol">Matched Date</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let betHistory of betHistoryList">
                 <td
                   *ngIf="betHistory.betType == 'BACK'"
-                  class="colblue p-3 border-start-0"
+                  class=" p-3 border-start-0"
                 >
                   {{ betHistory.eventName }}
                 </td>
                 <td
                   *ngIf="betHistory.betType !== 'BACK'"
-                  class="colpink p-3 border-start-0"
+                  class=" p-3 border-start-0"
                 >
                   {{ betHistory.eventName }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                <td *ngIf="betHistory.betType == 'BACK'" class="">
                   {{ betHistory.selection }}
                 </td>
-                <td *ngIf="betHistory.betType != 'BACK'" class="colpink">
+                <td *ngIf="betHistory.betType != 'BACK'" class="">
                   {{ betHistory.selection }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                <td *ngIf="betHistory.betType == 'BACK'" class="">
                   {{ betHistory.betType }}
                 </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
+                <td *ngIf="betHistory.betType !== 'BACK'" class="">
                   {{ betHistory.betType }}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                <td *ngIf="betHistory.betType == 'BACK'" class="">
                   {{ betHistory.odds }}
                 </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
+                <td *ngIf="betHistory.betType !== 'BACK'" class="">
                   {{ betHistory.odds }}
                 </td>
                 <td
                   *ngIf="betHistory.betType == 'BACK'"
-                  class="colblue text-end"
+                  class=" text-end"
                 >
                   <span>{{betHistory.amount}}</span>
                 </td>
                 <td
                   *ngIf="betHistory.betType !== 'BACK'"
-                  class="colpink text-end"
+                  class=" text-end"
                 >
                   <span>{{betHistory.amount }}</span>
                 </td>
@@ -177,7 +178,7 @@
                     betHistory.betType == 'BACK' &&
                     betHistoryStatus == 'Matched'
                   "
-                  class="colblue text-end"
+                  class=" text-end"
                 >
                 <span *ngIf="betHistory.profitLoss >= 0" class="text-success text-center">
                   {{ betHistory.profitLoss }}
@@ -192,7 +193,7 @@
                     betHistory.betType !== 'BACK' &&
                     betHistoryStatus == 'Matched'
                   "
-                  class="colpink text-end"
+                  class=" text-end"
                 >
                 <span *ngIf="betHistory.profitLoss >= 0" class="text-success">
                   {{ betHistory.profitLoss }}
@@ -207,7 +208,7 @@
                     betHistory.betType == 'BACK' &&
                     betHistoryStatus !== 'Matched'
                   "
-                  class="colblue"
+                  class=""
                 >
                   {{ betHistory.remarks }}
                 </td>
@@ -216,18 +217,18 @@
                     betHistory.betType !== 'BACK' &&
                     betHistoryStatus !== 'Matched'
                   "
-                  class="colpink"
+                  class=""
                 >
                   {{ betHistory.remarks }}
                 </td>
 
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                <td *ngIf="betHistory.betType == 'BACK'" class="">
                   {{ betHistory.placedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
+                <td *ngIf="betHistory.betType !== 'BACK'" class="">
                   {{ betHistory.placedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="colblue">
+                <td *ngIf="betHistory.betType == 'BACK'" class="">
                   {{ betHistory.matchedTime |  date :'MMM d, y, h:mm:ss a'}}
                 </td>
                 <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
