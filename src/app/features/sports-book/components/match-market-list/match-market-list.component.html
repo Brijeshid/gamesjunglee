@@ -20,7 +20,7 @@
   </div>
   <hr class="text-color" />
   <!--Aside start-->
-  <div class="col-md-2 asidenav mb-3">
+  <div class="col-md-2 asidenav mb-3 mobileTableHide">
     <app-left-navigation></app-left-navigation>
   </div>
   <!--Aside end-->
@@ -708,6 +708,23 @@
                                 <!--Online end-->
                                 <!-- </td> -->
                               </tr>
+                              <tr>
+                                <td colspan="4" class="p-0 border-0">
+                                  <div
+                                    class="col-md-4 mb-3 sidebarhide "
+                                    id="sidebarhide"
+                                  >
+                                    <app-bet-slip
+                                      *ngIf="matchName != 'NO MATCH AVAILABLE'"
+                                      [isBetSlipActive]="isBetSlipActive"
+                                      [betSlipParams]="betSlipObj"
+                                      [showMAtchwiseBet]="matchName"
+                                      [marketType]="marketType"
+                                      [isTVEnable]="isTVEnable"
+                                    ></app-bet-slip>
+                                  </div>
+                                </td>
+                              </tr>
                             </tbody>
                           </table>
                         </div>
@@ -1282,6 +1299,23 @@
                                     singleFancyMarket["vback1"]
                                       | marketRateFormater
                                   }}</span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" class="p-0 border-0">
+                                  <div
+                                    class="col-md-4 mb-3 sidebarhide "
+                                    id="sidebarhide"
+                                  >
+                                    <app-bet-slip
+                                      *ngIf="matchName != 'NO MATCH AVAILABLE'"
+                                      [isBetSlipActive]="isBetSlipActive"
+                                      [betSlipParams]="betSlipObj"
+                                      [showMAtchwiseBet]="matchName"
+                                      [marketType]="marketType"
+                                      [isTVEnable]="isTVEnable"
+                                    ></app-bet-slip>
+                                  </div>
                                 </td>
                               </tr>
                             </ng-container>
