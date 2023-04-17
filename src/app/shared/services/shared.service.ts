@@ -25,6 +25,9 @@ export class SharedService {
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
+  liveStreamingTVUrl:any;
+  liveScoreBoardUrl:any;
+
   constructor(
     private _toastr: ToastrService,
     private _apiHttpService: ApiHttpService,

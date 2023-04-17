@@ -6,6 +6,7 @@ import * as _ from "lodash";
 import { SportsBookService } from '../../services/sports-book.service';
 import {Location} from '@angular/common';
 import { EMarketType } from '@shared/models/shared';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-match-market-list',
@@ -51,9 +52,11 @@ export class MatchMarketListComponent implements OnInit {
   booksForMarket:any;
   ladderObj:any = {};
   isTVEnable:boolean = false;
+  isScoreBoardEnable:boolean = false;
   isMatchLive:number =0;
   isFancyCardShow:boolean = false;
   isMobileView:boolean;
+  liveScoreBoardUrl:any;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -70,7 +73,8 @@ export class MatchMarketListComponent implements OnInit {
     private _sportsBookService: SportsBookService,
     private _route: ActivatedRoute,
     private _location: Location,
-    private _cdref: ChangeDetectorRef
+    private _cdref: ChangeDetectorRef,
+    private _sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -117,6 +121,7 @@ export class MatchMarketListComponent implements OnInit {
           break;
       }
       })
+      this.getStreamingUrl();
       this._cdref.detectChanges();
   }
 
@@ -128,6 +133,14 @@ export class MatchMarketListComponent implements OnInit {
     this._sharedService._getUniqueDeviceKeyApi().subscribe((res:any)=>{
       sessionStorage.setItem('deviceId',res?.deviceId);
       this._getWebSocketUrl();
+    })
+  }
+
+  getStreamingUrl(){
+    this._sharedService.postLiveStreamForMarket({domain:window.location.hostname,matchId:this.matchId}).subscribe((res:any)=>{
+      this._sharedService.liveStreamingTVUrl = this._sanitizer.bypassSecurityTrustResourceUrl(res?.streamObj?.data?.streamingUrl);
+      this.liveScoreBoardUrl = this._sharedService.liveScoreBoardUrl = this._sanitizer.bypassSecurityTrustResourceUrl(res?.streamObj?.data?.scoreUrl);
+      console.log("tv",res);
     })
   }
 
@@ -493,10 +506,6 @@ export class MatchMarketListComponent implements OnInit {
       this.ladderObj = res?.ladderDetails;
       console.log(this.ladderObj,res);
     })
-  }
-
-  hideShowTV(){
-    this.isTVEnable = !this.isTVEnable;
   }
 
   goBack(){
