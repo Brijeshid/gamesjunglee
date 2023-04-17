@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     if(this.isLoggedIn){
       this.getUserBalance();
-      // this._sharedService.getUserBalance.subscribe(res =>{
-      //   this.getUserBalance();
-      // });
-      
+       this._sharedService.getUserBalance.subscribe(res =>{
+         this.getUserBalance();
+       });
+
       this._sharedService.getUserAdminPubSubApi().subscribe(
         (res: any) => {
           var messages = ["WINNINGS_ADJUSTED","EDIT_USER","BET_DELETED_BY_ADMIN","RESULT_OUT"];
