@@ -2,7 +2,7 @@
   <div class="col-md-12 accordionn">
     <div *ngIf="liveStreamingTVUrl" id="videoplayer">
       <iframe
-        [src]="sanitizer.bypassSecurityTrustResourceUrl(liveStreamingTVUrl)"
+        [src]="liveStreamingTVUrl"
         scrolling="no"
       ></iframe>
     </div>
