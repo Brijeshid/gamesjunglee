@@ -513,7 +513,7 @@ export class MatchMarketListComponent implements OnInit {
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
-    // if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    if(this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
   }
 
 }
