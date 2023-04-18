@@ -20,7 +20,7 @@
   </div>
   <hr class="text-color" />
   <!--Aside start-->
-  <div class="col-md-2 asidenav mb-3 mobileTableHide">
+  <div class="col-md-2 asidenav mb-3 mobileTableHide" *ngIf="!isMobileView">
     <app-left-navigation></app-left-navigation>
   </div>
   <!--Aside end-->

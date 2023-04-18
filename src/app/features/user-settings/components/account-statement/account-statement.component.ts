@@ -12,7 +12,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./account-statement.component.scss']
 })
 export class AccountStatementComponent implements OnInit {
-  allSports: any;
+  // allSports: any;
   limit:number = 25;
   searchTerm: string = '';
   accountStatement:any = {};
@@ -78,9 +78,9 @@ export class AccountStatementComponent implements OnInit {
   }
 
   getSports() {
-    this._sharedservice._getSportsListApi().subscribe((res: any) => {
-      this.allSports = res;
-    });
+    // this._sharedservice._getSportsListApi().subscribe((res: any) => {
+    //   this.allSports = res;
+    // });
   }
 
   getAccountStatement(){
@@ -104,7 +104,7 @@ export class AccountStatementComponent implements OnInit {
   }
 
   search(): void {
-    this.getAccountStatement();
+    // this.getAccountStatement();
   }
 
   updateLimit(event){
