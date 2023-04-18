@@ -7,7 +7,7 @@
   </div>
   <hr class="text-color" />
   <!--Artical Start-->
-  <div class="col-md-12 ps-5 pe-5" [formGroup]="filterForm">
+  <div class="col-md-12 ps-md-5 pe-md-5" [formGroup]="filterForm">
     <div class="row mb-4 ps-0">
       <!-- <div class="col-md-3 mb-2">
         <input type="date" class="form-control rounded-pill bg-transparent text-white border-colour" formControlName="fromDate">
@@ -15,7 +15,7 @@
       <div class="col-md-3 mb-2">
         <input type="date" class="form-control rounded-pill bg-transparent text-white border-colour" formControlName="toDate">
       </div> -->
-      <div class="col-md-4 mb-2">
+      <div class="col-md-4 col-6 mb-2">
         <div class="wrapper"></div>
         <!-- <input type="date" class="form-control"  placeholder="Date">  -->
         <date-range-picker
@@ -29,7 +29,7 @@
             <div class="input-group">
               <input
                 id="secondDateRange"
-                class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour"
+                class="w-100 rounded-pill btn btn-md  bg-dark text-white border-colour"
                 type="text"
                 name="dateRange"
                 [value]="dateRangePicker.range"
@@ -39,7 +39,7 @@
           </div>
         </date-range-picker>
       </div>
-      <div class="col-md-4 mb-2">
+      <div class="col-md-4 col-6 mb-2">
         <!-- <label class="text-white" for="games">Games </label> -->
         <select
           name="game"
@@ -54,7 +54,7 @@
           <!-- <option value="CardGame">Game Report</option> -->
         </select>
       </div>
-      <div class="col-md-4 mb-2">
+      <div class="col-md-4 col-12 mb-2">
         <button
           class="btn-sm border-colour w-100 rounded-pill btn-pink"
           (click)="getAccountStatement()"
@@ -63,12 +63,12 @@
         </button>
       </div>
     </div>
-    <div class="row gamedetails tabetails mb-5 ms-2">
-      <div class="col-md-6">
+    <div class="row gamedetails tabetails mb-5 ">
+      <div class="col-md-6 col-5">
         Show
         <select
           (change)="updateLimit($event)"
-          class="form-select-sm border-colour bg-dark text-white p-2 rounded-3 ms-2 me-2"
+          class="form-select-sm border-colour bg-dark text-white p-2 rounded-3 me-2"
         >
           <option>25</option>
           <option>50</option>
@@ -77,13 +77,13 @@
         </select>
         Entries
       </div>
-      <div class="col-md-4 d-flex justify-content-end">
+      <div class="col-md-4 col-7 d-flex justify-content-end">
         <span class="pt-2">Search : </span>
         <input
           type="text"
           formControlName="search"
           placeholder="Search"
-          class="ms-2 form-control-sm rounded-pill border-colour bg-transparent text-white"
+          class=" form-control-sm rounded-pill border-colour bg-transparent text-white ms-1"
           [(ngModel)]="searchTerm"
           (ngModelChange)="search()"
         />
@@ -92,13 +92,13 @@
         <button
           *ngIf="accountStatement.length > 0"
           type="button"
-          class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white mt-2"
+          class="btn btn-md w-50 rounded-pill  bg-color text-white mt-md-0 mt-2"
           (click)="exportExcel()"
         >
           Export
         </button>
       </div>
-      <div class="col-md-12 mt-3 ms-2">
+      <div class="col-md-12 mt-3 ">
         <div *ngIf="accountStatement.length == 0" class=" p-5">
           <h4 *ngIf="accountStatement.length == 0 && !isLoading">
             No data found
