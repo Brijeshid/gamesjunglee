@@ -23,20 +23,24 @@
 
               <div class="innerpagem pt-0" >
                 <div class="row m-0 p-2 pb-3">
-                  <span *ngIf="isLoading">Loading...</span>
+                  <span *ngIf="isLoading" class="h4 my-5">Loading...</span>
                   <ng-container *ngIf="!isEditMode">
                     <div  class="p-2 col-md-4 col-4"  *ngFor="let item of userConfig?.userConfig?.editOneClickStakeBtn">
-                      <button type="button" class="btn bg-light w-100" aria-pressed="true" [ngClass]="(item == editOneClickStakeActiveBtn?'bg-color':'bg-light')" (click)="setOneClickActiveBtn(item)">+{{item | number}}</button>
+                      <button type="button" class="btn bg-light w-100" aria-pressed="true" [disabled]="oneClickBetting==false" [ngClass]="(item == editOneClickStakeActiveBtn?'bg-color':'bg-light')" (click)="setOneClickActiveBtn(item)">+{{item | number}}</button>
                       <!-- <button type="button" class="btn bg-light w-100 active" aria-pressed="true" *ngIf="item==userConfig.userConfig.editOneClickStakeActiveBtn?"></button> -->
                     </div>
                   </ng-container>
+
                   <ng-container *ngIf="isEditMode">
                     <div  class="p-2 col-md-4 col-4" *ngFor="let item of editBetting.controls;let i=index">
-                      <input type="number" class="text-center form-control bg-light" value="userConfig.userConfig.editOneClickStakeBtn[i]" [formControl]="getControl(i)">
+                      <input type="number" class="text-center form-control bg-light" value="userConfig.userConfig.editOneClickStakeBtn[i]" [formControl]="getControl(i)" (click)="setOneClickActiveBtn(item)">
                     </div>
                   </ng-container>
-                    <div class="col-md-6 mt-3 col-6"><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode=!isEditMode">{{isEditMode?'Cancel':'Edit'}}</button> </div>
-                    <div class="col-md-6 mt-3 col-6"><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  class="btn btn-light bg-light border w-100"  [ngClass]="isEditMode? 'bg-color':''">Save </button> </div>
+                  
+                  <ng-container *ngIf="!isLoading" class="h4">
+                    <div class="col-md-6 mt-3 col-6" ><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode=!isEditMode">{{isEditMode?'Cancel':'Edit'}}</button> </div>
+                    <div class="col-md-6 mt-3 col-6" ><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  class="btn btn-light bg-light border w-100"  [ngClass]="isEditMode? 'bg-color':''">Save </button> </div>
+                  </ng-container>
                 </div>
               </div>
 
@@ -63,10 +67,10 @@
 
             <div class="innerpagem pt-0" >
               <div class="row m-0 p-2 pb-3">
-                <span *ngIf="isLoading">Loading...</span>
+                <span *ngIf="isLoading" class="h4 my-5">Loading...</span>
                 <ng-container *ngIf="!isEditMode1">
                   <div  class="p-2 col-md-4 col-4"  *ngFor="let item of userConfig?.userConfig?.EditStakesBtn">
-                    <button type="button" class="btn bg-light w-100 active" aria-pressed="true">+{{item | number}}</button>
+                    <button type="button" class="btn bg-light w-100 active" [disabled]="oneClickBetting==false" aria-pressed="true">+{{item | number}}</button>
                   </div>
                 </ng-container>
                 <ng-container *ngIf="isEditMode1">
@@ -75,9 +79,10 @@
                   </div>
                 </ng-container>
 
-
+                <ng-container *ngIf="!isLoading" class="h4">
                   <div class="col-md-6 mt-3 col-6"><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode1=!isEditMode1">{{isEditMode1?'Cancel':'Edit'}}</button> </div>
                   <div class="col-md-6 mt-3 col-6"><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode1==false"class="btn btn-light bg-light border  w-100" [ngClass]="isEditMode1? 'bg-pink':''">Save </button> </div>
+                </ng-container>
               </div>
             </div>
 
