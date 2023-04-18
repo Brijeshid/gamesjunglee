@@ -41,7 +41,7 @@
             <!-- <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3"> Open Bets</button> -->
           </div>
           <div class="col-md-6 col-6 text-end">
-            <button class="btn btn-sm badge bg-success me-1" 
+            <button class="btn btn-sm badge bg-success me-1"
             (click)="isScoreBoardEnable = !isScoreBoardEnable"
             *ngIf="isMatchLive !== 0">
               <i [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>SCORES
@@ -55,6 +55,7 @@
         <div class="row m-0">
           <div class="col-md-12 col-12 ps-0" *ngIf="isScoreBoardEnable">
               <iframe
+                style="height: 100%;width:100%;margin:0.7rem"
                 [src]="liveScoreBoardUrl"
                 scrolling="no"
               ></iframe>
@@ -809,18 +810,18 @@
                                     "
                                   >
                                     <strong>{{
-                                      runner?.hourseAmt?.amount
+                                      runner?.hourseAmt?.amount | number
                                     }}</strong>
                                   </a>
 
                                   <a>
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                   </a>
 
@@ -829,11 +830,11 @@
                                   >
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                     <strong
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
                                     >
                                   </a>
                                 </td>
@@ -855,8 +856,8 @@
                                 <td
                                   width="10%"
                                   class="colblue"
-                                  [boxHighlight]="runner['back0']"
-                                  [boxHighlight]="runner['vback0']"
+                                  [boxHighlight]="runner['back0'] | number"
+                                  [boxHighlight]="runner['vback0'] | number"
                                   (click)="
                                     onClickLiveMarketRate(
                                       runner,
@@ -880,9 +881,11 @@
                                 <td
                                   width="10%"
                                   class="colpink"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
-                                  (click)="
+                                  [boxHighlight]="runner['lay0'] | number"
+                                  [boxHighlight]="runner['vlay0'] | number"
+                                >
+                                  <a
+                                    (click)="
                                       onClickLiveMarketRate(
                                         runner,
                                         singleBookMaker,
@@ -894,7 +897,7 @@
                                         EMarketType.BOOKMAKER_TYPE
                                       )
                                     "
-                                >
+                                ></a>
                                   <a
 
                                     ><strong>{{ runner["lay0"] }}</strong>

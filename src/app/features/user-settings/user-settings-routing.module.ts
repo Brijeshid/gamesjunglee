@@ -13,6 +13,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { TimeSettingsComponent } from './components/time-settings/time-settings.component';
 import { TransferStatementComponent } from './components/transfer-statement/transfer-statement.component';
 import { UserSettingsMainComponent } from './components/user-settings-main/user-settings-main.component';
+import { ProfitLossComponent } from './components/profit-loss/profit-loss.component';
 
 const routes: Routes = [{
   path:'',
@@ -27,6 +28,7 @@ const routes: Routes = [{
     {path:'change-password',component:ChangePasswordComponent},
     {path:'rules-regulations', component:RulesRegulationsComponent},
     {path:'account-statement', component:AccountStatementComponent},
+    {path:'account-statement/profit-loss/:matchId', component:ProfitLossComponent},
     {path:'bet-history', component:BetHistoryComponent},
     {path:'settings', component:SettingsComponent},
     {path:'profit-loss/matchName-pl', component:MatchNamePlComponent},

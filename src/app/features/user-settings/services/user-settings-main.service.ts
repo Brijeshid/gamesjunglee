@@ -52,6 +52,10 @@ export class UserSettingsMainService {
     .post(this._apiEndpointsService._getBetHistoryForUserEndpoint(),betHistoryObj);
   }
 
+  _getBetHistoryForUserAccountStatementApi(betHistoryObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService._getBetHistoryForUserAccountStatementEndpoint(),betHistoryObj);
+  }
   getPlBets(){
       return this.currentBet;
   }

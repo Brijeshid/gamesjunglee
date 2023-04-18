@@ -1,9 +1,11 @@
 <div class="row m-0">
   <div class="col-md-12 pb-2 pt-2">
-    <a class="text-color small text-decoration-none h6"><i class="fa fa-angle-left text-white pointer"  (click)="goBack()"></i>&nbsp;&nbsp;
-      Account Statement</a>
+    <a class="text-color small text-decoration-none h6"
+      ><i class="fa fa-angle-left text-white pointer" (click)="goBack()"></i
+      >&nbsp;&nbsp; Account Statement</a
+    >
   </div>
-  <hr class="text-color">
+  <hr class="text-color" />
   <!--Artical Start-->
   <div class="col-md-12 ps-5 pe-5" [formGroup]="filterForm">
     <div class="row mb-4 ps-0">
@@ -48,7 +50,12 @@
         <!-- </select> -->
       <!-- </div> -->
       <div class="col-md-4 mb-2">
-        <button class="btn-sm border-colour w-100 rounded-pill btn-pink" (click)="getAccountStatement()">Submit</button>
+        <button
+          class="btn-sm border-colour w-100 rounded-pill btn-pink"
+          (click)="getAccountStatement()"
+        >
+          Submit
+        </button>
       </div>
     </div>
     <div class="row gamedetails tabetails mb-5 ms-2">
@@ -67,48 +74,79 @@
       </div>
       <div class="col-md-4 d-flex justify-content-end">
         <span class="pt-2">Search : </span>
-          <input
-            type="text"
-            formControlName="search"
-            placeholder="Search"
-            class="ms-2 form-control-sm rounded-pill border-colour bg-transparent text-white"
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="search()"
-          />
+        <input
+          type="text"
+          formControlName="search"
+          placeholder="Search"
+          class="ms-2 form-control-sm rounded-pill border-colour bg-transparent text-white"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="search()"
+        />
       </div>
       <div class="col-md-2">
-        <button *ngIf ="accountStatement.length >0 " type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white mt-2" (click)="exportExcel()">Export</button>
+        <button
+          *ngIf="accountStatement.length > 0"
+          type="button"
+          class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white mt-2"
+          (click)="exportExcel()"
+        >
+          Export
+        </button>
       </div>
       <div class="col-md-12 mt-3 ms-2">
-        <div *ngIf="accountStatement.length == 0" class="text-center p-5">
-          <h4 *ngIf="accountStatement.length == 0 && !isLoading">No data found</h4>
+        <div *ngIf="accountStatement.length == 0" class=" p-5">
+          <h4 *ngIf="accountStatement.length == 0 && !isLoading">
+            No data found
+          </h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
-        <table  *ngIf="accountStatement.length !== 0" class="table table-striped table-hover border-0">
+        <table
+          *ngIf="accountStatement.length !== 0"
+          class="table table-striped table-hover border-0"
+        >
           <thead>
             <tr>
-              <th class="text-center pe-0 tstartcol coldark">Sr No</th>
-              <th class="text-center coldark  ps-3">Date</th>
-              <th class="text-center pe-0 coldark">Credit</th>
-              <th class="text-center pe-0 coldark">Debit</th>
-              <th class="text-center pe-0 coldark">Balance</th>
-              <th class="text-center coldark tlastcol">Remark</th>
+              <th class=" pe-0 tstartcol coldark">Sr No</th>
+              <th class=" coldark ps-3">Date</th>
+              <th class=" pe-0 coldark">Credit</th>
+              <th class=" pe-0 coldark">Debit</th>
+              <th class=" pe-0 coldark">Balance</th>
+              <th class=" coldark tlastcol">Remark</th>
             </tr>
           </thead>
           <tbody>
-            <tr  *ngFor="let acctstatement of accountStatement;let i= index;">
-              <td class="text-center">{{i+1}}</td>
-              <td class="p-3 text-center">{{acctstatement.date |  date :'MMM d, y, h:mm:ss a'}}</td>
-              <td class="text-center">
-                <span [ngClass]="acctstatement.credit> 0 ?'text-success':'text-danger'" *ngIf= "acctstatement.credit == 0 ? '':'-'">{{acctstatement.credit | number}}</span>
-                <span  *ngIf= "acctstatement.credit == 0 "><strong>-</strong></span>
+            <tr class="acc-statement-cls"
+              *ngFor="let acctstatement of accountStatement; let i = index"
+              (click)="openProfitLoss(acctstatement.matchId)"
+            >
+              <td class="text-center">{{ i + 1 }}</td>
+              <td class="p-3 text-center">
+                {{ acctstatement.date | date : "MMM d, y, h:mm:ss a" }}
               </td>
               <td class="text-center">
-                <span  [ngClass]="acctstatement.debit> 0 ?'text-success':'text-danger'"  *ngIf= "acctstatement.debit == 0 ? '':'-'">{{acctstatement.debit | number}}</span>
-                <span  *ngIf= "acctstatement.debit == 0 "><strong>-</strong></span>
+                <span
+                  [ngClass]="
+                    acctstatement.credit > 0 ? 'text-success' : 'text-danger'
+                  "
+                  *ngIf="acctstatement.credit == 0 ? '' : '-'"
+                  >{{ acctstatement.credit | number }}</span
+                >
+                <span *ngIf="acctstatement.credit == 0"
+                  ><strong>-</strong></span
+                >
               </td>
-              <td class="text-center">{{acctstatement.balance | number}}</td>
-              <td>{{acctstatement.remark}}</td>
+              <td class="text-center">
+                <span
+                  [ngClass]="
+                    acctstatement.debit > 0 ? 'text-success' : 'text-danger'
+                  "
+                  *ngIf="acctstatement.debit == 0 ? '' : '-'"
+                  >{{ acctstatement.debit | number }}</span
+                >
+                <span *ngIf="acctstatement.debit == 0"><strong>-</strong></span>
+              </td>
+              <td class="text-center">{{ acctstatement.balance | number }}</td>
+              <td>{{ acctstatement.remark }}</td>
             </tr>
           </tbody>
         </table>
@@ -130,8 +168,10 @@
           >
             Next
           </button>
-        </div><br>
+        </div>
+        <br />
       </div>
     </div>
     <!--Artical end-->
   </div>
+</div>

@@ -1,0 +1,136 @@
+<!--body start-->
+<div class="row m-0">
+  <div class="col-md-12 pb-2 pt-2">
+      <a routerLink="/account-statement/" class="text-color small text-decoration-none h6"><i class="fa fa-angle-left text-white" (click)="goBack()"></i>&nbsp;&nbsp; Profit & Loss</a>
+  </div>
+  <hr class="text-color">
+  <div class=" col-md-12 ps-5 pe-5 accordionn">
+      <div class="innerpagem rounded">
+          <div class="row p-0 mb-1">
+              <p *ngIf="betsPnl" class="ms-3">{{betsPnl[0]?.sportName}}<i class="fa fa-angle-right text-white ms-2 me-2"></i>{{betsPnl[0]?.matchName}}-{{betsPnl[0]?.refMarketId}}</p>
+          </div>
+      </div>
+  </div>
+
+      <div class="col-md-12 ps-5 pe-5 accordionn">
+          <div class="innerpagem rounded">
+              <div class="row m-0 p-1 ps-3 pe-3 mb-1">
+                  <p *ngIf="!betsPnl" >Loading...</p>
+                  <table class="table table-hover" *ngIf="betsPnl">
+                      <thead>
+                          <tr>
+                              <th class=" pe-0 tstartcol coldark">Placed</th>
+                              <th class=" pe-0 coldark">Match Time</th>
+                              <th class=" pe-0 coldark">Selection</th>
+                              <th class=" pe-0 coldark">Type</th>
+                              <th class=" pe-0 coldark">Odds</th>
+                              <th class=" pe-0 coldark">Stake</th>
+                              <th class=" pe-0 coldark">Profit/Loss</th>
+                              <th class=" pe-0 coldark tlastcol">Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr class=" table-light" *ngFor="let data of betsPnl">
+                              <td>{{data.createDateTime | date :'d/MM/yy, h:mm a'}}</td>
+                              <td>{{data.matchTime | date: 'd/MM/yy, h:mm a'}}</td>
+                              <td>{{data.selectionName}}</td>
+                              <td><span
+                                *ngIf="!data.isBack"
+                                class="border bg-danger text-danger border-danger me-2"
+                              ></span>
+                              <span
+                                *ngIf="data.isBack"
+                                class="border bg-primary text-primary border-primary me-2"
+                              ></span>{{data.type}}</td>
+                              <td>{{data.odds}}</td>
+                              <td>{{data.stake}}</td>
+                              <td [ngClass]="data.status == 'WON'?'text-success':'text-danger' ">{{data?.winAmount | number}}</td>
+                              <td [ngClass]="data.status == 'WON'?'text-success':'text-danger' ">{{data?.status}}</td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+
+              </div>
+          </div>
+      </div>
+      <br>
+      <div class="col-md-12 ps-5 pe-5 accordionn2">
+          <div class="card float-end" style="width:30rem">
+              <div class="container">
+
+                  <div class="row">
+                      <div class="col-md-6">
+                          <small>Back subtotal:</small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end me-1" *ngIf="(currentBet.backSubTotal !=0)" [ngClass]="(currentBet.backSubTotal >0) ?'text-success':'text-danger'" >{{currentBet.backSubTotal | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.backSubTotal ==0)">{{currentBet.backSubTotal | number}}</small>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <small>Lay subtotal:</small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end  me-1" *ngIf="(currentBet.laySubTotal !=0)"[ngClass]="currentBet.laySubTotal >0 ?'text-success':'text-danger'">{{currentBet.laySubTotal | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.laySubTotal ==0)">{{currentBet.laySubTotal | number}}</small>
+
+                      </div>
+                  </div><div class="row">
+                      <div class="col-md-6">
+                          <small>Turnover:</small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end  me-1" *ngIf="(currentBet.turnOver  !=0)"[ngClass]="currentBet.turnOver >0 ?'text-success':'text-danger'">{{currentBet.turnOver | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.turnOver ==0)">{{currentBet.turnOver | number}}</small>
+
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <small><strong>Market subtotal:</strong></small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end  me-1" *ngIf="(currentBet.marketSubTotal !=0)"[ngClass]="currentBet.marketSubTotal >0 ?'text-success':'text-danger'">{{currentBet.marketSubTotal | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.marketSubTotal ==0)">{{currentBet.marketSubTotal | number}}</small>
+
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <small>Commission:</small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end  me-1" *ngIf="(currentBet.commission !=0)"[ngClass]="currentBet.commission >0 ?'text-success':'text-danger'">{{currentBet.commission | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.commission ==0)">{{currentBet.commission | number}}</small>
+                      </div>
+                  </div>
+                  <!--<div class="row">
+                      <div class="col-md-6">
+                          <small>Bookmaker Result Commission:</small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end  me-1" *ngIf="(currentBet.bookmakerResultCommission !=0)"[ngClass]="currentBet.bookmakerResultCommission >0 ?'text-success':'text-danger'">{{currentBet.bookmakerResultCommission | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.bookmakerResultCommission ==0)">{{currentBet.bookmakerResultCommission | number}}</small>
+
+                      </div>
+                  </div>-->
+                  <div class="row">
+                      <div class="col-md-6">
+                          <small><strong>Net Market Total:</strong></small>
+                      </div>
+                      <div class="col-md-6">
+                          <small class="float-end  me-1" *ngIf="(currentBet.netAmt !=0)" [ngClass]="currentBet.netAmt >0 ?'text-success':'text-danger'">{{currentBet.netAmt | number}}</small>
+                          <small class="float-end me-1" *ngIf="(currentBet.netAmt ==0)">{{currentBet.netAmt | number}}</small>
+
+                      </div>
+                  </div>
+                  </div>
+              </div>
+      </div>
+
+
+
+<!--Body end-->
