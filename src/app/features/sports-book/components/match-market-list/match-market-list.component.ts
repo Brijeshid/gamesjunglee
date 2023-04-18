@@ -87,7 +87,7 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   private _preConfig(){
-    
+
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._sharedService.getUserBalance.subscribe((res:any)=>{
       switch(res['marketType']){
@@ -116,7 +116,7 @@ export class MatchMarketListComponent implements OnInit {
       this.isMobileView = res;
     })
   }
-  
+
   initConfig(){
     (sessionStorage.getItem('deviceId') === null) ? this._getUniqueDeviceKeyApi(): this._getWebSocketUrl();
   }
@@ -437,9 +437,9 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any,marketType:number){
-    console.log(runnerObj,marketData);
-    console.log(marketData['SelectionId'])
-    console.log(marketData['RunnerName'])
+    console.log('runnerObj,marketData',runnerObj,marketData);
+    console.log('SelectionId',marketData['SelectionId'])
+    console.log('RunnerName',marketData['RunnerName'])
     this.marketType = marketType;
     this.betSlipObj = {
         "sportId":marketData['refSportId'],
