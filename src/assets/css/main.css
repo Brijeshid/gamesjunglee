@@ -1331,3 +1331,12 @@ small {
 /* * {
   overflow-x: clip;
 } */
+
+.mobileTableShow.header-tow li a {
+  font-size: 10px !important;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 3px;
+  border: 1px solid rgba(62, 64, 64, 0);
+  border-radius: 60px;
+}
