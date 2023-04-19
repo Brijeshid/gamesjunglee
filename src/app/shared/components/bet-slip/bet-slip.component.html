@@ -107,6 +107,7 @@
                               >-</span
                             >
                             <input
+                              (keypress)="numberOnly($event)"
                               min="1.01"
                               #bet_odds
                               step=".01"
@@ -153,6 +154,7 @@
                         <label class="text-dark">Stake</label>
                         <input
                           type="number"
+                          (keypress)="numberOnly($event)"
                           class="form-control"
                           placeholder="Min.{{ userBalance?.minimumBet }} Max.{{
                             userBalance?.maxBet
