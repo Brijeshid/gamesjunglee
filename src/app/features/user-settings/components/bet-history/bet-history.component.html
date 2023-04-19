@@ -8,9 +8,9 @@
   <!--Artical Start-->
 
   <form [formGroup]="betHistoryForm">
-    <div class="col-md-12 ps-5 pe-5">
+    <div class="col-md-12 ps-md-5 pe-md-5">
       <div class="row mb-4">
-        <div class="col-md-3 mb-2">
+        <div class="col-md-3 col-4 mb-2">
           <select
             formControlName="sportId"
             name="game"
@@ -22,7 +22,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-3 mb-2">
+        <div class="col-md-3 col-4 mb-2">
           <select
             formControlName="status"
             name="game"
@@ -33,7 +33,7 @@
             <option value="Deleted">Deleted</option>
           </select>
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 col-4 mb-2">
           <div class="wrapper"></div>
           <!-- <input type="date" class="form-control"  placeholder="Date">  -->
           <date-range-picker
@@ -66,8 +66,8 @@
           </button>
         </div>
       </div>
-      <div class="row gamedetails tabetails mb-5 ms-1">
-        <div class="col-md-6">
+      <div class="row gamedetails tabetails mb-5 align-items-center">
+        <div class="col-md-6 col-5">
           Show
           <select
             (change)="updateLimit($event)"
@@ -80,13 +80,13 @@
           </select>
           Entries
         </div>
-        <div class="col-md-4 d-flex justify-content-end">
+        <div class="col-md-4 col-7 d-flex justify-content-end">
           <span class="pt-2">Search : </span>
           <input
             type="text"
             formControlName="search"
             placeholder="Search"
-            class="ms-2 form-control-sm rounded-pill border-colour bg-transparent text-white"
+            class="ms-1 form-control-sm rounded-pill border-colour bg-transparent text-white"
             [(ngModel)]="searchTerm"
             (ngModelChange)="search()"
           />

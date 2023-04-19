@@ -298,7 +298,7 @@ body {
 }
 .gamedetails .table td {
   vertical-align: middle;
-  padding: 2px 5px;
+  /* padding: 2px 5px; */
   text-align: center;
   border-top: 2px solid #fff;
   line-height: 12px;
@@ -1285,7 +1285,9 @@ small {
 .mobileTableShow{display: none;}
 
 .mobileTableShow table tbody tr td{
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
+  border-radius: 2rem;
+
 }
 
 .mobileTableShow .innerpagem{
@@ -1326,4 +1328,22 @@ small {
 .login .btn {
   font-size: 16px;
   padding: 3px 4px;
+}
+
+/* * {
+  overflow-x: clip;
+} */
+
+.mobileTableShow.header-tow li a {
+  font-size: 10px !important;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 3px;
+  border: 1px solid rgba(62, 64, 64, 0);
+  border-radius: 60px;
+}
+
+
+.gamedetails.mobileTableShow{
+  padding: 15px;
 }

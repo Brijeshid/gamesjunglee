@@ -88,7 +88,7 @@
                 <!--Game details info start-->
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="mt-0 innerpagem gamedetails ps-3 pe-3">
+                    <div class="mt-0 innerpagem gamedetails ps-md-3 pe-md-3">
                       <!--Table 1-->
                       <ng-container
                         *ngFor="let singleInPlay of inPlayMatchListBySport"
@@ -399,7 +399,7 @@
                               "
                             >
                               <tr valign="middle">
-                                <th width="30%" class="tfirstcol">
+                                <th width="70%" class="tfirstcol">
                                   <i
                                     class="fa-solid"
                                     [ngClass]="
@@ -425,14 +425,12 @@
                                 </th>
 
                                 <th
-                                  width="15%"
                                   colspan="1"
                                   class="text-center coldark"
                                 >
                                   Back
                                 </th>
                                 <th
-                                  width="15%"
                                   colspan="1"
                                   class="text-center coldark tlastcol"
                                 >
@@ -598,7 +596,7 @@
                               "
                             >
                               <tr valign="middle">
-                                <th width="30%" class="tfirstcol">
+                                <th  width="70%" class="tfirstcol">
                                   <i
                                     class="fa-solid"
                                     [ngClass]="
@@ -628,18 +626,19 @@
                                 </th>
 
                                 <th
-                                  width="15%"
                                   colspan="1"
                                   class="text-center coldark"
                                 >
                                   Back
                                 </th>
                                 <th
-                                  width="15%"
                                   colspan="1"
                                   class="text-center coldark tlastcol"
                                 >
                                   Lay
+                                  
+                                </th>
+                                <!-- <th class="text-center coldark tlastcol">
                                   <div class="float-end">
 
                                     <div class="tooltipnk">
@@ -653,7 +652,7 @@
                                     </div>
 
                                   </div>
-                                </th>
+                                </th> -->
                               </tr>
                             </thead>
                             <tbody class="content">
@@ -702,6 +701,7 @@
                                       }}</span></a
                                     >
                                   </td>
+                                  <!-- <td></td> -->
 
                                 </tr>
                               </ng-container>
