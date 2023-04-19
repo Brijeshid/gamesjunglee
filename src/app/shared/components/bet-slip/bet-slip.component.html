@@ -593,7 +593,7 @@
           <p class="card-header text-dark" [ngClass]="betSlipParams['isBack'] === true ? 'bg-blue':'bg-peach'">
             {{ betSlipParams["event"] }} <br />
             {{ betSlipParams["selectionName"] }}
-            
+
           </p>
           <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
             <div class="row">
@@ -633,6 +633,7 @@
                             step=".01"
                             type="number"
                             formControlName="odds"
+                            autofocus
                           />
                           <span class="plus" (click)="upAndDownOddsValue(true)"
                             >+</span

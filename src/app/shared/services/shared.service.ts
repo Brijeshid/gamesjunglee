@@ -25,6 +25,7 @@ export class SharedService {
   userIp:any;
   unMatchSubjectListSubject=new Subject();
   userBalance:any;
+  ifBetSlipOpened = new BehaviorSubject(false);
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
@@ -240,7 +241,7 @@ export class SharedService {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
   }
-  
+
   getUserRealTimeEvent(params:any){
     let currentUserDetails = this.getUserDetails();
     if (params) {
@@ -272,7 +273,7 @@ export class SharedService {
               break;
             }
           }
-          
+
         })
       }
   }

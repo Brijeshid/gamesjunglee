@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { UserSettingsMainService } from 'src/app/features/user-settings/services/user-settings-main.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,13 +12,15 @@ import {DomSanitizer} from '@angular/platform-browser'
   templateUrl: './bet-slip.component.html',
   styleUrls: ['./bet-slip.component.scss']
 })
-export class BetSlipComponent implements OnInit, OnChanges {
+export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() isBetSlipActive:any;
   @Input() betSlipParams:any;
   @Input() showMAtchwiseBet = ''
   @Input() marketType:any = EMarketType.MATCH_TYPE;
   @Input() isTVEnable:boolean;
+  @ViewChild("bet_odds", {
+  }) bet_odds: ElementRef;
 
   EMarketType:typeof EMarketType = EMarketType;
   odds:number;
@@ -37,6 +39,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   liveStreamingTVUrl:any;
   exposure:number =0;
   isMobileView:boolean;
+  timeoutId: any;
 
   constructor(
     private _sharedService: SharedService,
@@ -45,13 +48,16 @@ export class BetSlipComponent implements OnInit, OnChanges {
     private _route: ActivatedRoute
     ) { }
 
+    ngAfterViewInit() {
+      console.log('afterView');
+      this.bet_odds.nativeElement.focus();
+    }
 
   ngOnChanges(changes: SimpleChanges){
     if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
       this.betSlipParams =  changes['betSlipParams']['currentValue'];
       this.isBack = changes['betSlipParams']['currentValue']['isBack'];
       this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
-
       if(!this.isBetSlipActive){
         this.betSlipForm.patchValue({
           odds:0,
@@ -59,6 +65,11 @@ export class BetSlipComponent implements OnInit, OnChanges {
           stake:0
         })
         this.stakeVal(0);
+      } else {
+        this.timeoutId = setTimeout(() => {
+          this.bet_odds.nativeElement.focus();
+        }, 100); // 5000 milliseconds = 5 seconds
+
       }
 
         this.betSlipForm.patchValue({
@@ -140,6 +151,8 @@ export class BetSlipComponent implements OnInit, OnChanges {
     //   }
     // },1000);
     this._placeBetCall();
+    console.log('bet_odds bet_odds bet_odds bet_odds');
+    this.bet_odds.nativeElement.focus();
   }
 
 
@@ -161,6 +174,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this.betSlipParams['exposure'] = this.exposure;
     this._sharedService._postPlaceBetApi(this.betSlipParams).subscribe(
       (betSlipRes: any) => {
+            console.log('1');
             if( betSlipRes){
               this.isBetSlipActive = false;
               this.isBetSlipPlaceCall = false;
@@ -196,6 +210,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   _getUserOpenBet(){
     this._sharedService._getUserOpenBetsApi().subscribe(
       (res:any) => {
+        console.log('2');
         res.userBets.forEach(bet=>{
           if(this.showMAtchwiseBet) bet.bets = bet.bets.filter(b => b.matchName == this.showMAtchwiseBet)
           if(bet.status == "EXECUTION_COMPLETE"){
