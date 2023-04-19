@@ -375,7 +375,8 @@ tr {
 }
 
 .colpink {
-  background-color: #f9c9d4 !important;
+  /* background-color: #f9c9d4 !important; */
+  background-color: #fba2b6 !important;
   border-left: 1px solid #fff;
 }
 

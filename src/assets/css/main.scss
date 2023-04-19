@@ -55,6 +55,7 @@ $searchddm: #212529;
 $gradient1: #cd212f;
 $gradient2: #e76f26;
 $background-color_22: #d35862;
+$background-color_23: #fba2b6;
 
 /*theme one end*/
 
@@ -393,7 +394,8 @@ tr {
   background-color: $background-color_5 !important;
 }
 .colpink {
-  background-color: $color_7 !important;
+  // background-color: $color_7 !important;
+  background-color: $background-color_23 !important;
   border-left: 1px solid $color_1;
 }
 .colpink.light {
