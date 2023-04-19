@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./account-statement.component.scss']
 })
 export class AccountStatementComponent implements OnInit {
-  allSports: any;
-  limit: number = 25;
+  // allSports: any;
+  limit:number = 25;
   searchTerm: string = '';
   accountStatement: any = {};
   filterForm: FormGroup;
@@ -85,9 +85,9 @@ export class AccountStatementComponent implements OnInit {
   }
 
   getSports() {
-    this._sharedservice._getSportsListApi().subscribe((res: any) => {
-      this.allSports = res;
-    });
+    // this._sharedservice._getSportsListApi().subscribe((res: any) => {
+    //   this.allSports = res;
+    // });
   }
 
   getAccountStatement() {
@@ -111,7 +111,7 @@ export class AccountStatementComponent implements OnInit {
   }
 
   search(): void {
-    this.getAccountStatement();
+    // this.getAccountStatement();
   }
 
   updateLimit(event) {

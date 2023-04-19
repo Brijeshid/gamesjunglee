@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { HttpContext } from '@angular/common/http';
 import { IGNORED_STATUSES } from '@core/interceptors/http-error.interceptor';
 import * as XLSX from 'xlsx';
+import { webSocket } from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,17 @@ export class SharedService {
   private previousUrl: string = '';
   private currentUrl: string = '';
   getUserBalance = new Subject();
+  isMobileView = new Subject();
   unmatchedBetsList:any = [];
   userIp:any;
   unMatchSubjectListSubject=new Subject();
+  userBalance:any;
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
   liveStreamingTVUrl:any;
   liveScoreBoardUrl:any;
+  realDataWebSocket: any;
 
   constructor(
     private _toastr: ToastrService,
@@ -235,6 +239,60 @@ export class SharedService {
   getUserAdminPubSubApi(){
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
+  }
+  
+  getUserRealTimeEvent(params:any){
+    let currentUserDetails = this.getUserDetails();
+    if (params) {
+      this.realDataWebSocket = webSocket(params['url']);
+      this.realDataWebSocket.subscribe(
+        data => {
+          if(currentUserDetails.userId == data.userId){
+            switch(data.message){
+              case "STATUS_CHANGED":
+                if(data.status == 'Closed'){
+                  this.logout();return;
+                }
+                currentUserDetails.isActive = data.status;
+                localStorage.setItem('userDetails',JSON.stringify(currentUserDetails));
+                window.location.reload();
+                break;
+              case "PASSWORD_CHANGED":
+                this.logout();
+                break;
+              case "BET_MATCHED":
+                this.unMatchSubjectListSubject.next(true);
+                this.getToastPopup('Successfully Bet Matched','Bet Matched','success');
+                break;
+              case "WINNINGS_ADJUSTED":
+              case "EDIT_USER":
+              case "BET_DELETED_BY_ADMIN":
+              case "RESULT_OUT":
+                  this.getUserBalance.next();
+              break;
+            }
+          }
+          
+        })
+      }
+  }
+
+  unsubscribeWebSocket(){
+    if(this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
+  }
+
+  isMobileViewFn(){
+    if(window.innerWidth <= 767){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  logout(){
+    this.removeJWTToken();
+    this.removeUserDetails();
+    this._router.navigate(['/login']);
   }
 
 }

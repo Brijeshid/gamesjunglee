@@ -28,17 +28,24 @@ export class InPlayIndexComponent implements OnInit {
   };
   setResponse:any= {};
   isLoggedIn:boolean = false;
+  isMobileView:boolean;
 
   constructor(
-    private _inPlayService: InPlayService,
     private _sharedService: SharedService,
-    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.isMobileViewCallInit();
     this.isLoggedIn = this._sharedService.isLoggedIn();
     // this.initConfig();
     this._getWebSocketUrl();
+  }
+
+  isMobileViewCallInit(){
+    this.isMobileView =  this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res:any)=>{
+      this.isMobileView = res;
+    })
   }
 
   initConfig(){
@@ -66,24 +73,46 @@ export class InPlayIndexComponent implements OnInit {
           return sportsObj['markets'].map(marketObj=>{
               if(marketObj['market']['appMarketStatus'] !=4 && marketObj['market']['appMarketStatus'] !=2) sportsObj['isShowCard'] = true;
               return marketObj['market']['runners'].map((runnerRes) => {
-                runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
-                runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
+                if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+                  runnerRes['back0'] ='';
+                  runnerRes['vback0'] ='';
 
-                runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
-                runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+                  runnerRes['back1'] =  '';
+                  runnerRes['vback1'] = '';
 
-                runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
-                runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
+                  runnerRes['back2'] ='';
+                  runnerRes['vback2'] = '';
 
-                runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
-                runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+                  runnerRes['lay0'] = '';
+                  runnerRes['vlay0'] = '';
 
-                runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
-                runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+                  runnerRes['lay1'] =  '';
+                  runnerRes['vlay1'] = '';
 
-                runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
-                runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+                  runnerRes['lay2'] = '';
+                  runnerRes['vlay2'] = '';
 
+                }else{
+                  runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+                  runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
+
+                  runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
+                  runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+
+                  runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
+                  runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
+
+                  runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+                  runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+
+                  runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
+                  runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+
+                  runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
+                  runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+
+                }
+                
                 runnerRes['suspended'] = true;
                 return runnerRes;
               })

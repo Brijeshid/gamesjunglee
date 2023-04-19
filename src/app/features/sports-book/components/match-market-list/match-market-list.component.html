@@ -20,7 +20,7 @@
   </div>
   <hr class="text-color" />
   <!--Aside start-->
-  <div class="col-md-2 asidenav mb-3 mobileTableHide">
+  <div class="col-md-2 asidenav mb-3 mobileTableHide" *ngIf="!isMobileView">
     <app-left-navigation></app-left-navigation>
   </div>
   <!--Aside end-->
@@ -880,27 +880,24 @@
                                 </td>
                                 <td
                                   width="10%"
-                                  class="colpink"
+                                  class="colpink 2"
                                   [boxHighlight]="runner['lay0'] | number"
-                                  [boxHighlight]="runner['vlay0'] | number"
+                                  [boxHighlight]="runner['vlay0'] | number"(click)="
+                                  onClickLiveMarketRate(
+                                    runner,
+                                    singleBookMaker,
+                                    {
+                                      isBack: false,
+                                      index: 0,
+                                      odds: runner['lay0']
+                                    },
+                                    EMarketType.BOOKMAKER_TYPE
+                                  )
+                                "
                                 >
                                   <a
-                                    (click)="
-                                      onClickLiveMarketRate(
-                                        runner,
-                                        singleBookMaker,
-                                        {
-                                          isBack: false,
-                                          index: 0,
-                                          odds: runner['lay0']
-                                        },
-                                        EMarketType.BOOKMAKER_TYPE
-                                      )
-                                    "
-                                ></a>
-                                  <a
 
-                                    ><strong>{{ runner["lay0"] }}</strong>
+                                ><strong>{{ runner["lay0"] }}</strong>
                                     <br /><span>{{
                                       runner["vlay0"] | marketRateFormater
                                     }}</span></a

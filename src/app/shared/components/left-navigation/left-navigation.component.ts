@@ -20,6 +20,7 @@ export class LeftNavigationComponent implements OnInit {
   menuList:any;
   tourId:any;
   matchId:any;
+  isMobileView:boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -28,6 +29,8 @@ export class LeftNavigationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log("hello");
+    this.isMobileViewCallInit();
     this._route.params.subscribe((routeParams)=>{
       this.sportsName = routeParams.sports;
       // this.sportsName = 'Cricket';
@@ -45,6 +48,13 @@ export class LeftNavigationComponent implements OnInit {
     })
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
+  }
+
+  isMobileViewCallInit(){
+    this.isMobileView =  this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res:any)=>{
+      this.isMobileView = res;
+    })
   }
 
   getSubNavBySportsList(){

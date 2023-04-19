@@ -58,16 +58,6 @@ export class MatchMarketListComponent implements OnInit {
   isMobileView:boolean;
   liveScoreBoardUrl:any;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    if(window.innerWidth <= 600){
-      this.isMobileView = true;
-    }else{
-      this.isMobileView = false;
-    }
-    console.log(window.innerWidth);
-  }
-
   constructor(
     private _sharedService: SharedService,
     private _sportsBookService: SportsBookService,
@@ -93,16 +83,11 @@ export class MatchMarketListComponent implements OnInit {
     this._sharedService.marketBookCalSubject.subscribe(res=>{
       this.placeBetData = res;
     })
-
     this._cdref.detectChanges();
   }
 
   private _preConfig(){
-    if(window.innerWidth <= 600){
-      this.isMobileView = true;
-    }else{
-      this.isMobileView = false;
-    }
+
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._sharedService.getUserBalance.subscribe((res:any)=>{
       switch(res['marketType']){
@@ -123,6 +108,13 @@ export class MatchMarketListComponent implements OnInit {
       })
       this.getStreamingUrl();
       this._cdref.detectChanges();
+  }
+
+  isMobileViewCallInit(){
+    this.isMobileView =  this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res:any)=>{
+      this.isMobileView = res;
+    })
   }
 
   initConfig(){
@@ -151,7 +143,26 @@ export class MatchMarketListComponent implements OnInit {
           this.isMatchLive = res['inPlayUpcomingMarket']['inPlayStatus'];
           this.setOrUnsetWebSocketParamsObj['match']['centralIds'].push(res['inPlayUpcomingMarket']['centralId']);
           res['inPlayUpcomingMarket']['runners'].map(runnerRes=>{
+            if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+              runnerRes['back0'] ='';
+              runnerRes['vback0'] ='';
 
+              runnerRes['back1'] =  '';
+              runnerRes['vback1'] = '';
+
+              runnerRes['back2'] ='';
+              runnerRes['vback2'] = '';
+
+              runnerRes['lay0'] = '';
+              runnerRes['vlay0'] = '';
+
+              runnerRes['lay1'] =  '';
+              runnerRes['vlay1'] = '';
+
+              runnerRes['lay2'] = '';
+              runnerRes['vlay2'] = '';
+
+            }else{
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
@@ -169,6 +180,7 @@ export class MatchMarketListComponent implements OnInit {
 
                 runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
                 runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+            }
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -193,12 +205,19 @@ export class MatchMarketListComponent implements OnInit {
         res.map(sportsObj =>{
           this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'].push(sportsObj['centralId']);
           return sportsObj['runners'].map(runnerRes=>{
+            if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+              runnerRes['back0'] = '';
+              runnerRes['vback0'] = '';
 
+              runnerRes['lay0'] = '';
+              runnerRes['vlay0'] = '';
+            }else{
             runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
             runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
             runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
             runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+            }
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -418,9 +437,9 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   onClickLiveMarketRate(runnerObj:any,marketData:any,positionObj:any,marketType:number){
-    console.log(runnerObj,marketData);
-    console.log(marketData['SelectionId'])
-    console.log(marketData['RunnerName'])
+    console.log('runnerObj,marketData',runnerObj,marketData);
+    console.log('SelectionId',marketData['SelectionId'])
+    console.log('RunnerName',marketData['RunnerName'])
     this.marketType = marketType;
     this.betSlipObj = {
         "sportId":marketData['refSportId'],
