@@ -33,6 +33,7 @@ export class SportsMarketListComponent implements OnInit {
   betSlipObj:any = {};
   booksForMarket:any;
   placeBetData:any;
+  isMobileView:boolean;
 
   allTabState:any={
     liveUpcoming: true,
@@ -47,6 +48,7 @@ export class SportsMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isMobileViewCallInit();
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._route.params.subscribe(routeParams =>{
       this.allTabState={
@@ -71,6 +73,13 @@ export class SportsMarketListComponent implements OnInit {
       this.placeBetData = res;
     })
     this._cdref.detectChanges();
+  }
+
+  isMobileViewCallInit(){
+    this.isMobileView =  this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res:any)=>{
+      this.isMobileView = res;
+    })
   }
 
   initConfig(){
@@ -113,18 +122,18 @@ export class SportsMarketListComponent implements OnInit {
   }
 
   getSubNavBySportsList(){
-    this._sharedService._postTourListApi({name:this.sports}).subscribe((tourListRes:any)=>{
-      console.log('subNavList',tourListRes);
-      if(tourListRes?.length >0){
-        let updatedTourList = tourListRes.map((singleObj:any)=>(
-          {
-            'id':singleObj['tournamentId'],
-            'name':singleObj['tournamentName']
-          }
-        ));
-        this.subNavList = updatedTourList;
-      }
-    });
+    // this._sharedService._postTourListApi({name:this.sports}).subscribe((tourListRes:any)=>{
+    //   console.log('subNavList',tourListRes);
+    //   if(tourListRes?.length >0){
+    //     let updatedTourList = tourListRes.map((singleObj:any)=>(
+    //       {
+    //         'id':singleObj['tournamentId'],
+    //         'name':singleObj['tournamentName']
+    //       }
+    //     ));
+    //     this.subNavList = updatedTourList;
+    //   }
+    // });
   }
 
   getInPlayUpcomingData(){
@@ -137,23 +146,44 @@ export class SportsMarketListComponent implements OnInit {
           sportsObj['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
-            runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
-            runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
+            if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+              runnerRes['back0'] ='';
+              runnerRes['vback0'] ='';
 
-            runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
-            runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+              runnerRes['back1'] =  '';
+              runnerRes['vback1'] = '';
 
-            runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
-            runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
+              runnerRes['back2'] ='';
+              runnerRes['vback2'] = '';
 
-            runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
-            runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+              runnerRes['lay0'] = '';
+              runnerRes['vlay0'] = '';
 
-            runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
-            runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+              runnerRes['lay1'] =  '';
+              runnerRes['vlay1'] = '';
 
-            runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
-            runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+              runnerRes['lay2'] = '';
+              runnerRes['vlay2'] = '';
+
+            }else{
+              runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+              runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
+
+              runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
+              runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+
+              runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
+              runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
+
+              runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+              runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+
+              runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
+              runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+
+              runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
+              runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+            }
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -165,23 +195,44 @@ export class SportsMarketListComponent implements OnInit {
           sportsObj['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
-            runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
-            runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
+            if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+              runnerRes['back0'] ='';
+              runnerRes['vback0'] ='';
 
-            runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
-            runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+              runnerRes['back1'] =  '';
+              runnerRes['vback1'] = '';
 
-            runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
-            runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
+              runnerRes['back2'] ='';
+              runnerRes['vback2'] = '';
 
-            runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
-            runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+              runnerRes['lay0'] = '';
+              runnerRes['vlay0'] = '';
 
-            runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
-            runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+              runnerRes['lay1'] =  '';
+              runnerRes['vlay1'] = '';
 
-            runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
-            runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+              runnerRes['lay2'] = '';
+              runnerRes['vlay2'] = '';
+
+            }else{
+                runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+                runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
+
+                runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
+                runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+
+                runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds']: '';
+                runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv']:'';
+
+                runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+                runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+
+                runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
+                runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+
+                runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
+                runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+            }
 
                 runnerRes['suspended'] = true;
                 return runnerRes;

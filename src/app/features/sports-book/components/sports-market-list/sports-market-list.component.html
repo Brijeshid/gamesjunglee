@@ -25,7 +25,7 @@
           Live & Upcoming
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <!-- <li class="nav-item" role="presentation">
         <button
           class="btn nav-link"
           [class.active]="allTabState['leagues']"
@@ -56,7 +56,7 @@
         >
           Results
         </button>
-      </li>
+      </li> -->
     </ul>
   </div>
   <!-- Tab panes -->
@@ -65,7 +65,7 @@
 
 <div class="row m-0">
   <!--Aside start-->
-  <div class="col-md-2 asidenav mobileTableHide">
+  <div class="col-md-2 asidenav mobileTableHide" *ngIf="!isMobileView">
     <app-left-navigation></app-left-navigation>
   </div>
   <!--Aside end-->

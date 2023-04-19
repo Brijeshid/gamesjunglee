@@ -138,7 +138,7 @@
         </form>
       </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="isMobileView">
         <app-left-navigation></app-left-navigation>
       </div>
     </nav>
@@ -147,7 +147,7 @@
 <!--Header 1 end-->
 
 <!--Header 2 start--->
-<div class="header-tow mobileTableHide">
+<div class="header-tow mobileTableHide" *ngIf="!isMobileView">
   <ul class="nav justify-content-center animate__animated animate__flipInX">
     <li class="nav-item">
       <a
@@ -205,7 +205,7 @@
   </ul>
 </div>
 
-<div class="header-tow mobileTableShow collapse" id="navbarSupportedContent2">
+<div class="header-tow mobileTableShow collapse" id="navbarSupportedContent2" *ngIf="isMobileView">
   <ul class="nav justify-content-center animate__animated animate__flipInX">
     <li class="nav-item">
       <a

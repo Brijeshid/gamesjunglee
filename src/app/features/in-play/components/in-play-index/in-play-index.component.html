@@ -2,7 +2,7 @@
 <div class="row m-0">
   <!--Aside start-->
 
-  <div class="col-md-2 disnone">
+  <div class="col-md-2 disnone" *ngIf="!isMobileView">
     <div class="row">
       <div class="col-md-12 asidenav">
         <app-left-navigation></app-left-navigation>

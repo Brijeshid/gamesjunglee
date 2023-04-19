@@ -40,6 +40,7 @@ export class TourMarketListComponent implements OnInit {
   betSlipObj:any = {};
   booksForMarket:any;
   placeBetData:any;
+  isMobileView:boolean;
 
   constructor(
     private _sharedService: SharedService,
@@ -49,6 +50,7 @@ export class TourMarketListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isMobileViewCallInit();
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
     this._route.params.subscribe(routeParams =>{
       this.sports = routeParams.sports;
@@ -59,6 +61,13 @@ export class TourMarketListComponent implements OnInit {
     this._sharedService.getUserBalance.subscribe(res=>{
       this.placeBetData = [];
       if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
+    })
+  }
+
+  isMobileViewCallInit(){
+    this.isMobileView =  this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res:any)=>{
+      this.isMobileView = res;
     })
   }
 
@@ -90,6 +99,26 @@ export class TourMarketListComponent implements OnInit {
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['inplay']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
+            if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+              runnerRes['back0'] ='';
+              runnerRes['vback0'] ='';
+
+              runnerRes['back1'] =  '';
+              runnerRes['vback1'] = '';
+
+              runnerRes['back2'] ='';
+              runnerRes['vback2'] = '';
+
+              runnerRes['lay0'] = '';
+              runnerRes['vlay0'] = '';
+
+              runnerRes['lay1'] =  '';
+              runnerRes['vlay1'] = '';
+
+              runnerRes['lay2'] = '';
+              runnerRes['vlay2'] = '';
+
+            }else{
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
@@ -107,6 +136,7 @@ export class TourMarketListComponent implements OnInit {
 
                 runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
                 runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+            }
 
                 runnerRes['suspended'] = true;
                 return runnerRes;
@@ -118,6 +148,26 @@ export class TourMarketListComponent implements OnInit {
           if(sportsObj?.tournamentName) this.tourName =  sportsObj['tournamentName'];
           this.setOrUnsetWebSocketParamsObj['upcoming']['centralIds'].push(sportsObj['market']['centralId']);
           return sportsObj['market']['runners'].map(runnerRes=>{
+            if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+              runnerRes['back0'] ='';
+              runnerRes['vback0'] ='';
+
+              runnerRes['back1'] =  '';
+              runnerRes['vback1'] = '';
+
+              runnerRes['back2'] ='';
+              runnerRes['vback2'] = '';
+
+              runnerRes['lay0'] = '';
+              runnerRes['vlay0'] = '';
+
+              runnerRes['lay1'] =  '';
+              runnerRes['vlay1'] = '';
+
+              runnerRes['lay2'] = '';
+              runnerRes['vlay2'] = '';
+
+            }else{
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
@@ -135,6 +185,7 @@ export class TourMarketListComponent implements OnInit {
 
                 runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
                 runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+            }
 
                 runnerRes['suspended'] = true;
                 return runnerRes;

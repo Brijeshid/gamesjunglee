@@ -36,6 +36,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
   matchId:number;
   liveStreamingTVUrl:any;
   exposure:number =0;
+  isMobileView:boolean;
 
   constructor(
     private _sharedService: SharedService,
@@ -82,6 +83,7 @@ export class BetSlipComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit(): void {
+    this.isMobileViewCallInit();
     this._route.params.subscribe(routeParams =>{
       this.matchId = routeParams.matchId;
     });
@@ -97,6 +99,13 @@ export class BetSlipComponent implements OnInit, OnChanges {
     this._getUserOpenBet();
     this.getUserConfig();
     this._setUserIp();
+  }
+
+  isMobileViewCallInit(){
+    this.isMobileView =  this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res:any)=>{
+      this.isMobileView = res;
+    })
   }
 
   private _setUserIp(){
@@ -266,12 +275,10 @@ export class BetSlipComponent implements OnInit, OnChanges {
   }
 
   getUserBalance(){
-    this._sharedService._getBalanceInfoApi().subscribe((res:any)=>{
-      this.userBalance = res;
-      if(res){
-        this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(res?.minimumBet),Validators.max(res?.maxBet)]);
-      }
-    })
+    this.userBalance = this._sharedService.userBalance;
+    if(this.userBalance){
+      this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(this.userBalance?.minimumBet),Validators.max(this.userBalance?.maxBet)]);
+    }
   }
 
   getRunnerId(){
