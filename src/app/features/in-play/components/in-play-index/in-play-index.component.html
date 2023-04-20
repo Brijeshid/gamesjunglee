@@ -786,7 +786,7 @@
               >
                 <thead>
                   <tr>
-                    <th width="30%" class="tfirstcol">
+                    <th width="45%" class="tfirstcol">
                       <img
                         src="assets/images/{{
                           singleMatchBySports?.sportName | lowercase
@@ -796,14 +796,14 @@
                       {{ singleMatchBySports?.sportName | uppercase }}
                     </th>
 
-                    <th width="10%" colspan="1" class="text-center coldark">
+                    <th width="5%" colspan="1" class="text-center coldark">
                       1
                     </th>
-                    <th width="10%" colspan="1" class="text-center coldark">
+                    <th width="5%" colspan="1" class="text-center coldark">
                       X
                     </th>
                     <th
-                      width="10%"
+                      width="5%"
                       colspan="1"
                       class="text-center tlastcol coldark"
                     >
@@ -832,8 +832,8 @@
                       }}"
                     >
                       <td
-                        class="text-start ps-2 heading border-top pointer py-2"
-                        [ngClass]="{ 'border-top': !first }"
+                      class="text-start  heading border-top pointer"
+                      [ngClass]="{ 'border-top': !first }"
                       >
                         <a
                           ><strong
@@ -849,15 +849,15 @@
                       </td>
 
                       <td
-                        class="colblue pointer"
+                       
+                      >
+                        <a  class="colblue pointer"
                         [boxHighlight]="
                           singleMarket['market']['runners'][0]['back0']
                         "
                         [boxHighlight]="
                           singleMarket['market']['runners'][0]['vback0']
                         "
-                      >
-                        <a
                           ><strong>{{
                             singleMarket["market"]["runners"][0]["back0"]
                           }}</strong>
@@ -868,36 +868,38 @@
                         >
                       </td>
 
-                      <td
-                        class="colgray"
-                        *ngIf="singleMarket?.market?.runners[2]"
+                      <td *ngIf="singleMarket?.market?.runners[2]"                      
                       >
-                        -
+                      <a class="colgray"
+                      >
+                        -</a>
                       </td>
                       <td
-                        class="colgray"
+                       
                         *ngIf="!singleMarket?.market?.runners[2]"
                       >
-                        -
+                      <a class="colgray">
+                        -</a>
                       </td>
                       <!-- <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td> -->
 
                       <td
-                        class="colblue pointer"
-                        [boxHighlight]="
-                          singleMarket['market']['runners'][1]['back0']
-                        "
-                        [boxHighlight]="
-                          singleMarket['market']['runners'][1]['vback0']
-                        "
+                       
                       >
+                      <a href=""  class="colblue pointer"
+                      [boxHighlight]="
+                        singleMarket['market']['runners'][1]['back0']
+                      "
+                      [boxHighlight]="
+                        singleMarket['market']['runners'][1]['vback0']
+                      ">
                         <strong>{{
                           singleMarket["market"]["runners"][1]["back0"]
                         }}</strong>
                         <br /><span>{{
                           singleMarket["market"]["runners"][1]["vback0"]
                             | marketRateFormater
-                        }}</span>
+                        }}</span></a>
                       </td>
                     </tr>
                   </ng-container>
@@ -1151,7 +1153,7 @@
               >
                 <thead>
                   <tr>
-                    <th width="30%" class="tfirstcol">
+                    <th width="45%" class="tfirstcol">
                       <img
                         src="assets/images/{{
                           singleMatchBySports?.sportName | lowercase
@@ -1161,14 +1163,14 @@
                       {{ singleMatchBySports?.sportName | uppercase }}
                     </th>
 
-                    <th width="10%" colspan="1" class="text-center coldark">
+                    <th width="5%" colspan="1" class="text-center coldark">
                       1
                     </th>
-                    <th width="10%" colspan="1" class="text-center coldark">
+                    <th width="5%" colspan="1" class="text-center coldark">
                       X
                     </th>
                     <th
-                      width="10%"
+                      width="5%"
                       colspan="1"
                       class="text-center tlastcol coldark"
                     >
@@ -1217,8 +1219,8 @@
                         </a>
                       </td>
 
-                      <td class="colblue dis">
-                        <a
+                      <td >
+                        <a class="colblue dis"
                           ><strong>{{
                             singleMarket["market"]["runners"][0]["back0"]
                           }}</strong>
@@ -1233,26 +1235,29 @@
                                             <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td> -->
 
                       <td
-                        class="colgray"
+                        
                         *ngIf="!singleMarket?.market?.runners[2]"
                       >
-                        -
+                      <a  class="colgray">
+                        -</a>
                       </td>
 
                       <td
-                        class="colblue dis"
+                        
                         *ngIf="singleMarket?.market?.runners[2]"
                       >
+                      <a  class="colblue dis">
                         <strong>{{
                           singleMarket["market"]["runners"][2]["back0"]
                         }}</strong>
                         <br /><span>{{
                           singleMarket["market"]["runners"][2]["vback0"]
                             | marketRateFormater
-                        }}</span>
+                        }}</span></a>
                       </td>
 
-                      <td class="colblue dis">
+                      <td >
+                        <a  class="colblue dis">
                         <strong>{{
                           singleMarket["market"]["runners"][1]["back0"]
                         }}</strong>
@@ -1260,6 +1265,7 @@
                           singleMarket["market"]["runners"][1]["vback0"]
                             | marketRateFormater
                         }}</span>
+                        </a>
                       </td>
                     </tr>
                   </ng-container>

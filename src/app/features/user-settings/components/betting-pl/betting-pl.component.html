@@ -11,7 +11,7 @@
             <div class="col-md-4 col-6 mb-2">
                 <!-- <label class="text-white" for="games">Games </label> -->
                 <select name="game" id="casinogame"
-                    class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour">
+                    class="w-100 rounded-pill btn btn-md  bg-dark text-white border-colour">
                     <option value="all">All</option>
                     <option value="LiveCasino">LiveCasino</option>
                     <option value="CardGame">CardGame</option>
@@ -27,7 +27,7 @@
                         [controlName]="'secondDateRange'" #dateRangePicker (rangeSelected)="rangeSelected($event)">
                     <div class="form-group">
                         <div class="input-group">
-                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-colour" type="text" name="dateRange"
+                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md  bg-dark text-white border-colour" type="text" name="dateRange"
                             [value]="dateRangePicker.range" placeholder="From - To"  />
                         </div>
                     </div>
@@ -36,13 +36,13 @@
                     data-drops="up"> -->
             </div>
             <div class="col-md-2 col-6 mb-2">
-                <button type="button" class="btn btn-md  rounded-pill ms-2 bg-color text-white col-12" (click)="getProfitAndLoss()">Search</button>
+                <button type="button" class="btn btn-md  rounded-pill  bg-color text-white col-12" (click)="getProfitAndLoss()">Search</button>
             </div>
             <div class="col-md-2 col-6 mb-2">
-                <button *ngIf ="profitLoss.length > 0 " type="button" class="btn btn-md  rounded-pill ms-2 bg-color text-white col-12" (click)="exportExcel()">Export</button>
+                <button *ngIf ="profitLoss.length > 0 " type="button" class="btn btn-md  rounded-pill  bg-color text-white col-12" (click)="exportExcel()">Export</button>
             </div>
         </div>
-        <div class="innerpagem ms-2">
+        <div class="innerpagem">
             <!--Betting P&L start-->
             <div class="row p-0 mb-1">
                 <div *ngIf="profitLoss.length == 0" class="text-center p-5">
@@ -54,7 +54,7 @@
                     <div class="accordion rightacco" id="accordionExample">
                         <div class="accordion-item mb-1 ">
                             <h2 class="accordion-header" id="heading_one">
-                                <button class="accordion-button collapsed text-white" type="button"
+                                <button class="accordion-button  text-white m-0" type="button"
                                     data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_one'+ i" aria-expanded="false"
                                     aria-controls="collapse_one">
                                     {{pl.settledDate |  date :'MMM d, y, h:mm:ss a'}}</button>

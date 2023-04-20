@@ -505,9 +505,7 @@
 
 
                                   <td
-                                    class="colblue"
-                                    [boxHighlight]="runner['back0']"
-                                    [boxHighlight]="runner['vback0']"
+                                    
                                     (click)="
                                         onClickLiveMarketRate(
                                           runner,
@@ -520,7 +518,9 @@
                                         )
                                       "
                                   >
-                                    <a
+                                    <a class="colblue"
+                                    [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']"
 
                                       ><strong>{{ runner["back0"] }}</strong>
                                       <br /><span>{{
@@ -529,9 +529,7 @@
                                     >
                                   </td>
                                   <td
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay0']"
-                                    [boxHighlight]="runner['vlay0']"
+                                    
                                     (click)="
                                         onClickLiveMarketRate(
                                           runner,
@@ -544,7 +542,9 @@
                                         )
                                       "
                                   >
-                                    <a><strong>{{ runner["lay0"] }}</strong>
+                                    <a class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"><strong>{{ runner["lay0"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay0"] | marketRateFormater
                                       }}</span></a
@@ -684,8 +684,8 @@
                                   </td>
                                   <!-- <td class="border-top"></td>
                                 <td class="border-top"></td> -->
-                                  <td class="colblue dis">
-                                    <a
+                                  <td >
+                                    <a class="colblue dis"
                                       ><strong>{{ runner["back2"] }}</strong>
                                       <br /><span>{{
                                         runner["vback2"] | marketRateFormater
@@ -693,8 +693,8 @@
                                     >
                                   </td>
 
-                                  <td class="colpink dis">
-                                    <a
+                                  <td >
+                                    <a class="colpink dis"
                                       ><strong>{{ runner["lay0"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay0"] | marketRateFormater
