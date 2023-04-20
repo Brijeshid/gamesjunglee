@@ -392,7 +392,7 @@
                                 "
                               >
                                 <tr valign="middle">
-                                  <th class="tfirstcol">
+                                  <th width="70%" class="tfirstcol">
                                     <i
                                       class="fa-solid"
                                       [ngClass]="
@@ -489,9 +489,7 @@
                                       </a>
                                     </td>
                                     <td
-                                      class="colblue"
-                                      [boxHighlight]="runner['back2']"
-                                      [boxHighlight]="runner['vback2']"
+                                      
                                       (click)="
                                           onClickLiveMarketRate(
                                             runner,
@@ -505,7 +503,9 @@
                                         "
                                     >
                                       <a
-
+                                      class="colblue"
+                                      [boxHighlight]="runner['back2']"
+                                      [boxHighlight]="runner['vback2']"
                                         ><strong>{{ runner["back2"] }}</strong>
                                         <br /><span>{{
                                           runner["vback2"] | marketRateFormater
@@ -514,9 +514,7 @@
                                     </td>
 
                                     <td
-                                      class="colpink"
-                                      [boxHighlight]="runner['lay0']"
-                                      [boxHighlight]="runner['vlay0']"
+                                     
                                       (click)="
                                           onClickLiveMarketRate(
                                             runner,
@@ -530,7 +528,9 @@
                                         "
                                     >
                                       <a
-
+                                      class="colpink"
+                                      [boxHighlight]="runner['lay0']"
+                                      [boxHighlight]="runner['vlay0']"
                                         ><strong>{{ runner["lay0"] }}</strong>
                                         <br /><span>{{
                                           runner["vlay0"] | marketRateFormater
@@ -755,7 +755,7 @@
                                 "
                               >
                                 <tr valign="middle">
-                                  <th  class="tfirstcol">
+                                  <th width="70%"  class="tfirstcol">
                                     <i
                                       class="fa-solid"
                                       [ngClass]="
@@ -831,8 +831,8 @@
                                     </td>
                                     <!-- <td class="border-top"></td>
                                   <td class="border-top"></td> -->
-                                    <td class="colblue dis">
-                                      <a
+                                    <td >
+                                      <a class="colblue dis"
                                         ><strong>{{ runner["back2"] }}</strong>
                                         <br /><span>{{
                                           runner["vback2"] | marketRateFormater
@@ -840,8 +840,8 @@
                                       >
                                     </td>
 
-                                    <td class="colpink dis">
-                                      <a
+                                    <td >
+                                      <a class="colpink dis"
                                         ><strong>{{ runner["lay0"] }}</strong>
                                         <br /><span>{{
                                           runner["vlay0"] | marketRateFormater

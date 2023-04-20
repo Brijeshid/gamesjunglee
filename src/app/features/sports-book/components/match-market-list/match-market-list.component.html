@@ -384,7 +384,7 @@
                         >
                           <thead class="collapsible">
                             <tr>
-                              <th  class="tfirstcol">Match Odds</th>
+                              <th width="70%"  class="tfirstcol">Match Odds</th>
                               <th  class="coldark">
                                 <img
                                   src="/assets/images/timer.png"
@@ -395,13 +395,13 @@
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th
                                 colspan="1"
-                                class="text-end coldark"
+                                class="text-center coldark"
                               >
                                 Back
                               </th>
                               <th
                                 colspan="1"
-                                class="text-start coldark tlastcol"
+                                class="text-center coldark tlastcol"
                               >
                                 Lay
                               </th>
@@ -419,7 +419,7 @@
                               [ngClass]="{ 'border-0': last }"
                             >
                               <td
-                                width="30%"
+                               
                                 class="text-start ps-2 py-2 heading"
                                 [ngClass]="{ 'border-top': !first }"
                               >
@@ -471,13 +471,8 @@
                                 [ngClass]="{ 'border-top': !first }"
                               ></td>
                               <td
-                                width="10%"
-                                class="colblue"
-                                [boxHighlight]="runner['back2']"
-                                [boxHighlight]="runner['vback2']"
-                                [class.dis]="
-                                  inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
+                                
+                                
                                 (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
@@ -492,7 +487,12 @@
                                     )
                                 "
                               >
-                                <a class="boxeffect"
+                                <a class="colblue"
+                                [boxHighlight]="runner['back2']"
+                                [boxHighlight]="runner['vback2']"
+                                [class.dis]="
+                                  inPlayUpcomingMarket['inPlayStatus'] == 0
+                                " 
                                   ><strong>{{ runner["back2"] }}</strong>
                                   <br /><span>{{
                                     runner["vback2"] | marketRateFormater
@@ -500,13 +500,8 @@
                                 >
                               </td>
                               <td
-                                width="10%"
-                                class="colpink"
-                                [boxHighlight]="runner['lay0']"
-                                [boxHighlight]="runner['vlay0']"
-                                [class.dis]="
-                                  inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
+                            
+                                
                                 (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
@@ -522,7 +517,12 @@
                                 "
 
                               >
-                                <a class="boxeffect"
+                                <a class="colpink"
+                                [boxHighlight]="runner['lay0']"
+                                [boxHighlight]="runner['vlay0']"
+                                [class.dis]="
+                                  inPlayUpcomingMarket['inPlayStatus'] == 0
+                                "
                                   ><strong>{{ runner["lay0"] }}</strong>
                                   <br /><span>{{
                                     runner["vlay0"] | marketRateFormater
@@ -565,15 +565,15 @@
                           >
                             <thead>
                               <tr>
-                                <th colspan="10" class="h-100">
+                                <th  colspan="10" class="h-100">
                                   Bookmaker (0% Commission & Instant Bet)
                                 </th>
                               </tr>
                               <tr>
-                                <th width="30%" class="tfirstcol">
+                                <th width="70%" class="tfirstcol">
                                   {{ singleBookMaker["marketName"] }}
                                 </th>
-                                <th width="10%" class="coldark">
+                                <th  class="coldark">
                                   <img
                                     src="/assets/images/fast.png"
                                     class="timer"
@@ -581,16 +581,16 @@
                                 </th>
                                 <!-- <th width="10%" class="coldark"></th> -->
                                 <th
-                                  width="15%"
+                                 
                                   colspan="1"
-                                  class="text-end coldark"
+                                  class="text-center coldark"
                                 >
                                   Back
                                 </th>
                                 <th
                                   width="15%"
                                   colspan="1"
-                                  class="text-start coldark tlastcol"
+                                  class="text-center coldark tlastcol"
                                 >
                                   Lay
                                 </th>
@@ -608,7 +608,7 @@
                                 [ngClass]="{ 'border-0': last }"
                               >
                                 <td
-                                  width="30%"
+                                  
                                   class="text-start ps-2 heading border-top dis"
                                   [ngClass]="{ 'border-top': !first }"
                                 >
@@ -660,9 +660,7 @@
                                 ></td>
 
                                 <td
-                                  class="colblue"
-                                  [boxHighlight]="runner['back0']"
-                                  [boxHighlight]="runner['vback0']"
+                                
                                   (click)="
                                     onClickLiveMarketRate(
                                       runner,
@@ -676,7 +674,9 @@
                                     )
                                   "
                                 >
-                                  <a
+                                  <a   class="colblue"
+                                  [boxHighlight]="runner['back0']"
+                                  [boxHighlight]="runner['vback0']"
                                     ><strong>{{ runner["back0"] }}</strong>
                                     <br /><span>{{
                                       runner["vback0"] | marketRateFormater
@@ -684,9 +684,7 @@
                                   >
                                 </td>
                                 <td
-                                  class="colpink"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
+                                  
                                   (click)="
                                       onClickLiveMarketRate(
                                         runner,
@@ -700,7 +698,9 @@
                                       )
                                     "
                                 >
-                                  <a
+                                  <a class="colpink"
+                                  [boxHighlight]="runner['lay0']"
+                                  [boxHighlight]="runner['vlay0']"
 
                                     ><strong>{{ runner["lay0"] }}</strong>
                                     <br /><span>{{
@@ -1163,8 +1163,8 @@
                         >
                           <thead>
                             <tr>
-                              <th width="30%" class="tfirstcol">Fancy</th>
-                              <th width="10%" class="coldark">
+                              <th width="70%" class="tfirstcol">Fancy</th>
+                              <th  class="coldark">
                                 <img
                                   src="/assets/images/fast.png"
                                   class="timer"
@@ -1172,16 +1172,16 @@
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th
-                                width="15%"
+                               
                                 colspan="1"
-                                class="text-end coldark"
+                                class="text-center coldark"
                               >
                                 No
                               </th>
                               <th
-                                width="15%"
+                                
                                 colspan="1"
-                                class="text-start coldark tlastcol"
+                                class="text-center coldark tlastcol"
                               >
                                 Yes
                               </th>
@@ -1205,7 +1205,7 @@
                                 [ngClass]="{ 'border-0': last }"
                               >
                                 <td
-                                  width="30%"
+                                 
                                   class="text-start ps-2 heading border-top"
                                   [ngClass]="{ 'border-top': !first }"
                                 >
@@ -1229,7 +1229,7 @@
                                 </td>
 
                                 <td
-                                  width="10%"
+                                 
                                   class="border-top"
                                   [ngClass]="{ 'border-top': !first }"
                                 >
@@ -1255,10 +1255,8 @@
                                   </a>
                                 </td>
                                 <td
-                                  width="10%"
-                                  class="colpink"
-                                  [boxHighlight]="singleFancyMarket['lay1']"
-                                  [boxHighlight]="singleFancyMarket['vlay1']"
+                                 
+                                
                                   (click)="
                                     onClickLiveMarketRate(
                                       null,
@@ -1273,19 +1271,20 @@
                                     )
                                   "
                                 >
+                                <a class="colpink"
+                                [boxHighlight]="singleFancyMarket['lay1']"
+                                [boxHighlight]="singleFancyMarket['vlay1']">
                                   <strong>{{
                                     singleFancyMarket["lay1"]
                                   }}</strong>
                                   <br /><span>{{
                                     singleFancyMarket["vlay1"]
                                       | marketRateFormater
-                                  }}</span>
+                                  }}</span></a>
                                 </td>
                                 <td
-                                  width="10%"
-                                  class="colblue"
-                                  [boxHighlight]="singleFancyMarket['back1']"
-                                  [boxHighlight]="singleFancyMarket['vback1']"
+                                  
+                                 
                                   (click)="
                                     onClickLiveMarketRate(
                                       null,
@@ -1300,13 +1299,16 @@
                                     )
                                   "
                                 >
+                                <a  class="colblue"
+                                [boxHighlight]="singleFancyMarket['back1']"
+                                [boxHighlight]="singleFancyMarket['vback1']">
                                   <strong>{{
                                     singleFancyMarket["back1"]
                                   }}</strong>
                                   <br /><span>{{
                                     singleFancyMarket["vback1"]
                                       | marketRateFormater
-                                  }}</span>
+                                  }}</span></a>
                                 </td>
                               </tr>
                               <tr>
