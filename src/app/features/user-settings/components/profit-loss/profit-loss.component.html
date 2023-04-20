@@ -17,20 +17,20 @@
               <div class="row m-0 p-1 ps-3 pe-3 mb-1">
                   <p *ngIf="!betsPnl" >Loading...</p>
                   <table class="table table-hover" *ngIf="betsPnl">
-                      <thead>
+                      <thead class="bg-color">
                           <tr>
-                              <th class=" pe-0 tstartcol coldark">Placed</th>
-                              <th class=" pe-0 coldark">Match Time</th>
-                              <th class=" pe-0 coldark">Selection</th>
-                              <th class=" pe-0 coldark">Type</th>
-                              <th class=" pe-0 coldark">Odds</th>
-                              <th class=" pe-0 coldark">Stake</th>
-                              <th class=" pe-0 coldark">Profit/Loss</th>
-                              <th class=" pe-0 coldark tlastcol">Status</th>
+                              <th class=" pe-0 tstartcol">Placed</th>
+                              <th class=" pe-0">Match Time</th>
+                              <th class=" pe-0">Selection</th>
+                              <th class=" pe-0">Type</th>
+                              <th class=" pe-0">Odds</th>
+                              <th class=" pe-0">Stake</th>
+                              <th class=" pe-0">Profit/Loss</th>
+                              <th class=" pe-0 tlastcol">Status</th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr class=" table-light" *ngFor="let data of betsPnl">
+                          <tr *ngFor="let data of betsPnl">
                               <td>{{data.createDateTime | date :'d/MM/yy, h:mm a'}}</td>
                               <td>{{data.matchTime | date: 'd/MM/yy, h:mm a'}}</td>
                               <td>{{data.selectionName}}</td>
