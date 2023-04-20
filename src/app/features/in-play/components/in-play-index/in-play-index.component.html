@@ -779,7 +779,7 @@
           <ng-container
             *ngFor="let singleMatchBySports of inPlayMatchListBySport?.[0]?.['sports']"
           >
-            <div class="mobileTableShow">
+            <div class="mobileTableShow overflow-auto">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
