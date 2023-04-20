@@ -16,25 +16,35 @@
             <div class="innerpagem rounded">
                 <div class="row m-0 p-1 ps-3 pe-3 mb-1">
 
-                    <table class="table table-striped table-hover border-0">
-                        <thead>
+                    <table class="table tableall text-center">
+                        <thead class="bg-color">
                             <tr>
-                                <th class="text-center pe-0 tstartcol coldark">Placed</th>
-                                <th class="text-center pe-0 coldark">Match Time</th>
-                                <th class="text-center pe-0 coldark">Selection</th>
-                                <th class="text-center pe-0 coldark">Type</th>
-                                <th class="text-center pe-0 coldark">Odds</th>
-                                <th class="text-center pe-0 coldark">Stake</th>
-                                <th class="text-center pe-0 coldark">Profit/Loss</th>
-                                <th class="text-center pe-0 tlastcol coldark">Status</th>
+                                <th class="text-center pe-0 tstartcol ">Placed</th>
+                                <th class="text-center pe-0 ">Match Time</th>
+                                <th class="text-center pe-0 ">Selection</th>
+                                <th class="text-center pe-0 ">Type</th>
+                                <th class="text-center pe-0 ">Odds</th>
+                                <th class="text-center pe-0 ">Stake</th>
+                                <th class="text-center pe-0 ">Profit/Loss</th>
+                                <th class="text-center pe-0 tlastcol ">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr  *ngFor="let data of betsPnl" class="table-light text-center">
+                            <tr  *ngFor="let data of betsPnl" class="text-white text-center">
                                 <td>{{data.createDateTime | date :'d/MM/yy, h:mm a'}}</td>
                                 <td>{{data.matchTime | date: 'd/MM/yy, h:mm a'}}</td>
                                 <td>{{data.selectionName}}</td>
-                                <td>{{data.type}}</td>
+                                <td>
+                                    <span
+                                    *ngIf="data.isBack == false"
+                                    class="border r-2 bg-danger text-danger border-danger me-2 border-3"
+                                  ></span>
+                                  <span
+                                    *ngIf="data.isBack == true"
+                                    class="border bg-primary text-primary border-primary me-2 border-3"
+                                  ></span>
+                                    {{data.type}}
+                                </td>
                                 <td>{{data.odds}}</td>
                                 <td>{{data.stake}}</td>
                                 <td [ngClass]="data.status == 'WON'?'text-success':'text-danger' ">{{data?.winAmount | number}}</td>

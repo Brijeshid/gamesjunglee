@@ -74,7 +74,7 @@
                 <small>{{ betSlipParams["selectionName"] }}</small>
               </p>
             </div>
-            <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
+            <div class="card-body" [class.batsliploader]="isLoaderStart">
               <div class="row">
                 <div class="col-md-12">
                   <form [formGroup]="betSlipForm">
@@ -188,23 +188,23 @@
                           >
                         </ng-container>
                       </div>
-                      <div class="col-md-6 col-6 mt-3">
+                      <div class="col-md-6 col-6">
                         <p class="text-dark mb-2">or Choose You Stake</p>
                       </div>
-                      <div class="col-md-6 col-6 mt-3 text-end text-dark">
+                      <div class="col-md-6 col-6 text-end text-dark">
                         <a
                           class="text-decoration-none text-dark"
                           routerLink="/settings"
                           >EDIT STAKES</a
                         >
                       </div>
-                      <div class="col-md-12">
-                        <p class="text-dark mb-1">Size</p>
+                      <div class="col-md-12 m-0">
+                        <p class="text-dark m-0">Size</p>
                       </div>
                     </div>
                     <div class="row">
                       <div
-                        class="col-md-4 col-4 p-1 mb-1"
+                        class="col-md-4 col-4 p-1"
                         *ngFor="
                           let item of userConfig?.userConfig?.EditStakesBtn
                         "
@@ -224,7 +224,7 @@
                         </button>
                       </div>
 
-                      <div class="col-md-6 col-6 p-1 mt-3">
+                      <div class="col-md-6 col-6 p-1">
                         <button
                           type="button"
                           class="btn border-colour w-100 p-2 rounded-pill betbtn"
@@ -233,7 +233,7 @@
                           CANCEL
                         </button>
                       </div>
-                      <div class="col-md-6 col-6 p-1 mt-3">
+                      <div class="col-md-6 col-6 p-1">
                         <button
                           type="submit"
                           class="btn w-100 p-1 rounded-pill betbtn"
@@ -275,7 +275,7 @@
                       </div>
                     </div>
                     <p
-                      class="text-bold mt-3"
+                      class="text-bold m-0"
                       [ngStyle]="{
                         color:
                           betSlipParams['isBack'] === true
@@ -595,7 +595,7 @@
             {{ betSlipParams["selectionName"] }}
 
           </p>
-          <div class="card-body pt-2" [class.batsliploader]="isLoaderStart">
+          <div class="card-body p-0" [class.batsliploader]="isLoaderStart">
             <div class="row">
               <div class="col-md-12">
                 <form [formGroup]="betSlipForm">
@@ -704,10 +704,10 @@
                         >
                       </ng-container>
                     </div>
-                    <div class="col-md-6 col-6 mt-3">
-                      <p class="text-dark mb-2">or Choose You Stake</p>
+                    <div class="col-md-6 col-6  ">
+                      <p class="text-dark m-0">or&nbsp;Choose&nbsp;You&nbsp;Stake</p>
                     </div>
-                    <div class="col-md-6 col-6 mt-3 text-end">
+                    <div class="col-md-6 col-6 text-end">
                       <a
                         class="text-decoration-none"
                         routerLink="/settings"
@@ -720,8 +720,8 @@
                         >EDIT STAKES</a
                       >
                     </div>
-                    <div class="col-md-12">
-                      <p class="text-dark mb-1">Size</p>
+                    <div class="col-md-12 m-0">
+                      <p class="text-dark">Size</p>
                     </div>
                   </div>
                   <div class="row">
@@ -744,7 +744,7 @@
                       </button>
                     </div>
 
-                    <div class="col-md-6 col-6 p-1 mt-3">
+                    <div class="col-md-6 col-6 p-1">
                       <button
                         type="button"
                         class="btn border-colour w-100 p-2 rounded-pill betbtn"
@@ -753,7 +753,7 @@
                         CANCEL
                       </button>
                     </div>
-                    <div class="col-md-6 col-6 p-1 mt-3">
+                    <div class="col-md-6 col-6 p-1">
                       <button
                         type="submit"
                         class="btn w-100 p-1 rounded-pill betbtn"
@@ -792,18 +792,21 @@
                       </button>
                     </div>
                   </div>
-                  <p
-                    class="text-bold mt-3"
+                  <div class="m-0">
+                    <p
+                    class="text-bold m-0"
                     [ngStyle]="{
                       color:
                         betSlipParams['isBack'] === true ? '#6abefa' : '#ffb9b5'
                     }"
                   >
-                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <i class="fa fa-exclamation-circle m-0" aria-hidden="true"></i>
                     Min Bet: {{ userBalance?.minimumBet }} Max Bet:
                     {{ userBalance?.maxBet }}
                   </p>
-                  <div class="form-group">
+                  </div>
+
+                  <div class="form-group m-0">
                     <label class="form-check-label text-dark" for="gridCheck"
                       >Confirm bets before placing</label
                     >
