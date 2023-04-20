@@ -1,111 +1,166 @@
 <!--body start-->
 <div class="row m-0">
-    <div class="col-md-12 pb-2 pt-2">
-        <a class="text-color small text-decoration-none h6"><i class="fa fa-angle-left text-white" (click)="goBack()"></i>&nbsp;&nbsp; Betting
-            P&L</a>
-    </div>
-    <hr class="text-color">
-    <!--Artical Start-->
-    <div class="col-md-12 ps-md-5 pe-md-5 accordionn">
-        <div class="row mb-4 ps-0">
-            <div class="col-md-4 col-6 mb-2">
-                <!-- <label class="text-white" for="games">Games </label> -->
-                <select name="game" id="casinogame"
-                    class="w-100 rounded-pill btn btn-md  bg-dark text-white border-colour">
-                    <option value="all">All</option>
-                    <option value="LiveCasino">LiveCasino</option>
-                    <option value="CardGame">CardGame</option>
-                    <option value="SportsBook">SportsBook</option>
-                    <option value="PremiumSportbook">PremiumSportbook</option>
-                    <option value="Racing">Racing</option>
-                </select>
+  <div class="col-md-12 pb-2 pt-2">
+    <a class="text-color small text-decoration-none h6"
+      ><i class="fa fa-angle-left text-white" (click)="goBack()"></i
+      >&nbsp;&nbsp; Betting P&L</a
+    >
+  </div>
+  <hr class="text-color" />
+  <!--Artical Start-->
+  <div class="col-md-12 ps-md-5 pe-md-5 accordionn">
+    <div class="row mb-4 ps-0">
+      <div class="col-md-4 col-6 mb-2">
+        <!-- <label class="text-white" for="games">Games </label> -->
+        <select
+          name="game"
+          id="casinogame"
+          class="w-100 rounded-pill btn btn-md bg-dark text-white border-colour"
+        >
+          <option value="all">All</option>
+          <option value="LiveCasino">LiveCasino</option>
+          <option value="CardGame">CardGame</option>
+          <option value="SportsBook">SportsBook</option>
+          <option value="PremiumSportbook">PremiumSportbook</option>
+          <option value="Racing">Racing</option>
+        </select>
+      </div>
+      <div class="col-md-4 col-6 mb-2">
+        <div class="wrapper"></div>
+        <!-- <input type="date" class="form-control"  placeholder="Date">  -->
+        <date-range-picker
+          [instanceId]="'secondDateRange'"
+          [options]="options"
+          [controlName]="'secondDateRange'"
+          #dateRangePicker
+          (rangeSelected)="rangeSelected($event)"
+        >
+          <div class="form-group">
+            <div class="input-group">
+              <input
+                id="secondDateRange"
+                class="w-100 rounded-pill btn btn-md bg-dark text-white border-colour"
+                type="text"
+                name="dateRange"
+                [value]="dateRangePicker.range"
+                placeholder="From - To"
+              />
             </div>
-            <div class="col-md-4 col-6 mb-2">
-                <div class="wrapper"></div>
-                <!-- <input type="date" class="form-control"  placeholder="Date">  -->
-                <date-range-picker [instanceId]="'secondDateRange'" [options]="options"
-                        [controlName]="'secondDateRange'" #dateRangePicker (rangeSelected)="rangeSelected($event)">
-                    <div class="form-group">
-                        <div class="input-group">
-                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md  bg-dark text-white border-colour" type="text" name="dateRange"
-                            [value]="dateRangePicker.range" placeholder="From - To"  />
-                        </div>
-                    </div>
-                    </date-range-picker>
-                <!-- <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
+          </div>
+        </date-range-picker>
+        <!-- <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
                     data-drops="up"> -->
-            </div>
-            <div class="col-md-2 col-6 mb-2">
-                <button type="button" class="btn btn-md  rounded-pill  bg-color text-white col-12" (click)="getProfitAndLoss()">Search</button>
-            </div>
-            <div class="col-md-2 col-6 mb-2">
-                <button *ngIf ="profitLoss.length > 0 " type="button" class="btn btn-md  rounded-pill  bg-color text-white col-12" (click)="exportExcel()">Export</button>
-            </div>
-        </div>
-        <div class="innerpagem">
-            <!--Betting P&L start-->
-            <div class="row p-0 mb-1">
-                <div *ngIf="profitLoss.length == 0" class="text-center p-5">
-                    <h4 *ngIf="profitLoss.length == 0 && !isLoading">No data found</h4>
-                    <h4 *ngIf="isLoading">Loading...</h4>
-                  </div>
-                <!-- accordin -->
-                <div class="col-md-12 pb-0 ps-4 pe-4 betting-pl-cls" *ngFor="let pl of profitLoss;let i= index;">
-                    <div class="accordion rightacco" id="accordionExample">
-                        <div class="accordion-item mb-1 ">
-                            <h2 class="accordion-header" id="heading_one">
-                                <button class="accordion-button  text-white m-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_one'+ i" aria-expanded="false"
-                                    aria-controls="collapse_one">
-                                    {{pl.settledDate |  date :'MMM d, y, h:mm:ss a'}}</button>
-                            </h2>
-                            <div id="collapse_one{{i}}" class="accordion-collapse collapse show" aria-labelledby="collapse_one"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body ps-3 pe-3 text-white">
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h5>SportBook</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p>Comm :</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end">{{pl.commission | number}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><a routerLink="matchName-pl" (click)="setPlBet(pl)"> {{pl.matchName}}-{{pl.marketName}}</a></h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p>Net Win :</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p class="float-end" [ngClass]="pl.netAmt>=0?'text-success':'text-danger'">{{pl.netAmt | number}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Settled Date: </strong>{{pl.settledDate |  date :'d/MM/yy, h:mm a'}}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 pe-5">
-                                            <h6><strong>Winner: </strong>{{pl.winningHorseName}}</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!--Betting P&L end-->
-
-        </div>
+      </div>
+      <div class="col-md-2 col-6 mb-2">
+        <button
+          type="button"
+          class="btn btn-md rounded-pill bg-color text-white col-12"
+          (click)="getProfitAndLoss()"
+        >
+          Search
+        </button>
+      </div>
+      <div class="col-md-2 col-6 mb-2">
+        <button
+          *ngIf="profitLoss.length > 0"
+          type="button"
+          class="btn btn-md rounded-pill bg-color text-white col-12"
+          (click)="exportExcel()"
+        >
+          Export
+        </button>
+      </div>
     </div>
-    <!--Artical end-->
+    <div class="innerpagem">
+      <!--Betting P&L start-->
+      <div class="row p-0 mb-1">
+        <div *ngIf="profitLoss.length == 0" class="text-center p-5">
+          <h4 *ngIf="profitLoss.length == 0 && !isLoading">No data found</h4>
+          <h4 *ngIf="isLoading">Loading...</h4>
+        </div>
+        <!-- accordin -->
+        <div
+          class="col-md-12 pb-0 ps-md-4 pe-md-4 betting-pl-cls"
+          *ngFor="let pl of profitLoss; let i = index"
+        >
+          <div class="accordion rightacco" id="accordionExample">
+            <div class="accordion-item mb-1">
+              <h2 class="accordion-header" id="heading_one">
+                <button
+                  class="accordion-button text-white m-0"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapse_one' + i"
+                  aria-expanded="false"
+                  aria-controls="collapse_one"
+                >
+                  {{ pl.settledDate | date : "MMM d, y, h:mm:ss a" }}
+                </button>
+              </h2>
+              <div
+                id="collapse_one{{ i }}"
+                class="accordion-collapse collapse show"
+                aria-labelledby="collapse_one"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body ps-3 pe-3 text-white">
+                  <div class="row">
+                    <div class="col-md-6 pe-5">
+                      <h5>SportBook</h5>
+                    </div>
+                    <div class="col-md-3">
+                      <p>Comm :</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p class="float-end">{{ pl.commission | number }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pe-5">
+                      <h6>
+                        <a routerLink="matchName-pl" (click)="setPlBet(pl)">
+                          {{ pl.matchName }}-{{ pl.marketName }}</a
+                        >
+                      </h6>
+                    </div>
+                    <div class="col-md-3">
+                      <p>Net Win :</p>
+                    </div>
+                    <div class="col-md-3">
+                      <p
+                        class="float-end"
+                        [ngClass]="
+                          pl.netAmt >= 0 ? 'text-success' : 'text-danger'
+                        "
+                      >
+                        {{ pl.netAmt | number }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pe-5">
+                      <h6>
+                        <strong>Settled Date: </strong
+                        >{{ pl.settledDate | date : "d/MM/yy, h:mm a" }}
+                      </h6>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pe-5">
+                      <h6>
+                        <strong>Winner: </strong>{{ pl.winningHorseName }}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Betting P&L end-->
+    </div>
+  </div>
+  <!--Artical end-->
 </div>
 <!--Body end-->

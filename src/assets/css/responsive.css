@@ -1,4 +1,3 @@
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .w-30 {
@@ -20,6 +19,7 @@
     color: #fff;
     font-size: 12px;
     background: none;
+    padding: 10px;
   }
   .colblue,
   .colblue.light,
@@ -48,6 +48,9 @@
 
   .head_logo {
     width: 5rem !important;
+  }
+  .tabetails .table td {
+    font-size: 11px;
   }
 }
 
@@ -110,13 +113,9 @@
 @media only screen and (max-width: 1440px) {
   .asidenav ul {
     font-size: 12px;
-    
   }
 
-  .asidenav ul li a{
+  .asidenav ul li a {
     padding: 0.5rem;
   }
-
-  
 }
-
