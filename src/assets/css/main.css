@@ -1348,3 +1348,7 @@ small {
 .gamedetails.mobileTableShow{
   padding: 15px;
 }
+
+.betting-pl-cls .accordion-item .accordion-collapse a{
+  color: #e76f26;
+}
