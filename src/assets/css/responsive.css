@@ -1,3 +1,4 @@
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .w-30 {
@@ -81,13 +82,13 @@
   }
 }
 
-@media only screen and (min-width: 1024px) {
+/* @media only screen and (min-width: 1024px) {
   .header-tow {
     position: sticky;
     top: 0;
     z-index: 999;
   }
-}
+} */
 
 @media only screen and (max-width: 1024px) {
   .head_logo {
@@ -105,3 +106,17 @@
     width: 9rem;
   }
 }
+
+@media only screen and (max-width: 1440px) {
+  .asidenav ul {
+    font-size: 12px;
+    
+  }
+
+  .asidenav ul li a{
+    padding: 0.5rem;
+  }
+
+  
+}
+

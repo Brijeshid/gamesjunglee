@@ -1338,7 +1338,7 @@ small {
 .mobileTableShow.header-tow li a {
   font-size: 10px !important;
   color: #fff;
-  padding: 10px 15px;
+  padding: 10px 10px;
   margin: 3px;
   border: 1px solid rgba(62, 64, 64, 0);
   border-radius: 60px;
@@ -1347,4 +1347,32 @@ small {
 
 .gamedetails.mobileTableShow{
   padding: 15px;
+}
+
+.betting-pl-cls .accordion-item .accordion-collapse a{
+  color: #e76f26;
+}
+
+
+.gamedetails .mobileTableShow .table td:nth-child(1) {
+  text-align: left;
+}
+
+.gamedetails .mobileTableShow .table td .colblue,
+.gamedetails .mobileTableShow .table td .colgray,
+.gamedetails .mobileTableShow .table td .colpink {
+  border-radius: 2rem;
+  height: 35px !important;
+  padding: 0 !important;
+  min-width: 55px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  line-height: 6px;
+}
+
+.gamedetails .mobileTableShow .table td {
+  padding: 5px 5px;
+  border-top: 0 !important;
 }
