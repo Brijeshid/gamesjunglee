@@ -82,7 +82,11 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
     }
     if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
       this.marketType = changes['marketType']['currentValue'];
-      if(this.marketType !== EMarketType.MATCH_TYPE) this.betSlipForm.controls['odds'].disable();
+      if(this.marketType == EMarketType.BOOKMAKER_TYPE){
+        this.betSlipForm.controls['odds'].disable();
+      }else{
+        this.betSlipForm.controls['odds'].enable();
+      } 
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
 

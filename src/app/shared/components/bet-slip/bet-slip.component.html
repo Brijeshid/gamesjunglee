@@ -99,6 +99,7 @@
                             "
                           >
                             <span
+                            *ngIf="marketType == EMarketType.MATCH_TYPE"
                               class="minus"
                               (click)="
                                 betSlipParams['odds'] > 0 &&
@@ -115,6 +116,7 @@
                               formControlName="odds"
                             />
                             <span
+                              *ngIf="marketType == EMarketType.MATCH_TYPE"
                               class="plus"
                               (click)="upAndDownOddsValue(true)"
                               >+</span
@@ -604,7 +606,7 @@
                       <label
                         class="text-dark"
                         *ngIf="marketType !== EMarketType.FANCY_TYPE"
-                        >Odds</label
+                        >Odds{{marketType}}</label
                       >
                       <label
                         class="text-dark"
@@ -614,12 +616,13 @@
                       <div class="number">
                         <ng-container
                           *ngIf="
-                            marketType == EMarketType.MATCH_TYPE ||
-                              marketType == EMarketType.BOOKMAKER_TYPE;
+                            (marketType == EMarketType.MATCH_TYPE) ||
+                            (marketType == EMarketType.BOOKMAKER_TYPE)
                             else otherMarket
                           "
                         >
                           <span
+                            *ngIf="marketType == EMarketType.MATCH_TYPE"
                             class="minus"
                             (click)="
                               betSlipParams['odds'] > 0 &&
@@ -635,7 +638,7 @@
                             formControlName="odds"
                             autofocus
                           />
-                          <span class="plus" (click)="upAndDownOddsValue(true)"
+                          <span *ngIf="marketType == EMarketType.MATCH_TYPE" class="plus" (click)="upAndDownOddsValue(true)"
                             >+</span
                           >
                           <ng-container
