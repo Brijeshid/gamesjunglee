@@ -1378,3 +1378,34 @@ small {
   padding: 5px 5px;
   border-top: 0 !important;
 }
+
+/* mobile navigation */
+
+#leftslider {
+  padding-right: 0;
+  transition: all 0.5s ease;
+  width: 250px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 1000;
+  background: #202121;
+  color: #fff;
+  font-size: 12px;
+  overflow-x: hidden;
+  transition: all 0.5s ease;
+  box-shadow: 0px 1px 2px #ffa7a3;
+}
+#leftslider a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#leftslider.toggled {
+  padding-right: 250px;
+}
+#leftslider.toggled #page-content-wrapper {
+  position: absolute;
+  margin-left: -250px;
+}
