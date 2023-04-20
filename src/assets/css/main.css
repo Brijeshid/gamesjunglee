@@ -45,7 +45,8 @@ body {
   color: #fff;
   /* padding: 10px 30px; */
   border-radius: 25px;
-  font-size: 1rem;
+  /* font-size: 1rem; */
+  font-size: 0.75rem;
   background-image: linear-gradient(0deg, #cd212f 0, #e76f26);
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;

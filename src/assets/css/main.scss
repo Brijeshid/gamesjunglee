@@ -89,7 +89,8 @@ $background-color_23: #fba2b6;
   border: none;
   // padding: 10px 30px;
   border-radius: 25px;
-  font-size: 1rem;
+  // font-size: 1rem;
+  font-size: 0.75rem;
   background-image: linear-gradient(0deg, $gradient1 0, $gradient2);
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -1160,10 +1161,9 @@ small {
   font-size: 0.875rem;
 }
 
-
 // New bg-colour
 
-.bg-color{
+.bg-color {
   background: linear-gradient(0deg, $gradient1 0, $gradient2);
 }
 
@@ -1186,8 +1186,8 @@ small {
   // animation: spin 2s linear infinite;
 }
 
-
-.form-signin .form-floating > .form-control, .form-floating > .form-select {
+.form-signin .form-floating > .form-control,
+.form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
   color: #fff;
   border-bottom: 1px solid #fff !important;

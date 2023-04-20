@@ -106,16 +106,18 @@
             </div>
             <table
               *ngIf="accountStatement.length !== 0"
-              class="table table-striped table-hover border-0"
+              class="table table-striped table-hover border-0 text-center"
             >
               <thead>
-                <tr>
-                  <th class="pe-0 tstartcol coldark">Sr No</th>
-                  <th class="coldark ps-3">Date</th>
-                  <th class="pe-0 coldark">Credit</th>
-                  <th class="pe-0 coldark">Debit</th>
-                  <th class="pe-0 coldark">Balance</th>
-                  <th class="coldark tlastcol">Remark</th>
+                <tr
+                  style="background: linear-gradient(90deg, #cd212f 0, #e76f26)"
+                >
+                  <th class="pe-0 tstartcol text-white">Sr No</th>
+                  <th class="text-white ps-3">Date</th>
+                  <th class="pe-0 text-white">Credit</th>
+                  <th class="pe-0 text-white">Debit</th>
+                  <th class="pe-0 text-white">Balance</th>
+                  <th class="text-white tlastcol">Remark</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,11 +126,11 @@
                   *ngFor="let acctstatement of accountStatement; let i = index"
                   (click)="openProfitLoss(acctstatement.matchId)"
                 >
-                  <td class="text-center">{{ i + 1 }}</td>
-                  <td class="p-3 text-center">
+                  <td class="">{{ i + 1 }}</td>
+                  <td class="p-3">
                     {{ acctstatement.date | date : "MMM d, y, h:mm:ss a" }}
                   </td>
-                  <td class="text-center">
+                  <td class="">
                     <span
                       [ngClass]="
                         acctstatement.credit > 0
@@ -142,7 +144,7 @@
                       ><strong>-</strong></span
                     >
                   </td>
-                  <td class="text-center">
+                  <td class="">
                     <span
                       [ngClass]="
                         acctstatement.debit > 0 ? 'text-success' : 'text-danger'
@@ -154,7 +156,7 @@
                       ><strong>-</strong></span
                     >
                   </td>
-                  <td class="text-center">
+                  <td class="">
                     {{ acctstatement.balance | number }}
                   </td>
                   <td>{{ acctstatement.remark }}</td>
