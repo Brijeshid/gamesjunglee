@@ -101,7 +101,7 @@
           <ng-container
             *ngFor="let singleMatchBySports of inPlayMatchListBySport?.[0]?.['sports']"
           >
-            <div class="mobileTableShow">
+            <div class="mobileTableShow" *ngIf="isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -226,7 +226,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="mobileTableHide">
+            <div class="mobileTableHide" *ngIf="!isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -466,7 +466,7 @@
           <ng-container
             *ngFor="let singleMatchBySports of upComingMatchListBySport?.[0]?.['sports']"
           >
-            <div class="mobileTableShow">
+            <div class="mobileTableShow" *ngIf="isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -590,7 +590,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="mobileTableHide">
+            <div class="mobileTableHide" *ngIf="!isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
