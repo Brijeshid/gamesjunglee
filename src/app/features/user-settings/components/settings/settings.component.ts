@@ -20,6 +20,8 @@ export class SettingsComponent implements OnInit {
   isEditMode1 = false;
   isLoading = false;
   editOneClickStakeActiveBtn : any;
+  userBalance:any;
+  creditLimit:any;
 
   constructor(
     private _userSettingsService: UserSettingsMainService,
@@ -41,12 +43,13 @@ export class SettingsComponent implements OnInit {
       (res:any) => {
         if(res?.userConfig){
           this.userConfig = res;
-          this.editBetting=new FormArray(res['userConfig']['editOneClickStakeBtn'].map(_singleValue=>new FormControl(_singleValue)));
+          this.editBetting=new FormArray(res['userConfig']['editOneClickStakeBtn'].map(_singleValue=>new FormControl(_singleValue)));   
           this.editBettingEditStake=new FormArray(res['userConfig']['EditStakesBtn'].map(_singleValue1=>new FormControl(_singleValue1)));
           this.isLoading = false;
           this.editOneClickStakeActiveBtn = res.userConfig.editOneClickStakeActiveBtn;
         }
       });
+      this.getUserBalance()
   }
 
   getControl(index){
@@ -80,6 +83,7 @@ export class SettingsComponent implements OnInit {
       (res) => {
         this.userConfig = res  ;
         this.getUserConfig();
+        this.isEditMode = false;
       });
       this._sharedService.getToastPopup("User Settings saved sucessfully",'Settings','success');
 
@@ -89,9 +93,26 @@ export class SettingsComponent implements OnInit {
       this._location.back();
     }
 
+    getUserBalance(){
+      this._sharedService._getBalanceInfoApi().subscribe((res:any)=>{
+        this.userBalance = res;
+        this._sharedService.userBalance = res.availableCredit;
+        this.creditLimit = res.creditLimit
+        console.log(res.creditLimit)
+      })
+    }
+
     setOneClickActiveBtn(activeBtn){
       console.log(activeBtn)
-      this.editOneClickStakeActiveBtn = activeBtn;
-      this.onSubmitSave();
+      if(this.creditLimit >= activeBtn){
+        // console.log(this.availableCredit >= activeBtn)
+        this.editOneClickStakeActiveBtn = activeBtn;
+        this.onSubmitSave();
+      }
+      // else{
+      //   if(!this.isEditMode){
+      //   this._sharedService.getToastPopup("Stake is greater than balance available",'Settings','error');
+      //   }
+      // }
     }
 }
