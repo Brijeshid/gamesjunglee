@@ -1,4 +1,4 @@
-<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableHide">
+<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableHide" *ngIf="!isMobileView">
   <div class="col-md-12 accordionn">
     <div *ngIf="liveStreamingTVUrl" id="videoplayer">
       <iframe
@@ -580,7 +580,7 @@
   </div>
 </div>
 
-<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableShow">
+<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableShow" *ngIf="isMobileView">
   <div class="col-md-12">
     <div class="innerpagem">
       <!--Betslip start-->

@@ -58,7 +58,7 @@ export class TourMarketListComponent implements OnInit {
       // this.initConfig();
       this._getWebSocketUrl();
     })
-    this._sharedService.getUserBalance.subscribe(res=>{
+    this._sharedService.getUserBalanceMarket.subscribe(res=>{
       this.placeBetData = [];
       if(this.inPlayMatchListBySport.length > 0 && this.isLoggedIn) this.getBooksForMarket(this.inPlayMatchListBySport);
     })

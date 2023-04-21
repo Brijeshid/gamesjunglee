@@ -105,7 +105,8 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
     this._sharedService.unMatchSubjectListSubject.subscribe(()=>{
       this._getUserOpenBet();
-      this._sharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+      this._sharedService.getUserBalance.next();
+      this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.MATCH_TYPE});
     })
 
     this.isBack = this.betSlipParams?.isBack;
@@ -183,7 +184,8 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
               this.isBetSlipActive = false;
               this.isBetSlipPlaceCall = false;
               this.isLoaderStart = false;
-              this._sharedService.getUserBalance.next({'marketType': this.marketType});
+              this._sharedService.getUserBalance.next();
+              this._sharedService.getUserBalanceMarket.next({'marketType': this.marketType});
               this.betSlipForm.reset();
               this._getUserOpenBet();
               this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
@@ -194,7 +196,8 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
         this.isBetSlipActive = false;
         this.isBetSlipPlaceCall = false;
         this.isLoaderStart = false;
-        this._sharedService.getUserBalance.next({'marketType': this.marketType});
+        this._sharedService.getUserBalance.next();
+        this._sharedService.getUserBalanceMarket.next({'marketType': this.marketType});
         this.betSlipForm.reset();
         this._getUserOpenBet();
       });
@@ -344,24 +347,25 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
     this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
       this._sharedService.getToastPopup('Successfully Bet Cancelled','Bet Cancelled','success');
       marketType = marketType.toUpperCase();
+      this._sharedService.getUserBalance.next();
         switch(marketType){
           case EMarketName.MATCH_ODDS_UNDERSCORE:
           case EMarketName.MATCH_ODDS_SPACE:
-            this._sharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.MATCH_TYPE});
           break;
 
           case EMarketName.BOOKMAKER:
-            this._sharedService.getUserBalance.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.BOOKMAKER_TYPE});
           break;
 
           case EMarketName.FANCY:
-            this._sharedService.getUserBalance.next({'marketType': EMarketType.FANCY_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.FANCY_TYPE});
           break;
 
           case 'ALL':
-            this._sharedService.getUserBalance.next({'marketType': EMarketType.MATCH_TYPE});
-            this._sharedService.getUserBalance.next({'marketType': EMarketType.BOOKMAKER_TYPE});
-            this._sharedService.getUserBalance.next({'marketType': EMarketType.FANCY_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.MATCH_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.FANCY_TYPE});
           break;
         }
 
