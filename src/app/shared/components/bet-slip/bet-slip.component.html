@@ -1,4 +1,4 @@
-<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableHide">
+<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableHide" *ngIf="!isMobileView">
   <div class="col-md-12 accordionn">
     <div *ngIf="liveStreamingTVUrl" id="videoplayer">
       <iframe
@@ -99,6 +99,7 @@
                             "
                           >
                             <span
+                            *ngIf="marketType == EMarketType.MATCH_TYPE"
                               class="minus"
                               (click)="
                                 betSlipParams['odds'] > 0 &&
@@ -115,6 +116,7 @@
                               formControlName="odds"
                             />
                             <span
+                              *ngIf="marketType == EMarketType.MATCH_TYPE"
                               class="plus"
                               (click)="upAndDownOddsValue(true)"
                               >+</span
@@ -578,7 +580,7 @@
   </div>
 </div>
 
-<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableShow">
+<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableShow" *ngIf="isMobileView">
   <div class="col-md-12">
     <div class="innerpagem">
       <!--Betslip start-->
@@ -604,7 +606,7 @@
                       <label
                         class="text-dark"
                         *ngIf="marketType !== EMarketType.FANCY_TYPE"
-                        >Odds</label
+                        >Odds{{marketType}}</label
                       >
                       <label
                         class="text-dark"
@@ -614,12 +616,13 @@
                       <div class="number">
                         <ng-container
                           *ngIf="
-                            marketType == EMarketType.MATCH_TYPE ||
-                              marketType == EMarketType.BOOKMAKER_TYPE;
+                            (marketType == EMarketType.MATCH_TYPE) ||
+                            (marketType == EMarketType.BOOKMAKER_TYPE)
                             else otherMarket
                           "
                         >
                           <span
+                            *ngIf="marketType == EMarketType.MATCH_TYPE"
                             class="minus"
                             (click)="
                               betSlipParams['odds'] > 0 &&
@@ -635,7 +638,7 @@
                             formControlName="odds"
                             autofocus
                           />
-                          <span class="plus" (click)="upAndDownOddsValue(true)"
+                          <span *ngIf="marketType == EMarketType.MATCH_TYPE" class="plus" (click)="upAndDownOddsValue(true)"
                             >+</span
                           >
                           <ng-container
