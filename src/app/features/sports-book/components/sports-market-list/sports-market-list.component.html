@@ -104,148 +104,151 @@
                             >Live</span
                           >
                           <!-- <span class=" rounded-pill bg-secondary midbadge float-end">{{singleInPlay['marketType'] | titlecase}}</span> -->
-                          <div class="overflow-hidden mobileTableHide">
-                          <table class="table table-hover pointer">
-                            <thead
-                              class="collapsible"
-                              (click)="
-                                singleInPlay['isExpand'] =
-                                  !singleInPlay['isExpand']
-                              "
-                            >
-                              <tr valign="middle">
-                                <th width="30%" class="tfirstcol">
-                                  <i
-                                    class="fa-solid"
-                                    [ngClass]="
-                                      singleInPlay['isExpand']
-                                        ? 'fa-minus'
-                                        : 'fa-plus'
-                                    "
-                                    (click)="
-                                      singleInPlay['isExpand'] =
-                                        !singleInPlay['isExpand']
-                                    "
-                                  ></i
-                                  >&nbsp;
-                                  <span
-                                    routerLink="/sportsbook/{{
-                                      sports | titlecase
-                                    }}/{{ singleInPlay['tournamentId'] }}/{{
-                                      singleInPlay['matchId']
-                                    }}"
-                                  >
-                                    {{ singleInPlay["matchName"] }}
-                                  </span>
-                                </th>
-
-                                <th
-                                  width="15%"
-                                  colspan="3"
-                                  class="text-center coldark"
-                                >
-                                  Back
-                                </th>
-                                <th
-                                  width="15%"
-                                  colspan="3"
-                                  class="text-center coldark tlastcol"
-                                >
-                                  Lay
-                                  <div class="float-end">
-                                    <!--Tooltip start-->
-                                    <div class="tooltipnk">
-                                      <i class="fa fa-caret-right fa-2x"></i>
-                                      <span class="tooltiptext">In-Play</span>
-                                    </div>
-                                    <!--Tooltip end-->
-                                    <!-- <i [[ngClass]="{fa-regular: fa-solid}"] [ngClass.fa-solid]=false class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i> -->
-                                    <!--Tooltip start-->
-                                    <div class="tooltipnk">
-                                      <i
-                                        *ngIf="isLoggedIn"
-                                        class="fa ms-4 text-pink fa-regular fa-star fa-2x"
-                                      ></i>
-                                      <span class="tooltiptext"
-                                        >Add to Favorite</span
-                                      >
-                                    </div>
-                                    <!--Tooltip end-->
-                                    <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
-                                  </div>
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody class="content">
-                              <ng-container *ngIf="singleInPlay['isExpand']">
-                                <tr
-                                  *ngFor="
-                                    let runner of singleInPlay['market'][
-                                      'runners'
-                                    ];
-                                    let last = last;
-                                    let first = first
-                                  "
-                                  [ngClass]="{ 'border-0': last }"
-                                >
-                                  <td
-                                    class="text-start ps-2 heading border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                    routerLink="/sportsbook/{{
-                                      sports | titlecase
-                                    }}/{{ singleInPlay['tournamentId'] }}/{{
-                                      singleInPlay['matchId']
-                                    }}"
-                                  >
-                                    <a
-                                      ><strong>{{
-                                        runner["RunnerName"]
-                                      }}</strong></a
-                                    >
-                                    <br />
-                                    <a
+                          <div
+                            class="overflow-hidden mobileTableHide"
+                            *ngIf="!isMobileView"
+                          >
+                            <table class="table table-hover pointer">
+                              <thead
+                                class="collapsible"
+                                (click)="
+                                  singleInPlay['isExpand'] =
+                                    !singleInPlay['isExpand']
+                                "
+                              >
+                                <tr valign="middle">
+                                  <th width="30%" class="tfirstcol">
+                                    <i
+                                      class="fa-solid"
                                       [ngClass]="
-                                        runner?.hourseAmt?.amount > 0
-                                          ? 'text-success'
-                                          : 'text-danger'
+                                        singleInPlay['isExpand']
+                                          ? 'fa-minus'
+                                          : 'fa-plus'
                                       "
+                                      (click)="
+                                        singleInPlay['isExpand'] =
+                                          !singleInPlay['isExpand']
+                                      "
+                                    ></i
+                                    >&nbsp;
+                                    <span
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
                                     >
-                                      <strong>{{
-                                        runner?.hourseAmt?.amount
-                                      }}</strong>
-                                    </a>
+                                      {{ singleInPlay["matchName"] }}
+                                    </span>
+                                  </th>
 
-                                    <a>
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                        >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                      >
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                        >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                      >
-                                    </a>
-
-                                    <a
-                                      [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                  <th
+                                    width="15%"
+                                    colspan="3"
+                                    class="text-center coldark"
+                                  >
+                                    Back
+                                  </th>
+                                  <th
+                                    width="15%"
+                                    colspan="3"
+                                    class="text-center coldark tlastcol"
+                                  >
+                                    Lay
+                                    <div class="float-end">
+                                      <!--Tooltip start-->
+                                      <div class="tooltipnk">
+                                        <i class="fa fa-caret-right fa-2x"></i>
+                                        <span class="tooltiptext">In-Play</span>
+                                      </div>
+                                      <!--Tooltip end-->
+                                      <!-- <i [[ngClass]="{fa-regular: fa-solid}"] [ngClass.fa-solid]=false class="fa ms-4 text-pink fa-regular fa-star fa-2x"></i> -->
+                                      <!--Tooltip start-->
+                                      <div class="tooltipnk">
+                                        <i
+                                          *ngIf="isLoggedIn"
+                                          class="fa ms-4 text-pink fa-regular fa-star fa-2x"
+                                        ></i>
+                                        <span class="tooltiptext"
+                                          >Add to Favorite</span
+                                        >
+                                      </div>
+                                      <!--Tooltip end-->
+                                      <!-- <i class="fa ms-4 text-pink fa-solid fa-star"></i> -->
+                                    </div>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody class="content">
+                                <ng-container *ngIf="singleInPlay['isExpand']">
+                                  <tr
+                                    *ngFor="
+                                      let runner of singleInPlay['market'][
+                                        'runners'
+                                      ];
+                                      let last = last;
+                                      let first = first
+                                    "
+                                    [ngClass]="{ 'border-0': last }"
+                                  >
+                                    <td
+                                      class="text-start ps-2 heading border-top"
+                                      [ngClass]="{ 'border-top': !first }"
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
                                     >
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                        >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                      <a
+                                        ><strong>{{
+                                          runner["RunnerName"]
+                                        }}</strong></a
                                       >
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                        >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                      <br />
+                                      <a
+                                        [ngClass]="
+                                          runner?.hourseAmt?.amount > 0
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        "
                                       >
-                                    </a>
-                                  </td>
-                                  <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
+                                        <strong>{{
+                                          runner?.hourseAmt?.amount
+                                        }}</strong>
+                                      </a>
+
+                                      <a>
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+
+                                      <a
+                                        [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                      >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+                                    </td>
+                                    <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                                 <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
-                                  <td
-                                    class="colblue"
-                                    [boxHighlight]="runner['back2']"
-                                    [boxHighlight]="runner['vback2']"
-                                    (click)="
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back2']"
+                                      [boxHighlight]="runner['vback2']"
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -256,19 +259,19 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a
-                                      ><strong>{{ runner["back2"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vback2"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                  <td
-                                    class="colblue"
-                                    [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']"
-                                    (click)="
+                                      <a
+                                        ><strong>{{ runner["back2"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback2"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back1']"
+                                      [boxHighlight]="runner['vback1']"
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -279,20 +282,19 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a
-
-                                      ><strong>{{ runner["back1"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vback1"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                  <td
-                                    class="colblue"
-                                    [boxHighlight]="runner['back0']"
-                                    [boxHighlight]="runner['vback0']"
-                                    (click)="
+                                      <a
+                                        ><strong>{{ runner["back1"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback1"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colblue"
+                                      [boxHighlight]="runner['back0']"
+                                      [boxHighlight]="runner['vback0']"
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -303,20 +305,19 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a
-
-                                      ><strong>{{ runner["back0"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vback0"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                  <td
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay0']"
-                                    [boxHighlight]="runner['vlay0']"
-                                    (click)="
+                                      <a
+                                        ><strong>{{ runner["back0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colpink"
+                                      [boxHighlight]="runner['lay0']"
+                                      [boxHighlight]="runner['vlay0']"
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -327,20 +328,19 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a
-
-                                      ><strong>{{ runner["lay0"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vlay0"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                  <td
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay1']"
-                                    [boxHighlight]="runner['vlay1']"
-                                    (click)="
+                                      <a
+                                        ><strong>{{ runner["lay0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colpink"
+                                      [boxHighlight]="runner['lay1']"
+                                      [boxHighlight]="runner['vlay1']"
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -351,21 +351,20 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a
-
-                                      ><strong>{{ runner["lay1"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vlay1"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                  <td
-                                    class="colpink"
-                                    [ngClass]="{ last: last }"
-                                    [boxHighlight]="runner['lay2']"
-                                    [boxHighlight]="runner['vlay2']"
-                                    (click)="
+                                      <a
+                                        ><strong>{{ runner["lay1"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay1"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      class="colpink"
+                                      [ngClass]="{ last: last }"
+                                      [boxHighlight]="runner['lay2']"
+                                      [boxHighlight]="runner['vlay2']"
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -376,137 +375,135 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a><strong>{{ runner["lay2"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vlay2"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                </tr>
-                              </ng-container>
-                            </tbody>
-                          </table>
-                        </div>
+                                      <a
+                                        ><strong>{{ runner["lay2"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay2"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table>
+                          </div>
 
-                        <div class="overflow-hidden mobileTableShow">
-                          <table class="table table-hover pointer">
-                            <thead
-                              class="collapsible"
-                              (click)="
-                                singleInPlay['isExpand'] =
-                                  !singleInPlay['isExpand']
-                              "
-                            >
-                              <tr valign="middle">
-                                <th width="70%" class="tfirstcol">
-                                  <i
-                                    class="fa-solid"
-                                    [ngClass]="
-                                      singleInPlay['isExpand']
-                                        ? 'fa-minus'
-                                        : 'fa-plus'
-                                    "
-                                    (click)="
-                                      singleInPlay['isExpand'] =
-                                        !singleInPlay['isExpand']
-                                    "
-                                  ></i
-                                  >&nbsp;
-                                  <span
-                                    routerLink="/sportsbook/{{
-                                      sports | titlecase
-                                    }}/{{ singleInPlay['tournamentId'] }}/{{
-                                      singleInPlay['matchId']
-                                    }}"
-                                  >
-                                    {{ singleInPlay["matchName"] }}
-                                  </span>
-                                </th>
-
-                                <th
-                                  colspan="1"
-                                  class="text-center coldark"
-                                >
-                                  Back
-                                </th>
-                                <th
-                                  colspan="1"
-                                  class="text-center coldark tlastcol"
-                                >
-                                  Lay
-
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody class="content">
-                              <ng-container *ngIf="singleInPlay['isExpand']">
-                                <tr
-                                  *ngFor="
-                                    let runner of singleInPlay['market'][
-                                      'runners'
-                                    ];
-                                    let last = last;
-                                    let first = first
-                                  "
-                                  [ngClass]="{ 'border-0': last }"
-                                >
-                                  <td
-                                    class="text-start ps-2 heading border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                    routerLink="/sportsbook/{{
-                                      sports | titlecase
-                                    }}/{{ singleInPlay['tournamentId'] }}/{{
-                                      singleInPlay['matchId']
-                                    }}"
-                                  >
-                                    <a
-                                      ><strong>{{
-                                        runner["RunnerName"]
-                                      }}</strong></a
-                                    >
-                                    <br />
-                                    <a
+                          <div
+                            class="overflow-hidden mobileTableShow"
+                            *ngIf="isMobileView"
+                          >
+                            <table class="table table-hover pointer">
+                              <thead
+                                class="collapsible"
+                                (click)="
+                                  singleInPlay['isExpand'] =
+                                    !singleInPlay['isExpand']
+                                "
+                              >
+                                <tr valign="middle">
+                                  <th width="70%" class="tfirstcol">
+                                    <i
+                                      class="fa-solid"
                                       [ngClass]="
-                                        runner?.hourseAmt?.amount > 0
-                                          ? 'text-success'
-                                          : 'text-danger'
+                                        singleInPlay['isExpand']
+                                          ? 'fa-minus'
+                                          : 'fa-plus'
                                       "
+                                      (click)="
+                                        singleInPlay['isExpand'] =
+                                          !singleInPlay['isExpand']
+                                      "
+                                    ></i
+                                    >&nbsp;
+                                    <span
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
                                     >
-                                      <strong>{{
-                                        runner?.hourseAmt?.amount
-                                      }}</strong>
-                                    </a>
+                                      {{ singleInPlay["matchName"] }}
+                                    </span>
+                                  </th>
 
-                                    <a>
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                        >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                      >
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                        >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                      >
-                                    </a>
-
-                                    <a
-                                      [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                  <th colspan="1" class="text-center coldark">
+                                    Back
+                                  </th>
+                                  <th
+                                    colspan="1"
+                                    class="text-center coldark tlastcol"
+                                  >
+                                    Lay
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody class="content">
+                                <ng-container *ngIf="singleInPlay['isExpand']">
+                                  <tr
+                                    *ngFor="
+                                      let runner of singleInPlay['market'][
+                                        'runners'
+                                      ];
+                                      let last = last;
+                                      let first = first
+                                    "
+                                    [ngClass]="{ 'border-0': last }"
+                                  >
+                                    <td
+                                      class="text-start ps-2 heading border-top"
+                                      [ngClass]="{ 'border-top': !first }"
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleInPlay['tournamentId'] }}/{{
+                                        singleInPlay['matchId']
+                                      }}"
                                     >
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                        >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                      <a
+                                        ><strong>{{
+                                          runner["RunnerName"]
+                                        }}</strong></a
                                       >
-                                      <strong
-                                        *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                        >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                      <br />
+                                      <a
+                                        [ngClass]="
+                                          runner?.hourseAmt?.amount > 0
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        "
                                       >
-                                    </a>
-                                  </td>
+                                        <strong>{{
+                                          runner?.hourseAmt?.amount
+                                        }}</strong>
+                                      </a>
 
+                                      <a>
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
 
-                                  <td
-                                    
-                                    (click)="
+                                      <a
+                                        [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                      >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                        <strong
+                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        >
+                                      </a>
+                                    </td>
+
+                                    <td
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -517,20 +514,19 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a class="colblue"
-                                    [boxHighlight]="runner['back0']"
-                                    [boxHighlight]="runner['vback0']"
-
-                                      ><strong>{{ runner["back0"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vback0"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
-                                  <td
-                                    
-                                    (click)="
+                                      <a
+                                        class="colblue"
+                                        [boxHighlight]="runner['back0']"
+                                        [boxHighlight]="runner['vback0']"
+                                        ><strong>{{ runner["back0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <td
+                                      (click)="
                                         onClickLiveMarketRate(
                                           runner,
                                           singleInPlay,
@@ -541,32 +537,36 @@
                                           }
                                         )
                                       "
-                                  >
-                                    <a class="colpink"
-                                    [boxHighlight]="runner['lay0']"
-                                    [boxHighlight]="runner['vlay0']"><strong>{{ runner["lay0"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vlay0"] | marketRateFormater
-                                      }}</span></a
                                     >
-                                  </td>
+                                      <a
+                                        class="colpink"
+                                        [boxHighlight]="runner['lay0']"
+                                        [boxHighlight]="runner['vlay0']"
+                                        ><strong>{{ runner["lay0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                  </tr>
 
-                                </tr>
-
-                                <tr>
-                                  <td colspan="3" class="border-0 pt-0 ">
-                                    <div class="col-md-4  mobileTableShow" >
-                                      <!--<app-bet-slip
-                                        [isBetSlipActive]="isBetSlipActive"
-                                        [betSlipParams]="betSlipObj"
-                                      ></app-bet-slip>-->
-                                    </div>
-                                  </td>
-                                </tr>
-                              </ng-container>
-                            </tbody>
-                          </table>
-                        </div>
+                                  <tr>
+                                    <td colspan="3" class="border-0 pt-0">
+                                      <div
+                                        class="col-md-4 mobileTableShow"
+                                        *ngIf="isMobileView"
+                                      >
+                                        <app-bet-slip
+                                          [isBetSlipActive]="isBetSlipActive"
+                                          [betSlipParams]="betSlipObj"
+                                        ></app-bet-slip>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table>
+                          </div>
                         </ng-container>
                       </ng-container>
 
@@ -586,59 +586,58 @@
                             >Upcoming</span
                           >
                           <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}}</span> -->
-                          <div class="overflow-hidden mobileTableShow">
-                          <table class="table table-hover">
-                            <thead
-                              class="collapsible pointer"
-                              (click)="
-                                singleUpcoming['isExpand'] =
-                                  !singleUpcoming['isExpand']
-                              "
-                            >
-                              <tr valign="middle">
-                                <th  width="70%" class="tfirstcol">
-                                  <i
-                                    class="fa-solid"
-                                    [ngClass]="
-                                      singleUpcoming['isExpand']
-                                        ? 'fa-minus'
-                                        : 'fa-plus'
-                                    "
-                                    (click)="
-                                      singleUpcoming['isExpand'] =
-                                        !singleUpcoming['isExpand']
-                                    "
-                                  ></i
-                                  >&nbsp;
-                                  <span
-                                    routerLink="/sportsbook/{{
-                                      sports | titlecase
-                                    }}/{{ singleUpcoming['tournamentId'] }}/{{
-                                      singleUpcoming['matchId']
-                                    }}"
-                                  >
-                                    {{ singleUpcoming["matchName"] }} <br />
-                                    <span class="ms-3">{{
-                                      singleUpcoming["matchTime"]
-                                        | date : "EEEE At h:mm a"
-                                    }}</span>
-                                  </span>
-                                </th>
+                          <div
+                            class="overflow-hidden mobileTableShow"
+                            *ngIf="isMobileView"
+                          >
+                            <table class="table table-hover">
+                              <thead
+                                class="collapsible pointer"
+                                (click)="
+                                  singleUpcoming['isExpand'] =
+                                    !singleUpcoming['isExpand']
+                                "
+                              >
+                                <tr valign="middle">
+                                  <th width="70%" class="tfirstcol">
+                                    <i
+                                      class="fa-solid"
+                                      [ngClass]="
+                                        singleUpcoming['isExpand']
+                                          ? 'fa-minus'
+                                          : 'fa-plus'
+                                      "
+                                      (click)="
+                                        singleUpcoming['isExpand'] =
+                                          !singleUpcoming['isExpand']
+                                      "
+                                    ></i
+                                    >&nbsp;
+                                    <span
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleUpcoming['tournamentId'] }}/{{
+                                        singleUpcoming['matchId']
+                                      }}"
+                                    >
+                                      {{ singleUpcoming["matchName"] }} <br />
+                                      <span class="ms-3">{{
+                                        singleUpcoming["matchTime"]
+                                          | date : "EEEE At h:mm a"
+                                      }}</span>
+                                    </span>
+                                  </th>
 
-                                <th
-                                  colspan="1"
-                                  class="text-center coldark"
-                                >
-                                  Back
-                                </th>
-                                <th
-                                  colspan="1"
-                                  class="text-center coldark tlastcol"
-                                >
-                                  Lay
-                                  
-                                </th>
-                                <!-- <th class="text-center coldark tlastcol">
+                                  <th colspan="1" class="text-center coldark">
+                                    Back
+                                  </th>
+                                  <th
+                                    colspan="1"
+                                    class="text-center coldark tlastcol"
+                                  >
+                                    Lay
+                                  </th>
+                                  <!-- <th class="text-center coldark tlastcol">
                                   <div class="float-end">
 
                                     <div class="tooltipnk">
@@ -653,63 +652,67 @@
 
                                   </div>
                                 </th> -->
-                              </tr>
-                            </thead>
-                            <tbody class="content">
-                              <ng-container *ngIf="singleUpcoming['isExpand']">
-                                <tr
-                                  *ngFor="
-                                    let runner of singleUpcoming['market'][
-                                      'runners'
-                                    ];
-                                    let last = last;
-                                    let first = first
-                                  "
-                                  [ngClass]="{ 'border-0': last }"
-                                >
-                                  <td
-                                    class="text-start ps-2 heading border-top pointer"
-                                    [ngClass]="{ 'border-top': !first }"
-                                    routerLink="/sportsbook/{{
-                                      sports | titlecase
-                                    }}/{{ singleUpcoming['tournamentId'] }}/{{
-                                      singleUpcoming['matchId']
-                                    }}"
-                                  >
-                                    <a
-                                      ><strong>{{
-                                        runner["RunnerName"]
-                                      }}</strong></a
-                                    >
-                                  </td>
-                                  <!-- <td class="border-top"></td>
-                                <td class="border-top"></td> -->
-                                  <td >
-                                    <a class="colblue dis"
-                                      ><strong>{{ runner["back2"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vback2"] | marketRateFormater
-                                      }}</span></a
-                                    >
-                                  </td>
-
-                                  <td >
-                                    <a class="colpink dis"
-                                      ><strong>{{ runner["lay0"] }}</strong>
-                                      <br /><span>{{
-                                        runner["vlay0"] | marketRateFormater
-                                      }}</span></a
-                                    >
-                                  </td>
-                                  <!-- <td></td> -->
-
                                 </tr>
-                              </ng-container>
-                            </tbody>
-                          </table>
+                              </thead>
+                              <tbody class="content">
+                                <ng-container
+                                  *ngIf="singleUpcoming['isExpand']"
+                                >
+                                  <tr
+                                    *ngFor="
+                                      let runner of singleUpcoming['market'][
+                                        'runners'
+                                      ];
+                                      let last = last;
+                                      let first = first
+                                    "
+                                    [ngClass]="{ 'border-0': last }"
+                                  >
+                                    <td
+                                      class="text-start ps-2 heading border-top pointer"
+                                      [ngClass]="{ 'border-top': !first }"
+                                      routerLink="/sportsbook/{{
+                                        sports | titlecase
+                                      }}/{{ singleUpcoming['tournamentId'] }}/{{
+                                        singleUpcoming['matchId']
+                                      }}"
+                                    >
+                                      <a
+                                        ><strong>{{
+                                          runner["RunnerName"]
+                                        }}</strong></a
+                                      >
+                                    </td>
+                                    <!-- <td class="border-top"></td>
+                                <td class="border-top"></td> -->
+                                    <td>
+                                      <a class="colblue dis"
+                                        ><strong>{{ runner["back2"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vback2"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+
+                                    <td>
+                                      <a class="colpink dis"
+                                        ><strong>{{ runner["lay0"] }}</strong>
+                                        <br /><span>{{
+                                          runner["vlay0"] | marketRateFormater
+                                        }}</span></a
+                                      >
+                                    </td>
+                                    <!-- <td></td> -->
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table>
                           </div>
 
-                          <div class="overflow-hidden mobileTableHide">
+                          <div
+                            class="overflow-hidden mobileTableHide"
+                            *ngIf="!isMobileView"
+                          >
                             <table class="table table-hover">
                               <thead
                                 class="collapsible pointer"
@@ -781,7 +784,9 @@
                                 </tr>
                               </thead>
                               <tbody class="content">
-                                <ng-container *ngIf="singleUpcoming['isExpand']">
+                                <ng-container
+                                  *ngIf="singleUpcoming['isExpand']"
+                                >
                                   <tr
                                     *ngFor="
                                       let runner of singleUpcoming['market'][
@@ -874,27 +879,17 @@
                                 </ng-container>
                               </tbody>
                             </table>
-                            </div>
+                          </div>
                         </ng-container>
                       </ng-container>
 
                       <!--Adv. start-->
                       <div class="row">
                         <div class="col-sm-6 my-3">
-
-                            <img
-                              src="assets/images/Frame_1.png"
-                              width="100%"
-                            />
-
+                          <img src="assets/images/Frame_1.png" width="100%" />
                         </div>
                         <div class="col-sm-6 my-3">
-
-                            <img
-                              src="assets/images/Frame_2.png"
-                              width="100%"
-                            />
-
+                          <img src="assets/images/Frame_2.png" width="100%" />
                         </div>
                       </div>
                       <!--Adv. end-->
@@ -932,7 +927,10 @@
         <!--Center content end-->
       </div>
       <!--Aside right start-->
-      <div class="col-md-4 mt-3 mobileTableHide" *ngIf="isBetSlipShow">
+      <div
+        class="col-md-4 mt-3 mobileTableHide"
+        *ngIf="isBetSlipShow && !isMobileView"
+      >
         <app-bet-slip
           [isBetSlipActive]="isBetSlipActive"
           [betSlipParams]="betSlipObj"

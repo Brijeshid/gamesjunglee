@@ -96,7 +96,7 @@
                             >Live</span
                           >
                           <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleInPlay['marketType'] | titlecase}}</span> -->
-                          <div class="mobileTableHide">
+                          <div class="mobileTableHide" *ngIf="!isMobileView">
                             <table class="table table-hover pointer">
                               <thead
                                 class="collapsible"
@@ -237,19 +237,18 @@
                                       [boxHighlight]="runner['back2']"
                                       [boxHighlight]="runner['vback2']"
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: true,
-                                              index: 2,
-                                              odds: runner['back2']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: true,
+                                            index: 2,
+                                            odds: runner['back2']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-
                                         ><strong>{{ runner["back2"] }}</strong>
                                         <br /><span>{{
                                           runner["vback2"] | marketRateFormater
@@ -261,19 +260,18 @@
                                       [boxHighlight]="runner['back1']"
                                       [boxHighlight]="runner['vback1']"
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: true,
-                                              index: 1,
-                                              odds: runner['back1']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: true,
+                                            index: 1,
+                                            odds: runner['back1']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-
                                         ><strong>{{ runner["back1"] }}</strong>
                                         <br /><span>{{
                                           runner["vback1"] | marketRateFormater
@@ -285,19 +283,18 @@
                                       [boxHighlight]="runner['back0']"
                                       [boxHighlight]="runner['vback0']"
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: true,
-                                              index: 0,
-                                              odds: runner['back0']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: true,
+                                            index: 0,
+                                            odds: runner['back0']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-
                                         ><strong>{{ runner["back0"] }}</strong>
                                         <br /><span>{{
                                           runner["vback0"] | marketRateFormater
@@ -309,19 +306,18 @@
                                       [boxHighlight]="runner['lay0']"
                                       [boxHighlight]="runner['vlay0']"
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: false,
-                                              index: 0,
-                                              odds: runner['lay0']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: false,
+                                            index: 0,
+                                            odds: runner['lay0']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-
                                         ><strong>{{ runner["lay0"] }}</strong>
                                         <br /><span>{{
                                           runner["vlay0"] | marketRateFormater
@@ -333,19 +329,18 @@
                                       [boxHighlight]="runner['lay1']"
                                       [boxHighlight]="runner['vlay1']"
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: false,
-                                              index: 1,
-                                              odds: runner['lay1']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: false,
+                                            index: 1,
+                                            odds: runner['lay1']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-
                                         ><strong>{{ runner["lay1"] }}</strong>
                                         <br /><span>{{
                                           runner["vlay1"] | marketRateFormater
@@ -358,16 +353,16 @@
                                       [boxHighlight]="runner['lay2']"
                                       [boxHighlight]="runner['vlay2']"
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: false,
-                                              index: 2,
-                                              odds: runner['lay2']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: false,
+                                            index: 2,
+                                            odds: runner['lay2']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
                                         ><strong>{{ runner["lay2"] }}</strong>
@@ -382,7 +377,7 @@
                             </table>
                           </div>
 
-                          <div class="mobileTableShow">
+                          <div class="mobileTableShow" *ngIf="isMobileView">
                             <table class="table table-hover pointer">
                               <thead
                                 class="collapsible"
@@ -420,7 +415,10 @@
                                   <th colspan="1" class="text-center coldark">
                                     Back
                                   </th>
-                                  <th colspan="1" class="text-center coldark tlastcol">
+                                  <th
+                                    colspan="1"
+                                    class="text-center coldark tlastcol"
+                                  >
                                     Lay
                                   </th>
                                 </tr>
@@ -489,23 +487,22 @@
                                       </a>
                                     </td>
                                     <td
-                                      
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: true,
-                                              index: 2,
-                                              odds: runner['back2']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: true,
+                                            index: 2,
+                                            odds: runner['back2']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-                                      class="colblue"
-                                      [boxHighlight]="runner['back2']"
-                                      [boxHighlight]="runner['vback2']"
+                                        class="colblue"
+                                        [boxHighlight]="runner['back2']"
+                                        [boxHighlight]="runner['vback2']"
                                         ><strong>{{ runner["back2"] }}</strong>
                                         <br /><span>{{
                                           runner["vback2"] | marketRateFormater
@@ -514,23 +511,22 @@
                                     </td>
 
                                     <td
-                                     
                                       (click)="
-                                          onClickLiveMarketRate(
-                                            runner,
-                                            singleInPlay,
-                                            {
-                                              isBack: false,
-                                              index: 0,
-                                              odds: runner['lay0']
-                                            }
-                                          )
-                                        "
+                                        onClickLiveMarketRate(
+                                          runner,
+                                          singleInPlay,
+                                          {
+                                            isBack: false,
+                                            index: 0,
+                                            odds: runner['lay0']
+                                          }
+                                        )
+                                      "
                                     >
                                       <a
-                                      class="colpink"
-                                      [boxHighlight]="runner['lay0']"
-                                      [boxHighlight]="runner['vlay0']"
+                                        class="colpink"
+                                        [boxHighlight]="runner['lay0']"
+                                        [boxHighlight]="runner['vlay0']"
                                         ><strong>{{ runner["lay0"] }}</strong>
                                         <br /><span>{{
                                           runner["vlay0"] | marketRateFormater
@@ -542,12 +538,12 @@
                                     <td colspan="3" class="border-0 pt-0">
                                       <div
                                         class="col-md-4 mobileTableShow"
-
+                                        *ngIf="isMobileView"
                                       >
-                                        <!--<app-bet-slip
+                                        <app-bet-slip
                                           [isBetSlipActive]="isBetSlipActive"
                                           [betSlipParams]="betSlipObj"
-                                        ></app-bet-slip>-->
+                                        ></app-bet-slip>
                                       </div>
                                     </td>
                                   </tr>
@@ -575,7 +571,7 @@
                           >
                           <!-- <span class="badge rounded-pill bg-secondary midbadge float-end p-2">{{singleUpcoming['marketType'] | titlecase}} -->
                           <!-- </span> -->
-                          <div class="mobileTableHide">
+                          <div class="mobileTableHide" *ngIf="!isMobileView">
                             <table class="table table-hover">
                               <thead
                                 class="collapsible pointer"
@@ -650,7 +646,9 @@
                                 </tr>
                               </thead>
                               <tbody class="content">
-                                <ng-container *ngIf="singleUpcoming['isExpand']">
+                                <ng-container
+                                  *ngIf="singleUpcoming['isExpand']"
+                                >
                                   <tr
                                     *ngFor="
                                       let runner of singleUpcoming['market'][
@@ -745,7 +743,7 @@
                             </table>
                           </div>
 
-                          <div class="mobileTableShow">
+                          <div class="mobileTableShow" *ngIf="isMobileView">
                             <table class="table table-hover">
                               <thead
                                 class="collapsible pointer"
@@ -755,7 +753,7 @@
                                 "
                               >
                                 <tr valign="middle">
-                                  <th width="70%"  class="tfirstcol">
+                                  <th width="70%" class="tfirstcol">
                                     <i
                                       class="fa-solid"
                                       [ngClass]="
@@ -785,25 +783,21 @@
                                   </th>
                                   <!-- <th width="15%" class="coldark"></th>
                                 <th width="15%" class="coldark"></th> -->
-                                  <th
-
-                                    colspan="1"
-                                    class="text-center coldark"
-                                  >
+                                  <th colspan="1" class="text-center coldark">
                                     Back
                                   </th>
                                   <th
-
                                     colspan="1"
                                     class="text-center coldark tlastcol"
                                   >
                                     Lay
                                   </th>
-
                                 </tr>
                               </thead>
                               <tbody class="content">
-                                <ng-container *ngIf="singleUpcoming['isExpand']">
+                                <ng-container
+                                  *ngIf="singleUpcoming['isExpand']"
+                                >
                                   <tr
                                     *ngFor="
                                       let runner of singleUpcoming['market'][
@@ -831,7 +825,7 @@
                                     </td>
                                     <!-- <td class="border-top"></td>
                                   <td class="border-top"></td> -->
-                                    <td >
+                                    <td>
                                       <a class="colblue dis"
                                         ><strong>{{ runner["back2"] }}</strong>
                                         <br /><span>{{
@@ -840,7 +834,7 @@
                                       >
                                     </td>
 
-                                    <td >
+                                    <td>
                                       <a class="colpink dis"
                                         ><strong>{{ runner["lay0"] }}</strong>
                                         <br /><span>{{
@@ -848,7 +842,6 @@
                                         }}</span></a
                                       >
                                     </td>
-
                                   </tr>
                                 </ng-container>
                               </tbody>
@@ -1160,7 +1153,10 @@
         <!--Center content end-->
       </div>
       <!--Aside right start-->
-      <div class="col-md-4 mt-3 mobileTableHide" *ngIf="isBetSlipShow">
+      <div
+        class="col-md-4 mt-3 mobileTableHide"
+        *ngIf="isBetSlipShow && !isMobileView"
+      >
         <app-bet-slip
           [isBetSlipActive]="isBetSlipActive"
           [betSlipParams]="betSlipObj"

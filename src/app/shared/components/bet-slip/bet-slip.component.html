@@ -1,10 +1,10 @@
-<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableHide" *ngIf="!isMobileView">
+<div
+  class="row sidebar flex-shrink-0 fixed-sidebar mobileTableHide"
+  *ngIf="!isMobileView"
+>
   <div class="col-md-12 accordionn">
     <div *ngIf="liveStreamingTVUrl" id="videoplayer">
-      <iframe
-        [src]="liveStreamingTVUrl"
-        scrolling="no"
-      ></iframe>
+      <iframe [src]="liveStreamingTVUrl" scrolling="no"></iframe>
     </div>
     <div class="innerpagem">
       <ul
@@ -68,7 +68,11 @@
                 <img src="assets/images/Loader.gif" width="40" height="40" />
               </div>
             </ng-container>
-            <div [ngClass]="betSlipParams['isBack'] === true ? 'bg-blue':'bg-peach'">
+            <div
+              [ngClass]="
+                betSlipParams['isBack'] === true ? 'bg-blue' : 'bg-peach'
+              "
+            >
               <p class="card-header text-dark">
                 <small>{{ betSlipParams["event"] }}</small> <br />
                 <small>{{ betSlipParams["selectionName"] }}</small>
@@ -99,7 +103,7 @@
                             "
                           >
                             <span
-                            *ngIf="marketType == EMarketType.MATCH_TYPE"
+                              *ngIf="marketType == EMarketType.MATCH_TYPE"
                               class="minus"
                               (click)="
                                 betSlipParams['odds'] > 0 &&
@@ -190,10 +194,10 @@
                           >
                         </ng-container>
                       </div>
-                      <div class="col-md-6 col-6 ">
+                      <div class="col-md-6 col-6">
                         <p class="text-dark mb-2">or Choose You Stake</p>
                       </div>
-                      <div class="col-md-6 col-6  text-end text-dark">
+                      <div class="col-md-6 col-6 text-end text-dark">
                         <a
                           class="text-decoration-none text-dark"
                           routerLink="/settings"
@@ -226,7 +230,7 @@
                         </button>
                       </div>
 
-                      <div class="col-md-6 col-6 p-1 ">
+                      <div class="col-md-6 col-6 p-1">
                         <button
                           type="button"
                           class="btn border-colour w-100 p-2 rounded-pill betbtn"
@@ -235,7 +239,7 @@
                           CANCEL
                         </button>
                       </div>
-                      <div class="col-md-6 col-6 p-1 ">
+                      <div class="col-md-6 col-6 p-1">
                         <button
                           type="submit"
                           class="btn w-100 p-1 rounded-pill betbtn"
@@ -277,7 +281,7 @@
                       </div>
                     </div>
                     <p
-                      class="text-bold "
+                      class="text-bold"
                       [ngStyle]="{
                         color:
                           betSlipParams['isBack'] === true
@@ -580,7 +584,10 @@
   </div>
 </div>
 
-<div class="row sidebar flex-shrink-0 fixed-sidebar mobileTableShow" *ngIf="isMobileView">
+<div
+  class="row sidebar flex-shrink-0 fixed-sidebar mobileTableShow"
+  *ngIf="isMobileView"
+>
   <div class="col-md-12">
     <div class="innerpagem">
       <!--Betslip start-->
@@ -592,12 +599,16 @@
               <img src="assets/images/Loader.gif" width="40" height="40" />
             </div>
           </ng-container>
-          <p class="card-header text-dark" [ngClass]="betSlipParams['isBack'] === true ? 'bg-blue':'bg-peach'">
+          <p
+            class="card-header text-dark"
+            [ngClass]="
+              betSlipParams['isBack'] === true ? 'bg-blue' : 'bg-peach'
+            "
+          >
             {{ betSlipParams["event"] }} <br />
             {{ betSlipParams["selectionName"] }}
-
           </p>
-          <div class="card-body p-0" [class.batsliploader]="isLoaderStart">
+          <div class="card-body" [class.batsliploader]="isLoaderStart">
             <div class="row">
               <div class="col-md-12">
                 <form [formGroup]="betSlipForm">
@@ -606,7 +617,7 @@
                       <label
                         class="text-dark"
                         *ngIf="marketType !== EMarketType.FANCY_TYPE"
-                        >Odds{{marketType}}</label
+                        >Odds{{ marketType }}</label
                       >
                       <label
                         class="text-dark"
@@ -616,8 +627,8 @@
                       <div class="number">
                         <ng-container
                           *ngIf="
-                            (marketType == EMarketType.MATCH_TYPE) ||
-                            (marketType == EMarketType.BOOKMAKER_TYPE)
+                            marketType == EMarketType.MATCH_TYPE ||
+                              marketType == EMarketType.BOOKMAKER_TYPE;
                             else otherMarket
                           "
                         >
@@ -638,7 +649,10 @@
                             formControlName="odds"
                             autofocus
                           />
-                          <span *ngIf="marketType == EMarketType.MATCH_TYPE" class="plus" (click)="upAndDownOddsValue(true)"
+                          <span
+                            *ngIf="marketType == EMarketType.MATCH_TYPE"
+                            class="plus"
+                            (click)="upAndDownOddsValue(true)"
                             >+</span
                           >
                           <ng-container
@@ -707,8 +721,10 @@
                         >
                       </ng-container>
                     </div>
-                    <div class="col-md-6 col-6  ">
-                      <p class="text-dark m-0">or&nbsp;Choose&nbsp;You&nbsp;Stake</p>
+                    <div class="col-md-6 col-6">
+                      <p class="text-dark m-0">
+                        or&nbsp;Choose&nbsp;You&nbsp;Stake
+                      </p>
                     </div>
                     <div class="col-md-6 col-6 text-end">
                       <a
@@ -797,16 +813,21 @@
                   </div>
                   <div class="m-0">
                     <p
-                    class="text-bold m-0"
-                    [ngStyle]="{
-                      color:
-                        betSlipParams['isBack'] === true ? '#6abefa' : '#fba2b6 '
-                    }"
-                  >
-                    <i class="fa fa-exclamation-circle m-0" aria-hidden="true"></i>
-                    Min Bet: {{ userBalance?.minimumBet }} Max Bet:
-                    {{ userBalance?.maxBet }}
-                  </p>
+                      class="text-bold m-0"
+                      [ngStyle]="{
+                        color:
+                          betSlipParams['isBack'] === true
+                            ? '#6abefa'
+                            : '#fba2b6 '
+                      }"
+                    >
+                      <i
+                        class="fa fa-exclamation-circle m-0"
+                        aria-hidden="true"
+                      ></i>
+                      Min Bet: {{ userBalance?.minimumBet }} Max Bet:
+                      {{ userBalance?.maxBet }}
+                    </p>
                   </div>
 
                   <div class="form-group m-0">

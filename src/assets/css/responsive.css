@@ -58,12 +58,12 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .mobileTableHide {
+  /* .mobileTableHide {
     display: none;
   }
   .mobileTableShow {
     display: block;
-  }
+  } */
   .gamedetails .table {
     margin-bottom: 10px;
   }
