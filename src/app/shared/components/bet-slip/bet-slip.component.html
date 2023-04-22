@@ -3,7 +3,7 @@
   *ngIf="!isMobileView"
 >
   <div class="col-md-12 accordionn">
-    <div *ngIf="liveStreamingTVUrl" id="videoplayer">
+    <div *ngIf="liveStreamingTVUrl && isTVEnable" id="videoplayer">
       <iframe [src]="liveStreamingTVUrl" scrolling="no"></iframe>
     </div>
     <div class="innerpagem">
