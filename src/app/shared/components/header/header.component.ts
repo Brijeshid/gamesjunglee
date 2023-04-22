@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,6 +15,7 @@ export class HeaderComponent implements OnInit {
   userBalance: any;
   isMobileView: boolean;
   isShowLeftSideBar: boolean = false;
+  private destroy = new Subject();
 
   constructor(
     private _sharedService: SharedService
@@ -23,9 +26,13 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     if (this.isLoggedIn) {
       this.getUserBalance();
-      this._sharedService.getUserBalance.subscribe(res => {
+      this._sharedService.getUserBalance.pipe(
+        takeUntil(this.destroy)     // import takeUntil from rxjs/operators.
+         ).subscribe(res => {
+        console.log('subscribe', res);
         this.getUserBalance();
-      });
+      })
+    ;
     }
   }
 
@@ -87,5 +94,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    this.destroy.next();
   }
 }

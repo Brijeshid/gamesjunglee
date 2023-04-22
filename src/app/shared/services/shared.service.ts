@@ -249,6 +249,7 @@ export class SharedService {
       this.realDataWebSocket = webSocket(params['url']);
       this.realDataWebSocket.subscribe(
         data => {
+          console.log('socket hit',data);
           if(currentUserDetails.userId == data.userId){
             switch(data.message){
               case "STATUS_CHANGED":
@@ -274,7 +275,17 @@ export class SharedService {
               break;
             }
           }
-
+          switch(data.message){
+            case "LOGOUT_USER":
+              console.log('getJWTToken', localStorage.getItem('jwtToken'));
+              if(localStorage.getItem('jwtToken') == data.userToken){
+                console.log("LOGOUT_USER..");
+                this.logout();
+              } else {
+                console.log('token not matched');
+              }
+            break;
+          }
         })
       }
   }
