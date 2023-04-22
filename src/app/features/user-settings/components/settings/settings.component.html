@@ -39,7 +39,7 @@
                   
                   <ng-container *ngIf="!isLoading" class="h4">
                     <div class="col-md-6 mt-3 col-6" ><button type="button" [disabled]="oneClickBetting==false" class="btn border w-100 btn-light"  (click)="isEditMode=!isEditMode">{{isEditMode?'Cancel':'Edit'}}</button> </div>
-                    <div class="col-md-6 mt-3 col-6" ><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  [disabled]="editBetting.invalid"  class="btn btn-light bg-light border w-100"  [ngClass]="(editBetting.invalid? '':''|| isEditMode? 'bg-color':'')">Save </button> </div>
+                    <div class="col-md-6 mt-3 col-6" ><button type="submit"  [disabled]="oneClickBetting==false" [disabled]="isEditMode==false"  [disabled]="editBetting.invalid"  class="btn btn-light bg-light border w-100"  [ngClass]="isEditMode? 'bg-color':''">Save </button> </div>
                   </ng-container>
                 </div>
               </div>
