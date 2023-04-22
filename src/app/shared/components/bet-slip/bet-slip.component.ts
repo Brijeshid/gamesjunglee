@@ -86,7 +86,7 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
         this.betSlipForm.controls['odds'].disable();
       }else{
         this.betSlipForm.controls['odds'].enable();
-      } 
+      }
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
 
@@ -382,11 +382,10 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
       return false;
     }
     return true;
-
   }
 
 }
