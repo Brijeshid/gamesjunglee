@@ -401,7 +401,7 @@
                                   class="text-dark"
                                   [ngStyle]="{
                                     'background-color':
-                                      b.type === 'BACK' ? '#a5d9fe' : '#f8d0ce'
+                                      b.type === 'BACK' ? '#6abefa' : '#fba2b6'
                                   }"
                                 >
                                   <td>
@@ -439,7 +439,7 @@
                                 <th>Stake</th>
                                 <th>Profit/Liability</th>
                               </tr>
-                              <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#a5d9fe' : '#f8d0ce' }">
+                              <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#6abefa' : '#fba2b6' }">
                                 <td>{{b.horse}}</td>
                                 <td>{{b.odds}}</td>
                                 <td>{{b.stake}}</td>
@@ -511,7 +511,7 @@
                                 *ngFor="let b of runner.bets"
                                 [ngStyle]="{
                                   'background-color':
-                                    b.type === 'BACK' ? '#a5d9fe' : '#f8d0ce'
+                                    b.type === 'BACK' ? '#6abefa' : '#fba2b6'
                                 }"
                               >
                                 <td>{{ b.horse }}</td>
