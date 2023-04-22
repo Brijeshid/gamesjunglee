@@ -7,12 +7,13 @@ import { SharedService } from '@shared/services/shared.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn:boolean = false;
-  isShowRightSideBar:boolean = false;
-  searchList:any = [];
-  userBalance:any;
-  isMobileView:boolean;
-  
+  isLoggedIn: boolean = false;
+  isShowRightSideBar: boolean = false;
+  searchList: any = [];
+  userBalance: any;
+  isMobileView: boolean;
+  isShowLeftSideBar: boolean = false;
+
   constructor(
     private _sharedService: SharedService
   ) { }
@@ -20,55 +21,68 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.isMobileViewCallInit();
     this.isLoggedIn = this._sharedService.isLoggedIn();
-    if(this.isLoggedIn){
+    if (this.isLoggedIn) {
       this.getUserBalance();
-      this._sharedService.getUserBalance.subscribe(res =>{
+      this._sharedService.getUserBalance.subscribe(res => {
         this.getUserBalance();
       });
     }
   }
 
-  isMobileViewCallInit(){
-    this.isMobileView =  this._sharedService.isMobileViewFn();
-    this._sharedService.isMobileView.subscribe((res:any)=>{
+  isMobileViewCallInit() {
+    this.isMobileView = this._sharedService.isMobileViewFn();
+    this._sharedService.isMobileView.subscribe((res: any) => {
       this.isMobileView = res;
     })
   }
 
-  getRightSidebarEvent(eventObj){
+  getRightSidebarEvent(eventObj) {
     this.isShowRightSideBar = !eventObj['isClose'];
   }
 
-  onClickAvailableCredit(){
-    this.isShowRightSideBar=!this.isShowRightSideBar;
+  getLeftSidebarEvent(eventObj) {
+    this.isShowLeftSideBar = !eventObj['isClose'];
+  }
+
+
+  onClickAvailableCredit() {
+    this.isShowRightSideBar = !this.isShowRightSideBar;
     this._sharedService.sharedSubject.next({
-      'isShowRightSideBar':this.isShowRightSideBar
+      'isShowRightSideBar': this.isShowRightSideBar
     });
 
   }
 
-  getUserBalance(){
-    this._sharedService._getBalanceInfoApi().subscribe((res)=>{
+  onLeftClick() {
+    this.isShowLeftSideBar = !this.isShowLeftSideBar;
+    this._sharedService.sharedSubject.next({
+      'isShowLeftSideBar': this.isShowLeftSideBar
+    });
+
+  }
+
+  getUserBalance() {
+    this._sharedService._getBalanceInfoApi().subscribe((res) => {
       this.userBalance = res;
       this._sharedService.userBalance = res;
     })
   }
 
-  postSearchList(searchText:any){
-    this._sharedService._postSearchListApi({"searchText":searchText})
-    .subscribe((res)=>{
-      this.searchList = res;
-      //console.log('res_data',res);
-    })
+  postSearchList(searchText: any) {
+    this._sharedService._postSearchListApi({ "searchText": searchText })
+      .subscribe((res) => {
+        this.searchList = res;
+        //console.log('res_data',res);
+      })
   }
-  emptySearchList(event){
+  emptySearchList(event) {
     this.searchList = [];
     event.target.value = ""
   }
 
   // Refresh
 
-  refreshPage(){
+  refreshPage() {
     window.location.reload();
   }
 

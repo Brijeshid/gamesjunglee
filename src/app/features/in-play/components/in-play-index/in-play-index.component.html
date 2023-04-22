@@ -90,7 +90,7 @@
     <!--Game details info start-->
     <div class="row mb-5">
       <div class="col-md-12">
-        <div class="gamedetails mobileTableHide">
+        <div class="gamedetails mobileTableHide" *ngIf="!isMobileView">
           <!--Table 1-->
           <h6
             class="text-white"
@@ -518,7 +518,9 @@
                         singleMarket['matchId']
                       }}"
                     >
-                      <td class="text-start ps-2 heading border-top pointer py-0">
+                      <td
+                        class="text-start ps-2 heading border-top pointer py-0"
+                      >
                         <a>
                           <span class="text-danger">{{
                             singleMarket["matchTime"]
@@ -768,7 +770,7 @@
           </div>
           <!--Adv. end-->
         </div>
-        <div class="gamedetails mobileTableShow">
+        <div class="gamedetails mobileTableShow" *ngIf="isMobileView">
           <!--Table 1-->
           <h6
             class="text-white"
@@ -779,7 +781,7 @@
           <ng-container
             *ngFor="let singleMatchBySports of inPlayMatchListBySport?.[0]?.['sports']"
           >
-            <div class="mobileTableShow overflow-auto">
+            <div class="mobileTableShow overflow-auto" *ngIf="isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -832,8 +834,8 @@
                       }}"
                     >
                       <td
-                      class="text-start  heading border-top pointer"
-                      [ngClass]="{ 'border-top': !first }"
+                        class="text-start heading border-top pointer"
+                        [ngClass]="{ 'border-top': !first }"
                       >
                         <a
                           ><strong
@@ -848,16 +850,15 @@
                         >
                       </td>
 
-                      <td
-                       
-                      >
-                        <a  class="colblue pointer"
-                        [boxHighlight]="
-                          singleMarket['market']['runners'][0]['back0']
-                        "
-                        [boxHighlight]="
-                          singleMarket['market']['runners'][0]['vback0']
-                        "
+                      <td>
+                        <a
+                          class="colblue pointer"
+                          [boxHighlight]="
+                            singleMarket['market']['runners'][0]['back0']
+                          "
+                          [boxHighlight]="
+                            singleMarket['market']['runners'][0]['vback0']
+                          "
                           ><strong>{{
                             singleMarket["market"]["runners"][0]["back0"]
                           }}</strong>
@@ -868,45 +869,40 @@
                         >
                       </td>
 
-                      <td *ngIf="singleMarket?.market?.runners[2]"                      
-                      >
-                      <a class="colgray"
-                      >
-                        -</a>
+                      <td *ngIf="singleMarket?.market?.runners[2]">
+                        <a class="colgray"> -</a>
                       </td>
-                      <td
-                       
-                        *ngIf="!singleMarket?.market?.runners[2]"
-                      >
-                      <a class="colgray">
-                        -</a>
+                      <td *ngIf="!singleMarket?.market?.runners[2]">
+                        <a class="colgray"> -</a>
                       </td>
                       <!-- <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td> -->
 
-                      <td
-                       
-                      >
-                      <a href=""  class="colblue pointer"
-                      [boxHighlight]="
-                        singleMarket['market']['runners'][1]['back0']
-                      "
-                      [boxHighlight]="
-                        singleMarket['market']['runners'][1]['vback0']
-                      ">
-                        <strong>{{
-                          singleMarket["market"]["runners"][1]["back0"]
-                        }}</strong>
-                        <br /><span>{{
-                          singleMarket["market"]["runners"][1]["vback0"]
-                            | marketRateFormater
-                        }}</span></a>
+                      <td>
+                        <a
+                          href=""
+                          class="colblue pointer"
+                          [boxHighlight]="
+                            singleMarket['market']['runners'][1]['back0']
+                          "
+                          [boxHighlight]="
+                            singleMarket['market']['runners'][1]['vback0']
+                          "
+                        >
+                          <strong>{{
+                            singleMarket["market"]["runners"][1]["back0"]
+                          }}</strong>
+                          <br /><span>{{
+                            singleMarket["market"]["runners"][1]["vback0"]
+                              | marketRateFormater
+                          }}</span></a
+                        >
                       </td>
                     </tr>
                   </ng-container>
                 </tbody>
               </table>
             </div>
-            <div class="mobileTableHide">
+            <div class="mobileTableHide" *ngIf="!isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -1146,7 +1142,7 @@
           <ng-container
             *ngFor="let singleMatchBySports of upComingMatchListBySport?.[0]?.['sports']"
           >
-            <div class="mobileTableShow">
+            <div class="mobileTableShow" *ngIf="isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -1198,7 +1194,9 @@
                         singleMarket['matchId']
                       }}"
                     >
-                      <td class="text-start ps-2 heading border-top pointer py-0">
+                      <td
+                        class="text-start ps-2 heading border-top pointer py-0"
+                      >
                         <a>
                           <span class="text-danger">{{
                             singleMarket["matchTime"]
@@ -1219,7 +1217,7 @@
                         </a>
                       </td>
 
-                      <td >
+                      <td>
                         <a class="colblue dis"
                           ><strong>{{
                             singleMarket["market"]["runners"][0]["back0"]
@@ -1234,37 +1232,31 @@
                       <!-- <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                             <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td> -->
 
-                      <td
-                        
-                        *ngIf="!singleMarket?.market?.runners[2]"
-                      >
-                      <a  class="colgray">
-                        -</a>
+                      <td *ngIf="!singleMarket?.market?.runners[2]">
+                        <a class="colgray"> -</a>
                       </td>
 
-                      <td
-                        
-                        *ngIf="singleMarket?.market?.runners[2]"
-                      >
-                      <a  class="colblue dis">
-                        <strong>{{
-                          singleMarket["market"]["runners"][2]["back0"]
-                        }}</strong>
-                        <br /><span>{{
-                          singleMarket["market"]["runners"][2]["vback0"]
-                            | marketRateFormater
-                        }}</span></a>
+                      <td *ngIf="singleMarket?.market?.runners[2]">
+                        <a class="colblue dis">
+                          <strong>{{
+                            singleMarket["market"]["runners"][2]["back0"]
+                          }}</strong>
+                          <br /><span>{{
+                            singleMarket["market"]["runners"][2]["vback0"]
+                              | marketRateFormater
+                          }}</span></a
+                        >
                       </td>
 
-                      <td >
-                        <a  class="colblue dis">
-                        <strong>{{
-                          singleMarket["market"]["runners"][1]["back0"]
-                        }}</strong>
-                        <br /><span>{{
-                          singleMarket["market"]["runners"][1]["vback0"]
-                            | marketRateFormater
-                        }}</span>
+                      <td>
+                        <a class="colblue dis">
+                          <strong>{{
+                            singleMarket["market"]["runners"][1]["back0"]
+                          }}</strong>
+                          <br /><span>{{
+                            singleMarket["market"]["runners"][1]["vback0"]
+                              | marketRateFormater
+                          }}</span>
                         </a>
                       </td>
                     </tr>
@@ -1272,7 +1264,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="mobileTableHide">
+            <div class="mobileTableHide" *ngIf="!isMobileView">
               <table
                 class="table table-hover"
                 *ngIf="singleMatchBySports?.isShowCard"
@@ -1458,6 +1450,5 @@
   </div>
   <!--Artical end-->
 </div>
-
 
 <!-- for mobile view -->

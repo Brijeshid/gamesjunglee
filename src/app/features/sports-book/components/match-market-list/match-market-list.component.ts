@@ -87,9 +87,9 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   private _preConfig(){
-
+    this.isMobileViewCallInit();
     this.isBetSlipShow = this.isLoggedIn = this._sharedService.isLoggedIn() && this._sharedService.isUserActive();
-    this._sharedService.getUserBalance.subscribe((res:any)=>{
+    this._sharedService.getUserBalanceMarket.subscribe((res:any)=>{
       switch(res['marketType']){
         case EMarketType.MATCH_TYPE:
           this.placeBetData = [];

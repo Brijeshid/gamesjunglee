@@ -1,67 +1,110 @@
 <!--body start-->
 <div class="row m-0">
-    <div class="col-md-12 pb-2 pt-2">
-        <a class="text-color small text-decoration-none"><i class="fa fa-angle-left text-white" (click)="goBack()"></i>&nbsp;&nbsp;Transfer
-            Statements</a>
-    </div>
-    <hr class="text-color">
-    <!--Artical Start-->
-    <div class="col-md-12 ps-5 pe-5 accordionn">
-        <div class="row mb-4">
-            <div class="col-md-4 mb-2">
-                <div class="wrapper"></div>
-                <!-- <input type="date" class="form-control"  placeholder="Date">  -->
-                <date-range-picker [instanceId]="'secondDateRange'" [options]="options"
-                        [controlName]="'secondDateRange'" #dateRangePicker (rangeSelected)="rangeSelected($event)">
-                    <div class="form-group">
-                        <div class="input-group">
-                        <input id="secondDateRange" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-pink" type="text" name="dateRange"
-                            [value]="dateRangePicker.range" placeholder="From - To"  />
-                        </div>
-                    </div>
-                    </date-range-picker>
-                <!-- <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
+  <div class="col-md-12 pb-2 pt-2">
+    <a class="text-color small text-decoration-none"
+      ><i class="fa fa-angle-left text-white" (click)="goBack()"></i
+      >&nbsp;&nbsp;Transfer Statements</a
+    >
+  </div>
+  <hr class="text-color" />
+  <!--Artical Start-->
+  <div class="col-md-12 ps-md-5 pe-md-5 accordionn">
+    <div class="row mb-md-4">
+      <div class="col-md-4 col-4 mb-2">
+        <div class="wrapper"></div>
+        <!-- <input type="date" class="form-control"  placeholder="Date">  -->
+        <date-range-picker
+          [instanceId]="'secondDateRange'"
+          [options]="options"
+          [controlName]="'secondDateRange'"
+          #dateRangePicker
+          (rangeSelected)="rangeSelected($event)"
+        >
+          <div class="form-group">
+            <div class="input-group">
+              <input
+                id="secondDateRange"
+                class="w-100 rounded-pill btn btn-md bg-dark text-white border-pink"
+                type="text"
+                name="dateRange"
+                [value]="dateRangePicker.range"
+                placeholder="From - To"
+              />
+            </div>
+          </div>
+        </date-range-picker>
+        <!-- <input type="date" class="w-100 rounded-pill btn btn-md ms-2 bg-dark text-white border-light"
                     data-drops="up"> -->
-            </div>
-            <div class="col-md-4 mb-2">
-                <button type="button" class="btn btn-md w-100 rounded-pill ms-2 bg-color text-white" (click)="getTransferStatment()">Search</button>
-            </div>
-            <div class="col-md-2">
-                <button *ngIf ="tranState.length >0 " type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white" (click)="exportExcel()">Export</button>
-            </div>
-        </div>
-
-        <div class="innerpagem">
-            <!--Transfer Statements start-->
-            <div class="row m-0 p-1 ps-3 pe-3 mb-1">
-                <div *ngIf="tranState.length == 0" class="text-center p-5">
-                    <h4 *ngIf="tranState.length == 0 && !isLoading">No data found</h4>
-                    <h4 *ngIf="isLoading">Loading...</h4>
-                  </div>
-                <table *ngIf="tranState.length !== 0" class="table table-hover">
-                    <thead>
-                        <tr class="bg-color text-white">
-                            <th width="30%" class="tfirstcol">Date</th>
-                            <th width="15%" >Description</th>
-                            <th width="10%" class="text-center tlastcol">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white" *ngFor="let item of tranState">
-                            <td>{{item?.createdDate | date :'d/MM/yyyy, h:mm:ss '}}</td>
-                            <td>{{item?.transferTypeDescription}}</td>
-                            <td class="text-center"
-                                [ngClass]="item.transferTypeDescription =='Transfer Out'?'text-danger':'text-success'"><span *ngIf="item.transferTypeDescription =='Transfer Out'">-</span>
-                                {{item?.amount | number}}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-
-            </div>
-            <!--Transfer Statements end-->
-        </div>
+      </div>
+      <div class="col-md-4 col-4 mb-2">
+        <button
+          type="button"
+          class="btn btn-md w-100 rounded-pill bg-color text-white"
+          (click)="getTransferStatment()"
+        >
+          Search
+        </button>
+      </div>
+      <div class="col-md-2 col-4">
+        <button
+          *ngIf="tranState.length > 0"
+          type="button"
+          class="btn btn-md w-100 rounded-pill bg-color text-white"
+          (click)="exportExcel()"
+        >
+          Export
+        </button>
+      </div>
     </div>
-    <!--Artical end-->
+
+    <div class="innerpagem">
+      <!--Transfer Statements start-->
+      <div class="row m-0 p-1 ps-md-3 pe-md-3 mb-1">
+        <div *ngIf="tranState.length == 0" class="text-center p-5">
+          <h4 *ngIf="tranState.length == 0 && !isLoading">No data found</h4>
+          <h4 *ngIf="isLoading">Loading...</h4>
+        </div>
+        <table *ngIf="tranState.length !== 0" class="table table-hover">
+          <thead>
+            <tr
+              class="bg-color text-white"
+              style="
+                background: linear-gradient(
+                  90deg,
+                  #cd212f 0,
+                  #e76f26
+                ) !important;
+              "
+            >
+              <th width="30%" class="">Date</th>
+              <th width="15%">Description</th>
+              <th width="10%" class="text-center">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white" *ngFor="let item of tranState">
+              <td>{{ item?.createdDate | date : "d/MM/yyyy, h:mm:ss " }}</td>
+              <td>{{ item?.transferTypeDescription }}</td>
+              <td
+                class="text-center"
+                [ngClass]="
+                  item.transferTypeDescription == 'Transfer Out'
+                    ? 'text-danger'
+                    : 'text-success'
+                "
+              >
+                <span *ngIf="item.transferTypeDescription == 'Transfer Out'"
+                  >-</span
+                >
+                {{ item?.amount | number }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--Transfer Statements end-->
+    </div>
+  </div>
+  <!--Artical end-->
 </div>
 <!--Body end-->

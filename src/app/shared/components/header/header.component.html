@@ -2,17 +2,22 @@
 <div class="container-fluid">
   <div class="row">
     <nav
-      class="navbar navbar-expand-lg navbar-light header-one animate__animated animate__fadeInDown p-1 align-items-center d-flex">
+      class="navbar navbar-expand-lg navbar-light header-one animate__animated animate__fadeInDown p-1 align-items-center d-flex"
+    >
       <div class="col-md-1 col-5">
-        <button class="navbar-toggler bg-color text-white" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler bg-color text-white"
+          type="button"
+          (click)="onLeftClick()"
+          (clickOutside)="isShowLeftSideBar = false"
+        >
           <!-- <span class="navbar-toggler-icon"></span> -->
           <i class="fa fa-bars-staggered"></i>
           <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
         </button>
-        <a class="navbar-brand" [routerLink]="['/in-play']"><img src="assets/images/logo.svg"
-            class="col-6 col-md-12" /></a>
+        <a class="navbar-brand" [routerLink]="['/in-play']"
+          ><img src="assets/images/logo.svg" class="col-6 col-md-12"
+        /></a>
       </div>
       <div class="col-md-2 disnone">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
@@ -42,8 +47,12 @@
       <div class="col-md-9 col-7">
         <form class="d-flex float-end align-items-center">
           <div class="searchs">
-            <a class="text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                class="fa fa-search bg-color rounded-circle p-2 me-2"></i></a>
+            <a
+              class="text-white"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              ><i class="fa fa-search bg-color rounded-circle p-2 me-2"></i
+            ></a>
           </div>
           <!-- <div class="searchs">
             <a class="text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent2"
@@ -53,44 +62,77 @@
           <div class="dropdown me-4 searchlist mt-1 disnone">
             <div class="dropdown-toggle">
               <i class="fa fa-search searchi"></i>
-              <input type="text" class="form-control searchinput" aria-label="" #inputRef
-                (keypress)="postSearchList(inputRef.value)" (blur)="emptySearchList($event)"
-                placeholder="Search for a Sport, Game or Team" />
+              <input
+                type="text"
+                class="form-control searchinput"
+                aria-label=""
+                #inputRef
+                (keypress)="postSearchList(inputRef.value)"
+                (blur)="emptySearchList($event)"
+                placeholder="Search for a Sport, Game or Team"
+              />
             </div>
-            <ul *ngIf="searchList.length > 0" class="dropdown-menu-dark search-dd">
-              <li *ngFor="let singleObj of searchList" routerLink="/sportsbook/{{
+            <ul
+              *ngIf="searchList.length > 0"
+              class="dropdown-menu-dark search-dd"
+            >
+              <li
+                *ngFor="let singleObj of searchList"
+                routerLink="/sportsbook/{{
                   singleObj['sportType']['sportName'] | titlecase
                 }}/{{ singleObj['tournament']['tournamentId'] }}/{{
                   singleObj['matchId']
-                }}">
-                <a><img src="assets/images/{{
+                }}"
+              >
+                <a
+                  ><img
+                    src="assets/images/{{
                       singleObj['sportType']['sportName'] | lowercase
-                    }}.png" width="45px" class="pe-4" />
+                    }}.png"
+                    width="45px"
+                    class="pe-4"
+                  />
                   {{ singleObj["matchName"] }}<br />
                   <span class="ps-5">{{
                     singleObj["openDate"] | date : "d/MM/yy, h:mm a"
-                    }}</span>
+                  }}</span>
                 </a>
               </li>
             </ul>
           </div>
-          <button class="btn btn-light btn-pink me-2 rounded-pill" type="button" *ngIf="!isLoggedIn"
-            routerLink="/login">
+          <button
+            class="btn btn-light btn-pink me-2 rounded-pill"
+            type="button"
+            *ngIf="!isLoggedIn"
+            routerLink="/login"
+          >
             Login
           </button>
-          <button class="btn border-colour me-2 text-nowrap rounded-pill disnone btn-pink headerFont" type="button"
-            *ngIf="isLoggedIn" [routerLink]="['/bets']" [routerLinkActive]="'active'">
+          <button
+            class="btn border-colour me-2 text-nowrap rounded-pill disnone btn-pink headerFont"
+            type="button"
+            *ngIf="isLoggedIn"
+            [routerLink]="['/bets']"
+            [routerLinkActive]="'active'"
+          >
             Open Bets
           </button>
-          <a class="btn text-white border-colour text-nowrap rounded-pill headerFont" *ngIf="isLoggedIn"
-            (click)="onClickAvailableCredit()" (clickOutside)="isShowRightSideBar = false">{{
-            userBalance?.availableCredit | number }}
+          <a
+            class="btn text-white border-colour text-nowrap rounded-pill headerFont"
+            *ngIf="isLoggedIn"
+            (click)="onClickAvailableCredit()"
+            (clickOutside)="isShowRightSideBar = false"
+            >{{ userBalance?.availableCredit | number }}
             <i class="fa fa-user bg-color rounded-circle small p-1"></i>
           </a>
         </form>
       </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="isMobileView">
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
+        *ngIf="isMobileView"
+      >
         <app-left-navigation></app-left-navigation>
       </div>
     </nav>
@@ -102,54 +144,98 @@
 <div class="header-tow mobileTableHide" *ngIf="!isMobileView">
   <ul class="nav justify-content-center animate__animated animate__flipInX">
     <li class="nav-item">
-      <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img
-          src="assets/images/soccer.png" /> INPLAY</a>
+      <a
+        class="nav-link"
+        aria-current="page"
+        [routerLink]="['/in-play']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/soccer.png" /> INPLAY</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/sportsbook/Cricket']" [routerLinkActive]="'active'"><img
-          src="assets/images/cricket.png" /> CRICKET</a>
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Cricket']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/cricket.png" /> CRICKET</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/sportsbook/Soccer']" [routerLinkActive]="'active'"><img
-          src="assets/images/soccer.png" /> SOCCER</a>
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Soccer']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/soccer.png" /> SOCCER</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/sportsbook/Tennis']" [routerLinkActive]="'active'"><img
-          src="assets/images/tennis.png" /> TENNIS</a>
+      <a
+        class="nav-link"
+        [routerLink]="['/sportsbook/Tennis']"
+        [routerLinkActive]="'active'"
+        ><img src="assets/images/tennis.png" /> TENNIS</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link pointer"><img src="assets/images/casino.png" /> CASINO</a>
+      <a class="nav-link pointer"
+        ><img src="assets/images/casino.png" /> CASINO</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link pointer"><img src="assets/images/premium_sportbook.png" /> PREMIUM-SPORTBOOK</a>
+      <a class="nav-link pointer"
+        ><img src="assets/images/premium_sportbook.png" /> PREMIUM-SPORTBOOK</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link pointer"><img src="assets/images/live_card.png" /> LIVE CARD</a>
+      <a class="nav-link pointer"
+        ><img src="assets/images/live_card.png" /> LIVE CARD</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link pointer"><img src="assets/images/slot_games.png" /> SLOT GAMES</a>
+      <a class="nav-link pointer"
+        ><img src="assets/images/slot_games.png" /> SLOT GAMES</a
+      >
     </li>
   </ul>
 </div>
 
 <!-- <div class="header-tow mobileTableShow collapse" id="navbarSupportedContent2" *ngIf="isMobileView"> -->
-<div class="header-tow mobileTableShow ">
-
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+<div class="header-tow mobileTableShow" *ngIf="isMobileView">
+  <div
+    id="carouselExampleControls"
+    class="carousel slide"
+    data-bs-ride="carousel"
+    data-bs-interval="false"
+  >
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <ul class="nav justify-content-center animate__animated animate__flipInX">
+        <ul
+          class="nav justify-content-center animate__animated animate__flipInX"
+        >
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img
-                src="assets/images/soccer.png" /> INPLAY</a>
+            <a
+              class="nav-link"
+              aria-current="page"
+              [routerLink]="['/in-play']"
+              [routerLinkActive]="'active'"
+              ><img src="assets/images/soccer.png" /> INPLAY</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/Cricket']" [routerLinkActive]="'active'"><img
-                src="assets/images/cricket.png" /> CRICKET</a>
+            <a
+              class="nav-link"
+              [routerLink]="['/sportsbook/Cricket']"
+              [routerLinkActive]="'active'"
+              ><img src="assets/images/cricket.png" /> CRICKET</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/Soccer']" [routerLinkActive]="'active'"><img
-                src="assets/images/soccer.png" /> SOCCER</a>
+            <a
+              class="nav-link"
+              [routerLink]="['/sportsbook/Soccer']"
+              [routerLinkActive]="'active'"
+              ><img src="assets/images/soccer.png" /> SOCCER</a
+            >
           </li>
           <!--<li class="nav-item">
             <a class="nav-link" [routerLink]="['/sportsbook/Tennis']" [routerLinkActive]="'active'"><img
@@ -170,7 +256,9 @@
         </ul>
       </div>
       <div class="carousel-item">
-        <ul class="nav justify-content-center animate__animated animate__flipInX">
+        <ul
+          class="nav justify-content-center animate__animated animate__flipInX"
+        >
           <!-- <li class="nav-item">
             <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img
                 src="assets/images/soccer.png" /> INPLAY</a>
@@ -184,14 +272,23 @@
                 src="assets/images/soccer.png" /> SOCCER</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/sportsbook/Tennis']" [routerLinkActive]="'active'"><img
-                src="assets/images/tennis.png" /> TENNIS</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link pointer"><img src="assets/images/casino.png" /> CASINO</a>
+            <a
+              class="nav-link"
+              [routerLink]="['/sportsbook/Tennis']"
+              [routerLinkActive]="'active'"
+              ><img src="assets/images/tennis.png" /> TENNIS</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer"><img src="assets/images/premium_sportbook.png" /> PREMIUM-SPORTBOOK</a>
+            <a class="nav-link pointer"
+              ><img src="assets/images/casino.png" /> CASINO</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pointer"
+              ><img src="assets/images/premium_sportbook.png" />
+              PREMIUM-SPORTBOOK</a
+            >
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link pointer"><img src="assets/images/live_card.png" /> LIVE CARD</a>
@@ -202,7 +299,9 @@
         </ul>
       </div>
       <div class="carousel-item">
-        <ul class="nav justify-content-center animate__animated animate__flipInX">
+        <ul
+          class="nav justify-content-center animate__animated animate__flipInX"
+        >
           <!-- <li class="nav-item">
             <a class="nav-link" aria-current="page" [routerLink]="['/in-play']" [routerLinkActive]="'active'"><img
                 src="assets/images/soccer.png" /> INPLAY</a>
@@ -226,19 +325,33 @@
             <a class="nav-link pointer"><img src="assets/images/premium_sportbook.png" /> PREMIUM-SPORTBOOK</a>
           </li>-->
           <li class="nav-item">
-            <a class="nav-link pointer"><img src="assets/images/live_card.png" /> LIVE CARD</a>
+            <a class="nav-link pointer"
+              ><img src="assets/images/live_card.png" /> LIVE CARD</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer"><img src="assets/images/slot_games.png" /> SLOT GAMES</a>
+            <a class="nav-link pointer"
+              ><img src="assets/images/slot_games.png" /> SLOT GAMES</a
+            >
           </li>
         </ul>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="prev"
+    >
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="next"
+    >
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
@@ -275,12 +388,31 @@
   </ul> -->
 </div>
 <!---Header 2 end-->
+<!--left sidebar start-->
+<div
+  id="overlay"
+  *ngIf="isShowLeftSideBar"
+  [ngClass]="{ toggled: isShowLeftSideBar }"
+  [style.display]="isShowLeftSideBar ? 'block' : 'none'"
+>
+  <div id="leftslider">
+    <app-left-navigation
+      (leftSidebarEvent)="getLeftSidebarEvent($event)"
+    ></app-left-navigation>
+  </div>
+</div>
 <!--Right sidebar start-->
-<div id="overlay" *ngIf="isShowRightSideBar" [ngClass]="{ toggled: isShowRightSideBar }"
-  [style.display]="isShowRightSideBar ? 'block' : 'none'">
+<div
+  id="overlay"
+  *ngIf="isShowRightSideBar"
+  [ngClass]="{ toggled: isShowRightSideBar }"
+  [style.display]="isShowRightSideBar ? 'block' : 'none'"
+>
   <div id="rightslider">
-    <app-right-sidebar (rightSidebarEvent)="getRightSidebarEvent($event)"
-      [userBalance]="userBalance"></app-right-sidebar>
+    <app-right-sidebar
+      (rightSidebarEvent)="getRightSidebarEvent($event)"
+      [userBalance]="userBalance"
+    ></app-right-sidebar>
   </div>
 </div>
 <!-- Button trigger modal -->
@@ -289,8 +421,15 @@
 </button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header border-bottom-0">
@@ -298,26 +437,58 @@
       </div>
       <div class="modal-body">
         <div class="dropdown me-4 searchlist mt-1 w-100">
-          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <a
+            class="dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             <i class="fa fa-search searchi"></i>
-            <input type="text" class="form-control searchinput" aria-label="" #inputRef
-              (input)="postSearchList(inputRef.value)" placeholder="Search for a Sport, Game or Team" />
+            <input
+              type="text"
+              class="form-control searchinput"
+              aria-label=""
+              #inputRef
+              (input)="postSearchList(inputRef.value)"
+              placeholder="Search for a Sport, Game or Team"
+            />
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+          <ul
+            class="dropdown-menu dropdown-menu-dark"
+            aria-labelledby="dropdownMenuLink"
+          >
             <li>
-              <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4" />
-                Football</a>
+              <a class="dropdown-item" href="#"
+                ><img
+                  src="assets/images/soccer.png"
+                  width="40px"
+                  class="pe-4"
+                />
+                Football</a
+              >
             </li>
             <li>
-              <a class="dropdown-item" href="#"><img src="assets/images/soccer.png" width="40px" class="pe-4" />
-                Cricket</a>
+              <a class="dropdown-item" href="#"
+                ><img
+                  src="assets/images/soccer.png"
+                  width="40px"
+                  class="pe-4"
+                />
+                Cricket</a
+              >
             </li>
           </ul>
         </div>
       </div>
       <div class="modal-footer border-top-0 justify-content-start">
-        <a href="" class="text-color text-decoration-none" data-bs-dismiss="modal">Close</a>
+        <a
+          href=""
+          class="text-color text-decoration-none"
+          data-bs-dismiss="modal"
+          >Close</a
+        >
       </div>
     </div>
   </div>

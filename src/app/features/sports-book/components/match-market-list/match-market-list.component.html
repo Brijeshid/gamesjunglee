@@ -34,17 +34,21 @@
           <div class="col-md-6 col-6 ps-0">
             <button
               class="bg-dark text-white float-start border-colour rounded-pill ps-3 pe-3 me-3"
-
             >
               Markets
             </button>
             <!-- <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3"> Open Bets</button> -->
           </div>
           <div class="col-md-6 col-6 text-end">
-            <button class="btn btn-sm badge bg-success me-1"
-            (click)="isScoreBoardEnable = !isScoreBoardEnable"
-            *ngIf="isMatchLive !== 0">
-              <i [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>SCORES
+            <button
+              class="btn btn-sm badge bg-success me-1"
+              (click)="isScoreBoardEnable = !isScoreBoardEnable"
+              *ngIf="isMatchLive !== 0"
+            >
+              <i
+                [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"
+              ></i
+              >SCORES
             </button>
             <button class="btn btn-sm bg-color rounded p-0 ps-1 pe-1">
               <i class="fas fa-share"></i>
@@ -54,11 +58,11 @@
         </div>
         <div class="row m-0">
           <div class="col-md-12 col-12 ps-0" *ngIf="isScoreBoardEnable">
-              <iframe
-                style="height: 100%;width:100%;margin:0.7rem"
-                [src]="liveScoreBoardUrl"
-                scrolling="no"
-              ></iframe>
+            <iframe
+              style="height: 100%; width: 100%; margin: 0.7rem"
+              [src]="liveScoreBoardUrl"
+              scrolling="no"
+            ></iframe>
           </div>
         </div>
         <!--Header 3 end-->
@@ -95,7 +99,7 @@
                   <div class="col-md-12">
                     <div class="mt-3 innerpagem gamedetails ps-md-3 pe-md-3">
                       <!--Table 1-->
-                      <div class="mobileTableHide">
+                      <div class="mobileTableHide" *ngIf="!isMobileView">
                         <table
                           class="table table-hover"
                           *ngIf="
@@ -245,7 +249,7 @@
                                     )
                                 "
                               >
-                                <a  class="boxeffect"
+                                <a class="boxeffect"
                                   ><strong>{{ runner["back1"] }}</strong>
                                   <br /><span>{{
                                     runner["vback1"] | marketRateFormater
@@ -373,7 +377,7 @@
                           </tbody>
                         </table>
                       </div>
-                      <div class="mobileTableShow">
+                      <div class="mobileTableShow" *ngIf="isMobileView">
                         <table
                           class="table table-hover"
                           *ngIf="
@@ -384,8 +388,8 @@
                         >
                           <thead class="collapsible">
                             <tr>
-                              <th width="70%"  class="tfirstcol">Match Odds</th>
-                              <th  class="coldark">
+                              <th width="70%" class="tfirstcol">Match Odds</th>
+                              <th class="coldark">
                                 <img
                                   src="/assets/images/timer.png"
                                   class="timer"
@@ -393,10 +397,7 @@
                                 5
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
-                              <th
-                                colspan="1"
-                                class="text-center coldark"
-                              >
+                              <th colspan="1" class="text-center coldark">
                                 Back
                               </th>
                               <th
@@ -419,7 +420,6 @@
                               [ngClass]="{ 'border-0': last }"
                             >
                               <td
-                               
                                 class="text-start ps-2 py-2 heading"
                                 [ngClass]="{ 'border-top': !first }"
                               >
@@ -471,8 +471,6 @@
                                 [ngClass]="{ 'border-top': !first }"
                               ></td>
                               <td
-                                
-                                
                                 (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
@@ -487,12 +485,13 @@
                                     )
                                 "
                               >
-                                <a class="colblue"
-                                [boxHighlight]="runner['back2']"
-                                [boxHighlight]="runner['vback2']"
-                                [class.dis]="
-                                  inPlayUpcomingMarket['inPlayStatus'] == 0
-                                " 
+                                <a
+                                  class="colblue"
+                                  [boxHighlight]="runner['back2']"
+                                  [boxHighlight]="runner['vback2']"
+                                  [class.dis]="
+                                    inPlayUpcomingMarket['inPlayStatus'] == 0
+                                  "
                                   ><strong>{{ runner["back2"] }}</strong>
                                   <br /><span>{{
                                     runner["vback2"] | marketRateFormater
@@ -500,8 +499,6 @@
                                 >
                               </td>
                               <td
-                            
-                                
                                 (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
@@ -515,14 +512,14 @@
                                       EMarketType.MATCH_TYPE
                                     )
                                 "
-
                               >
-                                <a class="colpink"
-                                [boxHighlight]="runner['lay0']"
-                                [boxHighlight]="runner['vlay0']"
-                                [class.dis]="
-                                  inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
+                                <a
+                                  class="colpink"
+                                  [boxHighlight]="runner['lay0']"
+                                  [boxHighlight]="runner['vlay0']"
+                                  [class.dis]="
+                                    inPlayUpcomingMarket['inPlayStatus'] == 0
+                                  "
                                   ><strong>{{ runner["lay0"] }}</strong>
                                   <br /><span>{{
                                     runner["vlay0"] | marketRateFormater
@@ -533,17 +530,20 @@
                             <tr>
                               <td colspan="4" class="p-0 border-0">
                                 <div
-                                  class="col-md-4 mb-3 sidebarhide "
+                                  class="col-md-4 mb-3 sidebarhide"
                                   id="sidebarhide"
                                 >
-                                  <!--<app-bet-slip
-                                    *ngIf="matchName != 'NO MATCH AVAILABLE'"
+                                  <app-bet-slip
+                                    *ngIf="
+                                      matchName != 'NO MATCH AVAILABLE' &&
+                                      isMobileView
+                                    "
                                     [isBetSlipActive]="isBetSlipActive"
                                     [betSlipParams]="betSlipObj"
                                     [showMAtchwiseBet]="matchName"
                                     [marketType]="marketType"
                                     [isTVEnable]="isTVEnable"
-                                  ></app-bet-slip>-->
+                                  ></app-bet-slip>
                                 </div>
                               </td>
                             </tr>
@@ -555,7 +555,7 @@
                       <ng-container
                         *ngFor="let singleBookMaker of bookMakerMarket"
                       >
-                        <div class="mobileTableShow">
+                        <div class="mobileTableShow" *ngIf="isMobileView">
                           <table
                             class="table table-hover"
                             *ngIf="
@@ -565,7 +565,7 @@
                           >
                             <thead>
                               <tr>
-                                <th  colspan="10" class="h-100">
+                                <th colspan="10" class="h-100">
                                   Bookmaker (0% Commission & Instant Bet)
                                 </th>
                               </tr>
@@ -573,18 +573,14 @@
                                 <th width="70%" class="tfirstcol">
                                   {{ singleBookMaker["marketName"] }}
                                 </th>
-                                <th  class="coldark">
+                                <th class="coldark">
                                   <img
                                     src="/assets/images/fast.png"
                                     class="timer"
                                   />
                                 </th>
                                 <!-- <th width="10%" class="coldark"></th> -->
-                                <th
-                                 
-                                  colspan="1"
-                                  class="text-center coldark"
-                                >
+                                <th colspan="1" class="text-center coldark">
                                   Back
                                 </th>
                                 <th
@@ -608,7 +604,6 @@
                                 [ngClass]="{ 'border-0': last }"
                               >
                                 <td
-                                  
                                   class="text-start ps-2 heading border-top dis"
                                   [ngClass]="{ 'border-top': !first }"
                                 >
@@ -660,7 +655,6 @@
                                 ></td>
 
                                 <td
-                                
                                   (click)="
                                     onClickLiveMarketRate(
                                       runner,
@@ -674,9 +668,10 @@
                                     )
                                   "
                                 >
-                                  <a   class="colblue"
-                                  [boxHighlight]="runner['back0']"
-                                  [boxHighlight]="runner['vback0']"
+                                  <a
+                                    class="colblue"
+                                    [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']"
                                     ><strong>{{ runner["back0"] }}</strong>
                                     <br /><span>{{
                                       runner["vback0"] | marketRateFormater
@@ -684,24 +679,23 @@
                                   >
                                 </td>
                                 <td
-                                  
                                   (click)="
-                                      onClickLiveMarketRate(
-                                        runner,
-                                        singleBookMaker,
-                                        {
-                                          isBack: false,
-                                          index: 0,
-                                          odds: runner['lay0']
-                                        },
-                                        EMarketType.BOOKMAKER_TYPE
-                                      )
-                                    "
+                                    onClickLiveMarketRate(
+                                      runner,
+                                      singleBookMaker,
+                                      {
+                                        isBack: false,
+                                        index: 0,
+                                        odds: runner['lay0']
+                                      },
+                                      EMarketType.BOOKMAKER_TYPE
+                                    )
+                                  "
                                 >
-                                  <a class="colpink"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
-
+                                  <a
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
                                     ><strong>{{ runner["lay0"] }}</strong>
                                     <br /><span>{{
                                       runner["vlay0"] | marketRateFormater
@@ -720,24 +714,27 @@
                               <tr>
                                 <td colspan="4" class="p-0 border-0">
                                   <div
-                                    class="col-md-4 mb-3 sidebarhide "
+                                    class="col-md-4 mb-3 sidebarhide"
                                     id="sidebarhide"
                                   >
-                                    <!--<app-bet-slip
-                                      *ngIf="matchName != 'NO MATCH AVAILABLE'"
+                                    <app-bet-slip
+                                      *ngIf="
+                                        matchName != 'NO MATCH AVAILABLE' &&
+                                        isMobileView
+                                      "
                                       [isBetSlipActive]="isBetSlipActive"
                                       [betSlipParams]="betSlipObj"
                                       [showMAtchwiseBet]="matchName"
                                       [marketType]="marketType"
                                       [isTVEnable]="isTVEnable"
-                                    ></app-bet-slip>-->
+                                    ></app-bet-slip>
                                   </div>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                        <div class="mobileTableHide">
+                        <div class="mobileTableHide" *ngIf="!isMobileView">
                           <table
                             class="table table-hover"
                             *ngIf="
@@ -880,22 +877,22 @@
                                   width="10%"
                                   class="colpink 2"
                                   [boxHighlight]="runner['lay0'] | number"
-                                  [boxHighlight]="runner['vlay0'] | number"(click)="
-                                  onClickLiveMarketRate(
-                                    runner,
-                                    singleBookMaker,
-                                    {
-                                      isBack: false,
-                                      index: 0,
-                                      odds: runner['lay0']
-                                    },
-                                    EMarketType.BOOKMAKER_TYPE
-                                  )
-                                "
+                                  [boxHighlight]="runner['vlay0'] | number"
+                                  (click)="
+                                    onClickLiveMarketRate(
+                                      runner,
+                                      singleBookMaker,
+                                      {
+                                        isBack: false,
+                                        index: 0,
+                                        odds: runner['lay0']
+                                      },
+                                      EMarketType.BOOKMAKER_TYPE
+                                    )
+                                  "
                                 >
                                   <a
-
-                                ><strong>{{ runner["lay0"] }}</strong>
+                                    ><strong>{{ runner["lay0"] }}</strong>
                                     <br /><span>{{
                                       runner["vlay0"] | marketRateFormater
                                     }}</span></a
@@ -951,7 +948,7 @@
                       </ng-container>
 
                       <!--Table 3-->
-                      <div class="mobileTableHide">
+                      <div class="mobileTableHide" *ngIf="!isMobileView">
                         <table
                           class="table table-hover"
                           *ngIf="fancyMarket.length > 0 && isFancyCardShow"
@@ -1156,7 +1153,7 @@
                         </table>
                       </div>
 
-                      <div class="mobileTableShow">
+                      <div class="mobileTableShow" *ngIf="isMobileView">
                         <table
                           class="table table-hover"
                           *ngIf="fancyMarket.length > 0 && isFancyCardShow"
@@ -1164,22 +1161,17 @@
                           <thead>
                             <tr>
                               <th width="70%" class="tfirstcol">Fancy</th>
-                              <th  class="coldark">
+                              <th class="coldark">
                                 <img
                                   src="/assets/images/fast.png"
                                   class="timer"
                                 />
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
-                              <th
-                               
-                                colspan="1"
-                                class="text-center coldark"
-                              >
+                              <th colspan="1" class="text-center coldark">
                                 No
                               </th>
                               <th
-                                
                                 colspan="1"
                                 class="text-center coldark tlastcol"
                               >
@@ -1205,7 +1197,6 @@
                                 [ngClass]="{ 'border-0': last }"
                               >
                                 <td
-                                 
                                   class="text-start ps-2 heading border-top"
                                   [ngClass]="{ 'border-top': !first }"
                                 >
@@ -1229,7 +1220,6 @@
                                 </td>
 
                                 <td
-                                 
                                   class="border-top"
                                   [ngClass]="{ 'border-top': !first }"
                                 >
@@ -1255,8 +1245,6 @@
                                   </a>
                                 </td>
                                 <td
-                                 
-                                
                                   (click)="
                                     onClickLiveMarketRate(
                                       null,
@@ -1271,20 +1259,21 @@
                                     )
                                   "
                                 >
-                                <a class="colpink"
-                                [boxHighlight]="singleFancyMarket['lay1']"
-                                [boxHighlight]="singleFancyMarket['vlay1']">
-                                  <strong>{{
-                                    singleFancyMarket["lay1"]
-                                  }}</strong>
-                                  <br /><span>{{
-                                    singleFancyMarket["vlay1"]
-                                      | marketRateFormater
-                                  }}</span></a>
+                                  <a
+                                    class="colpink"
+                                    [boxHighlight]="singleFancyMarket['lay1']"
+                                    [boxHighlight]="singleFancyMarket['vlay1']"
+                                  >
+                                    <strong>{{
+                                      singleFancyMarket["lay1"]
+                                    }}</strong>
+                                    <br /><span>{{
+                                      singleFancyMarket["vlay1"]
+                                        | marketRateFormater
+                                    }}</span></a
+                                  >
                                 </td>
                                 <td
-                                  
-                                 
                                   (click)="
                                     onClickLiveMarketRate(
                                       null,
@@ -1299,35 +1288,41 @@
                                     )
                                   "
                                 >
-                                <a  class="colblue"
-                                [boxHighlight]="singleFancyMarket['back1']"
-                                [boxHighlight]="singleFancyMarket['vback1']">
-                                  <strong>{{
-                                    singleFancyMarket["back1"]
-                                  }}</strong>
-                                  <br /><span>{{
-                                    singleFancyMarket["vback1"]
-                                      | marketRateFormater
-                                  }}</span></a>
+                                  <a
+                                    class="colblue"
+                                    [boxHighlight]="singleFancyMarket['back1']"
+                                    [boxHighlight]="singleFancyMarket['vback1']"
+                                  >
+                                    <strong>{{
+                                      singleFancyMarket["back1"]
+                                    }}</strong>
+                                    <br /><span>{{
+                                      singleFancyMarket["vback1"]
+                                        | marketRateFormater
+                                    }}</span></a
+                                  >
                                 </td>
                               </tr>
-                              <tr>
+                              <!-- <tr>
                                 <td colspan="4" class="p-0 border-0">
                                   <div
-                                    class="col-md-4 mb-3 sidebarhide "
+                                    class="col-md-4 mb-3 sidebarhide"
                                     id="sidebarhide"
                                   >
-                                   <!-- <app-bet-slip
-                                      *ngIf="matchName != 'NO MATCH AVAILABLE'"
+                                    <app-bet-slip
+                                      *ngIf="
+                                        matchName != 'NO MATCH AVAILABLE' &&
+                                        isMobileView
+                                      "
                                       [isBetSlipActive]="isBetSlipActive"
                                       [betSlipParams]="betSlipObj"
                                       [showMAtchwiseBet]="matchName"
                                       [marketType]="marketType"
                                       [isTVEnable]="isTVEnable"
-                                    ></app-bet-slip>-->
+                                    ></app-bet-slip>
                                   </div>
                                 </td>
-                              </tr>
+                              </tr> -->
                             </ng-container>
                           </tbody>
                         </table>
@@ -1619,7 +1614,7 @@
       <!--Aside right start-->
       <div class="col-md-4 mt-3 sidebarhd" *ngIf="isBetSlipShow">
         <app-bet-slip
-          *ngIf="matchName != 'NO MATCH AVAILABLE'"
+          *ngIf="matchName != 'NO MATCH AVAILABLE' && !isMobileView"
           [isBetSlipActive]="isBetSlipActive"
           [betSlipParams]="betSlipObj"
           [showMAtchwiseBet]="matchName"

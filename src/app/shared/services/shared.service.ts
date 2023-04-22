@@ -20,6 +20,7 @@ export class SharedService {
   private previousUrl: string = '';
   private currentUrl: string = '';
   getUserBalance = new Subject();
+  getUserBalanceMarket = new Subject();
   isMobileView = new Subject();
   unmatchedBetsList:any = [];
   userIp:any;

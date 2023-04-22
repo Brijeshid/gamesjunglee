@@ -1,7 +1,8 @@
 <div class="row m-0">
   <div class="col-md-12 pb-2 pt-2">
     <a class="text-color small text-decoration-none h6"
-      ><i class="fa fa-angle-left text-white"  (click)="goBack()"></i>&nbsp;&nbsp; Bet History</a
+      ><i class="fa fa-angle-left text-white" (click)="goBack()"></i
+      >&nbsp;&nbsp; Bet History</a
     >
   </div>
   <hr class="text-color" />
@@ -66,195 +67,217 @@
           </button>
         </div>
       </div>
-      <div class="row gamedetails tabetails mb-5 align-items-center">
-        <div class="col-md-6 col-5">
-          Show
-          <select
-            (change)="updateLimit($event)"
-            class="form-select-sm border-colour bg-dark text-white p-2 rounded-3 ms-2 me-2"
-          >
-            <option>25</option>
-            <option>50</option>
-            <option>75</option>
-            <option>100</option>
-          </select>
-          Entries
-        </div>
-        <div class="col-md-4 col-7 d-flex justify-content-end">
-          <span class="pt-2">Search : </span>
-          <input
-            type="text"
-            formControlName="search"
-            placeholder="Search"
-            class="ms-1 form-control-sm rounded-pill border-colour bg-transparent text-white"
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="search()"
-          />
-        </div>
-        <div class="col-md-2">
-          <button *ngIf ="betHistoryList.length >0 " type="button" class="btn btn-md w-50 rounded-pill ms-2 bg-color text-white mt-2" (click)="exportExcel()">Export</button>
-        </div>
-        <div class="col-md-12 mt-3 mb-3">
-          <div
-            *ngIf="betHistoryList.length == 0"
-            class="text-center p-5"
-          >
-            <h4 *ngIf="betHistoryList.length == 0 && !isLoading">
-              No data found
-            </h4>
-            <h4 *ngIf="isLoading">Loading...</h4>
+      <div class="gamedetails tabetails mb-5 align-items-center p-2 p-md-0">
+        <div class="row align-items-center">
+          <div class="col-md-6 col-5">
+            Show
+            <select
+              (change)="updateLimit($event)"
+              class="form-select-sm border-colour bg-dark text-white rounded-3 ms-md-2 me-md-2"
+            >
+              <option>25</option>
+              <option>50</option>
+              <option>75</option>
+              <option>100</option>
+            </select>
+            Entries
           </div>
-          <table
-            *ngIf="betHistoryList.length !== 0"
-            class="table table-striped table-hover border-0"
-          >
-            <thead>
-              <tr class="text-white" style="background: linear-gradient(90deg, #cd212f 0, #e76f26)">
-                <th class="text-center  tstartcol" >Event Name</th>
-                <th class="text-center pe-0 ">Selection</th>
-                <th class="text-center pe-0 ">Bet Type</th>
-                <th class="text-center pe-0 ">User Rate</th>
-                <th class="text-end pe-0 ">Amount</th>
-                <th
-                  *ngIf="betHistoryStatus == 'Matched'"
-                  class="text-end pe-0 "
-                  
-                >
-                  Profit/Loss
-                </th>
-                <th *ngIf="betHistoryStatus !== 'Matched'" class="pe-0 " >
-                  Remarks
-                </th>
-                <th class="text-center pe-0 " >Placed Date</th>
-                <th class="text-center  tlastcol">Matched Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let betHistory of betHistoryList">
-                <td
-                  *ngIf="betHistory.betType == 'BACK'"
-                  class=" p-3 border-start-0"
-                >
-                  {{ betHistory.eventName }}
-                </td>
-                <td
-                  *ngIf="betHistory.betType !== 'BACK'"
-                  class=" p-3 border-start-0"
-                >
-                  {{ betHistory.eventName }}
-                </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="">
-                  {{ betHistory.selection }}
-                </td>
-                <td *ngIf="betHistory.betType != 'BACK'" class="">
-                  {{ betHistory.selection }}
-                </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="">
-                  {{ betHistory.betType }}
-                </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="">
-                  {{ betHistory.betType }}
-                </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="">
-                  {{ betHistory.odds }}
-                </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="">
-                  {{ betHistory.odds }}
-                </td>
-                <td
-                  *ngIf="betHistory.betType == 'BACK'"
-                  class=" text-end"
-                >
-                  <span>{{betHistory.amount}}</span>
-                </td>
-                <td
-                  *ngIf="betHistory.betType !== 'BACK'"
-                  class=" text-end"
-                >
-                  <span>{{betHistory.amount }}</span>
-                </td>
-                <td
-                  *ngIf="
-                    betHistory.betType == 'BACK' &&
-                    betHistoryStatus == 'Matched'
-                  "
-                  class=" text-end"
-                >
-                <span *ngIf="betHistory.profitLoss >= 0" class="text-success text-center">
-                  {{ betHistory.profitLoss }}
-                </span>
-                <span *ngIf="betHistory.profitLoss < 0" class="text-danger">
-                  {{ betHistory.profitLoss }}
-                </span>
-                </td>
-
-                <td
-                  *ngIf="
-                    betHistory.betType !== 'BACK' &&
-                    betHistoryStatus == 'Matched'
-                  "
-                  class=" text-end"
-                >
-                <span *ngIf="betHistory.profitLoss >= 0" class="text-success">
-                  {{ betHistory.profitLoss }}
-                </span>
-                <span *ngIf="betHistory.profitLoss < 0" class="text-danger">
-                  {{ betHistory.profitLoss }}
-                </span>
-                </td>
-
-                <td
-                  *ngIf="
-                    betHistory.betType == 'BACK' &&
-                    betHistoryStatus !== 'Matched'
-                  "
-                  class=""
-                >
-                  {{ betHistory.remarks }}
-                </td>
-                <td
-                  *ngIf="
-                    betHistory.betType !== 'BACK' &&
-                    betHistoryStatus !== 'Matched'
-                  "
-                  class=""
-                >
-                  {{ betHistory.remarks }}
-                </td>
-
-                <td *ngIf="betHistory.betType == 'BACK'" class="">
-                  {{ betHistory.placedTime |  date :'MMM d, y, h:mm:ss a'}}
-                </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="">
-                  {{ betHistory.placedTime |  date :'MMM d, y, h:mm:ss a'}}
-                </td>
-                <td *ngIf="betHistory.betType == 'BACK'" class="">
-                  {{ betHistory.matchedTime |  date :'MMM d, y, h:mm:ss a'}}
-                </td>
-                <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
-                  {{ betHistory.matchedTime |  date :'MMM d, y, h:mm:ss a'}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div *ngIf="betHistoryList.length > 0 && !this.isLoading">
+          <div class="col-md-4 col-7">
+            Search :
+            <input
+              type="text"
+              formControlName="search"
+              placeholder="Search"
+              class="ms-1 form-control-sm rounded-pill border-colour bg-transparent text-white col-9"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="search()"
+            />
+          </div>
+          <div class="col-md-2 mt-2 mt-md-0">
             <button
-              class="btn bg-dgrey rounded-pill text-white"
-              [disabled]="currentPage === 1"
-              (click)="prev()"
+              *ngIf="betHistoryList.length > 0"
+              type="button"
+              class="btn btn-md w-50 rounded-pill bg-color text-white"
+              (click)="exportExcel()"
             >
-              Prev
+              Export
             </button>
-            <span class="btn btn-pink rounded-pill text-white ps-4 pe-4"
-              >{{ currentPage }} / {{ totalPages }}
-            </span>
-            <button
-              class="btn bg-dgrey rounded-pill text-white"
-              [disabled]="currentPage === totalPages"
-              (click)="next()"
-            >
-              Next
-            </button>
+          </div>
+          <div class="col-md-12 mt-3 mb-3">
+            <div *ngIf="betHistoryList.length == 0" class="text-center p-5">
+              <h4 *ngIf="betHistoryList.length == 0 && !isLoading">
+                No data found
+              </h4>
+              <h4 *ngIf="isLoading">Loading...</h4>
+            </div>
+            <div class="overflow-auto">
+              <table
+                *ngIf="betHistoryList.length !== 0"
+                class="table table-striped table-hover border-0"
+              >
+                <thead>
+                  <tr
+                    class="text-white"
+                    style="
+                      background: linear-gradient(90deg, #cd212f 0, #e76f26);
+                    "
+                  >
+                    <th class="text-center tstartcol">Event Name</th>
+                    <th class="text-center pe-0">Selection</th>
+                    <th class="text-center pe-0">Bet Type</th>
+                    <th class="text-center pe-0">User Rate</th>
+                    <th class="text-end pe-0">Amount</th>
+                    <th
+                      *ngIf="betHistoryStatus == 'Matched'"
+                      class="text-end pe-0"
+                    >
+                      Profit/Loss
+                    </th>
+                    <th *ngIf="betHistoryStatus !== 'Matched'" class="pe-0">
+                      Remarks
+                    </th>
+                    <th class="text-center pe-0">Placed Date</th>
+                    <th class="text-center tlastcol">Matched Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let betHistory of betHistoryList">
+                    <td
+                      *ngIf="betHistory.betType == 'BACK'"
+                      class="p-3 border-start-0"
+                    >
+                      {{ betHistory.eventName }}
+                    </td>
+                    <td
+                      *ngIf="betHistory.betType !== 'BACK'"
+                      class="p-3 border-start-0"
+                    >
+                      {{ betHistory.eventName }}
+                    </td>
+                    <td *ngIf="betHistory.betType == 'BACK'" class="">
+                      {{ betHistory.selection }}
+                    </td>
+                    <td *ngIf="betHistory.betType != 'BACK'" class="">
+                      {{ betHistory.selection }}
+                    </td>
+                    <td *ngIf="betHistory.betType == 'BACK'" class="">
+                      {{ betHistory.betType }}
+                    </td>
+                    <td *ngIf="betHistory.betType !== 'BACK'" class="">
+                      {{ betHistory.betType }}
+                    </td>
+                    <td *ngIf="betHistory.betType == 'BACK'" class="">
+                      {{ betHistory.odds }}
+                    </td>
+                    <td *ngIf="betHistory.betType !== 'BACK'" class="">
+                      {{ betHistory.odds }}
+                    </td>
+                    <td *ngIf="betHistory.betType == 'BACK'" class="text-end">
+                      <span>{{ betHistory.amount }}</span>
+                    </td>
+                    <td *ngIf="betHistory.betType !== 'BACK'" class="text-end">
+                      <span>{{ betHistory.amount }}</span>
+                    </td>
+                    <td
+                      *ngIf="
+                        betHistory.betType == 'BACK' &&
+                        betHistoryStatus == 'Matched'
+                      "
+                      class="text-end"
+                    >
+                      <span
+                        *ngIf="betHistory.profitLoss >= 0"
+                        class="text-success text-center"
+                      >
+                        {{ betHistory.profitLoss }}
+                      </span>
+                      <span
+                        *ngIf="betHistory.profitLoss < 0"
+                        class="text-danger"
+                      >
+                        {{ betHistory.profitLoss }}
+                      </span>
+                    </td>
+
+                    <td
+                      *ngIf="
+                        betHistory.betType !== 'BACK' &&
+                        betHistoryStatus == 'Matched'
+                      "
+                      class="text-end"
+                    >
+                      <span
+                        *ngIf="betHistory.profitLoss >= 0"
+                        class="text-success"
+                      >
+                        {{ betHistory.profitLoss }}
+                      </span>
+                      <span
+                        *ngIf="betHistory.profitLoss < 0"
+                        class="text-danger"
+                      >
+                        {{ betHistory.profitLoss }}
+                      </span>
+                    </td>
+
+                    <td
+                      *ngIf="
+                        betHistory.betType == 'BACK' &&
+                        betHistoryStatus !== 'Matched'
+                      "
+                      class=""
+                    >
+                      {{ betHistory.remarks }}
+                    </td>
+                    <td
+                      *ngIf="
+                        betHistory.betType !== 'BACK' &&
+                        betHistoryStatus !== 'Matched'
+                      "
+                      class=""
+                    >
+                      {{ betHistory.remarks }}
+                    </td>
+
+                    <td *ngIf="betHistory.betType == 'BACK'" class="">
+                      {{ betHistory.placedTime | date : "MMM d, y, h:mm:ss a" }}
+                    </td>
+                    <td *ngIf="betHistory.betType !== 'BACK'" class="">
+                      {{ betHistory.placedTime | date : "MMM d, y, h:mm:ss a" }}
+                    </td>
+                    <td *ngIf="betHistory.betType == 'BACK'" class="">
+                      {{
+                        betHistory.matchedTime | date : "MMM d, y, h:mm:ss a"
+                      }}
+                    </td>
+                    <td *ngIf="betHistory.betType !== 'BACK'" class="colpink">
+                      {{
+                        betHistory.matchedTime | date : "MMM d, y, h:mm:ss a"
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="betHistoryList.length > 0 && !this.isLoading">
+              <button
+                class="btn bg-dgrey rounded-pill text-white"
+                [disabled]="currentPage === 1"
+                (click)="prev()"
+              >
+                Prev
+              </button>
+              <span class="btn btn-pink rounded-pill text-white ps-4 pe-4"
+                >{{ currentPage }} / {{ totalPages }}
+              </span>
+              <button
+                class="btn bg-dgrey rounded-pill text-white"
+                [disabled]="currentPage === totalPages"
+                (click)="next()"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>
