@@ -54,48 +54,7 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
   ngOnChanges(changes: SimpleChanges){
-    if(changes['betSlipParams'] && !changes['betSlipParams'].isFirstChange() && changes['betSlipParams'].currentValue){
-      this.betSlipParams =  changes['betSlipParams']['currentValue'];
-      this.isBack = changes['betSlipParams']['currentValue']['isBack'];
-      this.isBetSlipActive = changes['betSlipParams']['currentValue']['isBetSlipActive'];
-      if(!this.isBetSlipActive){
-        this.betSlipForm.patchValue({
-          odds:0,
-          runs:0,
-          stake:0
-        })
-        this.stakeVal(0);
-      } else {
-        this.timeoutId = setTimeout(() => {
-          this.bet_odds.nativeElement.focus();
-        }, 100); // 5000 milliseconds = 5 seconds
-
-      }
-
-        this.betSlipForm.patchValue({
-          odds:this.betSlipParams['odds'],
-          runs:this.betSlipParams['runs'],
-        })
-      changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE;
-
-      this.stakeVal(this.betSlipForm.controls['stake'].value);
-    }
-    if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
-      this.marketType = changes['marketType']['currentValue'];
-      if(this.marketType == EMarketType.BOOKMAKER_TYPE){
-        this.betSlipForm.controls['odds'].disable();
-      }else{
-        this.betSlipForm.controls['odds'].enable();
-      }
-      this.stakeVal(this.betSlipForm.controls['stake'].value);
-    }
-
-    if(changes['isTVEnable'] && !changes['isTVEnable'].isFirstChange()){
-      this.isTVEnable =  changes['isTVEnable']['currentValue'];
-      if(this.isTVEnable){
-        this.liveStreamingTVUrl = this._sharedService.liveStreamingTVUrl;
-      }
-    }
+    
   }
   ngOnInit(): void {
     this.isMobileViewCallInit();
@@ -115,6 +74,48 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
     this._getUserOpenBet();
     this.getUserConfig();
     this._setUserIp();
+
+    if(this.isMobileView) this.callForMobile();
+  }
+
+  callForMobile(){
+    if(this.betSlipParams){
+      this.isBack = this.betSlipParams['isBack'];
+      this.isBetSlipActive = this.betSlipParams['isBetSlipActive'];
+      if(!this.isBetSlipActive){
+        this.betSlipForm.patchValue({
+          odds:0,
+          runs:0,
+          stake:0
+        })
+        this.stakeVal(0);
+      } else {
+        this.timeoutId = setTimeout(() => {
+          this.bet_odds.nativeElement.focus();
+        }, 100); // 5000 milliseconds = 5 seconds
+
+      }
+
+      this.betSlipForm.patchValue({
+        odds:this.betSlipParams['odds'],
+        runs:this.betSlipParams['runs'],
+      })
+      this.betSlipParams['marketName']== EMarketType.MATCH_TYPE;
+
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
+    }
+    if(this.marketType){
+      if(this.marketType == EMarketType.BOOKMAKER_TYPE){
+        this.betSlipForm.controls['odds'].disable();
+      }else{
+        this.betSlipForm.controls['odds'].enable();
+      }
+      this.stakeVal(this.betSlipForm.controls['stake'].value);
+    }
+
+    if(this.isTVEnable){
+      this.liveStreamingTVUrl = this._sharedService.liveStreamingTVUrl;
+    }
   }
 
   isMobileViewCallInit(){

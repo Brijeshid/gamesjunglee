@@ -411,142 +411,139 @@
                             </tr>
                           </thead>
                           <tbody class="content pointer">
-                            <tr
-                              *ngFor="
-                                let runner of inPlayUpcomingMarket['runners'];
-                                let last = last;
-                                let first = first
-                              "
-                              [ngClass]="{ 'border-0': last }"
-                            >
-                              <td
-                                class="text-start ps-2 py-2 heading"
-                                [ngClass]="{ 'border-top': !first }"
+                            <ng-container *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first; let even = even;">
+                              <tr
+                                [ngClass]="{ 'border-0': last }"
                               >
-                                <a
-                                  ><strong>{{
-                                    runner["RunnerName"]
-                                  }}</strong></a
+                                <td
+                                  class="text-start ps-2 py-2 heading"
+                                  [ngClass]="{ 'border-top': !first }"
                                 >
-                                <br />
-                                <a
-                                  [ngClass]="
-                                    runner?.hourseAmt?.amount > 0
-                                      ? 'text-success'
-                                      : 'text-danger'
-                                  "
-                                >
-                                  <strong>{{
-                                    runner?.hourseAmt?.amount
-                                  }}</strong>
-                                </a>
-
-                                <a>
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                    >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                  <a
+                                    ><strong>{{
+                                      runner["RunnerName"]
+                                    }}</strong></a
                                   >
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                    >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
-                                </a>
-
-                                <a
-                                  [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
-                                >
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                    >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                    >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
-                                </a>
-                              </td>
-                              <td
-                                width="10%"
-                                class="border-top"
-                                [ngClass]="{ 'border-top': !first }"
-                              ></td>
-                              <td
-                                (click)="
-                                  inPlayUpcomingMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      runner,
-                                      inPlayUpcomingMarket,
-                                      {
-                                        isBack: true,
-                                        index: 2,
-                                        odds: runner['back2']
-                                      },
-                                      EMarketType.MATCH_TYPE
-                                    )
-                                "
-                              >
-                                <a
-                                  class="colblue"
-                                  [boxHighlight]="runner['back2']"
-                                  [boxHighlight]="runner['vback2']"
-                                  [class.dis]="
-                                    inPlayUpcomingMarket['inPlayStatus'] == 0
-                                  "
-                                  ><strong>{{ runner["back2"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vback2"] | marketRateFormater
-                                  }}</span></a
-                                >
-                              </td>
-                              <td
-                                (click)="
-                                  inPlayUpcomingMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      runner,
-                                      inPlayUpcomingMarket,
-                                      {
-                                        isBack: false,
-                                        index: 0,
-                                        odds: runner['lay0']
-                                      },
-                                      EMarketType.MATCH_TYPE
-                                    )
-                                "
-                              >
-                                <a
-                                  class="colpink"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
-                                  [class.dis]="
-                                    inPlayUpcomingMarket['inPlayStatus'] == 0
-                                  "
-                                  ><strong>{{ runner["lay0"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vlay0"] | marketRateFormater
-                                  }}</span></a
-                                >
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="4" class="p-0 border-0">
-                                <div
-                                  class="col-md-4 mb-3 sidebarhide"
-                                  id="sidebarhide"
-                                >
-                                  <app-bet-slip
-                                    *ngIf="
-                                      matchName != 'NO MATCH AVAILABLE' &&
-                                      isMobileView
+                                  <br />
+                                  <a
+                                    [ngClass]="
+                                      runner?.hourseAmt?.amount > 0
+                                        ? 'text-success'
+                                        : 'text-danger'
                                     "
-                                    [isBetSlipActive]="isBetSlipActive"
-                                    [betSlipParams]="betSlipObj"
-                                    [showMAtchwiseBet]="matchName"
-                                    [marketType]="marketType"
-                                    [isTVEnable]="isTVEnable"
-                                  ></app-bet-slip>
-                                </div>
-                              </td>
-                            </tr>
+                                  >
+                                    <strong>{{
+                                      runner?.hourseAmt?.amount
+                                    }}</strong>
+                                  </a>
+
+                                  <a>
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                      >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                  </a>
+
+                                  <a
+                                    [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                  >
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                      >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                  </a>
+                                </td>
+                                <td
+                                  width="10%"
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                ></td>
+                                <td
+                                  (click)="
+                                    inPlayUpcomingMarket['inPlayStatus'] &&
+                                      onClickLiveMarketRate(
+                                        runner,
+                                        inPlayUpcomingMarket,
+                                        {
+                                          isBack: true,
+                                          index: 2,
+                                          odds: runner['back2']
+                                        },
+                                        EMarketType.MATCH_TYPE
+                                      )
+                                  "
+                                >
+                                  <a
+                                    class="colblue"
+                                    [boxHighlight]="runner['back2']"
+                                    [boxHighlight]="runner['vback2']"
+                                    [class.dis]="
+                                      inPlayUpcomingMarket['inPlayStatus'] == 0
+                                    "
+                                    ><strong>{{ runner["back2"] }}</strong>
+                                    <br /><span>{{
+                                      runner["vback2"] | marketRateFormater
+                                    }}</span></a
+                                  >
+                                </td>
+                                <td
+                                  (click)="
+                                    inPlayUpcomingMarket['inPlayStatus'] &&
+                                      onClickLiveMarketRate(
+                                        runner,
+                                        inPlayUpcomingMarket,
+                                        {
+                                          isBack: false,
+                                          index: 0,
+                                          odds: runner['lay0']
+                                        },
+                                        EMarketType.MATCH_TYPE
+                                      )
+                                  "
+                                >
+                                  <a
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
+                                    [class.dis]="
+                                      inPlayUpcomingMarket['inPlayStatus'] == 0
+                                    "
+                                    ><strong>{{ runner["lay0"] }}</strong>
+                                    <br /><span>{{
+                                      runner["vlay0"] | marketRateFormater
+                                    }}</span></a
+                                  >
+                                </td>
+                              </tr>
+                              <tr *ngIf="(runner['SelectionId'] == betSlipObj['selectionId']) && (matchName != 'NO MATCH AVAILABLE')">
+                                <td colspan="4" class="p-0 border-0">
+                                  <div
+                                    class="col-md-4 mb-3 sidebarhide"
+                                    id="sidebarhide"
+                                  >
+                                    <app-bet-slip
+                                      *ngIf="
+                                        matchName != 'NO MATCH AVAILABLE' &&
+                                        isMobileView
+                                      "
+                                      [isBetSlipActive]="isBetSlipActive"
+                                      [betSlipParams]="betSlipObj"
+                                      [showMAtchwiseBet]="matchName"
+                                      [marketType]="marketType"
+                                      [isTVEnable]="isTVEnable"
+                                    ></app-bet-slip>
+                                  </div>
+                                </td>
+                              </tr>
+                            </ng-container>
                           </tbody>
                         </table>
                       </div>
