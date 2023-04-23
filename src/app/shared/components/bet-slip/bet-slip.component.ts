@@ -231,6 +231,7 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
               this.betSlipForm.reset();
               this._getUserOpenBet();
               this._sharedService.getToastPopup(betSlipRes.message,'Market Bet','success');
+              if(this.isMobileView) this._sharedService.isMobileViewCancel.next();
             }
       },
       (err)=>{
@@ -418,6 +419,7 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   cancelBetSlip(){
+    if(this.isMobileView) this._sharedService.isMobileViewCancel.next();
     this.stakeVal(0);
     this.betSlipForm.controls['stake'].setValue("");
     this.isBetSlipActive=false;

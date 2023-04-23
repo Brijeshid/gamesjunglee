@@ -22,6 +22,7 @@ export class SharedService {
   getUserBalance = new Subject();
   getUserBalanceMarket = new Subject();
   isMobileView = new Subject();
+  isMobileViewCancel = new Subject();
   unmatchedBetsList: any = [];
   userIp: any;
   unMatchSubjectListSubject = new Subject();
