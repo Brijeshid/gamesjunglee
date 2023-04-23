@@ -329,6 +329,8 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
       this.betSlipForm.controls['stake'].setValue(parseInt(this.betSlipForm.controls['stake'].value) + parseInt(stackVal)) ;
     }
 
+    this.stakeVal(this.betSlipForm.controls['stake'].value);
+
   }
 
    getUserConfig() {
