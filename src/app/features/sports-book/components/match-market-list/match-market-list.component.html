@@ -7,7 +7,7 @@
       {{ matchName | uppercase }}</a
     >
   </div>
-  <div class="col-md-6 col-6 text-end pb-2 pt-2">
+  <div class="col-md-6 col-6 text-end pb-2 pt-2" *ngIf="isLoggedIn">
     <button
       class="btn btn-sm badge bg-success me-1"
       (click)="isTVEnable = !isTVEnable"
@@ -39,7 +39,7 @@
             </button>
             <!-- <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3"> Open Bets</button> -->
           </div>
-          <div class="col-md-6 col-6 text-end">
+          <div class="col-md-6 col-6 text-end" *ngIf="isLoggedIn">
             <button
               class="btn btn-sm badge bg-success me-1"
               (click)="isScoreBoardEnable = !isScoreBoardEnable"

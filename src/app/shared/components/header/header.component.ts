@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 @Component({
   selector: 'app-header',
@@ -13,9 +14,11 @@ export class HeaderComponent implements OnInit {
   userBalance: any;
   isMobileView: boolean;
   isShowLeftSideBar: boolean = false;
+  searchText = ''
 
   constructor(
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -69,15 +72,21 @@ export class HeaderComponent implements OnInit {
   }
 
   postSearchList(searchText: any) {
+    console.log(searchText)
+    console.log('keypress')
     this._sharedService._postSearchListApi({ "searchText": searchText })
       .subscribe((res) => {
         this.searchList = res;
-        //console.log('res_data',res);
+        // console.log('res_data',res);
+        if(!this.searchText){
+          this.searchList = [];
+        }
       })
   }
-  emptySearchList(event) {
+  emptySearchList() {
     this.searchList = [];
-    event.target.value = ""
+    // event.target.value = ""
+    this.searchText = ""
   }
 
   // Refresh
@@ -87,5 +96,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+  }
+
+  navigateToMatch(singleObj){
+    // "/sportsbook/{{
+    //   singleObj['sportType']['sportName'] | titlecase
+    // }}/{{ singleObj['tournament']['tournamentId'] }}/{{
+    //   singleObj['matchId']
+    // }}"
+    console.log(singleObj)
+    this.router.navigate(['sportsbook/'+ singleObj['sportType']['sportName'] +'/' + singleObj['tournament']['tournamentId'] + '/' + singleObj['matchId'] ])
+    this.emptySearchList()
   }
 }

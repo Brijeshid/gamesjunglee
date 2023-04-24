@@ -23,6 +23,7 @@
             role="tab"
             aria-controls="betslip"
             aria-selected="true"
+            [disabled]="!isBetSlipActive"
             [ngStyle]="{
               color: betSlipParams['isBack'] === true ? '#6abefa' : '#d35862',
               'border-bottom':
