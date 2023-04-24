@@ -528,6 +528,7 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   getLadderDataByMarket(marketId:any){
+    this.ladderObj = [];
     this._sportsBookService._postLadderDataByMarketApi({marketId:marketId}).subscribe((res:any)=>{
       this.ladderObj = res?.ladderDetails;
       console.log(this.ladderObj,res);

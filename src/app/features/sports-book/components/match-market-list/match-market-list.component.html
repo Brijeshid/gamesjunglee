@@ -1645,40 +1645,41 @@
           <div class="col-md-6">P&L</div>
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
-          <div class="row border-bottom p-2">
-            <div class="col-md-6">
-              {{ ladderObj[0]?.startScore }}-{{ ladderObj[0]?.endScore }}
-            </div>
-            <div class="col-md-6">
-              <span
-                [ngClass]="
-                  ladderObj[0]?.amount >= 0 ? 'text-success' : 'text-danger'
-                "
-                >{{ ladderObj[0]?.amount }}</span
-              >
-            </div>
-          </div>
-          <div class="row border-bottom p-2 bg-light">
-            <ng-container
-              *ngIf="ladderObj[1]?.endScore == 'Infinite'; else nonInfinte"
-            >
-              <div class="col-md-6">+{{ ladderObj[1]?.startScore }}</div>
-            </ng-container>
-            <ng-template #nonInfinte>
+          <div *ngFor="let ldr of ladderObj">
+            <div class="row border-bottom p-2" *ngIf="ldr?.endScore != 'Infinite'">
               <div class="col-md-6">
-                {{ ladderObj[1]?.startScore }}-{{ ladderObj[1]?.endScore }}
+                {{ ldr?.startScore }}-{{ ldr?.endScore }}
               </div>
-            </ng-template>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="
+                    ldr.amount >= 0 ? 'text-success' : 'text-danger'
+                  "
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
+            </div>
+            <div class="row border-bottom p-2 bg-light" *ngIf="ldr?.endScore == 'Infinite'">
+              <ng-container>
+                <div class="col-md-6">+{{ ldr?.startScore }}</div>
+              </ng-container>
+              <ng-template #nonInfinte>
+                <div class="col-md-6">
+                  {{ ldr?.startScore }}-{{ ldr?.endScore }}
+                </div>
+              </ng-template>
 
-            <div class="col-md-6">
-              <span
-                [ngClass]="
-                  ladderObj[1]?.amount >= 0 ? 'text-success' : 'text-danger'
-                "
-                >{{ ladderObj[1]?.amount }}</span
-              >
+              <div class="col-md-6">
+                <span
+                  [ngClass]="
+                    ldr?.amount >= 0 ? 'text-success' : 'text-danger'
+                  "
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
             </div>
           </div>
+
         </ng-container>
         <div class="row">
           <button
