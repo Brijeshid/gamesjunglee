@@ -110,8 +110,15 @@ export class MatchMarketListComponent implements OnInit {
       this._cdref.detectChanges();
   }
 
+  private _closeBetSlipWindowForMobile(){
+    this._sharedService.isMobileViewCancel.subscribe(()=>{
+      this.betSlipObj['selectionId'] = '';
+    })
+  }
+
   isMobileViewCallInit(){
     this.isMobileView =  this._sharedService.isMobileViewFn();
+    if(this.isMobileView) this._closeBetSlipWindowForMobile();
     this._sharedService.isMobileView.subscribe((res:any)=>{
       this.isMobileView = res;
     })
@@ -521,6 +528,7 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   getLadderDataByMarket(marketId:any){
+    this.ladderObj = [];
     this._sportsBookService._postLadderDataByMarketApi({marketId:marketId}).subscribe((res:any)=>{
       this.ladderObj = res?.ladderDetails;
       console.log(this.ladderObj,res);
