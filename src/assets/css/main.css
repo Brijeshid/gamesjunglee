@@ -795,7 +795,7 @@ input:checked + .slider:before {
   right: 78px;
 }
 
-.suspendedm1.marketlist-on {
+/* .suspendedm1.marketlist-on {
   right: 98px;
 }
 
@@ -817,7 +817,7 @@ input:checked + .slider:before {
 
 .suspendedm1.matchmarketlist-off {
   right: 96px;
-}
+} */
 
 /*suspended end*/
 /*Loder start*/

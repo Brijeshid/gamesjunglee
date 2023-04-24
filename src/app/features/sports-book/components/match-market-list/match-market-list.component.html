@@ -586,10 +586,11 @@
                                 <th
                                   width="15%"
                                   colspan="1"
-                                  class="text-center coldark tlastcol"
+                                  class="text-center coldark"
                                 >
                                   Lay
                                 </th>
+                                <th class="coldark tlastcol"></th>
                                 <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                                 <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                               </tr>
@@ -703,13 +704,36 @@
                                   >
                                 </td>
 
-                                <!-- <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"> -->
-                                <!--Online start-->
-                                <!-- <div class="suspendedbm1" *ngIf="runner['st']=='1' || runner['st']==''">
-                                        <button type="button" class="suspendedm1" [ngClass]="isLoggedIn ? 'matchmarketlist-on' : 'matchmarketlist-off'">Suspended</button>
-                                      </div> -->
-                                <!--Online end-->
-                                <!-- </td> -->
+                                <td
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <div
+                                    class="suspendedbm1"
+                                    *ngIf="
+                                      singleBookMaker['appMarketStatus'] ==
+                                        '3' ||
+                                      singleBookMaker['appMarketStatus'] == '9'
+                                    "
+                                  >
+                                    <button
+                                      type="button"
+                                      class="suspendedm1"
+                                      [ngClass]="
+                                        isLoggedIn
+                                          ? 'matchmarketlist-on'
+                                          : 'matchmarketlist-off'
+                                      "
+                                    >
+                                      {{
+                                        singleBookMaker["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
                               <tr>
                                 <td colspan="4" class="p-0 border-0">
@@ -1171,12 +1195,10 @@
                               <th colspan="1" class="text-center coldark">
                                 No
                               </th>
-                              <th
-                                colspan="1"
-                                class="text-center coldark tlastcol"
-                              >
+                              <th colspan="1" class="text-center coldark">
                                 Yes
                               </th>
+                              <th class="coldark tlastcol"></th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
@@ -1301,6 +1323,37 @@
                                         | marketRateFormater
                                     }}</span></a
                                   >
+                                </td>
+                                <td
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <div
+                                    class="suspendedbm1"
+                                    *ngIf="
+                                      singleFancyMarket['appMarketStatus'] ==
+                                        '3' ||
+                                      singleFancyMarket['appMarketStatus'] ==
+                                        '9'
+                                    "
+                                  >
+                                    <button
+                                      type="button"
+                                      class="suspendedm1"
+                                      [ngClass]="
+                                        isLoggedIn
+                                          ? 'matchmarketlist-on'
+                                          : 'matchmarketlist-off'
+                                      "
+                                    >
+                                      {{
+                                        singleFancyMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                    </button>
+                                  </div>
                                 </td>
                               </tr>
                               <!-- <tr>
