@@ -273,7 +273,32 @@
   }
 
   .suspendedm1.matchmarketlist-on {
-    right: 157px;
+    right: 185px;
+    width: 240px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 1980px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 185px;
+    width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
     right: 96px;
