@@ -592,9 +592,10 @@ tr {
 .number .minus,
 .number .plus {
   width: 27px;
-  height: 33px;
+  /* height: 33px; */
   border-radius: 4px;
-  padding: 4px 5px 4px 5px;
+  /* padding: 4px 5px 4px 5px; */
+  padding: 5px;
   border: 1px solid #ddd;
   display: inline-block;
   vertical-align: middle;
@@ -602,7 +603,7 @@ tr {
   color: #000;
 }
 .number input {
-  height: 33px;
+  /* height: 33px; */
   width: 70px;
   text-align: center;
   font-size: 18px;
@@ -842,7 +843,9 @@ input:checked + .slider:before {
 .betbtn {
   font-size: 15px;
   letter-spacing: 2px;
-  height: 45px;
+  /* height: 45px; */
+  height: 35px;
+  line-height: 1px;
 }
 
 .prof {

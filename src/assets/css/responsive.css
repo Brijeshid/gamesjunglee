@@ -68,6 +68,11 @@
     margin-bottom: 10px;
   }
 
+  .betbtn {
+    height: 30px;
+    line-height: 1px;
+  }
+
   /* .gamedetails .mobileTableShow .table td {
     padding: 10px 5px;
   } */
