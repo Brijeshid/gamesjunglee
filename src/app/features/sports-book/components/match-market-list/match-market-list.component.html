@@ -411,10 +411,15 @@
                             </tr>
                           </thead>
                           <tbody class="content pointer">
-                            <ng-container *ngFor="let runner of inPlayUpcomingMarket['runners']; let last=last; let first=first; let even = even;">
-                              <tr
-                                [ngClass]="{ 'border-0': last }"
-                              >
+                            <ng-container
+                              *ngFor="
+                                let runner of inPlayUpcomingMarket['runners'];
+                                let last = last;
+                                let first = first;
+                                let even = even
+                              "
+                            >
+                              <tr [ngClass]="{ 'border-0': last }">
                                 <td
                                   class="text-start ps-2 py-2 heading"
                                   [ngClass]="{ 'border-top': !first }"
@@ -523,7 +528,13 @@
                                   >
                                 </td>
                               </tr>
-                              <tr *ngIf="(runner['SelectionId'] == betSlipObj['selectionId']) && (matchName != 'NO MATCH AVAILABLE')">
+                              <tr
+                                *ngIf="
+                                  runner['SelectionId'] ==
+                                    betSlipObj['selectionId'] &&
+                                  matchName != 'NO MATCH AVAILABLE'
+                                "
+                              >
                                 <td colspan="4" class="p-0 border-0">
                                   <div
                                     class="col-md-4 mb-3 sidebarhide"
@@ -583,10 +594,11 @@
                                 <th
                                   width="15%"
                                   colspan="1"
-                                  class="text-center coldark tlastcol"
+                                  class="text-center coldark"
                                 >
                                   Lay
                                 </th>
+                                <th class="coldark tlastcol"></th>
                                 <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                                 <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                               </tr>
@@ -700,13 +712,36 @@
                                   >
                                 </td>
 
-                                <!-- <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"> -->
-                                <!--Online start-->
-                                <!-- <div class="suspendedbm1" *ngIf="runner['st']=='1' || runner['st']==''">
-                                        <button type="button" class="suspendedm1" [ngClass]="isLoggedIn ? 'matchmarketlist-on' : 'matchmarketlist-off'">Suspended</button>
-                                      </div> -->
-                                <!--Online end-->
-                                <!-- </td> -->
+                                <td
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <div
+                                    class="suspendedbm1"
+                                    *ngIf="
+                                      singleBookMaker['appMarketStatus'] ==
+                                        '3' ||
+                                      singleBookMaker['appMarketStatus'] == '9'
+                                    "
+                                  >
+                                    <button
+                                      type="button"
+                                      class="suspendedm1"
+                                      [ngClass]="
+                                        isLoggedIn
+                                          ? 'matchmarketlist-on'
+                                          : 'matchmarketlist-off'
+                                      "
+                                    >
+                                      {{
+                                        singleBookMaker["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
                               <tr>
                                 <td colspan="4" class="p-0 border-0">
@@ -1168,12 +1203,10 @@
                               <th colspan="1" class="text-center coldark">
                                 No
                               </th>
-                              <th
-                                colspan="1"
-                                class="text-center coldark tlastcol"
-                              >
+                              <th colspan="1" class="text-center coldark">
                                 Yes
                               </th>
+                              <th class="coldark tlastcol"></th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
@@ -1298,6 +1331,37 @@
                                         | marketRateFormater
                                     }}</span></a
                                   >
+                                </td>
+                                <td
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <div
+                                    class="suspendedbm1"
+                                    *ngIf="
+                                      singleFancyMarket['appMarketStatus'] ==
+                                        '3' ||
+                                      singleFancyMarket['appMarketStatus'] ==
+                                        '9'
+                                    "
+                                  >
+                                    <button
+                                      type="button"
+                                      class="suspendedm1"
+                                      [ngClass]="
+                                        isLoggedIn
+                                          ? 'matchmarketlist-on'
+                                          : 'matchmarketlist-off'
+                                      "
+                                    >
+                                      {{
+                                        singleFancyMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                    </button>
+                                  </div>
                                 </td>
                               </tr>
                               <!-- <tr>
@@ -1645,38 +1709,40 @@
           <div class="col-md-6">P&L</div>
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
-          <div class="row border-bottom p-2">
-            <div class="col-md-6">
-              {{ ladderObj[0]?.startScore }}-{{ ladderObj[0]?.endScore }}
-            </div>
-            <div class="col-md-6">
-              <span
-                [ngClass]="
-                  ladderObj[0]?.amount >= 0 ? 'text-success' : 'text-danger'
-                "
-                >{{ ladderObj[0]?.amount }}</span
-              >
-            </div>
-          </div>
-          <div class="row border-bottom p-2 bg-light">
-            <ng-container
-              *ngIf="ladderObj[1]?.endScore == 'Infinite'; else nonInfinte"
+          <div *ngFor="let ldr of ladderObj">
+            <div
+              class="row border-bottom p-2"
+              *ngIf="ldr?.endScore != 'Infinite'"
             >
-              <div class="col-md-6">+{{ ladderObj[1]?.startScore }}</div>
-            </ng-container>
-            <ng-template #nonInfinte>
               <div class="col-md-6">
-                {{ ladderObj[1]?.startScore }}-{{ ladderObj[1]?.endScore }}
+                {{ ldr?.startScore }}-{{ ldr?.endScore }}
               </div>
-            </ng-template>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'"
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
+            </div>
+            <div
+              class="row border-bottom p-2 bg-light"
+              *ngIf="ldr?.endScore == 'Infinite'"
+            >
+              <ng-container>
+                <div class="col-md-6">+{{ ldr?.startScore }}</div>
+              </ng-container>
+              <ng-template #nonInfinte>
+                <div class="col-md-6">
+                  {{ ldr?.startScore }}-{{ ldr?.endScore }}
+                </div>
+              </ng-template>
 
-            <div class="col-md-6">
-              <span
-                [ngClass]="
-                  ladderObj[1]?.amount >= 0 ? 'text-success' : 'text-danger'
-                "
-                >{{ ladderObj[1]?.amount }}</span
-              >
+              <div class="col-md-6">
+                <span
+                  [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'"
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
             </div>
           </div>
         </ng-container>
