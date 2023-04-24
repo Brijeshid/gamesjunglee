@@ -440,16 +440,8 @@
                               </thead>
                               <tbody class="content">
                                 <ng-container *ngIf="singleInPlay['isExpand']">
-                                  <tr
-                                    *ngFor="
-                                      let runner of singleInPlay['market'][
-                                        'runners'
-                                      ];
-                                      let last = last;
-                                      let first = first
-                                    "
-                                    [ngClass]="{ 'border-0': last }"
-                                  >
+                                  <ng-container *ngFor="let runner of singleInPlay['market']['runners'];let last = last;let first = first">
+                                  <tr [ngClass]="{ 'border-0': last }">
                                     <td
                                       class="text-start ps-2 heading border-top"
                                       [ngClass]="{ 'border-top': !first }"
@@ -501,7 +493,6 @@
                                         >
                                       </a>
                                     </td>
-
                                     <td
                                       (click)="
                                         onClickLiveMarketRate(
@@ -509,22 +500,23 @@
                                           singleInPlay,
                                           {
                                             isBack: true,
-                                            index: 0,
-                                            odds: runner['back0']
+                                            index: 2,
+                                            odds: runner['back2']
                                           }
                                         )
                                       "
                                     >
                                       <a
                                         class="colblue"
-                                        [boxHighlight]="runner['back0']"
-                                        [boxHighlight]="runner['vback0']"
-                                        ><strong>{{ runner["back0"] }}</strong>
+                                        [boxHighlight]="runner['back2']"
+                                        [boxHighlight]="runner['vback2']"
+                                        ><strong>{{ runner["back2"] }}</strong>
                                         <br /><span>{{
-                                          runner["vback0"] | marketRateFormater
+                                          runner["vback2"] | marketRateFormater
                                         }}</span></a
                                       >
                                     </td>
+
                                     <td
                                       (click)="
                                         onClickLiveMarketRate(
@@ -549,8 +541,7 @@
                                       >
                                     </td>
                                   </tr>
-
-                                  <tr>
+                                  <tr *ngIf="(runner['SelectionId'] == betSlipObj['selectionId'])">
                                     <td colspan="3" class="border-0 pt-0">
                                       <div
                                         class="col-md-4 mobileTableShow"
@@ -563,6 +554,7 @@
                                       </div>
                                     </td>
                                   </tr>
+                                  </ng-container>
                                 </ng-container>
                               </tbody>
                             </table>
