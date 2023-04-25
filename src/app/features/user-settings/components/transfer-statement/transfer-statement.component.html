@@ -65,7 +65,7 @@
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
         <table *ngIf="tranState.length !== 0" class="table table-hover">
-          <thead>
+          <thead class="bg-color">
             <tr
               class="bg-color text-white"
               style="
@@ -82,7 +82,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-white" *ngFor="let item of tranState">
+            <tr class="bg-dark text-white" *ngFor="let item of tranState">
               <td>{{ item?.createdDate | date : "d/MM/yyyy, h:mm:ss " }}</td>
               <td>{{ item?.transferTypeDescription }}</td>
               <td
