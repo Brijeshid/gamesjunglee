@@ -228,6 +228,18 @@
   .asidenav ul li a {
     padding: 0.5rem;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 205px;
+    width: 265px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .suspendedm1.matchmarketlist-off {
+    right: 205px;
+    width: 265px;
+  }
 }
 
 @media only screen and (min-width: 1536px) {
@@ -400,9 +412,14 @@
     width: 330px;
   }
 
-  .suspendedm1.matchmarketlist-off {
+  /* .suspendedm1.matchmarketlist-off {
     right: 345px;
     width: 400px;
+  } */
+
+  .suspendedm1.matchmarketlist-off {
+    right: 390px;
+    width: 450px;
   }
 }
 
