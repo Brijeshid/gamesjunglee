@@ -50,7 +50,9 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
     ngAfterViewInit() {
       console.log('afterView');
-      this.bet_odds.nativeElement.focus();
+      this.timeoutId = setTimeout(() => {
+        this.bet_odds.nativeElement.focus();
+      }, 100);
     }
 
     ngOnChanges(changes: SimpleChanges){
@@ -69,15 +71,15 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
           this.timeoutId = setTimeout(() => {
             this.bet_odds.nativeElement.focus();
           }, 100); // 5000 milliseconds = 5 seconds
-  
+
         }
-  
+
           this.betSlipForm.patchValue({
             odds:this.betSlipParams['odds'],
             runs:this.betSlipParams['runs'],
           })
         changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE;
-  
+
         this.stakeVal(this.betSlipForm.controls['stake'].value);
       }
       if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
@@ -89,7 +91,7 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
         }
         this.stakeVal(this.betSlipForm.controls['stake'].value);
       }
-  
+
       if(changes['isTVEnable'] && !changes['isTVEnable'].isFirstChange()){
         this.isTVEnable =  changes['isTVEnable']['currentValue'];
         if(this.isTVEnable){

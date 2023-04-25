@@ -77,8 +77,15 @@ export class SportsMarketListComponent implements OnInit {
 
   isMobileViewCallInit(){
     this.isMobileView =  this._sharedService.isMobileViewFn();
+    if(this.isMobileView) this._closeBetSlipWindowForMobile();
     this._sharedService.isMobileView.subscribe((res:any)=>{
       this.isMobileView = res;
+    })
+  }
+
+  private _closeBetSlipWindowForMobile(){
+    this._sharedService.isMobileViewCancel.subscribe(()=>{
+      this.betSlipObj['selectionId'] = '';
     })
   }
 

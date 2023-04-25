@@ -7,11 +7,11 @@
       {{ matchName | uppercase }}</a
     >
   </div>
-  <div class="col-md-6 col-6 text-end pb-2 pt-2">
+  <div class="col-md-6 col-6 text-end pb-2 pt-2" *ngIf="isLoggedIn">
     <button
       class="btn btn-sm badge bg-success me-1"
       (click)="isTVEnable = !isTVEnable"
-      *ngIf="isMatchLive !== 0"
+      *ngIf="isMatchLive !== 0 && liveScoreBoardActaulTVUrl && isLoggedIn"
     >
       <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i>&nbsp;{{
         isTVEnable ? "HIDE" : "WATCH"
@@ -39,20 +39,20 @@
             </button>
             <!-- <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3"> Open Bets</button> -->
           </div>
-          <div class="col-md-6 col-6 text-end">
+          <div class="col-md-6 col-6 text-end" *ngIf="isLoggedIn">
             <button
               class="btn btn-sm badge bg-success me-1"
               (click)="isScoreBoardEnable = !isScoreBoardEnable"
-              *ngIf="isMatchLive !== 0"
+              *ngIf="isMatchLive !== 0 && liveScoreBoardActaulUrl && isLoggedIn"
             >
               <i
                 [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"
               ></i
               >SCORES
             </button>
-            <button class="btn btn-sm bg-color rounded p-0 ps-1 pe-1">
+            <!-- <button class="btn btn-sm bg-color rounded p-0 ps-1 pe-1">
               <i class="fas fa-share"></i>
-            </button>
+            </button> -->
           </div>
           <!-- Tab panes -->
         </div>
