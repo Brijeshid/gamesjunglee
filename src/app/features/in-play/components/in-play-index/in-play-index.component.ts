@@ -44,6 +44,7 @@ export class InPlayIndexComponent implements OnInit {
   isMobileViewCallInit(){
     this.isMobileView =  this._sharedService.isMobileViewFn();
     this._sharedService.isMobileView.subscribe((res:any)=>{
+      console.log(res);
       this.isMobileView = res;
     })
   }
@@ -112,7 +113,7 @@ export class InPlayIndexComponent implements OnInit {
                   runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
 
                 }
-                
+
                 runnerRes['suspended'] = true;
                 return runnerRes;
               })

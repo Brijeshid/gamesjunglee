@@ -58,19 +58,36 @@
 }
 
 @media only screen and (max-width: 767px) {
-  /* .mobileTableHide {
-    display: none;
-  }
-  .mobileTableShow {
-    display: block;
-  } */
   .gamedetails .table {
     margin-bottom: 10px;
   }
 
-  /* .gamedetails .mobileTableShow .table td {
-    padding: 10px 5px;
-  } */
+  .betbtn {
+    height: 34px;
+    line-height: 18px;
+  }
+
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 0;
+    width: 160px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
@@ -109,6 +126,81 @@
   }
 }
 
+@media only screen and (min-width: 1024px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 45px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 1228.8px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 80px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .suspendedm1.matchmarketlist-on {
+    right: 105px;
+  }
+}
+
+@media only screen and (min-width: 1396.36px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 108px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
 @media only screen and (max-width: 1440px) {
   .asidenav ul {
     font-size: 12px;
@@ -116,5 +208,144 @@
 
   .asidenav ul li a {
     padding: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 1536px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 128px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 1706.67px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 157px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 185px;
+    width: 240px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 1980px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 185px;
+    width: 240px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 2048px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 207px;
+    width: 211px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 96px;
+  }
+}
+
+@media only screen and (min-width: 2304px) {
+  .suspendedm1.matchmarketlist-on {
+    right: 219px;
+    width: 270px;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .suspendedm1.matchmarketlist-on {
+    right: 235px;
+    width: 330px;
+  }
+}
+
+@media only screen and (min-width: 3072px) {
+  .suspendedm1.matchmarketlist-on {
+    right: 315px;
+    width: 330px;
   }
 }

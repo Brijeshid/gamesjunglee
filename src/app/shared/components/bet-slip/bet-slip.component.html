@@ -3,7 +3,7 @@
   *ngIf="!isMobileView"
 >
   <div class="col-md-12 accordionn">
-    <div *ngIf="liveStreamingTVUrl" id="videoplayer">
+    <div *ngIf="liveStreamingTVUrl && isTVEnable" id="videoplayer">
       <iframe [src]="liveStreamingTVUrl" scrolling="no"></iframe>
     </div>
     <div class="innerpagem">
@@ -162,7 +162,7 @@
                         <input
                           type="number"
                           (keypress)="numberOnly($event)"
-                          class="form-control"
+                          class="form-control minMax"
                           placeholder="Min.{{ userBalance?.minimumBet }} Max.{{
                             userBalance?.maxBet
                           }}"
@@ -592,255 +592,277 @@
   <div class="col-md-12">
     <div class="innerpagem">
       <!--Betslip start-->
-      <div id="betslip" aria-labelledby="betslip-tab">
-        <div class="card">
-          <ng-container *ngIf="isLoaderStart">
-            <!-- <span class="loadtime">{{count}}</span> -->
-            <div class="loader1">
-              <img src="assets/images/Loader.gif" width="40" height="40" />
-            </div>
-          </ng-container>
-          <p
-            class="card-header text-dark"
-            [ngClass]="
-              betSlipParams['isBack'] === true ? 'bg-blue' : 'bg-peach'
-            "
-          >
-            {{ betSlipParams["event"] }} <br />
-            {{ betSlipParams["selectionName"] }}
-          </p>
-          <div class="card-body" [class.batsliploader]="isLoaderStart">
-            <div class="row">
-              <div class="col-md-12">
-                <form [formGroup]="betSlipForm">
-                  <div class="row">
-                    <div class="col-md-6 col-6">
-                      <label
-                        class="text-dark"
-                        *ngIf="marketType !== EMarketType.FANCY_TYPE"
-                        >Odds{{ marketType }}</label
-                      >
-                      <label
-                        class="text-dark"
-                        *ngIf="marketType == EMarketType.FANCY_TYPE"
-                        >Runs</label
-                      >
-                      <div class="number">
-                        <ng-container
-                          *ngIf="
-                            marketType == EMarketType.MATCH_TYPE ||
-                              marketType == EMarketType.BOOKMAKER_TYPE;
-                            else otherMarket
-                          "
-                        >
-                          <span
-                            *ngIf="marketType == EMarketType.MATCH_TYPE"
-                            class="minus"
-                            (click)="
-                              betSlipParams['odds'] > 0 &&
-                                upAndDownOddsValue(false)
-                            "
-                            >-</span
+      <div class="tab-content" id="myTabContent">
+        <!--Betslip start-->
+        <div
+          class="tab-pane fade"
+          [ngClass]="{ 'show active': isBetSlipActive }"
+          id="betslip"
+          role="tabpanel"
+          aria-labelledby="betslip-tab"
+        >
+          <div id="betslip" aria-labelledby="betslip-tab">
+            <div class="card">
+              <ng-container *ngIf="isLoaderStart">
+                <!-- <span class="loadtime">{{count}}</span> -->
+                <div class="loader1">
+                  <img src="assets/images/Loader.gif" width="40" height="40" />
+                </div>
+              </ng-container>
+              <p
+                class="card-header text-dark"
+                [ngClass]="
+                  betSlipParams['isBack'] === true ? 'bg-blue' : 'bg-peach'
+                "
+              >
+                {{ betSlipParams["event"] }} <br />
+                {{ betSlipParams["selectionName"] }}
+              </p>
+              <div class="card-body" [class.batsliploader]="isLoaderStart">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form [formGroup]="betSlipForm">
+                      <div class="row">
+                        <div class="col-md-6 col-6">
+                          <label
+                            class="text-dark"
+                            *ngIf="marketType !== EMarketType.FANCY_TYPE"
+                            >Odds{{ marketType }}</label
                           >
+                          <label
+                            class="text-dark"
+                            *ngIf="marketType == EMarketType.FANCY_TYPE"
+                            >Runs</label
+                          >
+                          <div class="number">
+                            <ng-container
+                              *ngIf="
+                                marketType == EMarketType.MATCH_TYPE ||
+                                  marketType == EMarketType.BOOKMAKER_TYPE;
+                                else otherMarket
+                              "
+                            >
+                              <span
+                                *ngIf="marketType == EMarketType.MATCH_TYPE"
+                                class="minus"
+                                (click)="
+                                  betSlipParams['odds'] > 0 &&
+                                    upAndDownOddsValue(false)
+                                "
+                                >-</span
+                              >
+                              <input
+                                min="1.01"
+                                #bet_odds
+                                step=".01"
+                                type="number"
+                                formControlName="odds"
+                                autofocus
+                              />
+                              <span
+                                *ngIf="marketType == EMarketType.MATCH_TYPE"
+                                class="plus"
+                                (click)="upAndDownOddsValue(true)"
+                                >+</span
+                              >
+                              <ng-container
+                                *ngIf="
+                                  (betSlipForm.controls['odds'].touched ||
+                                    betSlipForm.controls['odds'].dirty) &&
+                                  betSlipForm.controls['odds'].invalid
+                                "
+                              >
+                                <span
+                                  class="text-danger p-3"
+                                  *ngIf="
+                                    betSlipForm.controls['odds'].errors
+                                      ?.required
+                                  "
+                                  >Odds is required</span
+                                >
+                                <span
+                                  class="text-danger p-3"
+                                  *ngIf="
+                                    betSlipForm.controls['odds'].errors?.min
+                                  "
+                                  >Min :{{ 1.01 }}</span
+                                >
+                              </ng-container>
+                            </ng-container>
+                            <ng-template #otherMarket>
+                              <input
+                                type="number"
+                                class="w-100"
+                                formControlName="runs"
+                                disable
+                              />
+                            </ng-template>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-6">
+                          <label class="text-dark">Stake</label>
                           <input
-                            min="1.01"
-                            #bet_odds
-                            step=".01"
                             type="number"
-                            formControlName="odds"
-                            autofocus
+                            class="form-control minMax"
+                            placeholder="Min.{{
+                              userBalance?.minimumBet
+                            }} Max.{{ userBalance?.maxBet }}"
+                            formControlName="stake"
+                            (input)="stakeVal($event)"
                           />
-                          <span
-                            *ngIf="marketType == EMarketType.MATCH_TYPE"
-                            class="plus"
-                            (click)="upAndDownOddsValue(true)"
-                            >+</span
-                          >
                           <ng-container
                             *ngIf="
-                              (betSlipForm.controls['odds'].touched ||
-                                betSlipForm.controls['odds'].dirty) &&
-                              betSlipForm.controls['odds'].invalid
+                              (betSlipForm.controls['stake'].touched ||
+                                betSlipForm.controls['stake'].dirty) &&
+                              betSlipForm.controls['stake'].invalid
                             "
                           >
                             <span
-                              class="text-danger p-3"
+                              class="text-danger"
                               *ngIf="
-                                betSlipForm.controls['odds'].errors?.required
+                                betSlipForm.controls['stake'].errors?.required
                               "
-                              >Odds is required</span
+                              >Stake is required</span
                             >
                             <span
-                              class="text-danger p-3"
-                              *ngIf="betSlipForm.controls['odds'].errors?.min"
-                              >Min :{{ 1.01 }}</span
+                              class="text-danger"
+                              *ngIf="betSlipForm.controls['stake'].errors?.min"
+                              >Min :{{ userBalance?.minimumBet }}</span
+                            >
+                            <span
+                              class="text-danger"
+                              *ngIf="betSlipForm.controls['stake'].errors?.max"
+                              >Max :{{ userBalance?.maxBet }}</span
                             >
                           </ng-container>
-                        </ng-container>
-                        <ng-template #otherMarket>
-                          <input
-                            type="number"
-                            class="w-100"
-                            formControlName="runs"
-                            disable
-                          />
-                        </ng-template>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-6">
-                      <label class="text-dark">Stake</label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Min.{{ userBalance?.minimumBet }} Max.{{
-                          userBalance?.maxBet
-                        }}"
-                        formControlName="stake"
-                        (input)="stakeVal($event)"
-                      />
-                      <ng-container
-                        *ngIf="
-                          (betSlipForm.controls['stake'].touched ||
-                            betSlipForm.controls['stake'].dirty) &&
-                          betSlipForm.controls['stake'].invalid
-                        "
-                      >
-                        <span
-                          class="text-danger"
-                          *ngIf="betSlipForm.controls['stake'].errors?.required"
-                          >Stake is required</span
-                        >
-                        <span
-                          class="text-danger"
-                          *ngIf="betSlipForm.controls['stake'].errors?.min"
-                          >Min :{{ userBalance?.minimumBet }}</span
-                        >
-                        <span
-                          class="text-danger"
-                          *ngIf="betSlipForm.controls['stake'].errors?.max"
-                          >Max :{{ userBalance?.maxBet }}</span
-                        >
-                      </ng-container>
-                    </div>
-                    <div class="col-md-6 col-6">
-                      <p class="text-dark m-0">
-                        or&nbsp;Choose&nbsp;You&nbsp;Stake
-                      </p>
-                    </div>
-                    <div class="col-md-6 col-6 text-end">
-                      <a
-                        class="text-decoration-none"
-                        routerLink="/settings"
-                        [ngStyle]="{
-                          color:
-                            betSlipParams['isBack'] === true
-                              ? '#6abefa'
-                              : '#fba2b6 '
-                        }"
-                        >EDIT STAKES</a
-                      >
-                    </div>
-                    <div class="col-md-12 m-0">
-                      <p class="text-dark">Size</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div
-                      class="col-md-4 col-4 p-1 mb-1"
-                      *ngFor="let item of userConfig?.userConfig?.EditStakesBtn"
-                    >
-                      <button
-                        type="button"
-                        class="btn w-100 rounded-pill"
-                        [ngStyle]="{
-                          'background-color':
-                            betSlipParams['isBack'] === true
-                              ? '#6abefa'
-                              : '#fba2b6 '
-                        }"
-                        (click)="updateStack(item)"
-                      >
-                        +{{ item | number }}
-                      </button>
-                    </div>
-
-                    <div class="col-md-6 col-6 p-1">
-                      <button
-                        type="button"
-                        class="btn border-colour w-100 p-2 rounded-pill betbtn"
-                        (click)="cancelBetSlip()"
-                      >
-                        CANCEL
-                      </button>
-                    </div>
-                    <div class="col-md-6 col-6 p-1">
-                      <button
-                        type="submit"
-                        class="btn w-100 p-1 rounded-pill betbtn"
-                        (click)="onClickPlaceBet()"
-                        [disabled]="
-                          betSlipForm.controls['stake'].invalid ||
-                          betSlipForm.controls['odds'].invalid ||
-                          isBetSlipPlaceCall
-                        "
-                        [ngClass]="
-                          betSlipForm.controls['stake'].invalid ||
-                          isBetSlipPlaceCall
-                            ? 'disabled bg-secondary'
-                            : 'bg-success text-white'
-                        "
-                      >
-                        <span class="d-block">PLACE BET</span>
-                        <ng-container
-                          *ngIf="!betSlipForm.controls['stake'].invalid"
-                        >
-                          <span class="d-block prof"
-                            >{{
-                              betSlipParams["isBack"] ? "PROFIT" : "LIABILITY"
-                            }}: {{ profit }}</span
+                        </div>
+                        <div class="col-md-6 col-6">
+                          <p class="text-dark m-0">
+                            or&nbsp;Choose&nbsp;You&nbsp;Stake
+                          </p>
+                        </div>
+                        <div class="col-md-6 col-6 text-end">
+                          <a
+                            class="text-decoration-none"
+                            routerLink="/settings"
+                            [ngStyle]="{
+                              color:
+                                betSlipParams['isBack'] === true
+                                  ? '#6abefa'
+                                  : '#fba2b6 '
+                            }"
+                            >EDIT STAKES</a
                           >
-                          <div class="sec-text">
-                            <span>{{
-                              marketType == EMarketType.MATCH_TYPE
-                                ? "5s"
-                                : marketType == EMarketType.FANCY_TYPE
-                                ? "2s"
-                                : "1s"
-                            }}</span>
-                          </div>
-                        </ng-container>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="m-0">
-                    <p
-                      class="text-bold m-0"
-                      [ngStyle]="{
-                        color:
-                          betSlipParams['isBack'] === true
-                            ? '#6abefa'
-                            : '#fba2b6 '
-                      }"
-                    >
-                      <i
-                        class="fa fa-exclamation-circle m-0"
-                        aria-hidden="true"
-                      ></i>
-                      Min Bet: {{ userBalance?.minimumBet }} Max Bet:
-                      {{ userBalance?.maxBet }}
-                    </p>
-                  </div>
+                        </div>
+                        <div class="col-md-12 m-0">
+                          <p class="text-dark">Size</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="col-md-4 col-4 p-1 mb-1"
+                          *ngFor="
+                            let item of userConfig?.userConfig?.EditStakesBtn
+                          "
+                        >
+                          <button
+                            type="button"
+                            class="btn w-100 rounded-pill"
+                            [ngStyle]="{
+                              'background-color':
+                                betSlipParams['isBack'] === true
+                                  ? '#6abefa'
+                                  : '#fba2b6 '
+                            }"
+                            (click)="updateStack(item)"
+                          >
+                            +{{ item | number }}
+                          </button>
+                        </div>
 
-                  <div class="form-group m-0">
-                    <label class="form-check-label text-dark" for="gridCheck"
-                      >Confirm bets before placing</label
-                    >
-                    <label class="switch float-end">
-                      <input type="checkbox" checked />
-                      <span class="slider round"></span
-                    ></label>
+                        <div class="col-md-6 col-6 p-1">
+                          <button
+                            type="button"
+                            class="btn border-colour w-100 p-2 rounded-pill betbtn"
+                            (click)="cancelBetSlip()"
+                          >
+                            CANCEL
+                          </button>
+                        </div>
+                        <div class="col-md-6 col-6 p-1">
+                          <button
+                            type="submit"
+                            class="btn w-100 p-1 rounded-pill betbtn"
+                            (click)="onClickPlaceBet()"
+                            [disabled]="
+                              betSlipForm.controls['stake'].invalid ||
+                              betSlipForm.controls['odds'].invalid ||
+                              isBetSlipPlaceCall
+                            "
+                            [ngClass]="
+                              betSlipForm.controls['stake'].invalid ||
+                              isBetSlipPlaceCall
+                                ? 'disabled bg-secondary'
+                                : 'bg-success text-white'
+                            "
+                          >
+                            <span class="d-block">PLACE BET</span>
+                            <ng-container
+                              *ngIf="!betSlipForm.controls['stake'].invalid"
+                            >
+                              <span class="d-block prof"
+                                >{{
+                                  betSlipParams["isBack"]
+                                    ? "PROFIT"
+                                    : "LIABILITY"
+                                }}: {{ profit }}</span
+                              >
+                              <div class="sec-text">
+                                <span>{{
+                                  marketType == EMarketType.MATCH_TYPE
+                                    ? "5s"
+                                    : marketType == EMarketType.FANCY_TYPE
+                                    ? "2s"
+                                    : "1s"
+                                }}</span>
+                              </div>
+                            </ng-container>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="m-0">
+                        <p
+                          class="text-bold m-0"
+                          [ngStyle]="{
+                            color:
+                              betSlipParams['isBack'] === true
+                                ? '#6abefa'
+                                : '#fba2b6 '
+                          }"
+                        >
+                          <i
+                            class="fa fa-exclamation-circle m-0"
+                            aria-hidden="true"
+                          ></i>
+                          Min Bet: {{ userBalance?.minimumBet }} Max Bet:
+                          {{ userBalance?.maxBet }}
+                        </p>
+                      </div>
+
+                      <div class="form-group m-0">
+                        <label
+                          class="form-check-label text-dark"
+                          for="gridCheck"
+                          >Confirm bets before placing</label
+                        >
+                        <label class="switch float-end">
+                          <input type="checkbox" checked />
+                          <span class="slider round"></span
+                        ></label>
+                      </div>
+                    </form>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@
     <button
       class="btn btn-sm badge bg-success me-1"
       (click)="isTVEnable = !isTVEnable"
-      *ngIf="isMatchLive !== 0"
+      *ngIf="isMatchLive !== 0 && liveScoreBoardActaulTVUrl && isLoggedIn"
     >
       <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i>&nbsp;{{
         isTVEnable ? "HIDE" : "WATCH"
@@ -43,16 +43,16 @@
             <button
               class="btn btn-sm badge bg-success me-1"
               (click)="isScoreBoardEnable = !isScoreBoardEnable"
-              *ngIf="isMatchLive !== 0"
+              *ngIf="isMatchLive !== 0 && liveScoreBoardActaulUrl && isLoggedIn"
             >
               <i
                 [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"
               ></i
               >SCORES
             </button>
-            <button class="btn btn-sm bg-color rounded p-0 ps-1 pe-1">
+            <!-- <button class="btn btn-sm bg-color rounded p-0 ps-1 pe-1">
               <i class="fas fa-share"></i>
-            </button>
+            </button> -->
           </div>
           <!-- Tab panes -->
         </div>
@@ -411,142 +411,150 @@
                             </tr>
                           </thead>
                           <tbody class="content pointer">
-                            <tr
+                            <ng-container
                               *ngFor="
                                 let runner of inPlayUpcomingMarket['runners'];
                                 let last = last;
-                                let first = first
+                                let first = first;
+                                let even = even
                               "
-                              [ngClass]="{ 'border-0': last }"
                             >
-                              <td
-                                class="text-start ps-2 py-2 heading"
-                                [ngClass]="{ 'border-top': !first }"
-                              >
-                                <a
-                                  ><strong>{{
-                                    runner["RunnerName"]
-                                  }}</strong></a
+                              <tr [ngClass]="{ 'border-0': last }">
+                                <td
+                                  class="text-start ps-2 py-2 heading"
+                                  [ngClass]="{ 'border-top': !first }"
                                 >
-                                <br />
-                                <a
-                                  [ngClass]="
-                                    runner?.hourseAmt?.amount > 0
-                                      ? 'text-success'
-                                      : 'text-danger'
-                                  "
-                                >
-                                  <strong>{{
-                                    runner?.hourseAmt?.amount
-                                  }}</strong>
-                                </a>
-
-                                <a>
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                    >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                  <a
+                                    ><strong>{{
+                                      runner["RunnerName"]
+                                    }}</strong></a
                                   >
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                    >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
-                                </a>
-
-                                <a
-                                  [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
-                                >
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                    >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
-                                  <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                    >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
-                                </a>
-                              </td>
-                              <td
-                                width="10%"
-                                class="border-top"
-                                [ngClass]="{ 'border-top': !first }"
-                              ></td>
-                              <td
-                                (click)="
-                                  inPlayUpcomingMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      runner,
-                                      inPlayUpcomingMarket,
-                                      {
-                                        isBack: true,
-                                        index: 2,
-                                        odds: runner['back2']
-                                      },
-                                      EMarketType.MATCH_TYPE
-                                    )
-                                "
-                              >
-                                <a
-                                  class="colblue"
-                                  [boxHighlight]="runner['back2']"
-                                  [boxHighlight]="runner['vback2']"
-                                  [class.dis]="
-                                    inPlayUpcomingMarket['inPlayStatus'] == 0
-                                  "
-                                  ><strong>{{ runner["back2"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vback2"] | marketRateFormater
-                                  }}</span></a
-                                >
-                              </td>
-                              <td
-                                (click)="
-                                  inPlayUpcomingMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      runner,
-                                      inPlayUpcomingMarket,
-                                      {
-                                        isBack: false,
-                                        index: 0,
-                                        odds: runner['lay0']
-                                      },
-                                      EMarketType.MATCH_TYPE
-                                    )
-                                "
-                              >
-                                <a
-                                  class="colpink"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
-                                  [class.dis]="
-                                    inPlayUpcomingMarket['inPlayStatus'] == 0
-                                  "
-                                  ><strong>{{ runner["lay0"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vlay0"] | marketRateFormater
-                                  }}</span></a
-                                >
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="4" class="p-0 border-0">
-                                <div
-                                  class="col-md-4 mb-3 sidebarhide"
-                                  id="sidebarhide"
-                                >
-                                  <app-bet-slip
-                                    *ngIf="
-                                      matchName != 'NO MATCH AVAILABLE' &&
-                                      isMobileView
+                                  <br />
+                                  <a
+                                    [ngClass]="
+                                      runner?.hourseAmt?.amount > 0
+                                        ? 'text-success'
+                                        : 'text-danger'
                                     "
-                                    [isBetSlipActive]="isBetSlipActive"
-                                    [betSlipParams]="betSlipObj"
-                                    [showMAtchwiseBet]="matchName"
-                                    [marketType]="marketType"
-                                    [isTVEnable]="isTVEnable"
-                                  ></app-bet-slip>
-                                </div>
-                              </td>
-                            </tr>
+                                  >
+                                    <strong>{{
+                                      runner?.hourseAmt?.amount
+                                    }}</strong>
+                                  </a>
+
+                                  <a>
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                      >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                  </a>
+
+                                  <a
+                                    [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                  >
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                      >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                    <strong
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                    >
+                                  </a>
+                                </td>
+                                <td
+                                  width="10%"
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                ></td>
+                                <td
+                                  (click)="
+                                    inPlayUpcomingMarket['inPlayStatus'] &&
+                                      onClickLiveMarketRate(
+                                        runner,
+                                        inPlayUpcomingMarket,
+                                        {
+                                          isBack: true,
+                                          index: 2,
+                                          odds: runner['back2']
+                                        },
+                                        EMarketType.MATCH_TYPE
+                                      )
+                                  "
+                                >
+                                  <a
+                                    class="colblue"
+                                    [boxHighlight]="runner['back2']"
+                                    [boxHighlight]="runner['vback2']"
+                                    [class.dis]="
+                                      inPlayUpcomingMarket['inPlayStatus'] == 0
+                                    "
+                                    ><strong>{{ runner["back2"] }}</strong>
+                                    <br /><span>{{
+                                      runner["vback2"] | marketRateFormater
+                                    }}</span></a
+                                  >
+                                </td>
+                                <td
+                                  (click)="
+                                    inPlayUpcomingMarket['inPlayStatus'] &&
+                                      onClickLiveMarketRate(
+                                        runner,
+                                        inPlayUpcomingMarket,
+                                        {
+                                          isBack: false,
+                                          index: 0,
+                                          odds: runner['lay0']
+                                        },
+                                        EMarketType.MATCH_TYPE
+                                      )
+                                  "
+                                >
+                                  <a
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
+                                    [class.dis]="
+                                      inPlayUpcomingMarket['inPlayStatus'] == 0
+                                    "
+                                    ><strong>{{ runner["lay0"] }}</strong>
+                                    <br /><span>{{
+                                      runner["vlay0"] | marketRateFormater
+                                    }}</span></a
+                                  >
+                                </td>
+                              </tr>
+                              <tr
+                                *ngIf="
+                                  runner['SelectionId'] ==
+                                    betSlipObj['selectionId'] &&
+                                  matchName != 'NO MATCH AVAILABLE'
+                                "
+                              >
+                                <td colspan="4" class="p-0 border-0">
+                                  <div
+                                    class="col-md-4 mb-3 sidebarhide"
+                                    id="sidebarhide"
+                                  >
+                                    <app-bet-slip
+                                      *ngIf="
+                                        matchName != 'NO MATCH AVAILABLE' &&
+                                        isMobileView
+                                      "
+                                      [isBetSlipActive]="isBetSlipActive"
+                                      [betSlipParams]="betSlipObj"
+                                      [showMAtchwiseBet]="matchName"
+                                      [marketType]="marketType"
+                                      [isTVEnable]="isTVEnable"
+                                    ></app-bet-slip>
+                                  </div>
+                                </td>
+                              </tr>
+                            </ng-container>
                           </tbody>
                         </table>
                       </div>
@@ -586,10 +594,11 @@
                                 <th
                                   width="15%"
                                   colspan="1"
-                                  class="text-center coldark tlastcol"
+                                  class="text-center coldark"
                                 >
                                   Lay
                                 </th>
+                                <th class="coldark tlastcol"></th>
                                 <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                                 <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                               </tr>
@@ -703,13 +712,36 @@
                                   >
                                 </td>
 
-                                <!-- <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"> -->
-                                <!--Online start-->
-                                <!-- <div class="suspendedbm1" *ngIf="runner['st']=='1' || runner['st']==''">
-                                        <button type="button" class="suspendedm1" [ngClass]="isLoggedIn ? 'matchmarketlist-on' : 'matchmarketlist-off'">Suspended</button>
-                                      </div> -->
-                                <!--Online end-->
-                                <!-- </td> -->
+                                <td
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <div
+                                    class="suspendedbm1"
+                                    *ngIf="
+                                      singleBookMaker['appMarketStatus'] ==
+                                        '3' ||
+                                      singleBookMaker['appMarketStatus'] == '9'
+                                    "
+                                  >
+                                    <button
+                                      type="button"
+                                      class="suspendedm1"
+                                      [ngClass]="
+                                        isLoggedIn
+                                          ? 'matchmarketlist-on'
+                                          : 'matchmarketlist-off'
+                                      "
+                                    >
+                                      {{
+                                        singleBookMaker["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
                               <tr>
                                 <td colspan="4" class="p-0 border-0">
@@ -1171,12 +1203,10 @@
                               <th colspan="1" class="text-center coldark">
                                 No
                               </th>
-                              <th
-                                colspan="1"
-                                class="text-center coldark tlastcol"
-                              >
+                              <th colspan="1" class="text-center coldark">
                                 Yes
                               </th>
+                              <th class="coldark tlastcol"></th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
@@ -1301,6 +1331,37 @@
                                         | marketRateFormater
                                     }}</span></a
                                   >
+                                </td>
+                                <td
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <div
+                                    class="suspendedbm1"
+                                    *ngIf="
+                                      singleFancyMarket['appMarketStatus'] ==
+                                        '3' ||
+                                      singleFancyMarket['appMarketStatus'] ==
+                                        '9'
+                                    "
+                                  >
+                                    <button
+                                      type="button"
+                                      class="suspendedm1"
+                                      [ngClass]="
+                                        isLoggedIn
+                                          ? 'matchmarketlist-on'
+                                          : 'matchmarketlist-off'
+                                      "
+                                    >
+                                      {{
+                                        singleFancyMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                    </button>
+                                  </div>
                                 </td>
                               </tr>
                               <!-- <tr>
@@ -1648,38 +1709,40 @@
           <div class="col-md-6">P&L</div>
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
-          <div class="row border-bottom p-2">
-            <div class="col-md-6">
-              {{ ladderObj[0]?.startScore }}-{{ ladderObj[0]?.endScore }}
-            </div>
-            <div class="col-md-6">
-              <span
-                [ngClass]="
-                  ladderObj[0]?.amount >= 0 ? 'text-success' : 'text-danger'
-                "
-                >{{ ladderObj[0]?.amount }}</span
-              >
-            </div>
-          </div>
-          <div class="row border-bottom p-2 bg-light">
-            <ng-container
-              *ngIf="ladderObj[1]?.endScore == 'Infinite'; else nonInfinte"
+          <div *ngFor="let ldr of ladderObj">
+            <div
+              class="row border-bottom p-2"
+              *ngIf="ldr?.endScore != 'Infinite'"
             >
-              <div class="col-md-6">+{{ ladderObj[1]?.startScore }}</div>
-            </ng-container>
-            <ng-template #nonInfinte>
               <div class="col-md-6">
-                {{ ladderObj[1]?.startScore }}-{{ ladderObj[1]?.endScore }}
+                {{ ldr?.startScore }}-{{ ldr?.endScore }}
               </div>
-            </ng-template>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'"
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
+            </div>
+            <div
+              class="row border-bottom p-2 bg-light"
+              *ngIf="ldr?.endScore == 'Infinite'"
+            >
+              <ng-container>
+                <div class="col-md-6">+{{ ldr?.startScore }}</div>
+              </ng-container>
+              <ng-template #nonInfinte>
+                <div class="col-md-6">
+                  {{ ldr?.startScore }}-{{ ldr?.endScore }}
+                </div>
+              </ng-template>
 
-            <div class="col-md-6">
-              <span
-                [ngClass]="
-                  ladderObj[1]?.amount >= 0 ? 'text-success' : 'text-danger'
-                "
-                >{{ ladderObj[1]?.amount }}</span
-              >
+              <div class="col-md-6">
+                <span
+                  [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'"
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
             </div>
           </div>
         </ng-container>

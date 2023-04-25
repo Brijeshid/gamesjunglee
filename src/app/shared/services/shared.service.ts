@@ -15,31 +15,32 @@ import { webSocket } from 'rxjs/webSocket';
 })
 export class SharedService {
 
-  sharedSubject=new Subject();
-  marketBookCalSubject=new Subject();
+  sharedSubject = new Subject();
+  marketBookCalSubject = new Subject();
   private previousUrl: string = '';
   private currentUrl: string = '';
   getUserBalance = new Subject();
   getUserBalanceMarket = new Subject();
   isMobileView = new Subject();
-  unmatchedBetsList:any = [];
-  userIp:any;
-  unMatchSubjectListSubject=new Subject();
-  userBalance:any;
+  isMobileViewCancel = new Subject();
+  unmatchedBetsList: any = [];
+  userIp: any;
+  unMatchSubjectListSubject = new Subject();
+  userBalance: any;
   ifBetSlipOpened = new BehaviorSubject(false);
 
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
-  liveStreamingTVUrl:any;
-  liveScoreBoardUrl:any;
+  liveStreamingTVUrl: any;
+  liveScoreBoardUrl: any;
   realDataWebSocket: any;
 
   constructor(
     private _toastr: ToastrService,
     private _apiHttpService: ApiHttpService,
     private _apiEndpointsService: ApiEndpointsService,
-    private _router:Router,
-    private _location:Location
+    private _router: Router,
+    private _location: Location
   ) {
     // this.currentUrl = this._route.url;
     // _route.events.subscribe(event => {
@@ -52,9 +53,9 @@ export class SharedService {
     // this._location.back();
   }
 
-  public exportExcel(fileData,fileName){
+  public exportExcel(fileData, fileName) {
     /* pass here the table id */
-    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(fileData);
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(fileData);
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -64,7 +65,7 @@ export class SharedService {
     XLSX.writeFile(wb, fileName);
   }
 
-   public getPreviousUrl(){
+  public getPreviousUrl() {
     return this._location.back();
   }
 
@@ -78,12 +79,12 @@ export class SharedService {
       .get(this._apiEndpointsService.getSportsEndpoint());
   }
 
-  _getSportsToursListApi(id:string) {
+  _getSportsToursListApi(id: string) {
     return this._apiHttpService
       .get(this._apiEndpointsService.getSportsToursByIdEndpoint(id));
   }
 
-  _getToursMatchesListApi(id:string) {
+  _getToursMatchesListApi(id: string) {
     return this._apiHttpService
       .get(this._apiEndpointsService.getToursMatchesByIdEndpoint(id));
   }
@@ -109,39 +110,39 @@ export class SharedService {
     }
   }
 
-  isLoggedIn(){
-    return localStorage.getItem('jwtToken') ? true: false;
+  isLoggedIn() {
+    return localStorage.getItem('jwtToken') ? true : false;
   }
 
-  isUserActive(){
-    return this.getUserDetails()['isActive'] =='Active' ? true : false ;
+  isUserActive() {
+    return this.getUserDetails()['isActive'] == 'Active' ? true : false;
   }
 
   getJWTToken() {
     return localStorage.getItem('jwtToken');
   }
 
-  setJWTToken(jwtToken:string){
-    localStorage.setItem('jwtToken',jwtToken);
+  setJWTToken(jwtToken: string) {
+    localStorage.setItem('jwtToken', jwtToken);
   }
 
-  removeJWTToken(){
+  removeJWTToken() {
     localStorage.removeItem('jwtToken');
   }
 
-  rtnSingleObjFromArrObj(arrObjParams:any, obj:any) {
+  rtnSingleObjFromArrObj(arrObjParams: any, obj: any) {
     let key = Object.keys(obj)[0];
     return arrObjParams.filter(arrObjParam => arrObjParam[key] == obj[key])[0];
   }
 
-  _replaceArrayObject(arr1, arr2,objKey) {
+  _replaceArrayObject(arr1, arr2, objKey) {
     return arr1.map(obj => arr2.find(o => o[objKey] === obj[objKey]) || obj);
   }
 
-  _removeObjectFromArray(arr1,data){
+  _removeObjectFromArray(arr1, data) {
     return arr1.filter(obj => obj.key != data.key);
   }
-  removeToken(){
+  removeToken() {
     localStorage.removeItem('jwtToken');
   }
 
@@ -149,11 +150,11 @@ export class SharedService {
     return JSON.parse(localStorage.getItem('userDetails') || '{}');
   }
 
-  setUserDetails(userDetails){
-    localStorage.setItem('userDetails',JSON.stringify(userDetails['user']));
+  setUserDetails(userDetails) {
+    localStorage.setItem('userDetails', JSON.stringify(userDetails['user']));
   }
 
-  removeUserDetails(){
+  removeUserDetails() {
     localStorage.removeItem('userDetails');
   }
 
@@ -177,29 +178,29 @@ export class SharedService {
       .post(this._apiEndpointsService.getInPlayUpcomingEndPoint(), inPlayUpcomingBody);
   }
 
-  postSetOrUnsetWebSocketDataApi(isSet:boolean,objParams:object) {
-    if(isSet){
+  postSetOrUnsetWebSocketDataApi(isSet: boolean, objParams: object) {
+    if (isSet) {
       return this._apiHttpService
-      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('set'), objParams);
-    }else{
+        .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('set'), objParams);
+    } else {
       return this._apiHttpService
-      .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('unset'), objParams);
+        .post(this._apiEndpointsService.getWebSocketDataBySetORUnsetEndpoint('unset'), objParams);
     }
   }
 
-  _postTourListApi(tourParams:any) {
+  _postTourListApi(tourParams: any) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getSportsToursEndpoint(),tourParams);
+      .post(this._apiEndpointsService.getSportsToursEndpoint(), tourParams);
   }
 
-  _postSearchListApi(searchParams:any) {
+  _postSearchListApi(searchParams: any) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getSearchEventEndPoint(),searchParams);
+      .post(this._apiEndpointsService.getSearchEventEndPoint(), searchParams);
   }
 
-  _postPlaceBetApi(placeBetObjParams:object) {
+  _postPlaceBetApi(placeBetObjParams: object) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getPlaceBetEndpoint(),placeBetObjParams,{
+      .post(this._apiEndpointsService.getPlaceBetEndpoint(), placeBetObjParams, {
         context: new HttpContext().set(IGNORED_STATUSES, [600]),
       });
   }
@@ -238,25 +239,26 @@ export class SharedService {
       .post(this._apiEndpointsService.getWebSocketURLByDevice(), liveStreamMatchObj);
   }
 
-  getUserAdminPubSubApi(){
+  getUserAdminPubSubApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
   }
 
-  getUserRealTimeEvent(params:any){
+  getUserRealTimeEvent(params: any) {
     let currentUserDetails = this.getUserDetails();
     if (params) {
       this.realDataWebSocket = webSocket(params['url']);
       this.realDataWebSocket.subscribe(
         data => {
-          if(currentUserDetails.userId == data.userId){
-            switch(data.message){
+          console.log('socket hit', data);
+          if (currentUserDetails.userId == data.userId) {
+            switch (data.message) {
               case "STATUS_CHANGED":
-                if(data.status == 'Closed'){
-                  this.logout();return;
+                if (data.status == 'Closed') {
+                  this.logout(); return;
                 }
                 currentUserDetails.isActive = data.status;
-                localStorage.setItem('userDetails',JSON.stringify(currentUserDetails));
+                localStorage.setItem('userDetails', JSON.stringify(currentUserDetails));
                 window.location.reload();
                 break;
               case "PASSWORD_CHANGED":
@@ -264,34 +266,52 @@ export class SharedService {
                 break;
               case "BET_MATCHED":
                 this.unMatchSubjectListSubject.next(true);
-                this.getToastPopup('Successfully Bet Matched','Bet Matched','success');
+                this.getToastPopup('Successfully Bet Matched', 'Bet Matched', 'success');
                 break;
               case "WINNINGS_ADJUSTED":
+                this.getUserBalance.next();
+                break;
               case "EDIT_USER":
+                this.getUserBalance.next();
+                break;
               case "BET_DELETED_BY_ADMIN":
+                this.unMatchSubjectListSubject.next(true);
+                this.getUserBalance.next();
+                break;
               case "RESULT_OUT":
-                  this.getUserBalance.next();
-              break;
+                this.unMatchSubjectListSubject.next(true);
+                this.getUserBalance.next();
+                break;
             }
           }
-
+          switch (data.message) {
+            case "LOGOUT_USER":
+              console.log('getJWTToken', localStorage.getItem('jwtToken'));
+              if (localStorage.getItem('jwtToken') == data.userToken) {
+                console.log("LOGOUT_USER..");
+                this.logout();
+              } else {
+                console.log('token not matched');
+              }
+              break;
+          }
         })
-      }
+    }
   }
 
-  unsubscribeWebSocket(){
-    if(this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
+  unsubscribeWebSocket() {
+    if (this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
   }
 
-  isMobileViewFn(){
-    if(window.innerWidth <= 767){
+  isMobileViewFn() {
+    if (window.innerWidth <= 767) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  logout(){
+  logout() {
     this.removeJWTToken();
     this.removeUserDetails();
     this._router.navigate(['/login']);

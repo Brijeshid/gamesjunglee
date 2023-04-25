@@ -57,6 +57,8 @@ export class MatchMarketListComponent implements OnInit {
   isFancyCardShow:boolean = false;
   isMobileView:boolean;
   liveScoreBoardUrl:any;
+  liveScoreBoardActaulUrl:any;
+  liveScoreBoardActaulTVUrl:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -110,8 +112,15 @@ export class MatchMarketListComponent implements OnInit {
       this._cdref.detectChanges();
   }
 
+  private _closeBetSlipWindowForMobile(){
+    this._sharedService.isMobileViewCancel.subscribe(()=>{
+      this.betSlipObj['selectionId'] = '';
+    })
+  }
+
   isMobileViewCallInit(){
     this.isMobileView =  this._sharedService.isMobileViewFn();
+    if(this.isMobileView) this._closeBetSlipWindowForMobile();
     this._sharedService.isMobileView.subscribe((res:any)=>{
       this.isMobileView = res;
     })
@@ -130,9 +139,11 @@ export class MatchMarketListComponent implements OnInit {
 
   getStreamingUrl(){
     this._sharedService.postLiveStreamForMarket({domain:window.location.hostname,matchId:this.matchId}).subscribe((res:any)=>{
+      this.liveScoreBoardActaulUrl =res?.streamObj?.data?.scoreUrl;
+      this.liveScoreBoardActaulTVUrl =res?.streamObj?.data?.streamingUrl;
       this._sharedService.liveStreamingTVUrl = this._sanitizer.bypassSecurityTrustResourceUrl(res?.streamObj?.data?.streamingUrl);
       this.liveScoreBoardUrl = this._sharedService.liveScoreBoardUrl = this._sanitizer.bypassSecurityTrustResourceUrl(res?.streamObj?.data?.scoreUrl);
-      console.log("tv",res);
+      console.log("tv",res?.streamObj?.data?.scoreUrl);
     })
   }
 
@@ -521,6 +532,7 @@ export class MatchMarketListComponent implements OnInit {
   }
 
   getLadderDataByMarket(marketId:any){
+    this.ladderObj = [];
     this._sportsBookService._postLadderDataByMarketApi({marketId:marketId}).subscribe((res:any)=>{
       this.ladderObj = res?.ladderDetails;
       console.log(this.ladderObj,res);

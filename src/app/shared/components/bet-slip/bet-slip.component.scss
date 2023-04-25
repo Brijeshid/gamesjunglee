@@ -2,15 +2,19 @@
   background-color: transparent;
 }
 
-.bg-blue{
+.bg-blue {
   background-color: #6abefa;
 }
 
-.bg-peach{
-  background-color: #fba2b6 ;
+.bg-peach {
+  background-color: #fba2b6;
 }
 
-.mobileTableHide #myTabContent .card{
+.mobileTableHide #myTabContent .card {
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
+}
+
+.minMax {
+  padding: 5px;
 }
