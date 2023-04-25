@@ -69,7 +69,7 @@
       </div>
       <div class="gamedetails tabetails mb-5 align-items-center p-2 p-md-0">
         <div class="row align-items-center">
-          <div class="col-md-6 col-5">
+          <div class="col-md-6 col-5 mt-3">
             Show
             <select
               (change)="updateLimit($event)"
@@ -82,7 +82,7 @@
             </select>
             Entries
           </div>
-          <div class="col-md-4 col-7">
+          <div class="col-md-4 col-7 mt-3">
             Search :
             <input
               type="text"
@@ -93,7 +93,7 @@
               (ngModelChange)="search()"
             />
           </div>
-          <div class="col-md-2 mt-2 mt-md-0">
+          <div class="col-md-2 mt-3 mt-md-0">
             <button
               *ngIf="betHistoryList.length > 0"
               type="button"
@@ -161,6 +161,14 @@
                       {{ betHistory.selection }}
                     </td>
                     <td *ngIf="betHistory.betType == 'BACK'" class="">
+                      <span
+                        *ngIf="betHistory.betType == 'BACK'"
+                        class="border bg-primary text-primary border-primary me-2 border-3"
+                      ></span>
+                      <span
+                        *ngIf="betHistory.betType != 'BACK'"
+                        class="border r-2 bg-danger text-danger border-danger me-2 border-3"
+                      ></span>
                       {{ betHistory.betType }}
                     </td>
                     <td *ngIf="betHistory.betType !== 'BACK'" class="">
