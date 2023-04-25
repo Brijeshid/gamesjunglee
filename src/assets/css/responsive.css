@@ -155,7 +155,7 @@
     right: 45px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 130px;
   }
 }
 
@@ -178,7 +178,8 @@
     right: 80px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 165px;
+    width: 225px;
   }
   .gamedetails .table a {
     font-size: 7px;
@@ -210,7 +211,8 @@
     right: 108px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 193px;
+    width: 250px;
   }
 
   .gamedetails .table a {
@@ -247,7 +249,8 @@
     right: 128px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 217px;
+    width: 276px;
   }
   .gamedetails .table a {
     font-size: 12px;
@@ -274,7 +277,8 @@
     width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 244px;
+    width: 300px;
   }
 }
 
@@ -298,7 +302,8 @@
     width: 205px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 248px;
+    width: 297px;
   }
 }
 
@@ -322,7 +327,8 @@
     width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 280px;
+    width: 337px;
   }
 }
 
@@ -346,7 +352,8 @@
     width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 295px;
+    width: 350px;
   }
 }
 
@@ -370,7 +377,8 @@
     width: 245px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 300px;
+    width: 360px;
   }
 }
 
@@ -379,12 +387,22 @@
     right: 219px;
     width: 270px;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 345px;
+    width: 400px;
+  }
 }
 
 @media only screen and (min-width: 2560px) {
   .suspendedm1.matchmarketlist-on {
     right: 235px;
     width: 330px;
+  }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 345px;
+    width: 400px;
   }
 }
 
@@ -393,6 +411,11 @@
     right: 300px;
     width: 360px;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 470px;
+    width: 530px;
+  }
 }
 
 @media only screen and (min-width: 4608px) {
@@ -400,11 +423,21 @@
     right: 470px;
     width: 528px;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 719px;
+    width: 785px;
+  }
 }
 
 @media only screen and (min-width: 6144px) {
   .suspendedm1.matchmarketlist-on {
     right: 643px;
     width: 706px;
+  }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 985px;
+    width: 1045px;
   }
 }
