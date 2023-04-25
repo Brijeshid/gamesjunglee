@@ -115,6 +115,16 @@
   }
 }
 
+@media only screen and (max-width: 1228.8px) {
+  .gamedetails .table a {
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 9px;
+    line-height: 12px;
+  }
+}
+
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 }
@@ -170,6 +180,9 @@
   .suspendedm1.matchmarketlist-off {
     right: 96px;
   }
+  .gamedetails .table a {
+    font-size: 7px;
+  }
 }
 
 @media only screen and (min-width: 1366px) {
@@ -198,6 +211,10 @@
   }
   .suspendedm1.matchmarketlist-off {
     right: 96px;
+  }
+
+  .gamedetails .table a {
+    font-size: 10px;
   }
 }
 
@@ -232,6 +249,9 @@
   .suspendedm1.matchmarketlist-off {
     right: 96px;
   }
+  .gamedetails .table a {
+    font-size: 12px;
+  }
 }
 
 @media only screen and (min-width: 1706.67px) {
@@ -250,7 +270,8 @@
   }
 
   .suspendedm1.matchmarketlist-on {
-    right: 157px;
+    right: 153px;
+    width: 205px;
   }
   .suspendedm1.matchmarketlist-off {
     right: 96px;
@@ -273,7 +294,7 @@
   }
 
   .suspendedm1.matchmarketlist-on {
-    right: 185px;
+    right: 170px;
     width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
@@ -321,8 +342,8 @@
   }
 
   .suspendedm1.matchmarketlist-on {
-    right: 207px;
-    width: 211px;
+    right: 190px;
+    width: 245px;
   }
   .suspendedm1.matchmarketlist-off {
     right: 96px;
@@ -345,7 +366,21 @@
 
 @media only screen and (min-width: 3072px) {
   .suspendedm1.matchmarketlist-on {
-    right: 315px;
-    width: 330px;
+    right: 300px;
+    width: 360px;
+  }
+}
+
+@media only screen and (min-width: 4608px) {
+  .suspendedm1.matchmarketlist-on {
+    right: 470px;
+    width: 528px;
+  }
+}
+
+@media only screen and (min-width: 6144px) {
+  .suspendedm1.matchmarketlist-on {
+    right: 643px;
+    width: 706px;
   }
 }
