@@ -16,7 +16,7 @@
           <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
         </button>
         <a class="navbar-brand" [routerLink]="['/in-play']"
-          ><img src="assets/images/logo.svg" class="col-6 col-md-12"
+          ><img src="assets/images/logo.svg" class="col-5 col-md-8"
         /></a>
       </div>
       <div class="col-md-2 disnone">
@@ -68,8 +68,8 @@
                 aria-label=""
                 #inputRef
                 (keydown)="postSearchList(inputRef.value)"
-                [ngModelOptions]="{standalone: true}"
-                 [(ngModel)] = "searchText"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="searchText"
                 placeholder="Search for a Sport, Game or Team"
               />
             </div>
@@ -388,46 +388,44 @@
           >
             <i class="fa fa-search searchi"></i>
             <input
-                type="text"
-                class="form-control searchinput"
-                aria-label=""
-                #inputRef
-                (keydown)="postSearchList(inputRef.value)"
-                [ngModelOptions]="{standalone: true}"
-                 [(ngModel)] = "searchText"
-                placeholder="Search for a Sport, Game or Team"
-              />
+              type="text"
+              class="form-control searchinput"
+              aria-label=""
+              #inputRef
+              (keydown)="postSearchList(inputRef.value)"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="searchText"
+              placeholder="Search for a Sport, Game or Team"
+            />
           </a>
           <ul
-          *ngIf="searchList?.length > 0"
-          class="dropdown-menu-dark search-dd"
-        >
-          <li
-            *ngFor="let singleObj of searchList"
-            (click)="navigateToMatch(singleObj)"
-            data-bs-dismiss="modal"
+            *ngIf="searchList?.length > 0"
+            class="dropdown-menu-dark search-dd"
           >
-            <a
-              ><img
-                src="assets/images/{{
-                  singleObj['sportType']['sportName'] | lowercase
-                }}.png"
-                width="45px"
-                class="pe-4"
-              />
-              {{ singleObj["matchName"] }}<br />
-              <span class="ps-5">{{
-                singleObj["openDate"] | date : "d/MM/yy, h:mm a"
-              }}</span>
-            </a>
-          </li>
-        </ul>
+            <li
+              *ngFor="let singleObj of searchList"
+              (click)="navigateToMatch(singleObj)"
+              data-bs-dismiss="modal"
+            >
+              <a
+                ><img
+                  src="assets/images/{{
+                    singleObj['sportType']['sportName'] | lowercase
+                  }}.png"
+                  width="45px"
+                  class="pe-4"
+                />
+                {{ singleObj["matchName"] }}<br />
+                <span class="ps-5">{{
+                  singleObj["openDate"] | date : "d/MM/yy, h:mm a"
+                }}</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="modal-footer border-top-0 justify-content-start">
-        <a
-          class="text-color text-decoration-none"
-          data-bs-dismiss="modal"
+        <a class="text-color text-decoration-none" data-bs-dismiss="modal"
           >Close</a
         >
       </div>
