@@ -154,8 +154,10 @@
   .suspendedm1.matchmarketlist-on {
     right: 45px;
   }
+
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 135px;
+    width: 195px;
   }
 }
 
@@ -178,10 +180,11 @@
     right: 80px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 165px;
+    width: 225px;
   }
   .gamedetails .table a {
-    font-size: 7px;
+    font-size: 12px;
   }
 }
 
@@ -210,7 +213,8 @@
     right: 108px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 193px;
+    width: 250px;
   }
 
   .gamedetails .table a {
@@ -225,6 +229,13 @@
 
   .asidenav ul li a {
     padding: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .suspendedm1.matchmarketlist-off {
+    right: 205px;
+    width: 265px;
   }
 }
 
@@ -247,10 +258,37 @@
     right: 128px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 217px;
+    width: 276px;
   }
   .gamedetails .table a {
     font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+@media only screen and (min-width: 1680px) {
+  .suspendedm1.marketlist-on {
+    right: 98px;
+  }
+  .suspendedm1.marketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.tourmarketlist-on {
+    right: 96px;
+  }
+  .suspendedm1.tourmarketlist-off {
+    right: 180px;
+  }
+
+  .suspendedm1.matchmarketlist-on {
+    right: 135px;
+    width: 240px;
+  }
+  .suspendedm1.matchmarketlist-off {
+    right: 244px;
+    width: 300px;
   }
 }
 
@@ -274,7 +312,8 @@
     width: 205px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 248px;
+    width: 297px;
   }
 }
 
@@ -298,7 +337,8 @@
     width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 280px;
+    width: 337px;
   }
 }
 
@@ -322,7 +362,8 @@
     width: 240px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 295px;
+    width: 350px;
   }
 }
 
@@ -346,7 +387,8 @@
     width: 245px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 300px;
+    width: 360px;
   }
 }
 
@@ -355,12 +397,36 @@
     right: 219px;
     width: 270px;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 345px;
+    width: 400px;
+  }
 }
 
 @media only screen and (min-width: 2560px) {
   .suspendedm1.matchmarketlist-on {
     right: 235px;
     width: 330px;
+  }
+
+  /* .suspendedm1.matchmarketlist-off {
+    right: 345px;
+    width: 400px;
+  } */
+
+  .suspendedm1.matchmarketlist-off {
+    right: 390px;
+    width: 450px;
+  }
+
+  .gamedetails .table a {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .gamedetails .table span {
+    font-size: 16px;
   }
 }
 
@@ -369,6 +435,11 @@
     right: 300px;
     width: 360px;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 470px;
+    width: 530px;
+  }
 }
 
 @media only screen and (min-width: 4608px) {
@@ -376,11 +447,21 @@
     right: 470px;
     width: 528px;
   }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 719px;
+    width: 785px;
+  }
 }
 
 @media only screen and (min-width: 6144px) {
   .suspendedm1.matchmarketlist-on {
     right: 643px;
     width: 706px;
+  }
+
+  .suspendedm1.matchmarketlist-off {
+    right: 985px;
+    width: 1045px;
   }
 }

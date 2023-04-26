@@ -299,7 +299,7 @@ body {
 }
 .gamedetails .table td {
   vertical-align: middle;
-  /* padding: 2px 5px; */
+  padding: 2px 5px;
   text-align: center;
   border-top: 2px solid #fff;
   line-height: 12px;
@@ -845,7 +845,7 @@ input:checked + .slider:before {
   letter-spacing: 2px;
   /* height: 45px; */
   height: 35px;
-  line-height: 1px;
+  line-height: 18px;
 }
 
 .prof {

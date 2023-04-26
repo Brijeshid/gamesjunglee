@@ -52,11 +52,10 @@
 </div> -->
 <!--Login end-->
 
-
 <div class="logins">
   <div class="w-30 m-auto">
     <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn()">
-      <div class="text-center">
+      <div class="text-center p-4">
         <img src="assets/images/logo.svg" class="col-6" />
       </div>
       <div class="row login pt-3 form-signin m-0 px-2">
@@ -73,33 +72,32 @@
             placeholder="User Name"
           /> -->
           <input
-          type="email"
-          class="form-control bg-transparent text-white "
-          readonly
-          onfocus="this.removeAttribute('readonly');"
-          placeholder="Enter User Name"
-          formControlName="username"
-          autocomplete="disabled"
-          id="floatingInput"
-        />
-            <span class="fa fa-user text-white bg-transparent"></span>
+            type="email"
+            class="form-control bg-transparent text-white"
+            readonly
+            onfocus="this.removeAttribute('readonly');"
+            placeholder="Enter User Name"
+            formControlName="username"
+            autocomplete="disabled"
+            id="floatingInput"
+          />
+          <span class="fa fa-user text-white bg-transparent"></span>
           <label for="floatingInput">User Name</label>
-          
+
           <div id="validationServer03Feedback" class="invalid-feedback">
             Please provide a valid name.
           </div>
         </div>
         <div class="form-floating mt-3">
-          
           <input
-          [type]="show ? 'text' : 'password'"
-          class="form-control bg-transparent text-white"
-          readonly
+            [type]="show ? 'text' : 'password'"
+            class="form-control bg-transparent text-white"
+            readonly
             onfocus="this.removeAttribute('readonly');"
-          placeholder="Enter Password"
-          formControlName="password"
-          autocomplete="disabled"
-        />
+            placeholder="Enter Password"
+            formControlName="password"
+            autocomplete="disabled"
+          />
           <label for="floatingInput">Password</label>
           <span
             class="fa text-white"
@@ -121,7 +119,7 @@
         <div class="col mt-4 text-center text-white">
           <!-- <a href="forgotpassword.html" class="text-white mb-3">Forgot Password</a><br>-->
           <span class="small me-2"> Not a member?</span>
-        <a routerLink="/registration">JOIN NOW</a><br />
+          <a routerLink="/registration">JOIN NOW</a><br />
           <span class="small pt-3"> Powered by </span>
           <img src="assets/images/betfair_logo.png" width="150px" />
         </div>
