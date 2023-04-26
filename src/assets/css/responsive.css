@@ -1,3 +1,9 @@
+@media only screen and (max-width: 320px) {
+  .gamedetails.mobileTableShow {
+    padding: 0;
+  }
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .w-30 {

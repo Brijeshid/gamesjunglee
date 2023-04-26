@@ -104,65 +104,74 @@
               </h4>
               <h4 *ngIf="isLoading">Loading...</h4>
             </div>
-            <table
-              *ngIf="accountStatement.length !== 0"
-              class="table  text-white bg-dark  border-0 text-center"
-            >
-              <thead>
-                <tr
-                  style="background: linear-gradient(90deg, #cd212f 0, #e76f26)"
-                >
-                  <th class="pe-0 tstartcol text-white">Sr No</th>
-                  <th class="text-white ps-3">Date</th>
-                  <th class="pe-0 text-white">Credit</th>
-                  <th class="pe-0 text-white">Debit</th>
-                  <th class="pe-0 text-white">Balance</th>
-                  <th class="text-white tlastcol">Remark</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  class="acc-statement-cls"
-                  *ngFor="let acctstatement of accountStatement; let i = index"
-                  (click)="openProfitLoss(acctstatement.matchId)"
-                >
-                  <td class="">{{ i + 1 }}</td>
-                  <td class="p-3">
-                    {{ acctstatement.date | date : "MMM d, y, h:mm:ss a" }}
-                  </td>
-                  <td class="">
-                    <span
-                      [ngClass]="
-                        acctstatement.credit > 0
-                          ? 'text-success'
-                          : 'text-danger'
-                      "
-                      *ngIf="acctstatement.credit == 0 ? '' : '-'"
-                      >{{ acctstatement.credit | number }}</span
-                    >
-                    <span *ngIf="acctstatement.credit == 0"
-                      ><strong>-</strong></span
-                    >
-                  </td>
-                  <td class="">
-                    <span
-                      [ngClass]="
-                        acctstatement.debit > 0 ? 'text-success' : 'text-danger'
-                      "
-                      *ngIf="acctstatement.debit == 0 ? '' : '-'"
-                      >{{ acctstatement.debit | number }}</span
-                    >
-                    <span *ngIf="acctstatement.debit == 0"
-                      ><strong>-</strong></span
-                    >
-                  </td>
-                  <td class="">
-                    {{ acctstatement.balance | number }}
-                  </td>
-                  <td>{{ acctstatement.remark }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table
+                *ngIf="accountStatement.length !== 0"
+                class="table text-white bg-dark border-0 text-center"
+              >
+                <thead>
+                  <tr
+                    style="
+                      background: linear-gradient(90deg, #cd212f 0, #e76f26);
+                    "
+                  >
+                    <th class="pe-0 tstartcol text-white">Sr No</th>
+                    <th class="text-white ps-3">Date</th>
+                    <th class="pe-0 text-white">Credit</th>
+                    <th class="pe-0 text-white">Debit</th>
+                    <th class="pe-0 text-white">Balance</th>
+                    <th class="text-white tlastcol">Remark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    class="acc-statement-cls"
+                    *ngFor="
+                      let acctstatement of accountStatement;
+                      let i = index
+                    "
+                    (click)="openProfitLoss(acctstatement.matchId)"
+                  >
+                    <td class="">{{ i + 1 }}</td>
+                    <td class="p-3">
+                      {{ acctstatement.date | date : "MMM d, y, h:mm:ss a" }}
+                    </td>
+                    <td class="">
+                      <span
+                        [ngClass]="
+                          acctstatement.credit > 0
+                            ? 'text-success'
+                            : 'text-danger'
+                        "
+                        *ngIf="acctstatement.credit == 0 ? '' : '-'"
+                        >{{ acctstatement.credit | number }}</span
+                      >
+                      <span *ngIf="acctstatement.credit == 0"
+                        ><strong>-</strong></span
+                      >
+                    </td>
+                    <td class="">
+                      <span
+                        [ngClass]="
+                          acctstatement.debit > 0
+                            ? 'text-success'
+                            : 'text-danger'
+                        "
+                        *ngIf="acctstatement.debit == 0 ? '' : '-'"
+                        >{{ acctstatement.debit | number }}</span
+                      >
+                      <span *ngIf="acctstatement.debit == 0"
+                        ><strong>-</strong></span
+                      >
+                    </td>
+                    <td class="">
+                      {{ acctstatement.balance | number }}
+                    </td>
+                    <td>{{ acctstatement.remark }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div *ngIf="accountStatement.length > 0 && !this.isLoading">
               <button
                 class="btn bg-dgrey rounded-pill text-white"
