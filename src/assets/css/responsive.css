@@ -124,7 +124,7 @@
     color: #000;
     text-decoration: none;
     display: inline-block;
-    font-size: 9px;
+    font-size: 12px;
     line-height: 12px;
   }
 }
@@ -222,7 +222,7 @@
   }
 
   .gamedetails .table a {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -343,6 +343,14 @@
   .suspendedm1.matchmarketlist-off {
     right: 280px;
     width: 337px;
+  }
+
+  .gamedetails .table a {
+    font-size: 16px;
+  }
+
+  .gamedetails .table span {
+    font-size: 14px;
   }
 }
 
