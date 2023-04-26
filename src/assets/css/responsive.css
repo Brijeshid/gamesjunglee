@@ -86,7 +86,8 @@
     width: 160px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 0;
+    width: 150px;
   }
 
   .gamedetails .table a {
