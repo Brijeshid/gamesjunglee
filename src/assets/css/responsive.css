@@ -154,8 +154,10 @@
   .suspendedm1.matchmarketlist-on {
     right: 45px;
   }
+
   .suspendedm1.matchmarketlist-off {
-    right: 130px;
+    right: 135px;
+    width: 195px;
   }
 }
 
@@ -182,7 +184,7 @@
     width: 225px;
   }
   .gamedetails .table a {
-    font-size: 7px;
+    font-size: 12px;
   }
 }
 
@@ -228,11 +230,6 @@
   .asidenav ul li a {
     padding: 0.5rem;
   }
-
-  .suspendedm1.matchmarketlist-off {
-    right: 205px;
-    width: 265px;
-  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -266,6 +263,7 @@
   }
   .gamedetails .table a {
     font-size: 12px;
+    line-height: 16px;
   }
 }
 
@@ -420,6 +418,15 @@
   .suspendedm1.matchmarketlist-off {
     right: 390px;
     width: 450px;
+  }
+
+  .gamedetails .table a {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .gamedetails .table span {
+    font-size: 16px;
   }
 }
 
