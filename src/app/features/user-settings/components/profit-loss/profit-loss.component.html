@@ -13,10 +13,10 @@
   </div>
 
       <div class="col-md-12 ps-5 pe-5 accordionn">
-          <div class="innerpagem rounded">
+          <div class=""innerpagem rounded>
               <div class="row m-0 p-1 ps-3 pe-3 mb-1">
                   <p *ngIf="!betsPnl" >Loading...</p>
-                  <table class="table table-hover" *ngIf="betsPnl">
+                  <table class="table text-white" *ngIf="betsPnl">
                       <thead class="bg-color">
                           <tr>
                               <th class=" pe-0 tstartcol">Placed</th>
@@ -29,18 +29,18 @@
                               <th class=" pe-0 tlastcol">Status</th>
                           </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="text-white">
                           <tr *ngFor="let data of betsPnl">
                               <td>{{data.createDateTime | date :'d/MM/yy, h:mm a'}}</td>
                               <td>{{data.matchTime | date: 'd/MM/yy, h:mm a'}}</td>
                               <td>{{data.selectionName}}</td>
                               <td><span
                                 *ngIf="!data.isBack"
-                                class="border bg-danger text-danger border-danger me-2"
+                                class="border bg-danger text-danger border-danger me-2 border-3"
                               ></span>
                               <span
                                 *ngIf="data.isBack"
-                                class="border bg-primary text-primary border-primary me-2"
+                                class="border bg-primary text-primary border-primary me-2 border-3"
                               ></span>{{data.type}}</td>
                               <td>{{data.odds}}</td>
                               <td>{{data.stake}}</td>
