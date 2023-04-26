@@ -88,6 +88,10 @@
   .suspendedm1.matchmarketlist-off {
     right: 96px;
   }
+
+  .gamedetails .table a {
+    font-size: 12px !important;
+  }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {

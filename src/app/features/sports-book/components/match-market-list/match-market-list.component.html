@@ -437,9 +437,7 @@
                                         : 'text-danger'
                                     "
                                   >
-                                    <strong>{{
-                                      runner?.hourseAmt?.amount
-                                    }}</strong>
+                                    <span>{{ runner?.hourseAmt?.amount }}</span>
                                   </a>
 
                                   <a>
@@ -629,9 +627,9 @@
                                         : 'text-danger'
                                     "
                                   >
-                                    <strong>{{
+                                    <span>{{
                                       runner?.hourseAmt?.amount | number
-                                    }}</strong>
+                                    }}</span>
                                   </a>
 
                                   <a>
@@ -639,9 +637,9 @@
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount"
                                       >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
                                     >
-                                    <strong
+                                    <span
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</span
                                     >
                                   </a>
 
@@ -652,9 +650,9 @@
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount"
                                       >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
                                     >
-                                    <strong
+                                    <span
                                       *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
+                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</span
                                     >
                                   </a>
                                 </td>
@@ -836,9 +834,9 @@
                                         : 'text-danger'
                                     "
                                   >
-                                    <strong>{{
+                                    <span>{{
                                       runner?.hourseAmt?.amount | number
-                                    }}</strong>
+                                    }}</span>
                                   </a>
 
                                   <a>
@@ -1046,10 +1044,10 @@
                                         : 'text-danger'
                                     "
                                   >
-                                    <strong>{{
+                                    <span>{{
                                       singleFancyMarket?.hourseAmt?.amount
                                         | number
-                                    }}</strong>
+                                    }}</span>
                                   </a>
                                 </td>
                                 <td
@@ -1243,9 +1241,9 @@
                                         : 'text-danger'
                                     "
                                   >
-                                    <strong>{{
+                                    <span>{{
                                       singleFancyMarket?.hourseAmt?.amount
-                                    }}</strong>
+                                    }}</span>
                                   </a>
                                 </td>
 

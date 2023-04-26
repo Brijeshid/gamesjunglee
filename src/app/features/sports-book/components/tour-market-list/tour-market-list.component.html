@@ -201,9 +201,9 @@
                                             : 'text-danger'
                                         "
                                       >
-                                        <strong>{{
+                                        <span>{{
                                           runner?.hourseAmt?.amount
-                                        }}</strong>
+                                        }}</span>
                                       </a>
 
                                       <a>
@@ -425,120 +425,136 @@
                               </thead>
                               <tbody class="content">
                                 <ng-container *ngIf="singleInPlay['isExpand']">
-                                  <ng-container *ngFor="let runner of singleInPlay['market']['runners'];let last = last;let first = first">
-                                  <tr [ngClass]="{ 'border-0': last }">
-                                    <td
-                                      class="text-start ps-2 heading border-top"
-                                      [ngClass]="{ 'border-top': !first }"
-                                      routerLink="/sportsbook/{{
-                                        sports | titlecase
-                                      }}/{{ singleInPlay['tournamentId'] }}/{{
-                                        singleInPlay['matchId']
-                                      }}"
-                                    >
-                                      <a
-                                        ><strong>{{
-                                          runner["RunnerName"]
-                                        }}</strong></a
+                                  <ng-container
+                                    *ngFor="
+                                      let runner of singleInPlay['market'][
+                                        'runners'
+                                      ];
+                                      let last = last;
+                                      let first = first
+                                    "
+                                  >
+                                    <tr [ngClass]="{ 'border-0': last }">
+                                      <td
+                                        class="text-start ps-2 heading border-top"
+                                        [ngClass]="{ 'border-top': !first }"
+                                        routerLink="/sportsbook/{{
+                                          sports | titlecase
+                                        }}/{{ singleInPlay['tournamentId'] }}/{{
+                                          singleInPlay['matchId']
+                                        }}"
                                       >
-                                      <br />
-                                      <a
-                                        [ngClass]="
-                                          runner?.hourseAmt?.amount > 0
-                                            ? 'text-success'
-                                            : 'text-danger'
+                                        <a
+                                          ><strong>{{
+                                            runner["RunnerName"]
+                                          }}</strong></a
+                                        >
+                                        <br />
+                                        <a
+                                          [ngClass]="
+                                            runner?.hourseAmt?.amount > 0
+                                              ? 'text-success'
+                                              : 'text-danger'
+                                          "
+                                        >
+                                          <strong>{{
+                                            runner?.hourseAmt?.amount
+                                          }}</strong>
+                                        </a>
+
+                                        <a>
+                                          <strong
+                                            *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
+                                            >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                          >
+                                          <strong
+                                            *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
+                                            >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                          >
+                                        </a>
+
+                                        <a
+                                          [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                        >
+                                          <strong
+                                            *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
+                                            >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                          >
+                                          <strong
+                                            *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
+                                            >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                          >
+                                        </a>
+                                      </td>
+                                      <td
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: true,
+                                              index: 2,
+                                              odds: runner['back2']
+                                            }
+                                          )
                                         "
                                       >
-                                        <strong>{{
-                                          runner?.hourseAmt?.amount
-                                        }}</strong>
-                                      </a>
-
-                                      <a>
-                                        <strong
-                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        <a
+                                          class="colblue"
+                                          [boxHighlight]="runner['back2']"
+                                          [boxHighlight]="runner['vback2']"
+                                          ><strong>{{
+                                            runner["back2"]
+                                          }}</strong>
+                                          <br /><span>{{
+                                            runner["vback2"]
+                                              | marketRateFormater
+                                          }}</span></a
                                         >
-                                        <strong
-                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                        >
-                                      </a>
+                                      </td>
 
-                                      <a
-                                        [ngClass]="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
+                                      <td
+                                        (click)="
+                                          onClickLiveMarketRate(
+                                            runner,
+                                            singleInPlay,
+                                            {
+                                              isBack: false,
+                                              index: 0,
+                                              odds: runner['lay0']
+                                            }
+                                          )
+                                        "
                                       >
-                                        <strong
-                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                          >{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
+                                        <a
+                                          class="colpink"
+                                          [boxHighlight]="runner['lay0']"
+                                          [boxHighlight]="runner['vlay0']"
+                                          ><strong>{{ runner["lay0"] }}</strong>
+                                          <br /><span>{{
+                                            runner["vlay0"] | marketRateFormater
+                                          }}</span></a
                                         >
-                                        <strong
-                                          *ngIf="placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                          >&nbsp; &#62; &nbsp;{{placeBetData?.[singleInPlay?.market?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                        >
-                                      </a>
-                                    </td>
-                                    <td
-                                      (click)="
-                                        onClickLiveMarketRate(
-                                          runner,
-                                          singleInPlay,
-                                          {
-                                            isBack: true,
-                                            index: 2,
-                                            odds: runner['back2']
-                                          }
-                                        )
+                                      </td>
+                                    </tr>
+                                    <tr
+                                      *ngIf="
+                                        runner['SelectionId'] ==
+                                        betSlipObj['selectionId']
                                       "
                                     >
-                                      <a
-                                        class="colblue"
-                                        [boxHighlight]="runner['back2']"
-                                        [boxHighlight]="runner['vback2']"
-                                        ><strong>{{ runner["back2"] }}</strong>
-                                        <br /><span>{{
-                                          runner["vback2"] | marketRateFormater
-                                        }}</span></a
-                                      >
-                                    </td>
-
-                                    <td
-                                      (click)="
-                                        onClickLiveMarketRate(
-                                          runner,
-                                          singleInPlay,
-                                          {
-                                            isBack: false,
-                                            index: 0,
-                                            odds: runner['lay0']
-                                          }
-                                        )
-                                      "
-                                    >
-                                      <a
-                                        class="colpink"
-                                        [boxHighlight]="runner['lay0']"
-                                        [boxHighlight]="runner['vlay0']"
-                                        ><strong>{{ runner["lay0"] }}</strong>
-                                        <br /><span>{{
-                                          runner["vlay0"] | marketRateFormater
-                                        }}</span></a
-                                      >
-                                    </td>
-                                  </tr>
-                                  <tr *ngIf="(runner['SelectionId'] == betSlipObj['selectionId'])">
-                                    <td colspan="3" class="border-0 pt-0">
-                                      <div
-                                        class="col-md-4 mobileTableShow"
-                                        *ngIf="isMobileView"
-                                      >
-                                        <app-bet-slip
-                                          [isBetSlipActive]="isBetSlipActive"
-                                          [betSlipParams]="betSlipObj"
-                                        ></app-bet-slip>
-                                      </div>
-                                    </td>
-                                  </tr>
+                                      <td colspan="3" class="border-0 pt-0">
+                                        <div
+                                          class="col-md-4 mobileTableShow"
+                                          *ngIf="isMobileView"
+                                        >
+                                          <app-bet-slip
+                                            [isBetSlipActive]="isBetSlipActive"
+                                            [betSlipParams]="betSlipObj"
+                                          ></app-bet-slip>
+                                        </div>
+                                      </td>
+                                    </tr>
                                   </ng-container>
                                 </ng-container>
                               </tbody>
