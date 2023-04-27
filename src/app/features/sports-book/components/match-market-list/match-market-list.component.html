@@ -385,17 +385,27 @@
                                   >
                                     <div
                                       class="suspendedbm1"
-                                     
+                                      *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'"
                                     >
                                       <button
                                         type="button"
-                                        class="suspendedm2 matchmarketlist-on"
+                                        class="suspendedm1"
+                                        [ngClass]="
+                                          isLoggedIn
+                                            ? 'matchmarketlist-on'
+                                            : 'matchmarketlist-off'
+                                        "
                                         
                                       >
-                                       suspended
+                                      {{
+                                        inPlayUpcomingMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
                                       </button>
                                     </div>
-                                  </td>
+                              </td>
                                   <!-- <td
                                     class="border-top"
                                     [ngClass]="{ 'border-top': !first }"
@@ -593,17 +603,27 @@
                                   >
                                     <div
                                       class="suspendedbm1"
-                                     
+                                      *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'"
                                     >
                                       <button
                                         type="button"
-                                        class="suspendedm2 matchmarketlist-off"
+                                        class="suspendedm1"
+                                        [ngClass]="
+                                          isLoggedIn
+                                            ? 'matchmarketlist-on'
+                                            : 'matchmarketlist-off'
+                                        "
                                         
                                       >
-                                       suspended
+                                      {{
+                                        inPlayUpcomingMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
                                       </button>
                                     </div>
-                                  </td>
+                              </td>
                               </tr>
                               <tr
                                 *ngIf="betSlipObj['odds'] !=='' &&
