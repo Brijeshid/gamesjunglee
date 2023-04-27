@@ -634,7 +634,7 @@
                             *ngIf="marketType == EMarketType.FANCY_TYPE"
                             >Runs</label
                           >
-                          <div class="number d-flex">
+                          <div class="number ">
                             <ng-container
                               *ngIf="
                                 marketType == EMarketType.MATCH_TYPE ||
@@ -671,9 +671,9 @@
                                     betSlipForm.controls['odds'].dirty) &&
                                   betSlipForm.controls['odds'].invalid
                                 "
-                              >
+                              > <br />
                                 <span
-                                  class="text-danger p-3"
+                                  class="text-danger"
                                   *ngIf="
                                     betSlipForm.controls['odds'].errors
                                       ?.required
