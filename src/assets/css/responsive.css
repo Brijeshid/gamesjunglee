@@ -106,6 +106,9 @@
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  #videoplayer iframe {
+    height: 18vh;
+}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -174,6 +177,10 @@
     right: 135px;
     width: 195px;
   }
+
+  #videoplayer iframe {
+    height: 25vh;
+}
 }
 
 @media only screen and (min-width: 1228.8px) {
@@ -207,6 +214,9 @@
   .suspendedm1.matchmarketlist-on {
     right: 105px;
   }
+  #videoplayer iframe {
+    height: 35vh;
+}
 }
 
 @media only screen and (min-width: 1396.36px) {
@@ -252,6 +262,10 @@
     right: 205px;
     width: 265px;
   }
+
+  #videoplayer iframe {
+    height: 38vh;
+}
 }
 
 @media only screen and (min-width: 1536px) {
@@ -363,6 +377,9 @@
   .gamedetails .table span {
     font-size: 14px;
   }
+  #videoplayer iframe {
+    height: 45vh;
+}
 }
 
 @media only screen and (min-width: 1980px) {

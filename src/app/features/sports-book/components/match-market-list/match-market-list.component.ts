@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -59,6 +59,7 @@ export class MatchMarketListComponent implements OnInit {
   liveScoreBoardUrl:any;
   liveScoreBoardActaulUrl:any;
   liveScoreBoardActaulTVUrl:any;
+  liveStreamingTVUrl:any;
 
   constructor(
     private _sharedService: SharedService,
@@ -554,6 +555,18 @@ export class MatchMarketListComponent implements OnInit {
     }
     this._setOrUnsetWebSocketData(unSetObj);
     if(this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
+  }
+
+  
+  ngOnChanges(changes: SimpleChanges){
+   
+
+    if(changes['isTVEnable'] && !changes['isTVEnable'].isFirstChange()){
+      this.isTVEnable =  changes['isTVEnable']['currentValue'];
+      if(this.isTVEnable){
+        this.liveStreamingTVUrl = this._sharedService.liveStreamingTVUrl;
+      }
+    }
   }
 
 }
