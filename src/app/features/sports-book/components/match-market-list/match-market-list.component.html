@@ -116,7 +116,7 @@
                                   src="/assets/images/timer.png"
                                   class="timer"
                                 />
-                                5
+                                {{inPlayUpcomingMarket['marketDelay']}}
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th
@@ -129,9 +129,15 @@
                               <th
                                 width="15%"
                                 colspan="3"
-                                class="text-start coldark tlastcol"
+                                class="text-start coldark "
                               >
                                 Lay
+                              </th>
+                              <th
+                                width="15%"
+                                colspan="1"
+                                class="text-start coldark tlastcol"
+                              >
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -346,7 +352,7 @@
                               <td
                                 width="10%"
                                 class="colpink"
-                                [ngClass]="{ last: last }"
+                                
                                 [boxHighlight]="runner['lay2']"
                                 [boxHighlight]="runner['vlay2']"
                                 [class.dis]="
@@ -373,6 +379,63 @@
                                   }}</span></a
                                 >
                               </td>
+                              <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="suspendedm1"
+                                        [ngClass]="
+                                          isLoggedIn
+                                            ? 'matchmarketlist-on'
+                                            : 'matchmarketlist-off'
+                                        "
+                                        
+                                      >
+                                      {{
+                                        inPlayUpcomingMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                      </button>
+                                    </div>
+                              </td>
+                                  <!-- <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                        singleBookMaker['appMarketStatus'] ==
+                                          '3' ||
+                                        singleBookMaker['appMarketStatus'] == '9'
+                                      "
+                                    >
+                                      <button
+                                        type="button"
+                                        class="suspendedm1"
+                                        [ngClass]="
+                                          isLoggedIn
+                                            ? 'matchmarketlist-on'
+                                            : 'matchmarketlist-off'
+                                        "
+                                      >
+                                        {{
+                                          singleBookMaker["appMarketStatus"] ==
+                                          "3"
+                                            ? "Suspended"
+                                            : "Ball Running"
+                                        }}
+                                      </button>
+                                    </div>
+                                  </td> -->
                             </tr>
                           </tbody>
                         </table>
@@ -394,7 +457,7 @@
                                   src="/assets/images/timer.png"
                                   class="timer"
                                 />
-                                5
+                                {{inPlayUpcomingMarket['marketDelay']}}
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th colspan="1" class="text-center coldark">
@@ -402,9 +465,16 @@
                               </th>
                               <th
                                 colspan="1"
-                                class="text-center coldark tlastcol"
+                                class="text-center coldark "
                               >
                                 Lay
+                              </th>
+
+                              <th
+                                colspan="1"
+                                class="text-center coldark tlastcol"
+                              >
+                                
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -527,6 +597,33 @@
                                     }}</span></a
                                   >
                                 </td>
+                                <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="suspendedm1"
+                                        [ngClass]="
+                                          isLoggedIn
+                                            ? 'matchmarketlist-on'
+                                            : 'matchmarketlist-off'
+                                        "
+                                        
+                                      >
+                                      {{
+                                        inPlayUpcomingMarket["appMarketStatus"] ==
+                                        "3"
+                                          ? "Suspended"
+                                          : "Ball Running"
+                                      }}
+                                      </button>
+                                    </div>
+                              </td>
                               </tr>
                               <tr
                                 *ngIf="betSlipObj['odds'] !=='' &&
@@ -1696,9 +1793,6 @@
 >
   <div class="modal-dialog modal-sm">
     <div class="modal-content modalradius">
-      <!-- <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div> -->
       <div class="modal-body text-center p-4 pb-3">
         <div class="row border-bottom p-2">
           <div class="col-md-6">Runs</div>
@@ -1756,20 +1850,4 @@
     </div>
   </div>
 </div>
-<!-- <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Hide this modal and show the first with the button below.
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!--modal Start-->
+

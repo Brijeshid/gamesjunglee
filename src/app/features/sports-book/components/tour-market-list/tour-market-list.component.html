@@ -371,6 +371,33 @@
                                         }}</span></a
                                       >
                                     </td>
+                                    <!-- <td
+                                        class="border-top"
+                                        [ngClass]="{ 'border-top': !first }"
+                                      >
+                                        <div
+                                          class="suspendedbm1"
+                                          *ngIf="inPlayMatchListBySport['appMarketStatus'] =='3' || inPlayMatchListBySport['appMarketStatus'] == '9'"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="suspendedm1"
+                                            [ngClass]="
+                                              isLoggedIn
+                                                ? 'matchmarketlist-on'
+                                                : 'matchmarketlist-off'
+                                            "
+                                            
+                                          >
+                                          {{
+                                            inPlayMatchListBySport["appMarketStatus"] ==
+                                            "3"
+                                              ? "Suspended"
+                                              : "Ball Running"
+                                          }}
+                                          </button>
+                                        </div>
+                                  </td> -->
                                   </tr>
                                 </ng-container>
                               </tbody>
@@ -525,6 +552,33 @@
                                         }}</span></a
                                       >
                                     </td>
+                                    <!-- <td
+                                        class="border-top"
+                                        [ngClass]="{ 'border-top': !first }"
+                                      >
+                                        <div
+                                          class="suspendedbm1"
+                                          *ngIf="inPlayMatchListBySport['appMarketStatus'] =='3' || inPlayMatchListBySport['appMarketStatus'] == '9'"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="suspendedm1"
+                                            [ngClass]="
+                                              isLoggedIn
+                                                ? 'matchmarketlist-on'
+                                                : 'matchmarketlist-off'
+                                            "
+                                            
+                                          >
+                                          {{
+                                            inPlayMatchListBySport["appMarketStatus"] ==
+                                            "3"
+                                              ? "Suspended"
+                                              : "Ball Running"
+                                          }}
+                                          </button>
+                                        </div>
+                                  </td> -->
                                   </tr>
                                   <tr *ngIf="betSlipObj['odds'] !=='' && (runner['SelectionId'] == betSlipObj['selectionId'])">
                                     <td colspan="3" class="border-0 pt-0">
