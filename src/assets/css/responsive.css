@@ -100,6 +100,13 @@
     width: 150px;
   }
 
+  .suspendedm2.matchmarketlist-off {
+    right: -10px;
+    width: 10rem;
+    padding: 14px 0;
+  
+  }
+
   .gamedetails .table a {
     font-size: 12px !important;
   }
@@ -178,6 +185,15 @@
     width: 195px;
   }
 
+  .suspendedm2.matchmarketlist-on {
+    right: -10px;
+    width: 22rem;
+    padding: 14px 0;
+
+}
+
+
+
   #videoplayer iframe {
     height: 25vh;
 }
@@ -214,6 +230,11 @@
   .suspendedm1.matchmarketlist-on {
     right: 105px;
   }
+  .suspendedm2.matchmarketlist-on {
+    right: -10px;
+    width: 28rem;
+    padding: 14px 0;
+}
   #videoplayer iframe {
     height: 35vh;
 }
@@ -262,6 +283,12 @@
     right: 205px;
     width: 265px;
   }
+  .suspendedm2.matchmarketlist-on {
+    right: -10px;
+    width: 30rem;
+    padding: 14px 0;
+
+}
 
   #videoplayer iframe {
     height: 38vh;
@@ -370,6 +397,11 @@
     width: 337px;
   }
 
+  .suspendedm2.matchmarketlist-on {
+    right: -10px;
+    width: 40rem;
+}
+
   .gamedetails .table a {
     font-size: 16px;
   }
@@ -432,6 +464,13 @@
   }
 }
 
+@media only screen and (min-width: 2133.33px){
+.suspendedm2.matchmarketlist-on {
+  right: -10px;
+  width: 44rem;
+}
+}
+
 @media only screen and (min-width: 2304px) {
   .suspendedm1.matchmarketlist-on {
     right: 219px;
@@ -442,6 +481,13 @@
     right: 345px;
     width: 400px;
   }
+}
+
+@media only screen and (min-width: 2304px){
+.suspendedm2.matchmarketlist-on {
+  right: -10px;
+  width: 50rem;
+}
 }
 
 @media only screen and (min-width: 2560px) {
@@ -459,6 +505,12 @@
     right: 390px;
     width: 450px;
   }
+  .suspendedm2.matchmarketlist-on {
+    right: -10px;
+    width: 53rem;
+    padding: 18px 0;
+    top: 0;
+}
 
   .gamedetails .table a {
     font-size: 20px;
@@ -468,6 +520,15 @@
   .gamedetails .table span {
     font-size: 16px;
   }
+}
+
+@media only screen and (min-width: 2880px){
+.suspendedm2.matchmarketlist-on {
+  right: -10px;
+  width: 60rem;
+  padding: 18px 0;
+  top: 0;
+}
 }
 
 @media only screen and (min-width: 3072px) {
@@ -481,6 +542,14 @@
     width: 530px;
   }
 }
+
+@media only screen and (min-width: 3840px){
+.suspendedm2.matchmarketlist-on {
+  right: -10px;
+  width: 80rem;
+  padding: 18px 0;
+  top: 0;
+}}
 
 @media only screen and (min-width: 4608px) {
   .suspendedm1.matchmarketlist-on {

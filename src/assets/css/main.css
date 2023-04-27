@@ -1425,3 +1425,16 @@ small {
 #videoplayer iframe .responsive-iframe body {
   overflow-y: hidden;
 }
+
+.suspendedm2 {
+  background: rgba(38, 38, 38, 0.63);
+  color: #fff;
+  border-radius: 35px;
+  padding: 13px 5px;
+  position: absolute;
+  top: 5px;
+  text-align: center;
+  border: 0px;
+  width: 196px;
+  font-size: 14px;
+}

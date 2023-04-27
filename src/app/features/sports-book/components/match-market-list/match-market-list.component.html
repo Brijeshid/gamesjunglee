@@ -129,9 +129,15 @@
                               <th
                                 width="15%"
                                 colspan="3"
-                                class="text-start coldark tlastcol"
+                                class="text-start coldark "
                               >
                                 Lay
+                              </th>
+                              <th
+                                width="15%"
+                                colspan="1"
+                                class="text-start coldark tlastcol"
+                              >
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -346,7 +352,7 @@
                               <td
                                 width="10%"
                                 class="colpink"
-                                [ngClass]="{ last: last }"
+                                
                                 [boxHighlight]="runner['lay2']"
                                 [boxHighlight]="runner['vlay2']"
                                 [class.dis]="
@@ -373,6 +379,53 @@
                                   }}</span></a
                                 >
                               </td>
+                              <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                     
+                                    >
+                                      <button
+                                        type="button"
+                                        class="suspendedm2 matchmarketlist-on"
+                                        
+                                      >
+                                       suspended
+                                      </button>
+                                    </div>
+                                  </td>
+                                  <!-- <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                        singleBookMaker['appMarketStatus'] ==
+                                          '3' ||
+                                        singleBookMaker['appMarketStatus'] == '9'
+                                      "
+                                    >
+                                      <button
+                                        type="button"
+                                        class="suspendedm1"
+                                        [ngClass]="
+                                          isLoggedIn
+                                            ? 'matchmarketlist-on'
+                                            : 'matchmarketlist-off'
+                                        "
+                                      >
+                                        {{
+                                          singleBookMaker["appMarketStatus"] ==
+                                          "3"
+                                            ? "Suspended"
+                                            : "Ball Running"
+                                        }}
+                                      </button>
+                                    </div>
+                                  </td> -->
                             </tr>
                           </tbody>
                         </table>
@@ -402,9 +455,16 @@
                               </th>
                               <th
                                 colspan="1"
-                                class="text-center coldark tlastcol"
+                                class="text-center coldark "
                               >
                                 Lay
+                              </th>
+
+                              <th
+                                colspan="1"
+                                class="text-center coldark tlastcol"
+                              >
+                                
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -527,6 +587,23 @@
                                     }}</span></a
                                   >
                                 </td>
+                                <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                     
+                                    >
+                                      <button
+                                        type="button"
+                                        class="suspendedm2 matchmarketlist-off"
+                                        
+                                      >
+                                       suspended
+                                      </button>
+                                    </div>
+                                  </td>
                               </tr>
                               <tr
                                 *ngIf="betSlipObj['odds'] !=='' &&
