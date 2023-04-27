@@ -74,12 +74,12 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
         }
 
-          this.betSlipForm.patchValue({
-            odds:this.betSlipParams['odds'],
-            runs:this.betSlipParams['runs'],
-          })
+        this.betSlipForm.patchValue({
+          odds:this.betSlipParams['odds'],
+          runs:this.betSlipParams['runs'],
+        })
         changes['betSlipParams']['currentValue']['marketName']== EMarketType.MATCH_TYPE;
-
+        this.setStackMinMaxValidator();
         this.stakeVal(this.betSlipForm.controls['stake'].value);
       }
       if(changes['marketType'] && !changes['marketType']?.isFirstChange() && changes['marketType']?.currentValue){
@@ -113,7 +113,6 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
     this.isBack = this.betSlipParams?.isBack;
     this._createBetSlipForm();
-    this.getUserBalance();
     this._getUserOpenBet();
     this.getUserConfig();
     this._setUserIp();
@@ -144,7 +143,7 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
         runs:this.betSlipParams['runs'],
       })
       this.betSlipParams['marketName']== EMarketType.MATCH_TYPE;
-
+      this.setStackMinMaxValidator();
       this.stakeVal(this.betSlipForm.controls['stake'].value);
     }
     if(this.marketType){
@@ -183,7 +182,6 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
 
   onClickPlaceBet(){
     this.isBetSlipPlaceCall = true;
-
     // if(this.marketType == EMarketType.MATCH_TYPE){
     //   this.count = 5;
     // }else if(this.marketType == EMarketType.FANCY_TYPE){
@@ -193,12 +191,14 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
     // }
 
     this.isLoaderStart = true;
+    
     // let internvalCount = setInterval(()=>{
     //   // this.count--;
     //   if(this.count <= 0){
     //     clearInterval(internvalCount);
     //   }
     // },1000);
+
     this._placeBetCall();
     console.log('bet_odds bet_odds bet_odds bet_odds');
     this.bet_odds.nativeElement.focus();
@@ -343,11 +343,8 @@ export class BetSlipComponent implements OnInit, OnChanges, AfterViewInit {
       });
   }
 
-  getUserBalance(){
-    this.userBalance = this._sharedService.userBalance;
-    if(this.userBalance){
-      this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(this.userBalance?.minimumBet),Validators.max(this.userBalance?.maxBet)]);
-    }
+  setStackMinMaxValidator(){
+    this.betSlipForm.controls['stake'].setValidators([Validators.required,Validators.min(this.betSlipParams?.minBet),Validators.max(this.betSlipParams?.maxBet)]);
   }
 
   getRunnerId(){

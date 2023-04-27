@@ -362,7 +362,10 @@ export class TourMarketListComponent implements OnInit {
         "isBetSlipActive":positionObj['odds'] > 0 ? true: false,
         "booksForMarket":this.booksForMarket,
         "runnerObj":marketData['market']['runners'],
-        "marketTypeName":marketData['market']['marketName']
+        "marketTypeName":marketData['market']['marketName'],
+        "minBet": marketData['minBet'],
+        "maxBet": marketData['maxBet'],
+        "marketDelay": marketData['marketDelay']
     }
   }
 

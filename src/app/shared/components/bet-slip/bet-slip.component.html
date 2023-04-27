@@ -163,8 +163,8 @@
                           type="number"
                           (keypress)="numberOnly($event)"
                           class="form-control minMax"
-                          placeholder="Min.{{ userBalance?.minimumBet }} Max.{{
-                            userBalance?.maxBet
+                          placeholder="Min.{{ betSlipParams?.minBet }} Max.{{
+                            betSlipParams?.maxBet
                           }}"
                           formControlName="stake"
                           (input)="stakeVal($event)"
@@ -186,12 +186,12 @@
                           <span
                             class="text-danger"
                             *ngIf="betSlipForm.controls['stake'].errors?.min"
-                            >Min :{{ userBalance?.minimumBet }}</span
+                            >Min :{{ betSlipParams?.minBet }}</span
                           >
                           <span
                             class="text-danger"
                             *ngIf="betSlipForm.controls['stake'].errors?.max"
-                            >Max :{{ userBalance?.maxBet }}</span
+                            >Max :{{ betSlipParams?.maxBet }}</span
                           >
                         </ng-container>
                       </div>
@@ -294,8 +294,8 @@
                         class="fa fa-exclamation-circle"
                         aria-hidden="true"
                       ></i>
-                      Min Bet: {{ userBalance?.minimumBet }} Max Bet:
-                      {{ userBalance?.maxBet }}
+                      Min Bet: {{ betSlipParams?.minBet }} Max Bet:
+                      {{ betSlipParams?.maxBet }}
                     </p>
                     <div class="form-group">
                       <label class="form-check-label text-dark" for="gridCheck"
@@ -705,8 +705,8 @@
                             type="number"
                             class="form-control minMax"
                             placeholder="Min.{{
-                              userBalance?.minimumBet
-                            }} Max.{{ userBalance?.maxBet }}"
+                              betSlipParams?.minBet
+                            }} Max.{{ betSlipParams?.maxBet }}"
                             formControlName="stake"
                             (input)="stakeVal($event)"
                           />
@@ -727,12 +727,12 @@
                             <span
                               class="text-danger"
                               *ngIf="betSlipForm.controls['stake'].errors?.min"
-                              >Min :{{ userBalance?.minimumBet }}</span
+                              >Min :{{ betSlipParams?.minBet }}</span
                             >
                             <span
                               class="text-danger"
                               *ngIf="betSlipForm.controls['stake'].errors?.max"
-                              >Max :{{ userBalance?.maxBet }}</span
+                              >Max :{{ betSlipParams?.maxBet }}</span
                             >
                           </ng-container>
                         </div>
@@ -844,8 +844,8 @@
                             class="fa fa-exclamation-circle m-0"
                             aria-hidden="true"
                           ></i>
-                          Min Bet: {{ userBalance?.minimumBet }} Max Bet:
-                          {{ userBalance?.maxBet }}
+                          Min Bet: {{ betSlipParams?.minBet }} Max Bet:
+                          {{ betSlipParams?.maxBet }}
                         </p>
                       </div>
 

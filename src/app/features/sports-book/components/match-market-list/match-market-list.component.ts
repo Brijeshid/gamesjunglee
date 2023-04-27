@@ -475,7 +475,10 @@ export class MatchMarketListComponent implements OnInit {
         "runs":positionObj['runs'],
         "booksForMarket":this.booksForMarket,
         "runnerObj":marketData['runners'],
-        "marketTypeName":marketData['marketName']
+        "marketTypeName":marketData['marketName'],
+        "minBet": marketData['minBet'],
+        "maxBet": marketData['maxBet'],
+        "marketDelay": marketData['marketDelay']
     }
 
     console.log(this.betSlipObj)
