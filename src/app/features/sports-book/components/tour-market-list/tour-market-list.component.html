@@ -232,6 +232,7 @@
                                     </td>
                                     <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
                                 <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
+                                <ng-container *ngIf="!(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9'); else marketStatus">
                                     <td
                                       class="colblue"
                                       [boxHighlight]="runner['back2']"
@@ -371,6 +372,7 @@
                                         }}</span></a
                                       >
                                     </td>
+                                  </ng-container>
                                     <!-- <td
                                         class="border-top"
                                         [ngClass]="{ 'border-top': !first }"
@@ -402,6 +404,12 @@
                                 </ng-container>
                               </tbody>
                             </table>
+
+                            <ng-template #marketStatus>
+                              <td colspan="5" class="suspendedbm3" >
+                             Suspended
+                            </td>
+                            </ng-template>
                           </div>
 
                           <div class="mobileTableShow" *ngIf="isMobileView">
@@ -505,6 +513,7 @@
                                         >
                                       </a>
                                     </td>
+                                    <ng-container *ngIf="!(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9'); else marketStatus">
                                     <td
                                       (click)="
                                         onClickLiveMarketRate(
@@ -552,6 +561,7 @@
                                         }}</span></a
                                       >
                                     </td>
+                                    </ng-container>
                                     <!-- <td
                                         class="border-top"
                                         [ngClass]="{ 'border-top': !first }"
@@ -597,6 +607,12 @@
                                 </ng-container>
                               </tbody>
                             </table>
+
+                            <ng-template #marketStatus>
+                              <td colspan="3" class="suspendedbm3" >
+                             Suspended
+                            </td>
+                            </ng-template>
                           </div>
                         </ng-container>
                       </ng-container>
