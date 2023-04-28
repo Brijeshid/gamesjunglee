@@ -1,4 +1,4 @@
-<app-header></app-header>isMobileView
+<app-header></app-header>
 <!--body start-->
 <div class="row m-0">
   <div class="col-md-6 col-6 pb-2 pt-2">
@@ -14,7 +14,7 @@
       }}
     </button>
   </div>
-  <hr class="text-color" />
+  <hr class="text-color" *ngIf="!isMobileView" />
   <!--Aside start-->
   <div class="col-md-2 asidenav mb-3 mobileTableHide" *ngIf="!isMobileView">
     <app-left-navigation></app-left-navigation>
@@ -46,18 +46,25 @@
         </div>
 
         <!-- mobileTab -->
-        <div class="row m-0" *ngIf="isMobileView">
-          <div class="col-12 pb-2">
-            <ul class="nav nav-tabs border-0 justify-content-between" id="myTab" role="tablist">
+        <div class="row" *ngIf="isMobileView">
+          <div class="col-12 header-tow">
+            <ul class="nav nav-tabs border-0 justify-content-between marketTab" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="bg-dark text-white  border-colour rounded-pill ps-3 pe-3 " id="markets"
+                <button  id="markets"
                   data-bs-toggle="tab" data-bs-target="#markets_tab" type="button" role="tab"
                   aria-controls="markets_tabs" aria-selected="true">
                   MARKETS
                 </button>
               </li>
+              <li class="nav-item" role="presentation">
+                <button  id="openbets"
+                  data-bs-toggle="tab" data-bs-target="#openbets_tab" type="button" role="tab"
+                  aria-controls="openbets_tab" aria-selected="true">
+                  OPEN BETS
+                </button>
+              </li>
               <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
-                <button class="bg-dark text-white  border-colour rounded-pill ps-3 pe-3 " id="watch"
+                <button  id="watch"
                   data-bs-toggle="tab" data-bs-target="#watch_tab" type="button" role="tab" aria-controls="watch_tab"
                   aria-selected="true"  (click)="isTVEnable = !isTVEnable"
                   *ngIf="isMatchLive !== 0 && liveScoreBoardActaulTVUrl && isLoggedIn">
@@ -67,7 +74,7 @@
                 </button>
               </li>
               <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
-                <button class="btn btn-sm badge bg-success" id="scores" data-bs-toggle="tab"
+                <button id="scores" data-bs-toggle="tab"
                   data-bs-target="#scores_tab" type="button" role="tab" aria-controls="scores_tab" aria-selected="true"
                   (click)="isScoreBoardEnable = !isScoreBoardEnable"
                   *ngIf="isMatchLive !== 0 && liveScoreBoardActaulUrl && isLoggedIn">
@@ -80,7 +87,10 @@
           <hr class="text-color" />
 
           <div class="col-12 tab-content" id="myTabContent">
-            <div class="tab-pane fade " id="markets_tab" role="tabpanel" aria-labelledby="markets">
+            <div class="tab-pane fade m-0" id="markets_tab" role="tabpanel" aria-labelledby="markets">
+              
+            </div>
+            <div class="tab-pane fade " id="openbets_tab" role="tabpanel" aria-labelledby="openbets">
               <div class="row">
                 <div class="col-md-12  pb-0">
                   <div class="accordion rightacco" id="accordionExample">
@@ -408,11 +418,10 @@
                               <th width="15%" colspan="3" class="text-end coldark">
                                 Back
                               </th>
-                              <th width="15%" colspan="3" class="text-start coldark ">
+                              <th width="15%" colspan="3" class="text-start coldark tlastcol">
                                 Lay
                               </th>
-                              <th width="15%" colspan="1" class="text-start coldark tlastcol">
-                              </th>
+                              
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
@@ -458,6 +467,9 @@
                                 </a>
                               </td>
                               <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+
+                              <ng-container *ngIf="!(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')">
+                              
                               <td width="10%" class="colblue" [boxHighlight]="runner['back2']"
                                 [boxHighlight]="runner['vback2']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
@@ -584,53 +596,14 @@
                                     runner["vlay2"] | marketRateFormater
                                     }}</span></a>
                               </td>
-                              <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                <div class="suspendedbm1"
-                                  *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'">
-                                  <button type="button" class="suspendedm1" [ngClass]="
-                                          isLoggedIn
-                                            ? 'matchmarketlist-on'
-                                            : 'matchmarketlist-off'
-                                        ">
-                                    {{
-                                    inPlayUpcomingMarket["appMarketStatus"] ==
-                                    "3"
-                                    ? "Suspended"
-                                    : "Ball Running"
-                                    }}
-                                  </button>
-                                </div>
-                              </td>
-                              <!-- <td
-                                    class="border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  >
-                                    <div
-                                      class="suspendedbm1"
-                                      *ngIf="
-                                        singleBookMaker['appMarketStatus'] ==
-                                          '3' ||
-                                        singleBookMaker['appMarketStatus'] == '9'
-                                      "
-                                    >
-                                      <button
-                                        type="button"
-                                        class="suspendedm1"
-                                        [ngClass]="
-                                          isLoggedIn
-                                            ? 'matchmarketlist-on'
-                                            : 'matchmarketlist-off'
-                                        "
-                                      >
-                                        {{
-                                          singleBookMaker["appMarketStatus"] ==
-                                          "3"
-                                            ? "Suspended"
-                                            : "Ball Running"
-                                        }}
-                                      </button>
-                                    </div>
-                                  </td> -->
+
+                              </ng-container>
+                              <ng-container 
+                                *ngIf="(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')" 
+                                [ngTemplateOutlet]="marketStatusTemplate"
+                                [ngTemplateOutletContext] ="{appMarketStatus:inPlayUpcomingMarket['appMarketStatus'],col:'5'}">
+                              </ng-container> 
+                              
                             </tr>
                           </tbody>
                         </table>
@@ -652,12 +625,8 @@
                               <th colspan="1" class="text-center coldark">
                                 Back
                               </th>
-                              <th colspan="1" class="text-center coldark ">
-                                Lay
-                              </th>
-
                               <th colspan="1" class="text-center coldark tlastcol">
-
+                                Lay
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -705,6 +674,7 @@
                                       &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
                                 </td>
+                                <ng-container *ngIf="!(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')">
                                 <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
                                 <td (click)="
                                     inPlayUpcomingMarket['inPlayStatus'] &&
@@ -748,23 +718,13 @@
                                       runner["vlay0"] | marketRateFormater
                                       }}</span></a>
                                 </td>
-                                <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <div class="suspendedbm1"
-                                    *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'">
-                                    <button type="button" class="suspendedm1" [ngClass]="
-                                          isLoggedIn
-                                            ? 'matchmarketlist-on'
-                                            : 'matchmarketlist-off'
-                                        ">
-                                      {{
-                                      inPlayUpcomingMarket["appMarketStatus"] ==
-                                      "3"
-                                      ? "Suspended"
-                                      : "Ball Running"
-                                      }}
-                                    </button>
-                                  </div>
-                                </td>
+                                </ng-container>
+
+                                <ng-container 
+                                *ngIf="(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')" 
+                                [ngTemplateOutlet]="marketStatusTemplate"
+                                [ngTemplateOutletContext] ="{appMarketStatus:inPlayUpcomingMarket['appMarketStatus'],col:'3'}">
+                              </ng-container> 
                               </tr>
                               <tr *ngIf="betSlipObj['odds'] !=='' &&
                                   runner['SelectionId'] ==
@@ -785,6 +745,11 @@
                             </ng-container>
                           </tbody>
                         </table>
+                        <ng-template #marketStatus>
+                          <td colspan="3" class="suspendedbm3" >
+                         Suspended
+                        </td>
+                        </ng-template>
                       </div>
 
                       <!--Table 2-->
@@ -1546,49 +1511,10 @@
 </div>
 <!--Body end-->
 
-<!--modal Start-->
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content modalradius">
-      <div class="modal-body text-center p-4 pb-3">
-        <div class="row border-bottom p-2">
-          <div class="col-md-6">Runs</div>
-          <div class="col-md-6">P&L</div>
-        </div>
-        <ng-container *ngIf="ladderObj && ladderObj.length > 0">
-          <div *ngFor="let ldr of ladderObj">
-            <div class="row border-bottom p-2" *ngIf="ldr?.endScore != 'Infinite'">
-              <div class="col-md-6">
-                {{ ldr?.startScore }}-{{ ldr?.endScore }}
-              </div>
-              <div class="col-md-6">
-                <span [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount }}</span>
-              </div>
-            </div>
-            <div class="row border-bottom p-2 bg-light" *ngIf="ldr?.endScore == 'Infinite'">
-              <ng-container>
-                <div class="col-md-6">+{{ ldr?.startScore }}</div>
-              </ng-container>
-              <ng-template #nonInfinte>
-                <div class="col-md-6">
-                  {{ ldr?.startScore }}-{{ ldr?.endScore }}
-                </div>
-              </ng-template>
-
-              <div class="col-md-6">
-                <span [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount }}</span>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-        <div class="row">
-          <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2"
-            data-bs-toggle="modal" data-bs-dismiss="modal">
-            CLOSE
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--Suspended OR Ball Running Start-->
+<ng-template let-appMarketStatus="appMarketStatus" let-col="col" #marketStatusTemplate>
+  <td [attr.colspan]="col" class="suspendedbm3">
+    {{appMarketStatus == "3"? "Suspended": "Ball Running"}}
+  </td>
+</ng-template>
+<!--Suspended OR Ball Running End-->
