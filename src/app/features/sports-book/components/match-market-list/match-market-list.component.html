@@ -1,20 +1,16 @@
-<app-header></app-header>
+<app-header></app-header>isMobileView
 <!--body start-->
 <div class="row m-0">
   <div class="col-md-6 col-6 pb-2 pt-2">
-    <a class="text-color small text-decoration-none pointer"
-      ><i (click)="goBack()" class="fa fa-angle-left text-white"></i>
-      {{ matchName | uppercase }}</a
-    >
+    <a class="text-color small text-decoration-none pointer"><i (click)="goBack()"
+        class="fa fa-angle-left text-white"></i>
+      {{ matchName | uppercase }}</a>
   </div>
-  <div class="col-md-6 col-6 text-end pb-2 pt-2" *ngIf="isLoggedIn">
-    <button
-      class="btn btn-sm badge bg-success me-1"
-      (click)="isTVEnable = !isTVEnable"
-      *ngIf="isMatchLive !== 0 && liveScoreBoardActaulTVUrl && isLoggedIn"
-    >
+  <div class="col-md-6 col-6 text-end pb-2 pt-2" *ngIf="isLoggedIn && !isMobileView">
+    <button class="btn btn-sm badge bg-success me-1" (click)="isTVEnable = !isTVEnable"
+      *ngIf="isMatchLive !== 0 && liveScoreBoardActaulTVUrl && isLoggedIn">
       <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i>&nbsp;{{
-        isTVEnable ? "HIDE" : "WATCH"
+      isTVEnable ? "HIDE" : "WATCH"
       }}
     </button>
   </div>
@@ -30,25 +26,17 @@
       <div [ngClass]="isBetSlipShow ? 'col-md-8' : 'col-md-12'">
         <!-- Nav tabs -->
         <!--Header 3 start-->
-        <div class="row m-0">
+        <div class="row m-0" *ngIf="!isMobileView">
           <div class="col-md-6 col-6 ps-0">
-            <button
-              class="bg-dark text-white float-start border-colour rounded-pill ps-3 pe-3 me-3"
-            >
+            <button class="bg-dark text-white float-start border-colour rounded-pill ps-3 pe-3 me-3">
               Markets
             </button>
             <!-- <button class="bg-dark text-white float-start border-pink rounded-pill ps-3 pe-3"> Open Bets</button> -->
           </div>
           <div class="col-md-6 col-6 text-end" *ngIf="isLoggedIn">
-            <button
-              class="btn btn-sm badge bg-success me-1"
-              (click)="isScoreBoardEnable = !isScoreBoardEnable"
-              *ngIf="isMatchLive !== 0 && liveScoreBoardActaulUrl && isLoggedIn"
-            >
-              <i
-                [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"
-              ></i
-              >SCORES
+            <button class="btn btn-sm badge bg-success me-1" (click)="isScoreBoardEnable = !isScoreBoardEnable"
+              *ngIf="isMatchLive !== 0 && liveScoreBoardActaulUrl && isLoggedIn">
+              <i [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>SCORES
             </button>
             <!-- <button class="btn btn-sm bg-color rounded p-0 ps-1 pe-1">
               <i class="fas fa-share"></i>
@@ -56,13 +44,322 @@
           </div>
           <!-- Tab panes -->
         </div>
-        <div class="row m-0">
+
+        <!-- mobileTab -->
+        <div class="row m-0" *ngIf="isMobileView">
+          <div class="col-12 pb-2">
+            <ul class="nav nav-tabs border-0 justify-content-between" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="bg-dark text-white  border-colour rounded-pill ps-3 pe-3 " id="markets"
+                  data-bs-toggle="tab" data-bs-target="#markets_tab" type="button" role="tab"
+                  aria-controls="markets_tabs" aria-selected="true">
+                  Markets
+                </button>
+              </li>
+              <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
+                <button class="bg-dark text-white  border-colour rounded-pill ps-3 pe-3 " id="watch"
+                  data-bs-toggle="tab" data-bs-target="#watch_tab" type="button" role="tab" aria-controls="watch_tab"
+                  aria-selected="true"  (click)="isTVEnable = !isTVEnable"
+                  *ngIf="isMatchLive !== 0 && liveScoreBoardActaulTVUrl && isLoggedIn">
+                  <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i>&nbsp;{{
+                    isTVEnable ? "HIDE" : "WATCH"
+                    }}
+                </button>
+              </li>
+              <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
+                <button class="btn btn-sm badge bg-success" id="scores" data-bs-toggle="tab"
+                  data-bs-target="#scores_tab" type="button" role="tab" aria-controls="scores_tab" aria-selected="true"
+                  (click)="isScoreBoardEnable = !isScoreBoardEnable"
+                  *ngIf="isMatchLive !== 0 && liveScoreBoardActaulUrl && isLoggedIn">
+                  <i [ngClass]="isScoreBoardEnable ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>SCORES
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <hr class="text-color" />
+
+          <div class="col-12 tab-content" id="myTabContent">
+            <div class="tab-pane fade " id="markets_tab" role="tabpanel" aria-labelledby="markets">
+              <div class="row">
+                <div class="col-md-12  pb-0">
+                  <div class="accordion rightacco" id="accordionExample">
+                    <div class="accordion-item mb-1">
+                      <h2 class="accordion-header" id="headingSix">
+                        <button
+                          class="accordion-button collapsed text-white"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseSix"
+                          aria-expanded="false"
+                          aria-controls="collapseSix"
+                        >
+                          Unmatched Bets
+                          <a
+                            *ngIf="unMatchedBets.length > 0"
+                            class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0"
+                            (click)="cancelBet(unMatchedBets, 'ALL', 1)"
+                            >CANCEL ALL</a
+                          >
+                        </button>
+                      </h2>
+                      <div
+                        id="collapseSix"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingSix"
+                        data-bs-parent="#accordionExample"
+                        [ngClass]="unMatchedBets.length > 0 ? 'show' : ''"
+                      >
+                        <div class="accordion-body text-white">
+                          <div *ngIf="unMatchedBets.length <= 0">
+                            <div class="text-center mt-3">
+                              <i
+                                class="fa fa-exclamation-triangle text-color fa-4x"
+                                aria-hidden="true"
+                              ></i>
+                              <p class="text-center text-color my-3">
+                                No Unmatched Bets!
+                              </p>
+                              <br />
+                            </div>
+                          </div>
+                          <div *ngIf="unMatchedBets.length > 0">
+                            <!-- <div class="form-check border-bottom border-secondary mb-2">
+                              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                              <label class="form-check-label" for="defaultCheck1">
+                                Average Odds
+                              </label>
+                            </div> -->
+    
+                            <div *ngFor="let bet of unMatchedBets">
+                              <p class="mb-1">{{ bet.matchName }}</p>
+                              <div *ngFor="let market of bet.markets">
+                                <table
+                                  class="table text-white text-center"
+                                  *ngFor="let runner of market.runners"
+                                >
+                                  <tr>
+                                    <th width="25%" class="ps-0">
+                                      {{ market.name }}
+                                    </th>
+                                    <th width="25%"></th>
+                                    <th width="25%"></th>
+                                    <th width="25%" class="text-end">
+                                      <a
+                                        class="text-danger text-decoration-none pointer"
+                                        (click)="cancelBet(market, market.name, 2)"
+                                        >CANCEL</a
+                                      >
+                                    </th>
+                                  </tr>
+                                  <ng-container *ngFor="let b of runner.bets">
+                                    <tr>
+                                      <td>{{ b.horse | titlecase }}</td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                    <tr
+                                      class="text-dark"
+                                      [ngStyle]="{
+                                        'background-color':
+                                          b.type === 'BACK' ? '#6abefa' : '#fba2b6'
+                                      }"
+                                    >
+                                      <td>
+                                        Odds<br />
+                                        <p class="bg-white text-dark p-1 mb-0">
+                                          {{ b.odds }}
+                                        </p>
+                                      </td>
+                                      <td>
+                                        Stake<br />
+                                        <p class="bg-white text-dark p-1 mb-0">
+                                          {{ b.stake }}
+                                        </p>
+                                      </td>
+                                      <td>
+                                        Profit<br />
+                                        <p class="p-2 mb-0">
+                                          {{ b.profitLiability | number : "1.2-2" }}
+                                        </p>
+                                      </td>
+                                      <td class="text-end">
+                                        <a
+                                          class="btn btn-danger mt-3 mb-0"
+                                          (click)="cancelBet(b, market.name, 3)"
+                                          >X</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </ng-container>
+                                </table>
+                                <!-- <table class="table text-white " *ngFor="let runner of market.runners">
+                                  <tr>
+                                    <th class="ps-0">{{market.name}}</th>
+                                    <th>Odds</th>
+                                    <th>Stake</th>
+                                    <th>Profit/Liability</th>
+                                  </tr>
+                                  <tr  class="text-dark" *ngFor="let b of runner.bets" [ngStyle]="{'background-color':b.type  === 'BACK' ? '#6abefa' : '#fba2b6' }">
+                                    <td>{{b.horse}}</td>
+                                    <td>{{b.odds}}</td>
+                                    <td>{{b.stake}}</td>
+                                    <td>{{b.profitLiability | number : '1.2-2'}}</td>
+                                    <td class="text-end"><a  class=" btn btn-danger mt-3 mb-0">X</a></td>
+                                  </tr>
+                                </table> -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item mb-1">
+                      <h2 class="accordion-header" id="headingFour">
+                        <button
+                          class="accordion-button collapsed text-white"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseFour"
+                          aria-expanded="false"
+                          aria-controls="collapseFour"
+                        >
+                          Matched Bets
+                        </button>
+                      </h2>
+                      <div
+                        id="collapseFour"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingFour"
+                        data-bs-parent="#accordionExample"
+                        [ngClass]="matchedBets.length > 0 ? 'show' : ''"
+                      >
+                        <div class="accordion-body text-white">
+                          <div *ngIf="matchedBets.length <= 0">
+                            <div class="text-center mt-3">
+                              <i
+                                class="fa fa-exclamation-triangle text-color fa-4x"
+                                aria-hidden="true"
+                              ></i>
+                              <p class="text-center text-color my-3">
+                                No Matched Bets!
+                              </p>
+                              <br />
+                            </div>
+                          </div>
+                          <div *ngIf="matchedBets.length > 0">
+                            <!-- <div class="form-check border-bottom border-secondary mb-2">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                  Average Odds
+                                </label>
+                              </div> -->
+                            <div *ngFor="let bet of matchedBets">
+                              <p class="mb-1">{{ bet.matchName }}</p>
+                              <div *ngFor="let market of bet.markets">
+                                <table
+                                  class="table text-white"
+                                  *ngFor="let runner of market.runners"
+                                >
+                                  <tr>
+                                    <th class="ps-0">{{ market.name }}</th>
+                                    <th>Odds</th>
+                                    <th>Stake</th>
+                                    <th>Profit/Liability</th>
+                                  </tr>
+                                  <tr
+                                    class="text-dark"
+                                    *ngFor="let b of runner.bets"
+                                    [ngStyle]="{
+                                      'background-color':
+                                        b.type === 'BACK' ? '#6abefa' : '#fba2b6'
+                                    }"
+                                  >
+                                    <td>{{ b.horse }}</td>
+                                    <td>{{ b.odds }}</td>
+                                    <td>{{ b.stake }}</td>
+                                    <td>
+                                      {{ b.profitLiability | number : "1.2-2" }}
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="accordion-item mb-1">
+                        <h2 class="accordion-header" id="headingFive">
+                          <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Premium SportsBook Bets <a class="btn btn-danger btn-sm ms-3 ps-1 pe-1 pt-0 pb-0">CANCEL </a></button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                          data-bs-parent="#accordionExample">
+                          <div class="accordion-body text-white">
+                            <div class="form-check border-bottom border-secondary mb-2">
+                              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                              <label class="form-check-label" for="defaultCheck1">
+                                Average Odds
+                              </label>
+                            </div>
+                            <p class="mb-1">Auckland v Wellington</p>
+                            <table class="table text-white ">
+                              <tr>
+                                <th width="25%" class="ps-0">Match Odds</th>
+                                <th width="25%"></th>
+                                <th width="25%"></th>
+                                <th width="25%" class="text-end"> <a
+                                    class="text-danger text-decoration-none">CANCEL</a></th>
+                              </tr>
+                              <tr>
+                                <td>Wellington</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                              <tr class="colblue">
+                                <td>Odds<br>
+                                  <p class="bg-white text-dark p-2 mb-0">1.62</p>
+                                </td>
+                                <td>Stake<br>
+                                  <p class="bg-white text-dark p-2 mb-0">1.62</p>
+                                </td>
+                                <td>Profit<br>
+                                  <p class="p-2 mb-0">1.62</p>
+                                </td>
+                                <td class="text-end"><a  class=" btn btn-danger mt-3 mb-0">X</a></td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="watch_tab" role="tabpanel" aria-labelledby="watch">
+              <div *ngIf="liveStreamingTVUrl && isTVEnable" id="videoplayer">
+                <iframe [src]="liveStreamingTVUrl" scrolling="no"></iframe>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="scores_tab" role="tabpanel" aria-labelledby="scores">
+              <div class="row m-0" *ngIf="isMobileView">
+                <div class="col-md-12 col-12 ps-0" *ngIf="isScoreBoardEnable">
+                  <iframe style="height: 100%; width: 100%; margin: 0.7rem" [src]="liveScoreBoardUrl"
+                    scrolling="yes"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab panes -->
+        </div>
+
+        <div class="row m-0" *ngIf="!isMobileView">
           <div class="col-md-12 col-12 ps-0" *ngIf="isScoreBoardEnable">
-            <iframe
-              style="height: 100%; width: 100%; margin: 0.7rem"
-              [src]="liveScoreBoardUrl"
-              scrolling="no"
-            ></iframe>
+            <iframe style="height: 100%; width: 100%; margin: 0.7rem" [src]="liveScoreBoardUrl" scrolling="no"></iframe>
           </div>
         </div>
         <!--Header 3 end-->
@@ -88,131 +385,83 @@
           <div class="col-md-12">
             <div class="tab-content text-white">
               <!--liveupcoming start-->
-              <div
-                class="tab-pane active"
-                id="liveupcoming"
-                role="tabpanel"
-                aria-labelledby="home-tab"
-              >
+              <div class="tab-pane active" id="liveupcoming" role="tabpanel" aria-labelledby="home-tab">
                 <!--Game details info start-->
                 <div class="row">
                   <div class="col-md-12">
                     <div class="mt-3 innerpagem gamedetails ps-md-3 pe-md-3">
                       <!--Table 1-->
                       <div class="mobileTableHide" *ngIf="!isMobileView">
-                        <table
-                          class="table table-hover"
-                          *ngIf="
+                        <table class="table table-hover" *ngIf="
                             inPlayUpcomingMarket?.runners &&
                             inPlayUpcomingMarket['appMarketStatus'] != '4' &&
                             inPlayUpcomingMarket['appMarketStatus'] != '2'
-                          "
-                        >
+                          ">
                           <thead class="collapsible">
                             <tr>
                               <th width="30%" class="tfirstcol">Match Odds</th>
                               <th width="10%" class="coldark">
-                                <img
-                                  src="/assets/images/timer.png"
-                                  class="timer"
-                                />
+                                <img src="/assets/images/timer.png" class="timer" />
                                 {{inPlayUpcomingMarket['marketDelay']}}
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
-                              <th
-                                width="15%"
-                                colspan="3"
-                                class="text-end coldark"
-                              >
+                              <th width="15%" colspan="3" class="text-end coldark">
                                 Back
                               </th>
-                              <th
-                                width="15%"
-                                colspan="3"
-                                class="text-start coldark "
-                              >
+                              <th width="15%" colspan="3" class="text-start coldark ">
                                 Lay
                               </th>
-                              <th
-                                width="15%"
-                                colspan="1"
-                                class="text-start coldark tlastcol"
-                              >
+                              <th width="15%" colspan="1" class="text-start coldark tlastcol">
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody class="content pointer">
-                            <tr
-                              *ngFor="
+                            <tr *ngFor="
                                 let runner of inPlayUpcomingMarket['runners'];
                                 let last = last;
                                 let first = first
-                              "
-                              [ngClass]="{ 'border-0': last }"
-                            >
-                              <td
-                                width="30%"
-                                class="text-start ps-2 heading"
-                                [ngClass]="{ 'border-top': !first }"
-                              >
-                                <a
-                                  ><strong>{{
+                              " [ngClass]="{ 'border-0': last }">
+                              <td width="30%" class="text-start ps-2 heading" [ngClass]="{ 'border-top': !first }">
+                                <a><strong>{{
                                     runner["RunnerName"]
-                                  }}</strong></a
-                                >
+                                    }}</strong></a>
                                 <br />
-                                <a
-                                  [ngClass]="
+                                <a [ngClass]="
                                     runner?.hourseAmt?.amount > 0
                                       ? 'text-success'
                                       : 'text-danger'
-                                  "
-                                >
+                                  ">
                                   <strong>{{
                                     runner?.hourseAmt?.amount | number
-                                  }}</strong>
+                                    }}</strong>
                                 </a>
 
                                 <a>
                                   <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                    >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
+                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                    >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
+                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount">&nbsp;
+                                    &#62;
+                                    &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                 </a>
 
                                 <a
-                                  [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
-                                >
+                                  [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
                                   <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                    >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
+                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   <strong
-                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                    >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                  >
+                                    *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp;
+                                    &#62;
+                                    &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                 </a>
                               </td>
-                              <td
-                                width="10%"
-                                class="border-top"
-                                [ngClass]="{ 'border-top': !first }"
-                              ></td>
-                              <td
-                                width="10%"
-                                class="colblue"
-                                [boxHighlight]="runner['back2']"
-                                [boxHighlight]="runner['vback2']"
-                                [class.dis]="
+                              <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                              <td width="10%" class="colblue" [boxHighlight]="runner['back2']"
+                                [boxHighlight]="runner['vback2']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
-                                (click)="
+                                " (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
                                       runner,
@@ -224,24 +473,16 @@
                                       },
                                       EMarketType.MATCH_TYPE
                                     )
-                                "
-                              >
-                                <a class="boxeffect"
-                                  ><strong>{{ runner["back2"] }}</strong>
+                                ">
+                                <a class="boxeffect"><strong>{{ runner["back2"] }}</strong>
                                   <br /><span>{{
                                     runner["vback2"] | marketRateFormater
-                                  }}</span></a
-                                >
+                                    }}</span></a>
                               </td>
-                              <td
-                                width="10%"
-                                class="colblue"
-                                [boxHighlight]="runner['back1']"
-                                [boxHighlight]="runner['vback1']"
-                                [class.dis]="
+                              <td width="10%" class="colblue" [boxHighlight]="runner['back1']"
+                                [boxHighlight]="runner['vback1']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
-                                (click)="
+                                " (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
                                       runner,
@@ -253,24 +494,16 @@
                                       },
                                       EMarketType.MATCH_TYPE
                                     )
-                                "
-                              >
-                                <a class="boxeffect"
-                                  ><strong>{{ runner["back1"] }}</strong>
+                                ">
+                                <a class="boxeffect"><strong>{{ runner["back1"] }}</strong>
                                   <br /><span>{{
                                     runner["vback1"] | marketRateFormater
-                                  }}</span></a
-                                >
+                                    }}</span></a>
                               </td>
-                              <td
-                                width="10%"
-                                class="colblue"
-                                [boxHighlight]="runner['back0']"
-                                [boxHighlight]="runner['vback0']"
-                                [class.dis]="
+                              <td width="10%" class="colblue" [boxHighlight]="runner['back0']"
+                                [boxHighlight]="runner['vback0']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
-                                (click)="
+                                " (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
                                       runner,
@@ -282,24 +515,16 @@
                                       },
                                       EMarketType.MATCH_TYPE
                                     )
-                                "
-                              >
-                                <a class="boxeffect"
-                                  ><strong>{{ runner["back0"] }}</strong>
+                                ">
+                                <a class="boxeffect"><strong>{{ runner["back0"] }}</strong>
                                   <br /><span>{{
                                     runner["vback0"] | marketRateFormater
-                                  }}</span></a
-                                >
+                                    }}</span></a>
                               </td>
-                              <td
-                                width="10%"
-                                class="colpink"
-                                [boxHighlight]="runner['lay0']"
-                                [boxHighlight]="runner['vlay0']"
-                                [class.dis]="
+                              <td width="10%" class="colpink" [boxHighlight]="runner['lay0']"
+                                [boxHighlight]="runner['vlay0']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
-                                (click)="
+                                " (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
                                       runner,
@@ -311,24 +536,16 @@
                                       },
                                       EMarketType.MATCH_TYPE
                                     )
-                                "
-                              >
-                                <a class="boxeffect"
-                                  ><strong>{{ runner["lay0"] }}</strong>
+                                ">
+                                <a class="boxeffect"><strong>{{ runner["lay0"] }}</strong>
                                   <br /><span>{{
                                     runner["vlay0"] | marketRateFormater
-                                  }}</span></a
-                                >
+                                    }}</span></a>
                               </td>
-                              <td
-                                width="10%"
-                                class="colpink"
-                                [boxHighlight]="runner['lay1']"
-                                [boxHighlight]="runner['vlay1']"
-                                [class.dis]="
+                              <td width="10%" class="colpink" [boxHighlight]="runner['lay1']"
+                                [boxHighlight]="runner['vlay1']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
-                                (click)="
+                                " (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
                                       runner,
@@ -340,25 +557,16 @@
                                       },
                                       EMarketType.MATCH_TYPE
                                     )
-                                "
-                              >
-                                <a class="boxeffect"
-                                  ><strong>{{ runner["lay1"] }}</strong>
+                                ">
+                                <a class="boxeffect"><strong>{{ runner["lay1"] }}</strong>
                                   <br /><span>{{
                                     runner["vlay1"] | marketRateFormater
-                                  }}</span></a
-                                >
+                                    }}</span></a>
                               </td>
-                              <td
-                                width="10%"
-                                class="colpink"
-                                
-                                [boxHighlight]="runner['lay2']"
-                                [boxHighlight]="runner['vlay2']"
-                                [class.dis]="
+                              <td width="10%" class="colpink" [boxHighlight]="runner['lay2']"
+                                [boxHighlight]="runner['vlay2']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
-                                "
-                                (click)="
+                                " (click)="
                                   inPlayUpcomingMarket['inPlayStatus'] &&
                                     onClickLiveMarketRate(
                                       runner,
@@ -370,43 +578,30 @@
                                       },
                                       EMarketType.MATCH_TYPE
                                     )
-                                "
-                              >
-                                <a class="boxeffect"
-                                  ><strong>{{ runner["lay2"] }}</strong>
+                                ">
+                                <a class="boxeffect"><strong>{{ runner["lay2"] }}</strong>
                                   <br /><span>{{
                                     runner["vlay2"] | marketRateFormater
-                                  }}</span></a
-                                >
+                                    }}</span></a>
                               </td>
-                              <td
-                                    class="border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  >
-                                    <div
-                                      class="suspendedbm1"
-                                      *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'"
-                                    >
-                                      <button
-                                        type="button"
-                                        class="suspendedm1"
-                                        [ngClass]="
+                              <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                <div class="suspendedbm1"
+                                  *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'">
+                                  <button type="button" class="suspendedm1" [ngClass]="
                                           isLoggedIn
                                             ? 'matchmarketlist-on'
                                             : 'matchmarketlist-off'
-                                        "
-                                        
-                                      >
-                                      {{
-                                        inPlayUpcomingMarket["appMarketStatus"] ==
-                                        "3"
-                                          ? "Suspended"
-                                          : "Ball Running"
-                                      }}
-                                      </button>
-                                    </div>
+                                        ">
+                                    {{
+                                    inPlayUpcomingMarket["appMarketStatus"] ==
+                                    "3"
+                                    ? "Suspended"
+                                    : "Ball Running"
+                                    }}
+                                  </button>
+                                </div>
                               </td>
-                                  <!-- <td
+                              <!-- <td
                                     class="border-top"
                                     [ngClass]="{ 'border-top': !first }"
                                   >
@@ -441,108 +636,77 @@
                         </table>
                       </div>
                       <div class="mobileTableShow" *ngIf="isMobileView">
-                        <table
-                          class="table table-hover"
-                          *ngIf="
+                        <table class="table table-hover" *ngIf="
                             inPlayUpcomingMarket?.runners &&
                             inPlayUpcomingMarket['appMarketStatus'] != '4' &&
                             inPlayUpcomingMarket['appMarketStatus'] != '2'
-                          "
-                        >
+                          ">
                           <thead class="collapsible">
                             <tr>
                               <th width="70%" class="tfirstcol">Match Odds</th>
                               <th class="coldark">
-                                <img
-                                  src="/assets/images/timer.png"
-                                  class="timer"
-                                />
+                                <img src="/assets/images/timer.png" class="timer" />
                                 {{inPlayUpcomingMarket['marketDelay']}}
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th colspan="1" class="text-center coldark">
                                 Back
                               </th>
-                              <th
-                                colspan="1"
-                                class="text-center coldark "
-                              >
+                              <th colspan="1" class="text-center coldark ">
                                 Lay
                               </th>
 
-                              <th
-                                colspan="1"
-                                class="text-center coldark tlastcol"
-                              >
-                                
+                              <th colspan="1" class="text-center coldark tlastcol">
+
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
                           </thead>
                           <tbody class="content pointer">
-                            <ng-container
-                              *ngFor="
+                            <ng-container *ngFor="
                                 let runner of inPlayUpcomingMarket['runners'];
                                 let last = last;
                                 let first = first;
                                 let even = even
-                              "
-                            >
+                              ">
                               <tr [ngClass]="{ 'border-0': last }">
-                                <td
-                                  class="text-start ps-2 py-2 heading"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <a
-                                    ><strong>{{
+                                <td class="text-start ps-2 py-2 heading" [ngClass]="{ 'border-top': !first }">
+                                  <a><strong>{{
                                       runner["RunnerName"]
-                                    }}</strong></a
-                                  >
+                                      }}</strong></a>
                                   <br />
-                                  <a
-                                    [ngClass]="
+                                  <a [ngClass]="
                                       runner?.hourseAmt?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
-                                    "
-                                  >
+                                    ">
                                     <strong>{{
                                       runner?.hourseAmt?.amount
-                                    }}</strong>
+                                      }}</strong>
                                   </a>
 
                                   <a>
                                     <strong
-                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                     <strong
-                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount">&nbsp;
+                                      &#62;
+                                      &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
 
                                   <a
-                                    [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'"
-                                  >
+                                    [ngClass]="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
                                     <strong
-                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                     <strong
-                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp;
+                                      &#62;
+                                      &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  (click)="
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td (click)="
                                     inPlayUpcomingMarket['inPlayStatus'] &&
                                       onClickLiveMarketRate(
                                         runner,
@@ -554,23 +718,16 @@
                                         },
                                         EMarketType.MATCH_TYPE
                                       )
-                                  "
-                                >
-                                  <a
-                                    class="colblue"
-                                    [boxHighlight]="runner['back2']"
-                                    [boxHighlight]="runner['vback2']"
+                                  ">
+                                  <a class="colblue" [boxHighlight]="runner['back2']" [boxHighlight]="runner['vback2']"
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
-                                    "
-                                    ><strong>{{ runner["back2"] }}</strong>
+                                    "><strong>{{ runner["back2"] }}</strong>
                                     <br /><span>{{
                                       runner["vback2"] | marketRateFormater
-                                    }}</span></a
-                                  >
+                                      }}</span></a>
                                 </td>
-                                <td
-                                  (click)="
+                                <td (click)="
                                     inPlayUpcomingMarket['inPlayStatus'] &&
                                       onClickLiveMarketRate(
                                         runner,
@@ -582,72 +739,46 @@
                                         },
                                         EMarketType.MATCH_TYPE
                                       )
-                                  "
-                                >
-                                  <a
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay0']"
-                                    [boxHighlight]="runner['vlay0']"
+                                  ">
+                                  <a class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']"
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
-                                    "
-                                    ><strong>{{ runner["lay0"] }}</strong>
+                                    "><strong>{{ runner["lay0"] }}</strong>
                                     <br /><span>{{
                                       runner["vlay0"] | marketRateFormater
-                                    }}</span></a
-                                  >
+                                      }}</span></a>
                                 </td>
-                                <td
-                                    class="border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  >
-                                    <div
-                                      class="suspendedbm1"
-                                      *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'"
-                                    >
-                                      <button
-                                        type="button"
-                                        class="suspendedm1"
-                                        [ngClass]="
+                                <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                  <div class="suspendedbm1"
+                                    *ngIf="inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9'">
+                                    <button type="button" class="suspendedm1" [ngClass]="
                                           isLoggedIn
                                             ? 'matchmarketlist-on'
                                             : 'matchmarketlist-off'
-                                        "
-                                        
-                                      >
+                                        ">
                                       {{
-                                        inPlayUpcomingMarket["appMarketStatus"] ==
-                                        "3"
-                                          ? "Suspended"
-                                          : "Ball Running"
+                                      inPlayUpcomingMarket["appMarketStatus"] ==
+                                      "3"
+                                      ? "Suspended"
+                                      : "Ball Running"
                                       }}
-                                      </button>
-                                    </div>
-                              </td>
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
-                              <tr
-                                *ngIf="betSlipObj['odds'] !=='' &&
+                              <tr *ngIf="betSlipObj['odds'] !=='' &&
                                   runner['SelectionId'] ==
                                     betSlipObj['selectionId'] &&
                                   matchName != 'NO MATCH AVAILABLE'
-                                "
-                              >
-                                <td colspan="4" class="p-0 border-0">
-                                  <div
-                                    class="col-md-4 mb-3 sidebarhide"
-                                    id="sidebarhide"
-                                  >
-                                    <app-bet-slip
-                                      *ngIf="
+                                ">
+                                <td colspan="5" class="p-0 border-0">
+                                  <div class="col-md-4 mb-3 sidebarhide" id="sidebarhide">
+                                    <app-bet-slip *ngIf="
                                         matchName != 'NO MATCH AVAILABLE' &&
                                         isMobileView
-                                      "
-                                      [isBetSlipActive]="isBetSlipActive"
-                                      [betSlipParams]="betSlipObj"
-                                      [showMAtchwiseBet]="matchName"
-                                      [marketType]="marketType"
-                                      [isTVEnable]="isTVEnable"
-                                    ></app-bet-slip>
+                                      " [isBetSlipActive]="isBetSlipActive" [betSlipParams]="betSlipObj"
+                                      [showMAtchwiseBet]="matchName" [marketType]="marketType"
+                                      [isTVEnable]="isTVEnable"></app-bet-slip>
                                   </div>
                                 </td>
                               </tr>
@@ -657,17 +788,12 @@
                       </div>
 
                       <!--Table 2-->
-                      <ng-container
-                        *ngFor="let singleBookMaker of bookMakerMarket"
-                      >
+                      <ng-container *ngFor="let singleBookMaker of bookMakerMarket">
                         <div class="mobileTableShow" *ngIf="isMobileView">
-                          <table
-                            class="table table-hover"
-                            *ngIf="
+                          <table class="table table-hover" *ngIf="
                               singleBookMaker['appMarketStatus'] != '4' &&
                               singleBookMaker['appMarketStatus'] != '2'
-                            "
-                          >
+                            ">
                             <thead>
                               <tr>
                                 <th colspan="10" class="h-100">
@@ -679,20 +805,13 @@
                                   {{ singleBookMaker["marketName"] }}
                                 </th>
                                 <th class="coldark">
-                                  <img
-                                    src="/assets/images/fast.png"
-                                    class="timer"
-                                  />
+                                  <img src="/assets/images/fast.png" class="timer" />
                                 </th>
                                 <!-- <th width="10%" class="coldark"></th> -->
                                 <th colspan="1" class="text-center coldark">
                                   Back
                                 </th>
-                                <th
-                                  width="15%"
-                                  colspan="1"
-                                  class="text-center coldark"
-                                >
+                                <th width="15%" colspan="1" class="text-center coldark">
                                   Lay
                                 </th>
                                 <th class="coldark tlastcol"></th>
@@ -701,61 +820,47 @@
                               </tr>
                             </thead>
                             <tbody class="pointer">
-                              <ng-container *ngFor="let runner of singleBookMaker['runners'];let last = last;let first = first">
+                              <ng-container
+                                *ngFor="let runner of singleBookMaker['runners'];let last = last;let first = first">
                                 <tr [ngClass]="{ 'border-0': last }">
-                                  <td
-                                    class="text-start ps-2 heading border-top dis"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  >
-                                    <a
-                                      ><strong>{{
+                                  <td class="text-start ps-2 heading border-top dis"
+                                    [ngClass]="{ 'border-top': !first }">
+                                    <a><strong>{{
                                         runner["RunnerName"]
-                                      }}</strong></a
-                                    >
+                                        }}</strong></a>
                                     <br />
-                                    <a
-                                      [ngClass]="
+                                    <a [ngClass]="
                                         runner?.hourseAmt?.amount > 0
                                           ? 'text-success'
                                           : 'text-danger'
-                                      "
-                                    >
+                                      ">
                                       <strong>{{
                                         runner?.hourseAmt?.amount | number
-                                      }}</strong>
+                                        }}</strong>
                                     </a>
 
                                     <a>
                                       <strong
-                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount"
-                                        >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
-                                      >
+                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
                                       <strong
-                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount"
-                                        >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
-                                      >
+                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount">&nbsp;
+                                        &#62;
+                                        &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
                                     </a>
 
                                     <a
-                                      [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount >0 ? 'text-success':'text-danger'"
-                                    >
+                                      [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount >0 ? 'text-success':'text-danger'">
                                       <strong
-                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount"
-                                        >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
-                                      >
+                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount">{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
                                       <strong
-                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount"
-                                        >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong
-                                      >
+                                        *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount">&nbsp;
+                                        &#62;
+                                        &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount}}</strong>
                                     </a>
                                   </td>
-                                  <td
-                                    class="border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  ></td>
+                                  <td class="border-top" [ngClass]="{ 'border-top': !first }"></td>
 
-                                  <td
-                                    (click)="
+                                  <td (click)="
                                       onClickLiveMarketRate(
                                         runner,
                                         singleBookMaker,
@@ -766,20 +871,14 @@
                                         },
                                         EMarketType.BOOKMAKER_TYPE
                                       )
-                                    "
-                                  >
-                                    <a
-                                      class="colblue"
-                                      [boxHighlight]="runner['back0']"
-                                      [boxHighlight]="runner['vback0']"
-                                      ><strong>{{ runner["back0"] }}</strong>
+                                    ">
+                                    <a class="colblue" [boxHighlight]="runner['back0']"
+                                      [boxHighlight]="runner['vback0']"><strong>{{ runner["back0"] }}</strong>
                                       <br /><span>{{
                                         runner["vback0"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                        }}</span></a>
                                   </td>
-                                  <td
-                                    (click)="
+                                  <td (click)="
                                       onClickLiveMarketRate(
                                         runner,
                                         singleBookMaker,
@@ -790,82 +889,57 @@
                                         },
                                         EMarketType.BOOKMAKER_TYPE
                                       )
-                                    "
-                                  >
-                                    <a
-                                      class="colpink"
-                                      [boxHighlight]="runner['lay0']"
-                                      [boxHighlight]="runner['vlay0']"
-                                      ><strong>{{ runner["lay0"] }}</strong>
+                                    ">
+                                    <a class="colpink" [boxHighlight]="runner['lay0']"
+                                      [boxHighlight]="runner['vlay0']"><strong>{{ runner["lay0"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay0"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                        }}</span></a>
                                   </td>
 
-                                  <td
-                                    class="border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  >
-                                    <div
-                                      class="suspendedbm1"
-                                      *ngIf="
+                                  <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                    <div class="suspendedbm1" *ngIf="
                                         singleBookMaker['appMarketStatus'] ==
                                           '3' ||
                                         singleBookMaker['appMarketStatus'] == '9'
-                                      "
-                                    >
-                                      <button
-                                        type="button"
-                                        class="suspendedm1"
-                                        [ngClass]="
+                                      ">
+                                      <button type="button" class="suspendedm1" [ngClass]="
                                           isLoggedIn
                                             ? 'matchmarketlist-on'
                                             : 'matchmarketlist-off'
-                                        "
-                                      >
+                                        ">
                                         {{
-                                          singleBookMaker["appMarketStatus"] ==
-                                          "3"
-                                            ? "Suspended"
-                                            : "Ball Running"
+                                        singleBookMaker["appMarketStatus"] ==
+                                        "3"
+                                        ? "Suspended"
+                                        : "Ball Running"
                                         }}
                                       </button>
                                     </div>
                                   </td>
                                 </tr>
-                                <tr *ngIf="betSlipObj['odds'] !=='' && runner['SelectionId'] == betSlipObj['selectionId'] && matchName != 'NO MATCH AVAILABLE'">
+                                <tr
+                                  *ngIf="betSlipObj['odds'] !=='' && runner['SelectionId'] == betSlipObj['selectionId'] && matchName != 'NO MATCH AVAILABLE'">
                                   <td colspan="4" class="p-0 border-0">
-                                    <div
-                                      class="col-md-4 mb-3 sidebarhide"
-                                      id="sidebarhide"
-                                    >
-                                      <app-bet-slip
-                                        *ngIf="
+                                    <div class="col-md-4 mb-3 sidebarhide" id="sidebarhide">
+                                      <app-bet-slip *ngIf="
                                           matchName != 'NO MATCH AVAILABLE' &&
                                           isMobileView
-                                        "
-                                        [isBetSlipActive]="isBetSlipActive"
-                                        [betSlipParams]="betSlipObj"
-                                        [showMAtchwiseBet]="matchName"
-                                        [marketType]="marketType"
-                                        [isTVEnable]="isTVEnable"
-                                      ></app-bet-slip>
+                                        " [isBetSlipActive]="isBetSlipActive" [betSlipParams]="betSlipObj"
+                                        [showMAtchwiseBet]="matchName" [marketType]="marketType"
+                                        [isTVEnable]="isTVEnable"></app-bet-slip>
                                     </div>
                                   </td>
                                 </tr>
-                            </ng-container>
+                              </ng-container>
                             </tbody>
                           </table>
                         </div>
                         <div class="mobileTableHide" *ngIf="!isMobileView">
-                          <table
-                            class="table table-hover"
-                            *ngIf="
+                          <table class="table table-hover" *ngIf="
                               singleBookMaker['appMarketStatus'] != '4' &&
                               singleBookMaker['appMarketStatus'] != '2'
-                            "
-                          >
+                            ">
                             <thead>
                               <tr>
                                 <th colspan="10" class="h-100">
@@ -877,24 +951,13 @@
                                   {{ singleBookMaker["marketName"] }}
                                 </th>
                                 <th width="10%" class="coldark">
-                                  <img
-                                    src="/assets/images/fast.png"
-                                    class="timer"
-                                  />
+                                  <img src="/assets/images/fast.png" class="timer" />
                                 </th>
                                 <!-- <th width="10%" class="coldark"></th> -->
-                                <th
-                                  width="15%"
-                                  colspan="3"
-                                  class="text-end coldark"
-                                >
+                                <th width="15%" colspan="3" class="text-end coldark">
                                   Back
                                 </th>
-                                <th
-                                  width="15%"
-                                  colspan="3"
-                                  class="text-start coldark tlastcol"
-                                >
+                                <th width="15%" colspan="3" class="text-start coldark tlastcol">
                                   Lay
                                 </th>
                                 <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
@@ -902,82 +965,55 @@
                               </tr>
                             </thead>
                             <tbody class="pointer">
-                              <tr
-                                *ngFor="
+                              <tr *ngFor="
                                   let runner of singleBookMaker['runners'];
                                   let last = last;
                                   let first = first
-                                "
-                                [ngClass]="{ 'border-0': last }"
-                              >
-                                <td
-                                  width="30%"
-                                  class="text-start ps-2 heading border-top dis"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <a
-                                    ><strong>{{
+                                " [ngClass]="{ 'border-0': last }">
+                                <td width="30%" class="text-start ps-2 heading border-top dis"
+                                  [ngClass]="{ 'border-top': !first }">
+                                  <a><strong>{{
                                       runner["RunnerName"]
-                                    }}</strong></a
-                                  >
+                                      }}</strong></a>
                                   <br />
-                                  <a
-                                    [ngClass]="
+                                  <a [ngClass]="
                                       runner?.hourseAmt?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
-                                    "
-                                  >
+                                    ">
                                     <strong>{{
                                       runner?.hourseAmt?.amount | number
-                                    }}</strong>
+                                      }}</strong>
                                   </a>
 
                                   <a>
                                     <strong
-                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount
+                                      | number}}</strong>
                                     <strong
-                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount == 0 && runner?.hourseAmt?.amount">&nbsp;
+                                      &#62;
+                                      &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount |
+                                      number}}</strong>
                                   </a>
 
                                   <a
-                                    [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount >0 ? 'text-success':'text-danger'"
-                                  >
+                                    [ngClass]="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount >0 ? 'text-success':'text-danger'">
                                     <strong
-                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount"
-                                      >{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && !runner?.hourseAmt?.amount">{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount
+                                      | number}}</strong>
                                     <strong
-                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount"
-                                      >&nbsp; &#62; &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount | number}}</strong
-                                    >
+                                      *ngIf="placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount && runner?.hourseAmt?.amount">&nbsp;
+                                      &#62;
+                                      &nbsp;{{placeBetData?.[singleBookMaker?.marketId]?.[runner?.SelectionId]?.amount |
+                                      number}}</strong>
                                   </a>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  width="10%"
-                                  class="colblue"
-                                  [boxHighlight]="runner['back0'] | number"
-                                  [boxHighlight]="runner['vback0'] | number"
-                                  (click)="
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td width="10%" class="colblue" [boxHighlight]="runner['back0'] | number"
+                                  [boxHighlight]="runner['vback0'] | number" (click)="
                                     onClickLiveMarketRate(
                                       runner,
                                       singleBookMaker,
@@ -988,21 +1024,14 @@
                                       },
                                       EMarketType.BOOKMAKER_TYPE
                                     )
-                                  "
-                                >
-                                  <a
-                                    ><strong>{{ runner["back0"] }}</strong>
+                                  ">
+                                  <a><strong>{{ runner["back0"] }}</strong>
                                     <br /><span>{{
                                       runner["vback0"] | marketRateFormater
-                                    }}</span></a
-                                  >
+                                      }}</span></a>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="colpink 2"
-                                  [boxHighlight]="runner['lay0'] | number"
-                                  [boxHighlight]="runner['vlay0'] | number"
-                                  (click)="
+                                <td width="10%" class="colpink 2" [boxHighlight]="runner['lay0'] | number"
+                                  [boxHighlight]="runner['vlay0'] | number" (click)="
                                     onClickLiveMarketRate(
                                       runner,
                                       singleBookMaker,
@@ -1013,20 +1042,13 @@
                                       },
                                       EMarketType.BOOKMAKER_TYPE
                                     )
-                                  "
-                                >
-                                  <a
-                                    ><strong>{{ runner["lay0"] }}</strong>
+                                  ">
+                                  <a><strong>{{ runner["lay0"] }}</strong>
                                     <br /><span>{{
                                       runner["vlay0"] | marketRateFormater
-                                    }}</span></a
-                                  >
+                                      }}</span></a>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
                                 <!-- <td width="10%" class="border-top" [ngClass]="{'border-top':!first}"> -->
                                 <!--Online start-->
                                 <!-- <div class="suspendedbm1" *ngIf="runner['st']=='1' || runner['st']==''">
@@ -1034,33 +1056,22 @@
                                     </div> -->
                                 <!--Online end-->
                                 <!-- </td> -->
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <div
-                                    class="suspendedbm1"
-                                    *ngIf="
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
+                                  <div class="suspendedbm1" *ngIf="
                                       singleBookMaker['appMarketStatus'] ==
                                         '3' ||
                                       singleBookMaker['appMarketStatus'] == '9'
-                                    "
-                                  >
-                                    <button
-                                      type="button"
-                                      class="suspendedm1"
-                                      [ngClass]="
+                                    ">
+                                    <button type="button" class="suspendedm1" [ngClass]="
                                         isLoggedIn
                                           ? 'matchmarketlist-on'
                                           : 'matchmarketlist-off'
-                                      "
-                                    >
+                                      ">
                                       {{
-                                        singleBookMaker["appMarketStatus"] ==
-                                        "3"
-                                          ? "Suspended"
-                                          : "Ball Running"
+                                      singleBookMaker["appMarketStatus"] ==
+                                      "3"
+                                      ? "Suspended"
+                                      : "Ball Running"
                                       }}
                                     </button>
                                   </div>
@@ -1073,32 +1084,18 @@
 
                       <!--Table 3-->
                       <div class="mobileTableHide" *ngIf="!isMobileView">
-                        <table
-                          class="table table-hover"
-                          *ngIf="fancyMarket.length > 0 && isFancyCardShow"
-                        >
+                        <table class="table table-hover" *ngIf="fancyMarket.length > 0 && isFancyCardShow">
                           <thead>
                             <tr>
                               <th width="30%" class="tfirstcol">Fancy</th>
                               <th width="10%" class="coldark">
-                                <img
-                                  src="/assets/images/fast.png"
-                                  class="timer"
-                                />
+                                <img src="/assets/images/fast.png" class="timer" />
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
-                              <th
-                                width="15%"
-                                colspan="3"
-                                class="text-end coldark"
-                              >
+                              <th width="15%" colspan="3" class="text-end coldark">
                                 No
                               </th>
-                              <th
-                                width="15%"
-                                colspan="3"
-                                class="text-start coldark tlastcol"
-                              >
+                              <th width="15%" colspan="3" class="text-start coldark tlastcol">
                                 Yes
                               </th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
@@ -1106,86 +1103,48 @@
                             </tr>
                           </thead>
                           <tbody class="pointer">
-                            <ng-container
-                              *ngFor="
+                            <ng-container *ngFor="
                                 let singleFancyMarket of fancyMarket;
                                 let last = last;
                                 let first = first
-                              "
-                            >
-                              <tr
-                                *ngIf="
+                              ">
+                              <tr *ngIf="
                                   singleFancyMarket['appMarketStatus'] != '4' &&
                                   singleFancyMarket['appMarketStatus'] != '2'
-                                "
-                                [ngClass]="{ 'border-0': last }"
-                              >
-                                <td
-                                  width="30%"
-                                  class="text-start ps-2 heading border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <a
-                                    ><strong
-                                      >{{ singleFancyMarket["marketName"]
-                                      }}<br /> </strong
-                                  ></a>
+                                " [ngClass]="{ 'border-0': last }">
+                                <td width="30%" class="text-start ps-2 heading border-top"
+                                  [ngClass]="{ 'border-top': !first }">
+                                  <a><strong>{{ singleFancyMarket["marketName"]
+                                      }}<br /> </strong></a>
                                   <br />
-                                  <a
-                                    [ngClass]="
+                                  <a [ngClass]="
                                       singleFancyMarket?.hourseAmt?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
-                                    "
-                                  >
+                                    ">
                                     <strong>{{
                                       singleFancyMarket?.hourseAmt?.amount
-                                        | number
-                                    }}</strong>
+                                      | number
+                                      }}</strong>
                                   </a>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <a
-                                    *ngIf="
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
+                                  <a *ngIf="
                                       singleFancyMarket?.hourseAmt && isLoggedIn
-                                    "
-                                    data-bs-toggle="modal"
-                                    href="#exampleModalToggle"
-                                    role="button"
-                                    class="laddericon"
-                                    (click)="
+                                    " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
+                                    class="laddericon" (click)="
                                       getLadderDataByMarket(
                                         singleFancyMarket['marketId']
                                       )
-                                    "
-                                  >
+                                    ">
                                     <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon" > -->
-                                    <img
-                                      src="/assets/images/ladder-icon.png"
-                                      width="10px"
-                                    />
+                                    <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="colpink"
-                                  [boxHighlight]="singleFancyMarket['lay1']"
-                                  [boxHighlight]="singleFancyMarket['vlay1']"
-                                  (click)="
+                                <td width="10%" class="colpink" [boxHighlight]="singleFancyMarket['lay1']"
+                                  [boxHighlight]="singleFancyMarket['vlay1']" (click)="
                                     onClickLiveMarketRate(
                                       null,
                                       singleFancyMarket,
@@ -1197,22 +1156,17 @@
                                       },
                                       EMarketType.FANCY_TYPE
                                     )
-                                  "
-                                >
+                                  ">
                                   <strong>{{
                                     singleFancyMarket["lay1"]
-                                  }}</strong>
+                                    }}</strong>
                                   <br /><span>{{
                                     singleFancyMarket["vlay1"]
-                                      | marketRateFormater
-                                  }}</span>
+                                    | marketRateFormater
+                                    }}</span>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="colblue"
-                                  [boxHighlight]="singleFancyMarket['back1']"
-                                  [boxHighlight]="singleFancyMarket['vback1']"
-                                  (click)="
+                                <td width="10%" class="colblue" [boxHighlight]="singleFancyMarket['back1']"
+                                  [boxHighlight]="singleFancyMarket['vback1']" (click)="
                                     onClickLiveMarketRate(
                                       null,
                                       singleFancyMarket,
@@ -1224,49 +1178,33 @@
                                       },
                                       EMarketType.FANCY_TYPE
                                     )
-                                  "
-                                >
+                                  ">
                                   <strong>{{
                                     singleFancyMarket["back1"]
-                                  }}</strong>
+                                    }}</strong>
                                   <br /><span>{{
                                     singleFancyMarket["vback1"]
-                                      | marketRateFormater
-                                  }}</span>
+                                    | marketRateFormater
+                                    }}</span>
                                 </td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                ></td>
-                                <td
-                                  width="10%"
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <div
-                                    class="suspendedbm1"
-                                    *ngIf="
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
+                                  <div class="suspendedbm1" *ngIf="
                                       singleFancyMarket['appMarketStatus'] ==
                                         '3' ||
                                       singleFancyMarket['appMarketStatus'] ==
                                         '9'
-                                    "
-                                  >
-                                    <button
-                                      type="button"
-                                      class="suspendedm1"
-                                      [ngClass]="
+                                    ">
+                                    <button type="button" class="suspendedm1" [ngClass]="
                                         isLoggedIn
                                           ? 'matchmarketlist-on'
                                           : 'matchmarketlist-off'
-                                      "
-                                    >
+                                      ">
                                       {{
-                                        singleFancyMarket["appMarketStatus"] ==
-                                        "3"
-                                          ? "Suspended"
-                                          : "Ball Running"
+                                      singleFancyMarket["appMarketStatus"] ==
+                                      "3"
+                                      ? "Suspended"
+                                      : "Ball Running"
                                       }}
                                     </button>
                                   </div>
@@ -1278,18 +1216,12 @@
                       </div>
 
                       <div class="mobileTableShow" *ngIf="isMobileView">
-                        <table
-                          class="table table-hover"
-                          *ngIf="fancyMarket.length > 0 && isFancyCardShow"
-                        >
+                        <table class="table table-hover" *ngIf="fancyMarket.length > 0 && isFancyCardShow">
                           <thead>
                             <tr>
                               <th width="70%" class="tfirstcol">Fancy</th>
                               <th class="coldark">
-                                <img
-                                  src="/assets/images/fast.png"
-                                  class="timer"
-                                />
+                                <img src="/assets/images/fast.png" class="timer" />
                               </th>
                               <!-- <th width="10%" class="coldark"></th> -->
                               <th colspan="1" class="text-center coldark">
@@ -1304,70 +1236,44 @@
                             </tr>
                           </thead>
                           <tbody class="pointer">
-                            <ng-container
-                              *ngFor="
+                            <ng-container *ngFor="
                                 let singleFancyMarket of fancyMarket;
                                 let last = last;
                                 let first = first
-                              "
-                            >
-                              <tr
-                                *ngIf="
+                              ">
+                              <tr *ngIf="
                                   singleFancyMarket['appMarketStatus'] != '4' &&
                                   singleFancyMarket['appMarketStatus'] != '2'
-                                "
-                                [ngClass]="{ 'border-0': last }"
-                              >
-                                <td
-                                  class="text-start ps-2 heading border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <a
-                                    ><strong
-                                      >{{ singleFancyMarket["marketName"]
-                                      }}<br /> </strong
-                                  ></a>
+                                " [ngClass]="{ 'border-0': last }">
+                                <td class="text-start ps-2 heading border-top" [ngClass]="{ 'border-top': !first }">
+                                  <a><strong>{{ singleFancyMarket["marketName"]
+                                      }}<br /> </strong></a>
                                   <br />
-                                  <a
-                                    [ngClass]="
+                                  <a [ngClass]="
                                       singleFancyMarket?.hourseAmt?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
-                                    "
-                                  >
+                                    ">
                                     <strong>{{
                                       singleFancyMarket?.hourseAmt?.amount
-                                    }}</strong>
+                                      }}</strong>
                                   </a>
                                 </td>
 
-                                <td
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <a
-                                    *ngIf="
+                                <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                  <a *ngIf="
                                       singleFancyMarket?.hourseAmt && isLoggedIn
-                                    "
-                                    data-bs-toggle="modal"
-                                    href="#exampleModalToggle"
-                                    role="button"
-                                    class="laddericon"
-                                    (click)="
+                                    " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
+                                    class="laddericon" (click)="
                                       getLadderDataByMarket(
                                         singleFancyMarket['marketId']
                                       )
-                                    "
-                                  >
+                                    ">
                                     <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon" > -->
-                                    <img
-                                      src="/assets/images/ladder-icon.png"
-                                      width="10px"
-                                    />
+                                    <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
-                                <td
-                                  (click)="
+                                <td (click)="
                                     onClickLiveMarketRate(
                                       null,
                                       singleFancyMarket,
@@ -1379,24 +1285,18 @@
                                       },
                                       EMarketType.FANCY_TYPE
                                     )
-                                  "
-                                >
-                                  <a
-                                    class="colpink"
-                                    [boxHighlight]="singleFancyMarket['lay1']"
-                                    [boxHighlight]="singleFancyMarket['vlay1']"
-                                  >
+                                  ">
+                                  <a class="colpink" [boxHighlight]="singleFancyMarket['lay1']"
+                                    [boxHighlight]="singleFancyMarket['vlay1']">
                                     <strong>{{
                                       singleFancyMarket["lay1"]
-                                    }}</strong>
+                                      }}</strong>
                                     <br /><span>{{
                                       singleFancyMarket["vlay1"]
-                                        | marketRateFormater
-                                    }}</span></a
-                                  >
+                                      | marketRateFormater
+                                      }}</span></a>
                                 </td>
-                                <td
-                                  (click)="
+                                <td (click)="
                                     onClickLiveMarketRate(
                                       null,
                                       singleFancyMarket,
@@ -1408,49 +1308,34 @@
                                       },
                                       EMarketType.FANCY_TYPE
                                     )
-                                  "
-                                >
-                                  <a
-                                    class="colblue"
-                                    [boxHighlight]="singleFancyMarket['back1']"
-                                    [boxHighlight]="singleFancyMarket['vback1']"
-                                  >
+                                  ">
+                                  <a class="colblue" [boxHighlight]="singleFancyMarket['back1']"
+                                    [boxHighlight]="singleFancyMarket['vback1']">
                                     <strong>{{
                                       singleFancyMarket["back1"]
-                                    }}</strong>
+                                      }}</strong>
                                     <br /><span>{{
                                       singleFancyMarket["vback1"]
-                                        | marketRateFormater
-                                    }}</span></a
-                                  >
+                                      | marketRateFormater
+                                      }}</span></a>
                                 </td>
-                                <td
-                                  class="border-top"
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <div
-                                    class="suspendedbm1"
-                                    *ngIf="
+                                <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                  <div class="suspendedbm1" *ngIf="
                                       singleFancyMarket['appMarketStatus'] ==
                                         '3' ||
                                       singleFancyMarket['appMarketStatus'] ==
                                         '9'
-                                    "
-                                  >
-                                    <button
-                                      type="button"
-                                      class="suspendedm1"
-                                      [ngClass]="
+                                    ">
+                                    <button type="button" class="suspendedm1" [ngClass]="
                                         isLoggedIn
                                           ? 'matchmarketlist-on'
                                           : 'matchmarketlist-off'
-                                      "
-                                    >
+                                      ">
                                       {{
-                                        singleFancyMarket["appMarketStatus"] ==
-                                        "3"
-                                          ? "Suspended"
-                                          : "Ball Running"
+                                      singleFancyMarket["appMarketStatus"] ==
+                                      "3"
+                                      ? "Suspended"
+                                      : "Ball Running"
                                       }}
                                     </button>
                                   </div>
@@ -1459,21 +1344,13 @@
                               <tr *ngIf="betSlipObj['odds'] !=='' && singleFancyMarket['SelectionId'] == betSlipObj['selectionId'] 
                                         && matchName != 'NO MATCH AVAILABLE'">
                                 <td colspan="4" class="p-0 border-0">
-                                  <div
-                                    class="col-md-4 mb-3 sidebarhide"
-                                    id="sidebarhide"
-                                  >
-                                    <app-bet-slip
-                                      *ngIf="
+                                  <div class="col-md-4 mb-3 sidebarhide" id="sidebarhide">
+                                    <app-bet-slip *ngIf="
                                         matchName != 'NO MATCH AVAILABLE' &&
                                         isMobileView
-                                      "
-                                      [isBetSlipActive]="isBetSlipActive"
-                                      [betSlipParams]="betSlipObj"
-                                      [showMAtchwiseBet]="matchName"
-                                      [marketType]="marketType"
-                                      [isTVEnable]="isTVEnable"
-                                    ></app-bet-slip>
+                                      " [isBetSlipActive]="isBetSlipActive" [betSlipParams]="betSlipObj"
+                                      [showMAtchwiseBet]="matchName" [marketType]="marketType"
+                                      [isTVEnable]="isTVEnable"></app-bet-slip>
                                   </div>
                                 </td>
                               </tr>
@@ -1488,45 +1365,19 @@
               </div>
               <!--liveupcoming end-->
               <!--leagues start-->
-              <div
-                class="tab-pane"
-                id="leagues"
-                role="tabpanel"
-                aria-labelledby="profile-tab"
-              >
+              <div class="tab-pane" id="leagues" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="innerpagem">
                       <div class="list-group">
-                        <a
-                          href="#"
-                          class="list-group-item list-group-item-action"
-                          aria-current="true"
-                        >
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                           The current link item
                         </a>
-                        <a
-                          href="#"
-                          class="list-group-item list-group-item-action"
-                          >A second link item</a
-                        >
-                        <a
-                          href="#"
-                          class="list-group-item list-group-item-action"
-                          >A third link item</a
-                        >
-                        <a
-                          href="#"
-                          class="list-group-item list-group-item-action"
-                          >A fourth link item</a
-                        >
-                        <a
-                          href="#"
-                          class="list-group-item list-group-item-action disabled"
-                          tabindex="-1"
-                          aria-disabled="true"
-                          >A disabled link item</a
-                        >
+                        <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                        <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                        <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
+                          aria-disabled="true">A disabled link item</a>
                       </div>
                     </div>
                   </div>
@@ -1534,12 +1385,7 @@
               </div>
               <!--leagues end-->
               <!--results start-->
-              <div
-                class="tab-pane disabled"
-                id="results"
-                role="tabpanel"
-                aria-labelledby="messages-tab"
-              >
+              <div class="tab-pane disabled" id="results" role="tabpanel" aria-labelledby="messages-tab">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="innerpagem ps-3 pe-3 pb-3">
@@ -1547,34 +1393,21 @@
                         <!-- accordin 1 -->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingOne">
-                            <button
-                              class="accordion-button bg-transparent bg-color text-dark"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseOne"
-                              aria-expanded="true"
-                              aria-controls="collapseOne"
-                            >
+                            <button class="accordion-button bg-transparent bg-color text-dark" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                              aria-controls="collapseOne">
                               Auckland Women v Wellington Women <br />Fri, Jan
                               20, 2023 5:00 AM
                             </button>
                           </h2>
-                          <div
-                            id="collapseOne"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                          >
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                              <svg
-                                class="w-25"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                enable-background="new 0 0 24 24"
-                              >
+                              <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24">
                                 <path
-                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
-                                ></path>
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
+                                </path>
                               </svg>
                             </div>
                           </div>
@@ -1582,34 +1415,21 @@
                         <!--  accordin 2-->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingTwo">
-                            <button
-                              class="accordion-button collapsed bg-transparent bg-color text-dark"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseTwo"
-                              aria-expanded="false"
-                              aria-controls="collapseTwo"
-                            >
+                            <button class="accordion-button collapsed bg-transparent bg-color text-dark" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                              aria-controls="collapseTwo">
                               Auckland Women v Wellington Women <br />Fri, Jan
                               20, 2023 5:00 AM
                             </button>
                           </h2>
-                          <div
-                            id="collapseTwo"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample"
-                          >
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                              <svg
-                                class="w-25"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                enable-background="new 0 0 24 24"
-                              >
+                              <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24">
                                 <path
-                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
-                                ></path>
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
+                                </path>
                               </svg>
                             </div>
                           </div>
@@ -1617,34 +1437,21 @@
                         <!-- accordin 3 -->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingThree">
-                            <button
-                              class="accordion-button collapsed bg-transparent bg-color text-dark"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseThree"
-                              aria-expanded="false"
-                              aria-controls="collapseThree"
-                            >
+                            <button class="accordion-button collapsed bg-transparent bg-color text-dark" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                              aria-controls="collapseThree">
                               Auckland Women v Wellington Women <br />Fri, Jan
                               20, 2023 5:00 AM
                             </button>
                           </h2>
-                          <div
-                            id="collapseThree"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExample"
-                          >
+                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                              <svg
-                                class="w-25"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                enable-background="new 0 0 24 24"
-                              >
+                              <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24">
                                 <path
-                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
-                                ></path>
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
+                                </path>
                               </svg>
                             </div>
                           </div>
@@ -1652,34 +1459,21 @@
                         <!-- accordin 4 -->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingFour">
-                            <button
-                              class="accordion-button collapsed bg-transparent bg-color text-dark"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseFour"
-                              aria-expanded="false"
-                              aria-controls="collapseFour"
-                            >
+                            <button class="accordion-button collapsed bg-transparent bg-color text-dark" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                              aria-controls="collapseFour">
                               Auckland Women v Wellington Women <br />Fri, Jan
                               20, 2023 5:00 AM
                             </button>
                           </h2>
-                          <div
-                            id="collapseFour"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingFour"
-                            data-bs-parent="#accordionExample"
-                          >
+                          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                              <svg
-                                class="w-25"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                enable-background="new 0 0 24 24"
-                              >
+                              <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24">
                                 <path
-                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
-                                ></path>
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
+                                </path>
                               </svg>
                             </div>
                           </div>
@@ -1687,34 +1481,21 @@
                         <!-- accordin 5 -->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingFive">
-                            <button
-                              class="accordion-button collapsed bg-transparent bg-color text-dark"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseFive"
-                              aria-expanded="false"
-                              aria-controls="collapseFive"
-                            >
+                            <button class="accordion-button collapsed bg-transparent bg-color text-dark" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
+                              aria-controls="collapseFive">
                               Auckland Women v Wellington Women <br />Fri, Jan
                               20, 2023 5:00 AM
                             </button>
                           </h2>
-                          <div
-                            id="collapseFive"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingFive"
-                            data-bs-parent="#accordionExample"
-                          >
+                          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                              <svg
-                                class="w-25"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                enable-background="new 0 0 24 24"
-                              >
+                              <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24">
                                 <path
-                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
-                                ></path>
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
+                                </path>
                               </svg>
                             </div>
                           </div>
@@ -1722,34 +1503,21 @@
                         <!-- accordin 6 -->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingSix">
-                            <button
-                              class="accordion-button collapsed bg-transparent bg-color text-dark"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseSix"
-                              aria-expanded="false"
-                              aria-controls="collapseSix"
-                            >
+                            <button class="accordion-button collapsed bg-transparent bg-color text-dark" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+                              aria-controls="collapseSix">
                               Auckland Women v Wellington Women <br />Fri, Jan
                               20, 2023 5:00 AM
                             </button>
                           </h2>
-                          <div
-                            id="collapseSix"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingSix"
-                            data-bs-parent="#accordionExample"
-                          >
+                          <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                              <svg
-                                class="w-25"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                enable-background="new 0 0 24 24"
-                              >
+                              <svg class="w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                enable-background="new 0 0 24 24">
                                 <path
-                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7"
-                                ></path>
+                                  d="M10.8 17.8c-.3 0-.6-.2-.7-.4l-2.5-4.9-3.1 1.9c-.4.2-.9.1-1.1-.3-.2-.4-.1-.9.3-1.1l3.8-2.4c.2-.1.4-.2.6-.1.2.1.4.2.5.4l2.3 4.5 3.4-5.3c.1-.2.4-.4.6-.4.3 0 .5.1.7.3l1.7 2.3 5.2-10.3c.2-.4.7-.5 1.1-.4.4.2.6.7.4 1.1l-5.8 11.4c-.1.2-.4.4-.6.4-.3 0-.5-.1-.7-.3l-1.9-2.2-3.5 5.5c-.2.2-.4.3-.7.3M22.9 22.4h-22.1c-.5 0-.8-.4-.8-.8v-19.2c0-.4.3-.7.8-.7s.7.3.7.7v18.5h21.4c.4 0 .8.3.8.8 0 .4-.3.7-.8.7">
+                                </path>
                               </svg>
                             </div>
                           </div>
@@ -1767,14 +1535,9 @@
       </div>
       <!--Aside right start-->
       <div class="col-md-4 mt-3 sidebarhd" *ngIf="isBetSlipShow">
-        <app-bet-slip
-          *ngIf="matchName != 'NO MATCH AVAILABLE' && !isMobileView"
-          [isBetSlipActive]="isBetSlipActive"
-          [betSlipParams]="betSlipObj"
-          [showMAtchwiseBet]="matchName"
-          [marketType]="marketType"
-          [isTVEnable]="isTVEnable"
-        ></app-bet-slip>
+        <app-bet-slip *ngIf="matchName != 'NO MATCH AVAILABLE' && !isMobileView" [isBetSlipActive]="isBetSlipActive"
+          [betSlipParams]="betSlipObj" [showMAtchwiseBet]="matchName" [marketType]="marketType"
+          [isTVEnable]="isTVEnable"></app-bet-slip>
       </div>
       <!--Aside right end-->
     </div>
@@ -1784,13 +1547,8 @@
 <!--Body end-->
 
 <!--modal Start-->
-<div
-  class="modal fade"
-  id="exampleModalToggle"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1"
->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1">
   <div class="modal-dialog modal-sm">
     <div class="modal-content modalradius">
       <div class="modal-body text-center p-4 pb-3">
@@ -1800,24 +1558,15 @@
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
           <div *ngFor="let ldr of ladderObj">
-            <div
-              class="row border-bottom p-2"
-              *ngIf="ldr?.endScore != 'Infinite'"
-            >
+            <div class="row border-bottom p-2" *ngIf="ldr?.endScore != 'Infinite'">
               <div class="col-md-6">
                 {{ ldr?.startScore }}-{{ ldr?.endScore }}
               </div>
               <div class="col-md-6">
-                <span
-                  [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'"
-                  >{{ ldr?.amount }}</span
-                >
+                <span [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount }}</span>
               </div>
             </div>
-            <div
-              class="row border-bottom p-2 bg-light"
-              *ngIf="ldr?.endScore == 'Infinite'"
-            >
+            <div class="row border-bottom p-2 bg-light" *ngIf="ldr?.endScore == 'Infinite'">
               <ng-container>
                 <div class="col-md-6">+{{ ldr?.startScore }}</div>
               </ng-container>
@@ -1828,21 +1577,14 @@
               </ng-template>
 
               <div class="col-md-6">
-                <span
-                  [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'"
-                  >{{ ldr?.amount }}</span
-                >
+                <span [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount }}</span>
               </div>
             </div>
           </div>
         </ng-container>
         <div class="row">
-          <button
-            class="btn col-md-4 mt-3 btn-outline-pink border-0"
-            data-bs-target="#exampleModalToggle2"
-            data-bs-toggle="modal"
-            data-bs-dismiss="modal"
-          >
+          <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal" data-bs-dismiss="modal">
             CLOSE
           </button>
         </div>
@@ -1850,4 +1592,3 @@
     </div>
   </div>
 </div>
-

@@ -6,6 +6,10 @@
   .mobileTableShow .number .minus, .mobileTableShow .number .plus{
     width: 19px;
   }
+
+  .btn {
+    font-size: 9px;
+}
 }
 
 /* Extra small devices (phones, 600px and down) */

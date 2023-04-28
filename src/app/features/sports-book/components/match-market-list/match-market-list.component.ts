@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import * as _ from "lodash";
 import { SportsBookService } from '../../services/sports-book.service';
 import {Location} from '@angular/common';
-import { EMarketType } from '@shared/models/shared';
+import { EMarketName, EMarketType } from '@shared/models/shared';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -60,6 +60,10 @@ export class MatchMarketListComponent implements OnInit {
   liveScoreBoardActaulUrl:any;
   liveScoreBoardActaulTVUrl:any;
   liveStreamingTVUrl:any;
+  matchedBets :any[] = [];
+  unMatchedBets :any[] = [];
+
+  @Input() showMAtchwiseBet = ''
 
   constructor(
     private _sharedService: SharedService,
@@ -572,4 +576,85 @@ export class MatchMarketListComponent implements OnInit {
     }
   }
 
+  _getUserOpenBet(){
+    this._sharedService._getUserOpenBetsApi().subscribe(
+      (res:any) => {
+        console.log('2');
+        res.userBets.forEach(bet=>{
+          if(this.showMAtchwiseBet) bet.bets = bet.bets.filter(b => b.matchName == this.showMAtchwiseBet)
+          if(bet.status == "EXECUTION_COMPLETE"){
+            this.matchedBets = bet.bets
+          }else{
+            this.unMatchedBets = bet.bets
+            this._sharedService.unmatchedBetsList = bet.bets;
+          }
+        })
+      })
+   }
+
+   cancelBet(betListObj:any,marketType:string,cancelBetLevel:any){
+    console.log(betListObj);
+    let betList:any = [];
+    switch(cancelBetLevel){
+      case 1:
+        if(betListObj.length >0 && betListObj[0]['markets'].length >0){
+          betListObj[0]['markets'].map((singleMarket)=>{
+            singleMarket.runners.map((singleRunner) =>{
+              singleRunner.bets.map((singleBet) =>{
+                betList.push(singleBet['betId']);
+              })
+            })
+          })
+        }
+      break;
+
+      case 2:
+        if(betListObj['runners'].length >0){
+          betListObj.runners.map((singleRunner) =>{
+            singleRunner.bets.map((singleBet) =>{
+              betList.push(singleBet['betId']);
+            })
+          })
+        }
+      break;
+
+      case 3:
+        if(betListObj?.betId) betList.push(betListObj.betId);
+      break;
+
+    }
+
+    console.log(betList);
+
+    let betIdObj = {
+      betIdList: betList
+    }
+    this._sharedService.postCancelBetForMarket(betIdObj).subscribe((res)=>{
+      this._sharedService.getToastPopup('Successfully Bet Cancelled','Bet Cancelled','success');
+      marketType = marketType.toUpperCase();
+      this._sharedService.getUserBalance.next();
+        switch(marketType){
+          case EMarketName.MATCH_ODDS_UNDERSCORE:
+          case EMarketName.MATCH_ODDS_SPACE:
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.MATCH_TYPE});
+          break;
+
+          case EMarketName.BOOKMAKER:
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+          break;
+
+          case EMarketName.FANCY:
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.FANCY_TYPE});
+          break;
+
+          case 'ALL':
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.MATCH_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.BOOKMAKER_TYPE});
+            this._sharedService.getUserBalanceMarket.next({'marketType': EMarketType.FANCY_TYPE});
+          break;
+        }
+
+        this._getUserOpenBet();
+    })
+  }
 }
