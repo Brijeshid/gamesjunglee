@@ -207,7 +207,7 @@
                           {{ betHistory.profitLoss }}
                         </span>
                       </td>
-
+  
                       <td
                         *ngIf="
                           betHistory.betType !== 'BACK' &&
@@ -228,7 +228,7 @@
                           {{ betHistory.profitLoss }}
                         </span>
                       </td>
-
+  
                       <td
                         *ngIf="
                           betHistory.betType == 'BACK' &&
@@ -247,7 +247,7 @@
                       >
                         {{ betHistory.remarks }}
                       </td>
-
+  
                       <td *ngIf="betHistory.betType == 'BACK'" class="">
                         {{ betHistory.placedTime | date : "MMM d, y, h:mm:ss a" }}
                       </td>
