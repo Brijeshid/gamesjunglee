@@ -526,7 +526,7 @@
                                       >
                                     </td>
                                   </tr>
-                                  <tr *ngIf="(runner['SelectionId'] == betSlipObj['selectionId'])">
+                                  <tr *ngIf="betSlipObj['odds'] !=='' && (runner['SelectionId'] == betSlipObj['selectionId'])">
                                     <td colspan="3" class="border-0 pt-0">
                                       <div
                                         class="col-md-4 mobileTableShow"

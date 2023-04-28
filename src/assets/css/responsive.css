@@ -1,3 +1,9 @@
+@media only screen and (max-width: 320px) {
+  .gamedetails.mobileTableShow {
+    padding: 0;
+  }
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .w-30 {
@@ -86,7 +92,12 @@
     width: 160px;
   }
   .suspendedm1.matchmarketlist-off {
-    right: 96px;
+    right: 0;
+    width: 150px;
+  }
+
+  .gamedetails .table a {
+    font-size: 12px !important;
   }
 }
 /* Medium devices (landscape tablets, 768px and up) */
@@ -120,7 +131,7 @@
     color: #000;
     text-decoration: none;
     display: inline-block;
-    font-size: 9px;
+    font-size: 12px;
     line-height: 12px;
   }
 }
@@ -218,7 +229,7 @@
   }
 
   .gamedetails .table a {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -339,6 +350,14 @@
   .suspendedm1.matchmarketlist-off {
     right: 280px;
     width: 337px;
+  }
+
+  .gamedetails .table a {
+    font-size: 16px;
+  }
+
+  .gamedetails .table span {
+    font-size: 14px;
   }
 }
 
