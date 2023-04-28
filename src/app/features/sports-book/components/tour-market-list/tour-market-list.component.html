@@ -230,9 +230,8 @@
                                         >
                                       </a>
                                     </td>
-                                    <!-- <td class="border-top"><i class="fa fa-play"></i> </td>
-                                <td class="border-top"><i class="fas fa-broadcast-tower"></i></td> -->
-                                <ng-container *ngIf="!(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9'); else marketStatus">
+                                    
+                                <ng-container *ngIf="!(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9')">
                                     <td
                                       class="colblue"
                                       [boxHighlight]="runner['back2']"
@@ -372,34 +371,13 @@
                                         }}</span></a
                                       >
                                     </td>
-                                  </ng-container>
-                                    <!-- <td
-                                        class="border-top"
-                                        [ngClass]="{ 'border-top': !first }"
-                                      >
-                                        <div
-                                          class="suspendedbm1"
-                                          *ngIf="inPlayMatchListBySport['appMarketStatus'] =='3' || inPlayMatchListBySport['appMarketStatus'] == '9'"
-                                        >
-                                          <button
-                                            type="button"
-                                            class="suspendedm1"
-                                            [ngClass]="
-                                              isLoggedIn
-                                                ? 'matchmarketlist-on'
-                                                : 'matchmarketlist-off'
-                                            "
-                                            
-                                          >
-                                          {{
-                                            inPlayMatchListBySport["appMarketStatus"] ==
-                                            "3"
-                                              ? "Suspended"
-                                              : "Ball Running"
-                                          }}
-                                          </button>
-                                        </div>
-                                  </td> -->
+                                </ng-container>
+
+                                <ng-container 
+                                *ngIf="(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9')" 
+                                [ngTemplateOutlet]="marketStatusTemplate"
+                                [ngTemplateOutletContext] ="{appMarketStatus:singleInPlay['appMarketStatus'],col:'5'}">
+                                </ng-container> 
                                   </tr>
                                 </ng-container>
                               </tbody>
@@ -513,7 +491,7 @@
                                         >
                                       </a>
                                     </td>
-                                    <ng-container *ngIf="!(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9'); else marketStatus">
+                                    <ng-container *ngIf="!(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9')">
                                     <td
                                       (click)="
                                         onClickLiveMarketRate(
@@ -562,33 +540,11 @@
                                       >
                                     </td>
                                     </ng-container>
-                                    <!-- <td
-                                        class="border-top"
-                                        [ngClass]="{ 'border-top': !first }"
-                                      >
-                                        <div
-                                          class="suspendedbm1"
-                                          *ngIf="inPlayMatchListBySport['appMarketStatus'] =='3' || inPlayMatchListBySport['appMarketStatus'] == '9'"
-                                        >
-                                          <button
-                                            type="button"
-                                            class="suspendedm1"
-                                            [ngClass]="
-                                              isLoggedIn
-                                                ? 'matchmarketlist-on'
-                                                : 'matchmarketlist-off'
-                                            "
-                                            
-                                          >
-                                          {{
-                                            inPlayMatchListBySport["appMarketStatus"] ==
-                                            "3"
-                                              ? "Suspended"
-                                              : "Ball Running"
-                                          }}
-                                          </button>
-                                        </div>
-                                  </td> -->
+                                    <ng-container 
+                                      *ngIf="(singleInPlay['appMarketStatus'] =='3' || singleInPlay['appMarketStatus'] == '9')" 
+                                      [ngTemplateOutlet]="marketStatusTemplate"
+                                      [ngTemplateOutletContext] ="{appMarketStatus:singleInPlay['appMarketStatus'],col:'3'}">
+                                    </ng-container> 
                                   </tr>
                                   <tr *ngIf="betSlipObj['odds'] !=='' && (runner['SelectionId'] == betSlipObj['selectionId'])">
                                     <td colspan="3" class="border-0 pt-0">
@@ -607,12 +563,6 @@
                                 </ng-container>
                               </tbody>
                             </table>
-
-                            <ng-template #marketStatus>
-                              <td colspan="3" class="suspendedbm3" >
-                             Suspended
-                            </td>
-                            </ng-template>
                           </div>
                         </ng-container>
                       </ng-container>
@@ -1231,3 +1181,11 @@
   <!--Artical end-->
 </div>
 <!--Body end-->
+
+<!--Suspended OR Ball Running Start-->
+<ng-template let-appMarketStatus="appMarketStatus" let-col="col" #marketStatusTemplate>
+  <td [attr.colspan]="col" class="suspendedbm3">
+    {{appMarketStatus == "3"? "Suspended": "Ball Running"}}
+  </td>
+</ng-template>
+<!--Suspended OR Ball Running End-->
