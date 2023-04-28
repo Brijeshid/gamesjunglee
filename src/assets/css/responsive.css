@@ -197,6 +197,14 @@
   #videoplayer iframe {
     height: 25vh;
 }
+
+.number input{
+  font-size: 14px;
+}
+
+.number .minus, .number .plus{
+  padding: 2px;
+}
 }
 
 @media only screen and (min-width: 1228.8px) {
@@ -238,6 +246,10 @@
   #videoplayer iframe {
     height: 35vh;
 }
+
+.betbtn{
+  font-size: 12px;
+}
 }
 
 @media only screen and (min-width: 1396.36px) {
@@ -265,6 +277,18 @@
 
   .gamedetails .table a {
     font-size: 12px;
+  }
+
+  .betbtn{
+    font-size: 15px;
+  }
+
+  .number input{
+    font-size: 18px;
+  }
+
+  .number .minus, .number .plus{
+    padding: 5px;
   }
 }
 

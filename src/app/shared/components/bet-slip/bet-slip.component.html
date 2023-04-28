@@ -75,8 +75,8 @@
               "
             >
               <p class="card-header text-dark">
-                <small>{{ betSlipParams["event"] }}</small> <br />
-                <small>{{ betSlipParams["selectionName"] }}</small>
+                {{ betSlipParams["event"] }} <br />
+                {{ betSlipParams["selectionName"] }}
               </p>
             </div>
             <div class="card-body pt-1" [class.batsliploader]="isLoaderStart">
@@ -211,7 +211,7 @@
                     </div>
                     <div class="row">
                       <div
-                        class="col-md-4 col-4 p-1"
+                        class="col-md-4 col-4 mb-1"
                         *ngFor="
                           let item of userConfig?.userConfig?.EditStakesBtn
                         "
@@ -231,7 +231,7 @@
                         </button>
                       </div>
 
-                      <div class="col-md-6 col-6 p-1">
+                      <div class="col-md-6 col-6 ">
                         <button
                           type="button"
                           class="btn border-colour w-100 p-2 rounded-pill betbtn"
@@ -240,7 +240,7 @@
                           CANCEL
                         </button>
                       </div>
-                      <div class="col-md-6 col-6 p-1">
+                      <div class="col-md-6 col-6">
                         <button
                           type="submit"
                           class="btn w-100 p-1 rounded-pill betbtn"
@@ -282,7 +282,7 @@
                       </div>
                     </div>
                     <p
-                      class="text-bold"
+                      class="text-bold m-0"
                       [ngStyle]="{
                         color:
                           betSlipParams['isBack'] === true

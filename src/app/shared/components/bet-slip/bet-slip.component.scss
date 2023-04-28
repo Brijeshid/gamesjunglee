@@ -15,6 +15,18 @@
   border-bottom-right-radius: 30px;
 }
 
+// .minMax {
+//   padding: 5px;
+// }
+
+@media (min-width: 1024px) {
 .minMax {
-  padding: 5px;
+  padding: 3px 6px;
 }
+}
+
+@media (min-width: 1440px) {
+  .minMax {
+    padding: 6px 6px;
+  }
+  }
