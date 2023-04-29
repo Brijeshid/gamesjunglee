@@ -1527,3 +1527,7 @@ small {
   background: linear-gradient(0deg, #cd212f 0, #e76f26) !important;
   border-bottom: #e76f26 !important;
 }
+
+.dateRangePicker-wrapper .dateRangePicker{
+  top: 40px !important;
+}
