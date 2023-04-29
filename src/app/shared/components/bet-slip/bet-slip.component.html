@@ -168,6 +168,7 @@
                           }}"
                           formControlName="stake"
                           (input)="stakeVal($event)"
+                          #bet_stakes
                         />
                         <ng-container
                           *ngIf="
@@ -709,6 +710,7 @@
                             }} Max.{{ betSlipParams?.maxBet }}"
                             formControlName="stake"
                             (input)="stakeVal($event)"
+                            #bet_stakes
                           />
                           <ng-container
                             *ngIf="
