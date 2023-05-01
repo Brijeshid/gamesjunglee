@@ -88,7 +88,7 @@
 
           <div class="col-12 tab-content" id="myTabContent">
             <div class="tab-pane fade m-0" id="markets_tab" role="tabpanel" aria-labelledby="markets">
-              
+
             </div>
             <div class="tab-pane fade " id="openbets_tab" role="tabpanel" aria-labelledby="openbets">
               <div class="row">
@@ -140,7 +140,7 @@
                                 Average Odds
                               </label>
                             </div> -->
-    
+
                             <div *ngFor="let bet of unMatchedBets">
                               <p class="mb-1">{{ bet.matchName }}</p>
                               <div *ngFor="let market of bet.markets">
@@ -421,7 +421,7 @@
                               <th width="15%" colspan="3" class="text-start coldark tlastcol">
                                 Lay
                               </th>
-                              
+
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa fa-2x ms-4 text-color fa-regular fa-star"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                             </tr>
@@ -469,7 +469,7 @@
                               <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
 
                               <ng-container *ngIf="!(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')">
-                              
+
                               <td width="10%" class="colblue" [boxHighlight]="runner['back2']"
                                 [boxHighlight]="runner['vback2']" [class.dis]="
                                   inPlayUpcomingMarket['inPlayStatus'] == 0
@@ -598,12 +598,12 @@
                               </td>
 
                               </ng-container>
-                              <ng-container 
-                                *ngIf="(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')" 
+                              <ng-container
+                                *ngIf="(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')"
                                 [ngTemplateOutlet]="marketStatusTemplate"
                                 [ngTemplateOutletContext] ="{appMarketStatus:inPlayUpcomingMarket['appMarketStatus'],col:'5'}">
-                              </ng-container> 
-                              
+                              </ng-container>
+
                             </tr>
                           </tbody>
                         </table>
@@ -720,11 +720,11 @@
                                 </td>
                                 </ng-container>
 
-                                <ng-container 
-                                *ngIf="(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')" 
+                                <ng-container
+                                *ngIf="(inPlayUpcomingMarket['appMarketStatus'] =='3' || inPlayUpcomingMarket['appMarketStatus'] == '9')"
                                 [ngTemplateOutlet]="marketStatusTemplate"
                                 [ngTemplateOutletContext] ="{appMarketStatus:inPlayUpcomingMarket['appMarketStatus'],col:'3'}">
-                              </ng-container> 
+                              </ng-container>
                               </tr>
                               <tr *ngIf="betSlipObj['odds'] !=='' &&
                                   runner['SelectionId'] ==
@@ -1306,7 +1306,7 @@
                                   </div>
                                 </td>
                               </tr>
-                              <tr *ngIf="betSlipObj['odds'] !=='' && singleFancyMarket['SelectionId'] == betSlipObj['selectionId'] 
+                              <tr *ngIf="betSlipObj['odds'] !=='' && singleFancyMarket['SelectionId'] == betSlipObj['selectionId']
                                         && matchName != 'NO MATCH AVAILABLE'">
                                 <td colspan="4" class="p-0 border-0">
                                   <div class="col-md-4 mb-3 sidebarhide" id="sidebarhide">
@@ -1510,6 +1510,73 @@
   <!--Artical end-->
 </div>
 <!--Body end-->
+
+<!--modal Start-->
+<div
+  class="modal fade"
+  id="exampleModalToggle"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content modalradius">
+      <!-- <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+      <div class="modal-body text-center p-4 pb-3">
+        <div class="row border-bottom p-2">
+          <div class="col-md-6">Runs</div>
+          <div class="col-md-6">P&L</div>
+        </div>
+        <ng-container *ngIf="ladderObj && ladderObj.length > 0">
+          <div *ngFor="let ldr of ladderObj">
+            <div class="row border-bottom p-2" *ngIf="ldr?.position != 'last'">
+              <div class="col-md-6" *ngIf="ldr?.startScore!=ldr?.endScore">
+                {{ ldr?.startScore }}-{{ ldr?.endScore }}
+              </div>
+              <div class="col-md-6" *ngIf="ldr?.startScore==ldr?.endScore">
+                {{ ldr?.startScore}}
+              </div>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="
+                    ldr.amount >= 0 ? 'text-success' : 'text-danger'
+                  "
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
+            </div>
+            <div class="row border-bottom p-2 bg-light" *ngIf="ldr?.position == 'last'">
+              <ng-container>
+                <div class="col-md-6">{{ ldr?.startScore }}+</div>
+              </ng-container>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="
+                    ldr?.amount >= 0 ? 'text-success' : 'text-danger'
+                  "
+                  >{{ ldr?.amount }}</span
+                >
+              </div>
+            </div>
+          </div>
+
+        </ng-container>
+        <div class="row">
+          <button
+            class="btn col-md-4 mt-3 btn-outline-pink border-0"
+            data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal"
+            data-bs-dismiss="modal"
+          >
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--Suspended OR Ball Running Start-->
 <ng-template let-appMarketStatus="appMarketStatus" let-col="col" #marketStatusTemplate>
