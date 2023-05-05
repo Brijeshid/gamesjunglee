@@ -15,6 +15,8 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordForm!: FormGroup;
   clickMessage : any;
   show: boolean = false;
+  show1: boolean = false;
+  show2: boolean = false;
 
   constructor(private formbuilder: FormBuilder,
     private _SettingsService: UserSettingsMainService,
